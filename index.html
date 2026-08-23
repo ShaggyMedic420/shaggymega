@@ -3,3299 +3,2392 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090d16">
-<meta name="description" content="The Mega Site — an honest internet command center.">
-<title>THE MEGA SITE</title>
+<title>∞ PONG LEAGUE — Autonomous Intelligence Championship</title>
 
 <style>
 :root{
-  --bg:#070a10;
-  --bg2:#0b1020;
-  --panel:#101726;
-  --panel2:#131d30;
-  --line:#26344d;
-  --text:#eaf1ff;
-  --muted:#8d9bb5;
-  --cyan:#42dfff;
-  --blue:#5f8cff;
-  --purple:#b56cff;
-  --green:#48e59b;
-  --yellow:#ffd166;
-  --red:#ff637d;
-  --shadow:0 15px 45px rgba(0,0,0,.35);
-  --radius:16px;
-  --max:1450px;
+  --bg:#03050a;
+  --panel:#080d16;
+  --panel2:#0c1420;
+  --line:#183047;
+  --cyan:#00eaff;
+  --green:#35ff9a;
+  --pink:#ff2bd6;
+  --yellow:#ffe66d;
+  --red:#ff4568;
+  --text:#dcecff;
+  --muted:#6e8298;
+  --shadow:0 0 30px rgba(0,234,255,.08);
 }
 
 *{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
+html,body{
+  margin:0;
+  min-height:100%;
+  background:
+    radial-gradient(circle at 50% -10%,#10283a 0,#03050a 45%),
+    #03050a;
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.12;
   background:
-    radial-gradient(circle at 10% 0%,rgba(66,223,255,.08),transparent 25rem),
-    radial-gradient(circle at 90% 10%,rgba(181,108,255,.08),transparent 25rem),
-    linear-gradient(180deg,#060910,#0a0f1a 50%,#070a10);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  line-height:1.5;
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,.025) 4px
+    );
+  z-index:999;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,input,textarea,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-img{
-  max-width:100%;
-}
-
-::selection{
-  background:var(--cyan);
-  color:#001018;
-}
-
-/* ---------- GLOBAL ---------- */
-
-.container{
-  width:min(var(--max),calc(100% - 28px));
-  margin:auto;
-}
-
-.topbar{
+header{
+  padding:24px 20px 14px;
+  text-align:center;
+  border-bottom:1px solid #102437;
+  background:rgba(3,7,13,.86);
   position:sticky;
   top:0;
-  z-index:1000;
-  backdrop-filter:blur(18px);
-  background:rgba(6,9,16,.84);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.nav{
-  min-height:64px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  justify-content:space-between;
+  z-index:100;
+  backdrop-filter:blur(14px);
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:950;
-  letter-spacing:.08em;
-  white-space:nowrap;
+  font-weight:1000;
+  letter-spacing:.12em;
+  font-size:clamp(22px,4vw,42px);
+  color:#fff;
+  text-shadow:
+    0 0 8px var(--cyan),
+    0 0 30px rgba(0,234,255,.45);
 }
 
-.logoMark{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  color:#001018;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  box-shadow:0 0 25px rgba(66,223,255,.2);
+.logo span{
+  color:var(--cyan);
 }
 
-.navlinks{
-  display:flex;
-  gap:6px;
-  overflow:auto;
-  scrollbar-width:none;
-}
-
-.navlinks::-webkit-scrollbar{
-  display:none;
-}
-
-.navlinks a{
-  padding:8px 11px;
-  border-radius:9px;
+.subtitle{
+  margin-top:5px;
   color:var(--muted);
-  font-size:13px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.navlinks a:hover{
-  color:var(--text);
-  background:#141e31;
-}
-
-.clock{
-  font-family:ui-monospace,SFMono-Regular,monospace;
-  color:var(--cyan);
-  font-size:13px;
-  white-space:nowrap;
-}
-
-.hero{
-  padding:48px 0 28px;
-}
-
-.heroGrid{
-  display:grid;
-  grid-template-columns:1.35fr .65fr;
-  gap:20px;
-}
-
-.heroMain,
-.heroSide,
-.panel{
-  background:linear-gradient(145deg,rgba(18,27,44,.96),rgba(10,15,27,.96));
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-
-.heroMain{
-  padding:34px;
-  position:relative;
-  overflow:hidden;
-}
-
-.heroMain:after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:rgba(66,223,255,.08);
-  filter:blur(60px);
-  right:-130px;
-  top:-130px;
-  pointer-events:none;
-}
-
-.eyebrow{
-  color:var(--cyan);
-  font-weight:900;
   font-size:12px;
   letter-spacing:.18em;
   text-transform:uppercase;
 }
 
-h1{
-  font-size:clamp(40px,7vw,88px);
-  line-height:.9;
-  margin:14px 0 20px;
-  letter-spacing:-.055em;
-}
-
-.gradient{
-  background:linear-gradient(90deg,#fff,var(--cyan),#b57cff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.heroText{
-  max-width:800px;
-  color:#b9c5d9;
-  font-size:17px;
-}
-
-.heroButtons{
+nav{
+  margin-top:15px;
   display:flex;
-  gap:10px;
+  justify-content:center;
   flex-wrap:wrap;
-  margin-top:25px;
+  gap:8px;
 }
 
-.btn{
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:10px 14px;
-  background:#111a2a;
-  color:var(--text);
+button{
+  border:1px solid #20445d;
+  background:#09131e;
+  color:#bfe9ff;
+  padding:8px 12px;
+  border-radius:7px;
+  cursor:pointer;
   font-weight:800;
   transition:.15s;
 }
 
-.btn:hover{
+button:hover{
+  color:white;
+  border-color:var(--cyan);
+  box-shadow:0 0 14px rgba(0,234,255,.18);
   transform:translateY(-1px);
-  border-color:#45618e;
-  background:#17243a;
 }
 
-.btn.primary{
-  background:linear-gradient(135deg,#31cde8,#637cff);
-  color:#041019;
-  border:0;
+button.active{
+  background:#063347;
+  border-color:var(--cyan);
+  color:white;
 }
 
-.btn.green{
-  background:linear-gradient(135deg,#42e49a,#31b7a0);
-  color:#04140e;
-  border:0;
+main{
+  width:min(1500px,96vw);
+  margin:auto;
+  padding:18px 0 50px;
 }
 
-.heroSide{
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.statusCard{
-  padding:16px;
-  background:#0b1220;
-  border:1px solid #202d44;
-  border-radius:13px;
-}
-
-.statusTitle{
-  font-size:11px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  font-weight:900;
-}
-
-.statusValue{
-  font-size:18px;
-  font-weight:900;
-  margin-top:5px;
-}
-
-.dot{
-  display:inline-block;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  margin-right:7px;
-  background:var(--green);
-  box-shadow:0 0 12px var(--green);
-}
-
-section{
-  padding:22px 0;
-}
-
-.sectionHead{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:13px;
-}
-
-.sectionTitle{
-  font-size:27px;
-  line-height:1.1;
-  margin:0;
-  letter-spacing:-.025em;
-}
-
-.sectionDesc{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.panel{
-  padding:18px;
-}
-
-.grid2{
+.grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:1.65fr .85fr;
   gap:16px;
 }
 
-.grid4{
+@media(max-width:1000px){
+  .grid{grid-template-columns:1fr}
+}
+
+.panel{
+  background:
+    linear-gradient(145deg,rgba(12,22,34,.95),rgba(5,10,17,.95));
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.panelHead{
+  padding:12px 15px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.panelTitle{
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.live{
+  color:var(--green);
+  font-size:10px;
+  font-weight:1000;
+}
+
+.live:before{
+  content:"";
+  display:inline-block;
+  width:7px;
+  height:7px;
+  margin-right:6px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--green);
+}
+
+.stage{
+  padding:14px;
+}
+
+#game{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#010407;
+  border:1px solid #17334a;
+  border-radius:8px;
+  box-shadow:
+    inset 0 0 50px rgba(0,234,255,.03),
+    0 0 30px rgba(0,0,0,.5);
+}
+
+.scoreboard{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:10px;
+  align-items:center;
+  margin-top:12px;
+}
+
+.player{
+  padding:12px;
+  background:#050b12;
+  border:1px solid #12273a;
+  border-radius:8px;
+}
+
+.player.right{text-align:right}
+
+.aiName{
+  font-weight:1000;
+  font-size:16px;
+}
+
+.aiMeta{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.score{
+  font-size:34px;
+  font-weight:1000;
+  color:#fff;
+  text-align:center;
+  min-width:90px;
+}
+
+.vs{
+  font-size:9px;
+  color:var(--muted);
+  text-align:center;
+}
+
+.stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-@media(max-width:1000px){
-  .heroGrid,
-  .grid2{
-    grid-template-columns:1fr;
-  }
-
-  .grid3{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid4{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .navlinks{
-    display:none;
-  }
-}
-
-@media(max-width:620px){
-  .container{
-    width:min(var(--max),calc(100% - 18px));
-  }
-
-  .hero{
-    padding-top:25px;
-  }
-
-  .heroMain{
-    padding:24px;
-  }
-
-  .grid3,
-  .grid4{
-    grid-template-columns:1fr;
-  }
-
-  h1{
-    font-size:54px;
-  }
-}
-
-/* ---------- STREAM ---------- */
-
-.streamPanel{
-  overflow:hidden;
-}
-
-.streamHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:15px;
-}
-
-.liveBadge{
-  background:rgba(255,71,98,.13);
-  border:1px solid rgba(255,71,98,.35);
-  color:#ff8295;
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-}
-
-.streamWrap{
-  display:grid;
-  grid-template-columns:minmax(0,2fr) minmax(280px,1fr);
-  gap:15px;
-}
-
-.twitchFrame{
-  width:100%;
-  min-height:300px;
-  aspect-ratio:16/9;
-  border:0;
-  background:#000;
-  border-radius:12px;
-}
-
-.streamMessage{
-  padding:25px;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(181,108,255,.14),transparent 18rem),
-    #0b1220;
-  border:1px solid #24334c;
-  border-radius:12px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.streamMessage h3{
-  font-size:25px;
-  margin:0 0 10px;
-}
-
-.streamMessage p{
-  color:#aebbd0;
-}
-
-@media(max-width:800px){
-  .streamWrap{
-    grid-template-columns:1fr;
-  }
-}
-
-/* ---------- JEEVES ---------- */
-
-.jeeves{
-  display:grid;
-  grid-template-columns:250px 1fr;
-  gap:15px;
-}
-
-.jeevesIntro{
-  background:#0b1220;
-  border:1px solid #24334c;
-  border-radius:13px;
-  padding:18px;
-}
-
-.jeevesAvatar{
-  width:68px;
-  height:68px;
-  display:grid;
-  place-items:center;
-  font-size:35px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#e8edf7,#aab6ca);
-  color:#111827;
-  margin-bottom:15px;
-}
-
-.jeevesIntro h3{
-  margin:0;
-}
-
-.jeevesIntro p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.chat{
-  min-height:530px;
-  display:flex;
-  flex-direction:column;
-  background:#080e19;
-  border:1px solid #24334c;
-  border-radius:13px;
-  overflow:hidden;
-}
-
-.chatMessages{
-  flex:1;
-  padding:18px;
-  min-height:350px;
-  max-height:600px;
-  overflow:auto;
-}
-
-.message{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
-}
-
-.message.user{
-  justify-content:flex-end;
-}
-
-.bubble{
-  max-width:min(800px,90%);
-  padding:12px 14px;
-  border-radius:13px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-}
-
-.message.jeeves .bubble{
-  background:#131e31;
-  border:1px solid #263751;
-}
-
-.message.user .bubble{
-  background:linear-gradient(135deg,#244c77,#34427c);
-}
-
-.chatInput{
-  display:flex;
   gap:8px;
-  padding:12px;
-  border-top:1px solid #24334c;
+  padding:0 14px 14px;
 }
 
-.chatInput input{
-  flex:1;
+.stat{
+  padding:10px;
+  background:#050b12;
+  border:1px solid #12273a;
+  border-radius:7px;
+  text-align:center;
 }
 
-.input{
-  width:100%;
-  border:1px solid #2b3b56;
-  background:#0b1220;
-  color:var(--text);
-  border-radius:10px;
-  padding:11px 12px;
-  outline:none;
+.stat b{
+  display:block;
+  font-size:16px;
+  color:white;
 }
 
-.input:focus{
-  border-color:var(--cyan);
-  box-shadow:0 0 0 3px rgba(66,223,255,.08);
-}
-
-@media(max-width:800px){
-  .jeeves{
-    grid-template-columns:1fr;
-  }
-}
-
-/* ---------- NEWS ---------- */
-
-.newsGrid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:15px;
-}
-
-.newsList{
-  display:grid;
-  gap:9px;
-}
-
-.newsItem{
-  padding:13px;
-  border-radius:11px;
-  border:1px solid #233149;
-  background:#0c1423;
-  transition:.15s;
-}
-
-.newsItem:hover{
-  border-color:#45618e;
-  transform:translateX(2px);
-}
-
-.newsMeta{
-  color:var(--cyan);
-  font-size:10px;
+.stat span{
+  font-size:9px;
+  color:var(--muted);
   text-transform:uppercase;
-  letter-spacing:.1em;
+}
+
+.thought{
+  margin-top:10px;
+  color:#76a0bb;
+  font-family:monospace;
+  font-size:11px;
+  min-height:18px;
+}
+
+.thought .cursor{
+  color:var(--cyan);
+}
+
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.standings{
+  padding:10px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:30px 1fr 45px 55px;
+  gap:8px;
+  align-items:center;
+  padding:9px 7px;
+  border-bottom:1px solid #0f2131;
+  font-size:12px;
+}
+
+.row:last-child{border-bottom:0}
+
+.rank{
+  color:var(--muted);
+  text-align:center;
+  font-weight:1000;
+}
+
+.name{
   font-weight:900;
 }
 
-.newsTitle{
-  font-weight:800;
+.wins{
+  color:var(--green);
+  text-align:right;
+}
+
+.champs{
+  color:var(--yellow);
+  text-align:right;
+}
+
+.miniBar{
+  height:3px;
+  background:#0c1b29;
+  border-radius:3px;
+  overflow:hidden;
   margin-top:4px;
 }
 
-.newsTime{
-  color:#728099;
-  font-size:11px;
-  margin-top:5px;
+.miniBar i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
 }
 
-.sourceImg{
-  width:100%;
-  max-height:280px;
-  object-fit:cover;
-  border-radius:10px;
-  display:block;
+.replay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  backdrop-filter:blur(10px);
+}
+
+.replay.show{display:flex}
+
+.replayBox{
+  width:min(1000px,96vw);
+  background:#050a11;
+  border:1px solid #254b65;
+  border-radius:14px;
+  box-shadow:0 0 80px rgba(0,234,255,.16);
+  padding:15px;
+}
+
+.replayHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:10px;
 }
 
-/* ---------- LAUGHS ---------- */
+.replayTitle{
+  font-weight:1000;
+  color:var(--pink);
+  letter-spacing:.15em;
+}
 
-.laughGrid{
+#replayCanvas{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#010407;
+  border:1px solid #17334a;
+  border-radius:8px;
+}
+
+.replayInfo{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  font-family:monospace;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.sectionGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:16px;
+}
+
+@media(max-width:1000px){
+  .sectionGrid{grid-template-columns:1fr}
+}
+
+.content{
+  padding:14px;
+}
+
+.event{
+  display:flex;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid #10202e;
+  font-size:11px;
+}
+
+.event:last-child{border-bottom:0}
+
+.eventTime{
+  color:var(--cyan);
+  font-family:monospace;
+  white-space:nowrap;
+}
+
+.evo{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:13px;
-}
-
-.meme{
-  border:1px solid #26354e;
-  background:#0c1422;
-  border-radius:13px;
-  overflow:hidden;
-  transition:.16s;
-}
-
-.meme:hover{
-  transform:translateY(-3px);
-  border-color:#4d6691;
-}
-
-.meme img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  background:#080d16;
-  display:block;
-}
-
-.memeBody{
-  padding:12px;
-}
-
-.memeTitle{
-  font-size:13px;
-  font-weight:800;
-}
-
-.memeSource{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:6px;
-}
-
-@media(max-width:1050px){
-  .laughGrid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media(max-width:750px){
-  .laughGrid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:480px){
-  .laughGrid{
-    grid-template-columns:1fr;
-  }
-}
-
-/* ---------- TOOLS ---------- */
-
-.tool{
-  padding:17px;
-  border:1px solid #24334c;
-  border-radius:13px;
-  background:#0c1422;
-}
-
-.tool h3{
-  margin:0 0 4px;
-}
-
-.tool p{
-  color:var(--muted);
-  font-size:12px;
-  margin:0 0 12px;
-}
-
-.toolRow{
-  display:flex;
   gap:8px;
 }
 
-.toolResult{
-  margin-top:10px;
-  min-height:40px;
-  color:#bcd0e8;
-  font-family:ui-monospace,SFMono-Regular,monospace;
-  font-size:13px;
-  white-space:pre-wrap;
+.evoCard{
+  background:#050b12;
+  border:1px solid #12273a;
+  border-radius:7px;
+  padding:10px;
 }
 
-/* ---------- CARDS ---------- */
-
-.featureCard{
-  padding:18px;
-  border:1px solid #26364f;
-  background:linear-gradient(145deg,#101a2b,#0c1320);
-  border-radius:13px;
-  min-height:145px;
-}
-
-.featureIcon{
-  font-size:25px;
-}
-
-.featureCard h3{
-  margin:8px 0 3px;
-}
-
-.featureCard p{
-  margin:0;
-  color:var(--muted);
+.evoCard b{
+  display:block;
+  color:white;
   font-size:13px;
 }
 
-/* ---------- RANDOM ---------- */
-
-.randomBox{
-  text-align:center;
-  padding:35px 20px;
-  border-radius:14px;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(66,223,255,.12),transparent 22rem),
-    #0b1220;
-  border:1px solid #263851;
-}
-
-.randomText{
-  font-size:clamp(20px,3vw,32px);
-  font-weight:900;
-  min-height:80px;
-  display:grid;
-  place-items:center;
-}
-
-/* ---------- FOOTER ---------- */
-
-footer{
-  margin-top:40px;
-  border-top:1px solid #202c40;
-  padding:35px 0 60px;
+.evoCard span{
+  display:block;
+  margin-top:3px;
   color:var(--muted);
-  font-size:12px;
+  font-size:9px;
 }
 
-.footerGrid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:25px;
+.log{
+  height:180px;
+  overflow:auto;
+  font:10px/1.6 monospace;
+  color:#7995a9;
 }
 
-@media(max-width:700px){
-  .footerGrid{
-    grid-template-columns:1fr;
-  }
+.log div{
+  border-bottom:1px solid #0b1925;
+  padding:2px 0;
 }
 
-kbd{
-  border:1px solid #3a4a64;
-  border-bottom-width:2px;
-  background:#111b2b;
-  padding:2px 6px;
-  border-radius:5px;
-  font-family:monospace;
-  color:#d5e1f4;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.good{
-  color:var(--green);
-}
-
-.warn{
+.highlight{
   color:var(--yellow);
 }
 
-.error{
-  color:var(--red);
-}
+.cyan{color:var(--cyan)}
+.green{color:var(--green)}
+.pink{color:var(--pink)}
+.red{color:var(--red)}
 
-.mono{
-  font-family:ui-monospace,SFMono-Regular,monospace;
-}
-
-.loading{
-  color:var(--muted);
+.footer{
+  margin-top:20px;
+  text-align:center;
+  color:#405669;
+  font-size:10px;
+  letter-spacing:.1em;
   padding:20px;
+}
+
+#toast{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:1000;
+  background:#07131e;
+  border:1px solid var(--cyan);
+  color:#dff8ff;
+  padding:12px 15px;
+  border-radius:8px;
+  font-size:11px;
+  box-shadow:0 0 25px rgba(0,234,255,.18);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.25s;
+}
+
+#toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.badge{
+  display:inline-block;
+  padding:3px 6px;
+  border:1px solid #25445b;
+  border-radius:4px;
+  color:#8db4ca;
+  font-size:8px;
+  margin-left:5px;
+}
+
+.champion{
+  color:var(--yellow);
+  text-shadow:0 0 8px rgba(255,230,109,.3);
+}
+
+.controlRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+input[type=range]{
+  accent-color:var(--cyan);
+}
+
+.bigNumber{
+  font-size:27px;
+  font-weight:1000;
+  color:white;
+}
+
+.center{
   text-align:center;
 }
 
-.empty{
-  color:var(--muted);
-  padding:20px;
-  border:1px dashed #2b3a52;
-  border-radius:11px;
-}
-
-/* ---------- COMMAND PALETTE ---------- */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(8px);
-  z-index:3000;
-  display:none;
-  align-items:flex-start;
-  justify-content:center;
-  padding:12vh 15px 30px;
-}
-
-.modal.open{
-  display:flex;
-}
-
-.commandBox{
-  width:min(700px,100%);
-  background:#0d1524;
-  border:1px solid #334766;
-  border-radius:16px;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
-  overflow:hidden;
-}
-
-.commandSearch{
-  width:100%;
-  padding:18px;
-  background:transparent;
-  border:0;
-  border-bottom:1px solid #26354d;
-  color:#fff;
-  outline:0;
-  font-size:18px;
-}
-
-.commandItems{
-  max-height:430px;
-  overflow:auto;
-  padding:8px;
-}
-
-.commandItem{
-  width:100%;
-  display:block;
-  text-align:left;
-  padding:12px;
-  background:transparent;
-  border:0;
-  color:#dbe6f8;
-  border-radius:9px;
-}
-
-.commandItem:hover{
-  background:#17243a;
-}
-
-.commandItem small{
-  display:block;
-  color:var(--muted);
-}
-
-/* ---------- BACK TO TOP ---------- */
-
-.backTop{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  border:1px solid #334663;
-  background:#101a2b;
-  color:white;
-  z-index:900;
-  display:none;
-}
-
-.backTop.show{
-  display:block;
+.danger{
+  border-color:#653041;
+  color:#ff8096;
 }
 </style>
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="container nav">
-    <a class="logo" href="#">
-      <span class="logoMark">M</span>
-      <span>THE MEGA SITE</span>
-    </a>
-
-    <nav class="navlinks">
-      <a href="#stream">Stream</a>
-      <a href="#jeeves">Jeeves</a>
-      <a href="#headlines">Headlines</a>
-      <a href="#laughs">Laughs</a>
-      <a href="#tools">Tools</a>
-      <a href="#discover">Discover</a>
-      <a href="#games">Games</a>
-    </nav>
-
-    <div class="clock" id="clock">--:--:--</div>
+<header>
+  <div class="logo"><span>∞</span> PONG LEAGUE</div>
+  <div class="subtitle">
+    AUTONOMOUS INTELLIGENCE • ENDLESS COMPETITION • NO FINAL MATCH
   </div>
+
+  <nav>
+    <button class="active" onclick="scrollToGame()">LIVE ARENA</button>
+    <button onclick="scrollToId('standingsPanel')">STANDINGS</button>
+    <button onclick="scrollToId('evolutionPanel')">EVOLUTION</button>
+    <button onclick="scrollToId('historyPanel')">HISTORY</button>
+    <button onclick="togglePause()">PAUSE</button>
+    <button onclick="newLeague()">NEW ERA</button>
+  </nav>
 </header>
 
 <main>
 
-<!-- HERO -->
+<div class="grid">
 
-<section class="hero">
-  <div class="container heroGrid">
-
-    <div class="heroMain">
-      <div class="eyebrow">THE INTERNET • ONE PLACE</div>
-
-      <h1>
-        THE<br>
-        <span class="gradient">MEGA SITE</span>
-      </h1>
-
-      <p class="heroText">
-        A giant, useful, slightly unreasonable internet command center.
-        Search things. Ask Jeeves. Watch the stream. Read what's happening.
-        Discover weird knowledge. Calculate things. Waste time productively.
-      </p>
-
-      <div class="heroButtons">
-        <button class="btn primary" onclick="jumpTo('jeeves')">
-          Ask Jeeves
-        </button>
-
-        <button class="btn" onclick="jumpTo('headlines')">
-          Today's Internet
-        </button>
-
-        <button class="btn" onclick="openCommand()">
-          <kbd>Ctrl</kbd> + <kbd>K</kbd>
-        </button>
-      </div>
-    </div>
-
-    <aside class="heroSide">
-
-      <div class="statusCard">
-        <div class="statusTitle">Site age</div>
-        <div class="statusValue mono" id="siteAge">Launch date required</div>
-        <div class="muted" style="font-size:11px;margin-top:5px" id="siteAgeSub">
-          This will never invent an age.
-        </div>
-      </div>
-
-      <div class="statusCard">
-        <div class="statusTitle">Local visit count</div>
-        <div class="statusValue" id="visitCount">1</div>
-        <div class="muted" style="font-size:11px;margin-top:5px">
-          This browser only — not a fake global counter.
-        </div>
-      </div>
-
-      <div class="statusCard">
-        <div class="statusTitle">System</div>
-        <div class="statusValue">
-          <span class="dot"></span>
-          Online
-        </div>
-        <div class="muted" style="font-size:11px;margin-top:5px">
-          Static site loaded successfully.
-        </div>
-      </div>
-
-    </aside>
-
+<section class="panel">
+  <div class="panelHead">
+    <div class="panelTitle">LIVE AUTONOMOUS ARENA</div>
+    <div class="live" id="liveStatus">SIMULATION ONLINE</div>
   </div>
-</section>
 
-<!-- STREAM -->
+  <div class="stage">
+    <canvas id="game" width="1200" height="675"></canvas>
 
-<section id="stream">
-  <div class="container">
-    <div class="sectionHead">
+    <div class="scoreboard">
+      <div class="player">
+        <div class="aiName" id="leftName">—</div>
+        <div class="aiMeta" id="leftMeta">—</div>
+        <div class="thought" id="leftThought"></div>
+      </div>
+
       <div>
-        <h2 class="sectionTitle">📺 SHAGGYMEDIC420</h2>
-        <p class="sectionDesc">The lurker command center.</p>
+        <div class="score" id="score">0 — 0</div>
+        <div class="vs">FIRST TO 7</div>
       </div>
-      <span class="liveBadge">TWITCH</span>
+
+      <div class="player right">
+        <div class="aiName" id="rightName">—</div>
+        <div class="aiMeta" id="rightMeta">—</div>
+        <div class="thought" id="rightThought"></div>
+      </div>
     </div>
+  </div>
 
-    <div class="panel streamPanel">
-      <div class="streamWrap">
-
-        <iframe
-          class="twitchFrame"
-          id="twitchPlayer"
-          title="Shaggymedic420 Twitch stream"
-          allowfullscreen
-          scrolling="no"
-          frameborder="0"
-          src="">
-        </iframe>
-
-        <div class="streamMessage">
-          <div class="eyebrow">IMPORTANT INTERNET MESSAGE</div>
-          <h3>Lurking is the backbone of stream success.</h3>
-          <p>
-            Thank you for keeping a tab open.
-            You don't have to type. You don't have to talk.
-            Being here matters.
-          </p>
-          <a
-            class="btn primary"
-            href="https://www.twitch.tv/Shaggymedic420"
-            target="_blank"
-            rel="noopener">
-            Open Twitch ↗
-          </a>
-          <p class="muted" style="font-size:11px">
-            The embedded player is intentionally muted.
-          </p>
-        </div>
-
-      </div>
+  <div class="stats">
+    <div class="stat">
+      <b id="season">1</b>
+      <span>Era</span>
+    </div>
+    <div class="stat">
+      <b id="matchNumber">1</b>
+      <span>Match</span>
+    </div>
+    <div class="stat">
+      <b id="pointNumber">0</b>
+      <span>Points</span>
+    </div>
+    <div class="stat">
+      <b id="replaySpeed">3.0×</b>
+      <span>Replay speed</span>
     </div>
   </div>
 </section>
 
-<!-- JEEVES -->
 
-<section id="jeeves">
-  <div class="container">
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">🎩 ASK JEEVES</h2>
-        <p class="sectionDesc">
-          A local, honest browser-based Jeeves brain. No fake “AI connected” badge.
-        </p>
+<aside class="side">
+
+<section class="panel" id="standingsPanel">
+  <div class="panelHead">
+    <div class="panelTitle">WORLD RANKING</div>
+    <div class="live">11 COMPETITORS</div>
+  </div>
+  <div class="standings" id="standings"></div>
+</section>
+
+
+<section class="panel">
+  <div class="panelHead">
+    <div class="panelTitle">LEAGUE CORE</div>
+  </div>
+
+  <div class="content">
+    <div class="evo">
+      <div class="evoCard">
+        <b id="totalMatches">0</b>
+        <span>Matches</span>
+      </div>
+
+      <div class="evoCard">
+        <b id="totalPoints">0</b>
+        <span>Points</span>
+      </div>
+
+      <div class="evoCard">
+        <b id="totalChampions">0</b>
+        <span>Championships</span>
+      </div>
+
+      <div class="evoCard">
+        <b id="generation">1</b>
+        <span>Evolution</span>
       </div>
     </div>
 
-    <div class="panel jeeves">
+    <br>
 
-      <aside class="jeevesIntro">
-        <div class="jeevesAvatar">🎩</div>
-        <h3>Ask Jeeves</h3>
-        <p>
-          Good evening. I am Jeeves.
-          I can reason about a useful collection of everyday questions,
-          perform calculations, explain concepts, search the web, and remember
-          the conversation while this page remains open.
-        </p>
-
-        <p class="muted">
-          <strong>Honest mode:</strong>
-          this version does not pretend that a cloud AI exists when there is
-          no secure AI backend connected.
-        </p>
-
-        <button class="btn" style="width:100%" onclick="jeevesClear()">
-          Clear Conversation
-        </button>
-      </aside>
-
-      <div class="chat">
-
-        <div class="chatMessages" id="chatMessages"></div>
-
-        <form class="chatInput" id="jeevesForm">
-          <input
-            class="input"
-            id="jeevesInput"
-            autocomplete="off"
-            placeholder="Ask Jeeves anything useful…">
-          <button class="btn primary" type="submit">Ask</button>
-        </form>
-
-      </div>
-
+    <div class="controlRow">
+      <button onclick="changeGameSpeed(.5)">− SPEED</button>
+      <button onclick="changeGameSpeed(1)">+ SPEED</button>
+      <button onclick="togglePause()">PAUSE / PLAY</button>
     </div>
   </div>
 </section>
 
-<!-- HEADLINES -->
+</aside>
+</div>
 
-<section id="headlines">
-  <div class="container">
 
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">📰 HEADLINES</h2>
-        <p class="sectionDesc">
-          Live external sources when available. Failed sources are shown as failed — never fabricated.
-        </p>
-      </div>
+<div class="sectionGrid">
 
-      <button class="btn" onclick="loadHeadlines()">↻ Refresh</button>
-    </div>
+<section class="panel" id="evolutionPanel">
+  <div class="panelHead">
+    <div class="panelTitle">🧬 EVOLUTION LABORATORY</div>
+    <div class="cyan">LIVE</div>
+  </div>
 
-    <div class="newsGrid">
+  <div class="content" id="evolutionCards"></div>
+</section>
 
-      <div class="panel">
-        <h3 style="margin-top:0">Hacker News</h3>
-        <div id="hnNews" class="newsList">
-          <div class="loading">Loading real Hacker News stories…</div>
-        </div>
-      </div>
 
-      <div class="panel">
-        <h3 style="margin-top:0">Reddit / Internet</h3>
-        <div id="redditNews" class="newsList">
-          <div class="loading">Loading source data…</div>
-        </div>
-      </div>
+<section class="panel">
+  <div class="panelHead">
+    <div class="panelTitle">⚡ SYSTEM TELEMETRY</div>
+  </div>
 
-    </div>
+  <div class="content">
+    <div class="log" id="systemLog"></div>
   </div>
 </section>
 
-<!-- LAUGHS -->
 
-<section id="laughs">
-  <div class="container">
+<section class="panel" id="historyPanel">
+  <div class="panelHead">
+    <div class="panelTitle">📜 ETERNAL HISTORY</div>
+  </div>
 
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">😂 LAUGHS</h2>
-        <p class="sectionDesc">
-          Real source media when accessible. No generated fake thumbnails.
-        </p>
-      </div>
-
-      <button class="btn" onclick="loadLaughs()">↻ Refresh</button>
-    </div>
-
-    <div class="panel">
-      <div id="laughGrid" class="laughGrid">
-        <div class="loading">Fetching real posts…</div>
-      </div>
-    </div>
-
+  <div class="content">
+    <div id="history"></div>
   </div>
 </section>
 
-<!-- SEARCH -->
+</div>
 
-<section id="search">
-  <div class="container">
 
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">🔎 THE SEARCH DESK</h2>
-        <p class="sectionDesc">Search the actual web instead of pretending this site has indexed everything.</p>
-      </div>
-    </div>
+<section class="panel" style="margin-top:16px">
+  <div class="panelHead">
+    <div class="panelTitle">🏆 ALL-TIME CHAMPIONSHIP ARCHIVE</div>
+    <div class="highlight">PERSISTENT</div>
+  </div>
 
-    <div class="panel">
-
-      <form id="searchForm" class="toolRow">
-        <input
-          class="input"
-          id="searchInput"
-          placeholder="Search the web…"
-          autocomplete="off">
-
-        <select class="input" id="searchEngine" style="max-width:180px">
-          <option value="google">Google</option>
-          <option value="bing">Bing</option>
-          <option value="duck">DuckDuckGo</option>
-          <option value="wiki">Wikipedia</option>
-          <option value="news">Google News</option>
-          <option value="youtube">YouTube</option>
-        </select>
-
-        <button class="btn primary">Search</button>
-      </form>
-
-    </div>
-
+  <div class="content">
+    <div id="championshipArchive"></div>
   </div>
 </section>
 
-<!-- TOOLS -->
 
-<section id="tools">
-  <div class="container">
+<section class="panel" style="margin-top:16px">
+  <div class="panelHead">
+    <div class="panelTitle">ABOUT THE MACHINE</div>
+  </div>
 
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">🧰 THE TOOLBOX</h2>
-        <p class="sectionDesc">Small tools that should actually work.</p>
-      </div>
-    </div>
+  <div class="content" style="line-height:1.7;font-size:12px;color:#8da6b8">
+    The Pong League is an endless browser-based evolutionary simulation.
+    Every competitor maintains its own strategic parameters, performance
+    history and championship record. Competitors adapt after matches and
+    mutate their strategies between eras.
 
-    <div class="grid3">
+    <br><br>
 
-      <!-- Calculator -->
-      <div class="tool">
-        <h3>🧮 Calculator</h3>
-        <p>Basic arithmetic and common math expressions.</p>
+    <span class="cyan">The objective is simple:</span>
+    become champion.
 
-        <form id="calcForm" class="toolRow">
-          <input class="input" id="calcInput" placeholder="(25 * 4) / 2">
-          <button class="btn primary">=</button>
-        </form>
+    <br><br>
 
-        <div class="toolResult" id="calcResult"></div>
-      </div>
+    <span class="pink">The problem:</span>
+    there are ten other machines trying to do exactly the same thing.
 
-      <!-- Timer -->
-      <div class="tool">
-        <h3>⏱️ Timer</h3>
-        <p>Set a timer in seconds.</p>
+    <br><br>
 
-        <div class="toolRow">
-          <input class="input" id="timerInput" type="number" min="1" value="60">
-          <button class="btn primary" onclick="startTimer()">Start</button>
-        </div>
+    There is no final match. When an era ends, the league begins again.
+    Championships remain attached to their winners forever in this browser's
+    persistent archive.
 
-        <div class="toolResult" id="timerResult">Ready.</div>
-      </div>
+    <br><br>
 
-      <!-- Stopwatch -->
-      <div class="tool">
-        <h3>⏲️ Stopwatch</h3>
-        <p>Simple browser stopwatch.</p>
-
-        <div class="toolResult" id="stopwatchDisplay">00:00:00.000</div>
-
-        <div class="toolRow">
-          <button class="btn green" onclick="stopwatchStart()">Start</button>
-          <button class="btn" onclick="stopwatchStop()">Stop</button>
-          <button class="btn" onclick="stopwatchReset()">Reset</button>
-        </div>
-      </div>
-
-      <!-- World clock -->
-      <div class="tool">
-        <h3>🌎 World Clock</h3>
-        <p>Current browser-time conversion.</p>
-
-        <select class="input" id="zoneSelect">
-          <option value="UTC">UTC</option>
-          <option value="America/New_York">New York</option>
-          <option value="America/Chicago">Chicago</option>
-          <option value="America/Denver">Denver</option>
-          <option value="America/Los_Angeles">Los Angeles</option>
-          <option value="Europe/London">London</option>
-          <option value="Europe/Berlin">Berlin</option>
-          <option value="Asia/Tokyo">Tokyo</option>
-          <option value="Australia/Sydney">Sydney</option>
-        </select>
-
-        <div class="toolResult" id="zoneResult">--</div>
-      </div>
-
-      <!-- Password generator -->
-      <div class="tool">
-        <h3>🔐 Password Generator</h3>
-        <p>Generates randomness locally in your browser.</p>
-
-        <div class="toolRow">
-          <input class="input" id="passwordResult" readonly>
-          <button class="btn primary" onclick="generatePassword()">Generate</button>
-        </div>
-      </div>
-
-      <!-- UUID -->
-      <div class="tool">
-        <h3>🆔 UUID</h3>
-        <p>Create a standard UUID locally.</p>
-
-        <div class="toolRow">
-          <input class="input" id="uuidResult" readonly>
-          <button class="btn primary" onclick="generateUUID()">New</button>
-        </div>
-      </div>
-
-    </div>
+    <span class="green">The simulation continues for as long as this page is open.</span>
   </div>
 </section>
 
-<!-- RANDOM INTERNET -->
 
-<section id="discover">
-  <div class="container">
-
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">🧠 INTERNET KNOWLEDGE</h2>
-        <p class="sectionDesc">
-          A large hand-built knowledge pool with no fake claim of infinite data.
-        </p>
-      </div>
-    </div>
-
-    <div class="panel randomBox">
-
-      <div class="randomText" id="knowledgeText">
-        Click the button to learn something weird.
-      </div>
-
-      <div class="heroButtons" style="justify-content:center">
-        <button class="btn primary" onclick="newKnowledge()">
-          Teach Me Something
-        </button>
-
-        <button class="btn" onclick="doTheThing()">
-          ✨ Do The Thing
-        </button>
-      </div>
-
-      <div class="muted" style="font-size:11px;margin-top:15px" id="randomMeta"></div>
-
-    </div>
-  </div>
-</section>
-
-<!-- MORE FEATURES -->
-
-<section>
-  <div class="container">
-
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">⚡ INTERNET COMMAND CENTER</h2>
-        <p class="sectionDesc">Useful doors into the rest of the internet.</p>
-      </div>
-    </div>
-
-    <div class="grid4">
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://www.wikipedia.org/">
-        <div class="featureIcon">📚</div>
-        <h3>Wikipedia</h3>
-        <p>The giant encyclopedia.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://www.youtube.com/">
-        <div class="featureIcon">▶️</div>
-        <h3>YouTube</h3>
-        <p>Videos upon videos upon videos.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://www.reddit.com/">
-        <div class="featureIcon">👽</div>
-        <h3>Reddit</h3>
-        <p>The front page of the internet.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://github.com/">
-        <div class="featureIcon">💻</div>
-        <h3>GitHub</h3>
-        <p>Where the machines are built.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://archive.org/">
-        <div class="featureIcon">🗄️</div>
-        <h3>Internet Archive</h3>
-        <p>A ridiculous amount of human history.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://www.google.com/maps/">
-        <div class="featureIcon">🗺️</div>
-        <h3>Maps</h3>
-        <p>Explore practically anywhere.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://radio.garden/">
-        <div class="featureIcon">📻</div>
-        <h3>Radio Garden</h3>
-        <p>Listen to radio around Earth.</p>
-      </a>
-
-      <a class="featureCard" target="_blank" rel="noopener"
-         href="https://neal.fun/">
-        <div class="featureIcon">🧪</div>
-        <h3>Neal.fun</h3>
-        <p>A laboratory of excellent internet nonsense.</p>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- GAMES -->
-
-<section id="games">
-  <div class="container">
-
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">🎮 MINI ARCADE</h2>
-        <p class="sectionDesc">Tiny games. No downloads.</p>
-      </div>
-    </div>
-
-    <div class="grid3">
-
-      <div class="tool">
-        <h3>🎯 Number Guess</h3>
-        <p>I'm thinking of a number from 1–100.</p>
-
-        <div class="toolRow">
-          <input class="input" id="guessInput" type="number" min="1" max="100">
-          <button class="btn primary" onclick="guessNumber()">Guess</button>
-        </div>
-
-        <div class="toolResult" id="guessResult"></div>
-      </div>
-
-      <div class="tool">
-        <h3>🪙 Coin Flip</h3>
-        <p>Cryptographically strong browser randomness where supported.</p>
-
-        <button class="btn primary" onclick="flipCoin()">Flip</button>
-
-        <div class="toolResult" id="coinResult">Awaiting destiny.</div>
-      </div>
-
-      <div class="tool">
-        <h3>🎲 Dice</h3>
-        <p>Roll anything from d2 to d100.</p>
-
-        <div class="toolRow">
-          <input class="input" id="diceSides" type="number" min="2" max="100" value="20">
-          <button class="btn primary" onclick="rollDice()">Roll</button>
-        </div>
-
-        <div class="toolResult" id="diceResult"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- NOTES -->
-
-<section>
-  <div class="container">
-
-    <div class="sectionHead">
-      <div>
-        <h2 class="sectionTitle">📝 SCRATCHPAD</h2>
-        <p class="sectionDesc">Your notes stay in this browser using local storage.</p>
-      </div>
-
-      <button class="btn" onclick="clearNotes()">Clear</button>
-    </div>
-
-    <div class="panel">
-      <textarea
-        class="input"
-        id="notes"
-        rows="10"
-        placeholder="Write something..."></textarea>
-
-      <div class="muted" style="font-size:11px;margin-top:7px">
-        Saved locally in your browser.
-      </div>
-    </div>
-
-  </div>
-</section>
+<div class="footer">
+  ∞ PONG LEAGUE • AUTONOMOUS SIMULATION • LOCAL PERSISTENCE • NO END CONDITION
+</div>
 
 </main>
 
-<footer>
-  <div class="container footerGrid">
 
-    <div>
-      <strong style="color:#fff">THE MEGA SITE</strong>
-      <p>
-        Built as a real static website. No fabricated visitor totals,
-        fake headlines, fake thumbnails, or imaginary API connections.
-      </p>
-      <p>
-        Lurking is the backbone of stream success. ❤️
-      </p>
+<div class="replay" id="replay">
+  <div class="replayBox">
+
+    <div class="replayHeader">
+      <div class="replayTitle">⚡ INSTANT REPLAY</div>
+      <button onclick="skipReplay()">SKIP</button>
     </div>
 
-    <div>
-      <strong style="color:#fff">Keyboard</strong>
-      <p><kbd>Ctrl</kbd> + <kbd>K</kbd> Command palette</p>
-      <p><kbd>/</kbd> Focus search</p>
-      <p><kbd>Esc</kbd> Close dialogs</p>
-    </div>
+    <canvas id="replayCanvas" width="1200" height="675"></canvas>
 
-    <div>
-      <strong style="color:#fff">Data philosophy</strong>
-      <p>
-        External data is marked as external.
-        If it cannot be retrieved, this site says so.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-<button class="backTop" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  ↑
-</button>
-
-<!-- COMMAND PALETTE -->
-
-<div class="modal" id="commandModal">
-  <div class="commandBox">
-
-    <input
-      class="commandSearch"
-      id="commandSearch"
-      placeholder="Type a command…">
-
-    <div class="commandItems" id="commandItems">
-
-      <button class="commandItem" onclick="jumpTo('jeeves');closeCommand()">
-        🎩 Ask Jeeves
-        <small>Open the Jeeves conversation.</small>
-      </button>
-
-      <button class="commandItem" onclick="jumpTo('headlines');closeCommand()">
-        📰 Headlines
-        <small>See current external stories.</small>
-      </button>
-
-      <button class="commandItem" onclick="jumpTo('laughs');closeCommand()">
-        😂 Laughs
-        <small>Browse sourced Reddit media.</small>
-      </button>
-
-      <button class="commandItem" onclick="newKnowledge();closeCommand()">
-        🧠 Teach me something
-        <small>Get a knowledge fact.</small>
-      </button>
-
-      <button class="commandItem" onclick="doTheThing();closeCommand()">
-        ✨ Do the thing
-        <small>Get a useful/random action.</small>
-      </button>
-
-      <button class="commandItem" onclick="jumpTo('tools');closeCommand()">
-        🧰 Tools
-        <small>Calculator, timer, clocks and generators.</small>
-      </button>
-
-      <button class="commandItem" onclick="jumpTo('games');closeCommand()">
-        🎮 Arcade
-        <small>Play tiny browser games.</small>
-      </button>
-
+    <div class="replayInfo">
+      <span id="replayText">POINT RECONSTRUCTION</span>
+      <span id="replayMultiplier">3.0×</span>
     </div>
 
   </div>
 </div>
 
+
+<div id="toast"></div>
+
+
 <script>
-"use strict";
-
-/*
-===========================================================
- THE MEGA SITE
- Single-file static edition
-===========================================================
-
-IMPORTANT CONFIGURATION
-
-1. SITE LAUNCH DATE
-
-Put the REAL date/time your website first went live here.
-
-Example:
-
-LAUNCHED_AT: "2025-04-12T18:30:00Z"
-
-Do NOT use today's date unless that really is your launch date.
-
-Until configured, the counter honestly says:
-"Launch date required"
-
-2. TWITCH
-
-The channel is already set to Shaggymedic420.
-
-Twitch requires the actual hostname of the page as parent.
-This script detects the current hostname automatically.
-
-3. AI
-
-There is intentionally NO secret AI API key in this file.
-
-If you later create a secure backend, set:
-
-AI_ENDPOINT = "https://your-backend.example/api/chat"
-
-Your backend should accept:
-
-POST JSON:
-{
-  "message": "...",
-  "history": [...]
-}
-
-and return:
-
-{
-  "reply": "..."
-}
-
-Never put an OpenAI/OpenRouter/etc secret directly into this HTML.
-===========================================================
-*/
-
-const CONFIG = {
-
-  /*
-   * REPLACE THIS WITH YOUR ACTUAL WEBSITE LAUNCH TIMESTAMP.
-   * Leave null until you know it.
-   */
-  LAUNCHED_AT: null,
-
-  TWITCH_CHANNEL: "Shaggymedic420",
-
-  /*
-   * Leave blank for honest local Jeeves.
-   * Add your own secure backend later if desired.
-   */
-  AI_ENDPOINT: "",
-
-  /*
-   * External feed endpoints.
-   * These are public APIs/feeds and can change independently.
-   */
-  HN_API:
-    "https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=12",
-
-  REDDIT_SUBREDDITS: [
-    "funny",
-    "memes"
-  ]
-};
-
-
 /* =========================================================
-   UTILITIES
-========================================================= */
+   ∞ PONG LEAGUE
+   Complete standalone simulation
+   ========================================================= */
 
-function $(id){
-  return document.getElementById(id);
+
+/* ---------- CANVAS ---------- */
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const replayCanvas = document.getElementById("replayCanvas");
+const rctx = replayCanvas.getContext("2d");
+
+
+/* ---------- STORAGE ---------- */
+
+const SAVE_KEY = "infinite_pong_league_v2";
+
+
+/* ---------- UTILITIES ---------- */
+
+function clamp(v,min,max){
+  return Math.max(min,Math.min(max,v));
 }
 
-function escapeHTML(value){
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+function rand(min,max){
+  return Math.random()*(max-min)+min;
 }
 
-function jumpTo(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+function choice(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
-function randomInt(max){
-  if(window.crypto && crypto.getRandomValues){
-    const arr = new Uint32Array(1);
-    crypto.getRandomValues(arr);
-    return arr[0] % max;
-  }
-  return Math.floor(Math.random()*max);
+function fmt(n){
+  return Number(n||0).toLocaleString();
 }
 
-function formatDate(date){
-  return new Intl.DateTimeFormat(undefined,{
-    dateStyle:"medium",
-    timeStyle:"short"
-  }).format(date);
+function nowTime(){
+  return new Date().toLocaleTimeString([],{
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  });
 }
 
 
-/* =========================================================
-   CLOCK
-========================================================= */
+/* ---------- COMPETITORS ---------- */
 
-function updateClock(){
-  const now = new Date();
+const names = [
+  "NEON",
+  "ORACLE",
+  "TITAN",
+  "MIRAGE",
+  "VECTOR",
+  "NOVA",
+  "OMEGA",
+  "SPECTRE",
+  "APEX",
+  "CIRCUIT",
+  "VOID"
+];
 
-  $("clock").textContent =
-    new Intl.DateTimeFormat(undefined,{
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit"
-    }).format(now);
+const colors = [
+  "#00eaff",
+  "#35ff9a",
+  "#ff2bd6",
+  "#ffe66d",
+  "#ff657d",
+  "#9d7bff",
+  "#00ffa6",
+  "#ff9e4a",
+  "#6ee7ff",
+  "#d6ff4f",
+  "#ff4fcb"
+];
 
-  const zone = $("zoneSelect").value;
+const strategies = [
+  "PREDICTIVE",
+  "AGGRESSIVE",
+  "DEFENSIVE",
+  "ADAPTIVE",
+  "COUNTER",
+  "PRECISION",
+  "CHAOTIC",
+  "PATIENT"
+];
 
-  $("zoneResult").textContent =
-    new Intl.DateTimeFormat(undefined,{
-      timeZone:zone,
-      dateStyle:"medium",
-      timeStyle:"medium"
-    }).format(now);
+
+function makeCompetitor(i){
+  return {
+    id:i,
+    name:names[i],
+    color:colors[i],
+
+    wins:0,
+    losses:0,
+
+    pointsFor:0,
+    pointsAgainst:0,
+
+    championships:0,
+
+    streak:0,
+    bestStreak:0,
+
+    generation:1,
+    xp:0,
+
+    strategy:choice(strategies),
+
+    reaction:rand(.78,1.15),
+    prediction:rand(.72,1.16),
+    accuracy:rand(.76,1.15),
+    aggression:rand(.75,1.2),
+    defense:rand(.75,1.18),
+    adaptation:rand(.75,1.2),
+
+    learningRate:rand(.015,.055),
+
+    memory:[],
+
+    recentForm:0,
+
+    lastMutation:"INITIALIZED"
+  };
 }
 
-setInterval(updateClock,1000);
-updateClock();
 
-$("zoneSelect").addEventListener("change",updateClock);
+function defaultState(){
+  return {
+    era:1,
+    match:0,
+    points:0,
+    totalMatches:0,
+    totalPoints:0,
+    generation:1,
 
+    championHistory:[],
+    matchHistory:[],
 
-/* =========================================================
-   REAL SITE AGE
-========================================================= */
-
-function updateSiteAge(){
-
-  if(!CONFIG.LAUNCHED_AT){
-
-    $("siteAge").textContent = "Launch date required";
-
-    $("siteAgeSub").textContent =
-      "Set CONFIG.LAUNCHED_AT to the real date. No invented age.";
-
-    return;
-  }
-
-  const start = new Date(CONFIG.LAUNCHED_AT);
-  const now = new Date();
-
-  if(
-    Number.isNaN(start.getTime()) ||
-    start.getTime() > now.getTime()
-  ){
-
-    $("siteAge").textContent = "Invalid launch date";
-    $("siteAgeSub").textContent =
-      "Check CONFIG.LAUNCHED_AT.";
-    return;
-  }
-
-  let seconds = Math.floor(
-    (now.getTime() - start.getTime()) / 1000
-  );
-
-  const days = Math.floor(seconds / 86400);
-  seconds %= 86400;
-
-  const hours = Math.floor(seconds / 3600);
-  seconds %= 3600;
-
-  const minutes = Math.floor(seconds / 60);
-  seconds %= 60;
-
-  $("siteAge").textContent =
-    `${days.toLocaleString()}d ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-  $("siteAgeSub").textContent =
-    `Counting from ${formatDate(start)}.`;
+    competitors:names.map((_,i)=>makeCompetitor(i))
+  };
 }
 
-setInterval(updateSiteAge,1000);
-updateSiteAge();
 
-
-/* =========================================================
-   LOCAL VISIT COUNTER
-========================================================= */
-
-function updateLocalVisits(){
-
-  const key = "megaSiteLocalVisits";
-
-  let count =
-    Number(localStorage.getItem(key) || "0");
-
-  count++;
-
-  localStorage.setItem(key,String(count));
-
-  $("visitCount").textContent =
-    count.toLocaleString();
-}
+let state;
 
 try{
-  updateLocalVisits();
-}catch(err){
-  $("visitCount").textContent = "Unavailable";
+  state=JSON.parse(localStorage.getItem(SAVE_KEY)) || defaultState();
+}catch{
+  state=defaultState();
+}
+
+if(!state.competitors || state.competitors.length!==11){
+  state=defaultState();
 }
 
 
-/* =========================================================
-   TWITCH
-========================================================= */
+/* ---------- SAVE ---------- */
 
-function setupTwitch(){
-
-  const host = location.hostname;
-
-  /*
-   * Twitch needs parent=<your actual hostname>.
-   *
-   * localhost can work for testing, but production should be
-   * served over HTTPS.
-   */
-  if(!host){
-    $("twitchPlayer").style.display = "none";
-    return;
-  }
-
-  const src =
-    "https://player.twitch.tv/?" +
-    "channel=" +
-    encodeURIComponent(CONFIG.TWITCH_CHANNEL) +
-    "&parent=" +
-    encodeURIComponent(host) +
-    "&muted=true" +
-    "&autoplay=false";
-
-  $("twitchPlayer").src = src;
-}
-
-setupTwitch();
-
-
-/* =========================================================
-   JEEVES
-========================================================= */
-
-const jeevesHistory = [];
-
-function jeevesAdd(role,text){
-
-  const wrap = document.createElement("div");
-
-  wrap.className =
-    "message " +
-    (role === "user" ? "user" : "jeeves");
-
-  wrap.innerHTML =
-    `<div class="bubble">${escapeHTML(text)}</div>`;
-
-  $("chatMessages").appendChild(wrap);
-
-  $("chatMessages").scrollTop =
-    $("chatMessages").scrollHeight;
-}
-
-function jeevesWelcome(){
-
-  if($("chatMessages").children.length) return;
-
-  jeevesAdd(
-    "jeeves",
-    "Good day. I am Jeeves. How may I be of service? I can perform calculations, explain concepts, help you find things, generate useful ideas, and converse about the functions of this rather ambitious website."
-  );
-}
-
-function jeevesClear(){
-
-  jeevesHistory.length = 0;
-  $("chatMessages").innerHTML = "";
-  jeevesWelcome();
-}
-
-function calculateExpression(expression){
-
-  /*
-   * Restrict calculator input.
-   */
-  if(!/^[0-9+\-*/%().,\s^]+$/.test(expression)){
-    return null;
-  }
-
+function save(){
   try{
-
-    const safe =
-      expression
-        .replaceAll("^","**")
-        .replaceAll(",",".");
-
-    /*
-     * This is intentionally limited to mathematical characters.
-     */
-    const result =
-      Function('"use strict";return (' + safe + ')')();
-
-    if(
-      typeof result !== "number" ||
-      !Number.isFinite(result)
-    ){
-      return null;
-    }
-
-    return result;
-
-  }catch{
-    return null;
-  }
+    localStorage.setItem(SAVE_KEY,JSON.stringify(state));
+  }catch(e){}
 }
 
-function localJeeves(message){
 
-  const m = message.trim();
-  const lower = m.toLowerCase();
+/* ---------- MATCH ---------- */
 
-  /*
-   * Greetings
-   */
-  if(
-    /^(hi|hello|hey|yo|sup|good morning|good evening|good afternoon)\b/i.test(m)
-  ){
-    return "Good day. It is a pleasure to see you. What can I do for you?";
-  }
+let leftAI;
+let rightAI;
 
-  if(
-    lower.includes("who are you") ||
-    lower.includes("what are you")
-  ){
-    return "I am Jeeves, your browser-based assistant. This particular version runs locally inside this page. I shall not claim to be connected to a cloud AI service when no such service has been configured.";
-  }
+let leftPaddle;
+let rightPaddle;
 
-  /*
-   * Site navigation
-   */
-  if(
-    lower.includes("stream") ||
-    lower.includes("shaggymedic")
-  ){
-    return "The Shaggymedic420 stream is in the Stream section. I have also conveyed the site's most important message: lurking is the backbone of stream success.";
-  }
+let ball;
 
-  if(lower.includes("headline") || lower.includes("news")){
-    jumpTo("headlines");
-    return "Certainly. I have taken you to the Headlines desk. The stories there are fetched from external sources when those sources are reachable.";
-  }
+let running=true;
+let gameSpeed=1;
 
-  if(lower.includes("laugh") || lower.includes("meme")){
-    jumpTo("laughs");
-    return "The Laughs section awaits. It uses source media when available rather than manufacturing pretend thumbnails.";
-  }
+let lastFrame=performance.now();
+let accumulator=0;
 
-  /*
-   * Time
-   */
-  if(
-    lower.includes("what time") ||
-    lower === "time"
-  ){
-    return "The current local time is " +
-      new Intl.DateTimeFormat(undefined,{
-        dateStyle:"full",
-        timeStyle:"medium"
-      }).format(new Date()) +
-      ".";
-  }
+let pointHistory=[];
 
-  /*
-   * Date
-   */
-  if(
-    lower.includes("what date") ||
-    lower.includes("today's date") ||
-    lower === "date"
-  ){
-    return "Today is " +
-      new Intl.DateTimeFormat(undefined,{
-        dateStyle:"full"
-      }).format(new Date()) +
-      ".";
-  }
+const WIN_SCORE=7;
 
-  /*
-   * Calculator
-   */
-  const mathMatch =
-    m.match(
-      /^(?:calculate|what is|compute|solve)\s+(.+)$/i
+let matchState="playing";
+
+
+function selectOpponents(){
+
+  let ranking=[...state.competitors]
+    .sort((a,b)=>
+      (b.wins-b.losses*0.4+b.recentForm*.2)-
+      (a.wins-a.losses*0.4+a.recentForm*.2)
     );
 
-  if(mathMatch){
+  /* Occasionally force variety so the league doesn't become repetitive. */
 
-    const result =
-      calculateExpression(mathMatch[1]);
+  let a=ranking[Math.floor(Math.random()*Math.min(6,ranking.length))];
 
-    if(result !== null){
-      return `The answer is ${result}.`;
-    }
+  let candidates=state.competitors.filter(x=>x.id!==a.id);
+
+  let b;
+
+  if(Math.random()<.65){
+    b=choice(candidates.slice().sort(
+      (x,y)=>Math.abs(x.wins-a.wins)-Math.abs(y.wins-a.wins)
+    ).slice(0,5));
+  }else{
+    b=choice(candidates);
   }
 
-  /*
-   * Direct mathematical expression
-   */
-  if(
-    /^[\d\s()+\-*/%.^]+$/.test(m) &&
-    /[\d]/.test(m)
-  ){
+  leftAI=a;
+  rightAI=b;
+}
 
-    const result =
-      calculateExpression(m);
 
-    if(result !== null){
-      return `The answer is ${result}.`;
-    }
-  }
+function resetMatch(){
 
-  /*
-   * Explain common concepts.
-   */
-  const explanations = {
+  selectOpponents();
 
-    "html":
-      "HTML is the structure of a webpage. Think of it as the nouns and skeleton: headings, paragraphs, buttons, images, forms and other elements.",
-
-    "css":
-      "CSS controls presentation: colors, spacing, typography, layout, animation and responsive behavior.",
-
-    "javascript":
-      "JavaScript is the programming language running in the browser that can make a page interactive, manipulate HTML, call APIs and respond to user actions.",
-
-    "api":
-      "An API is a defined way for software to communicate with other software. A webpage can request data from an API and use the response.",
-
-    "github pages":
-      "GitHub Pages is static hosting. It is excellent for HTML, CSS and browser JavaScript, but it does not secretly provide a private server where your AI keys or database can safely live.",
-
-    "cors":
-      "CORS is a browser security mechanism controlling which origins can request resources from another origin. It is one reason some public feeds work directly in a webpage while others do not.",
-
-    "twitch embed":
-      "Twitch provides an official embedded player. The embedding page must provide its parent hostname, and Twitch documents minimum dimensions for embedded video."
+  leftPaddle={
+    x:45,
+    y:canvas.height/2-55,
+    w:15,
+    h:110,
+    vy:0
   };
 
-  for(const key of Object.keys(explanations)){
-    if(lower === key || lower.includes("what is " + key)){
-      return explanations[key];
-    }
-  }
-
-  /*
-   * Website commands
-   */
-  if(
-    lower.includes("open tools") ||
-    lower.includes("show tools")
-  ){
-    jumpTo("tools");
-    return "Certainly. The toolbox is open.";
-  }
-
-  if(
-    lower.includes("open games") ||
-    lower.includes("show games")
-  ){
-    jumpTo("games");
-    return "The arcade is ready.";
-  }
-
-  if(
-    lower.includes("teach me") ||
-    lower.includes("tell me something")
-  ){
-    newKnowledge();
-    return "I have placed a fact in the Internet Knowledge desk for you.";
-  }
-
-  /*
-   * Search intent
-   */
-  if(
-    lower.startsWith("search for ") ||
-    lower.startsWith("google ")
-  ){
-
-    const query =
-      m.replace(/^search for /i,"")
-       .replace(/^google /i,"");
-
-    $("searchInput").value = query;
-
-    document.getElementById("searchForm")
-      .requestSubmit();
-
-    return `Certainly. I have sent "${query}" to the search desk.`;
-  }
-
-  /*
-   * Default local conversational answer.
-   */
-  return (
-    "A sensible question, sir. I understand what you have asked, " +
-    "but this single-file version does not have a remote language model " +
-    "connected to it. I would rather admit that than fabricate an answer " +
-    "and call it artificial intelligence.\n\n" +
-    "I can nevertheless help with calculations, dates, times, website " +
-    "navigation, explanations of web technology, searches, tools, " +
-    "knowledge facts and the site's live data sections."
-  );
-}
-
-async function askJeeves(message){
-
-  if(!message.trim()) return;
-
-  jeevesAdd("user",message);
-  jeevesHistory.push({
-    role:"user",
-    content:message
-  });
-
-  $("jeevesInput").disabled = true;
-
-  /*
-   * Optional real AI backend.
-   */
-  if(CONFIG.AI_ENDPOINT){
-
-    try{
-
-      const response =
-        await fetch(CONFIG.AI_ENDPOINT,{
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            message,
-            history:jeevesHistory
-          })
-        });
-
-      if(!response.ok){
-        throw new Error(
-          "AI server returned HTTP " +
-          response.status
-        );
-      }
-
-      const data = await response.json();
-
-      if(!data.reply){
-        throw new Error("AI server returned no reply.");
-      }
-
-      jeevesAdd("jeeves",data.reply);
-
-      jeevesHistory.push({
-        role:"assistant",
-        content:data.reply
-      });
-
-      $("jeevesInput").disabled = false;
-      $("jeevesInput").focus();
-
-      return;
-
-    }catch(error){
-
-      console.error(error);
-
-      jeevesAdd(
-        "jeeves",
-        "I attempted to contact the configured AI service, but it did not respond successfully. I shall fall back to my local brain rather than pretending the connection worked."
-      );
-    }
-  }
-
-  /*
-   * Local brain.
-   */
-  const reply =
-    localJeeves(message);
-
-  jeevesAdd("jeeves",reply);
-
-  jeevesHistory.push({
-    role:"assistant",
-    content:reply
-  });
-
-  $("jeevesInput").disabled = false;
-  $("jeevesInput").focus();
-}
-
-$("jeevesForm").addEventListener("submit",function(e){
-
-  e.preventDefault();
-
-  const value =
-    $("jeevesInput").value.trim();
-
-  if(!value) return;
-
-  $("jeevesInput").value = "";
-
-  askJeeves(value);
-});
-
-jeevesWelcome();
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-$("searchForm").addEventListener("submit",function(e){
-
-  e.preventDefault();
-
-  const query =
-    $("searchInput").value.trim();
-
-  if(!query) return;
-
-  const engine =
-    $("searchEngine").value;
-
-  const encoded =
-    encodeURIComponent(query);
-
-  const urls = {
-
-    google:
-      "https://www.google.com/search?q=" + encoded,
-
-    bing:
-      "https://www.bing.com/search?q=" + encoded,
-
-    duck:
-      "https://duckduckgo.com/?q=" + encoded,
-
-    wiki:
-      "https://en.wikipedia.org/w/index.php?search=" + encoded,
-
-    news:
-      "https://news.google.com/search?q=" + encoded,
-
-    youtube:
-      "https://www.youtube.com/results?search_query=" + encoded
+  rightPaddle={
+    x:canvas.width-60,
+    y:canvas.height/2-55,
+    w:15,
+    h:110,
+    vy:0
   };
 
-  window.open(
-    urls[engine],
-    "_blank",
-    "noopener"
+  ball={
+    x:canvas.width/2,
+    y:canvas.height/2,
+    vx:choice([-1,1])*rand(6,8),
+    vy:rand(-4.5,4.5),
+    radius:8
+  };
+
+  state.match++;
+  state.totalMatches++;
+
+  state.points=0;
+  pointHistory=[];
+
+  matchState="playing";
+
+  updateUI();
+
+  log(
+    "MATCH "+state.match+
+    " ONLINE :: "+
+    leftAI.name+" vs "+rightAI.name
   );
-});
-
-
-/* =========================================================
-   HACKER NEWS
-========================================================= */
-
-async function loadHackerNews(){
-
-  const box = $("hnNews");
-
-  box.innerHTML =
-    `<div class="loading">Loading real Hacker News stories…</div>`;
-
-  try{
-
-    const response =
-      await fetch(CONFIG.HN_API,{
-        cache:"no-store"
-      });
-
-    if(!response.ok){
-      throw new Error("HTTP " + response.status);
-    }
-
-    const data =
-      await response.json();
-
-    const hits =
-      Array.isArray(data.hits)
-        ? data.hits
-        : [];
-
-    if(!hits.length){
-      box.innerHTML =
-        `<div class="empty">No stories were returned.</div>`;
-      return;
-    }
-
-    box.innerHTML =
-      hits.map(item => {
-
-        const title =
-          item.title ||
-          item.story_title ||
-          "Untitled";
-
-        const url =
-          item.url ||
-          (
-            "https://news.ycombinator.com/item?id=" +
-            item.objectID
-          );
-
-        const points =
-          Number(item.points || 0);
-
-        const comments =
-          Number(item.num_comments || 0);
-
-        const created =
-          item.created_at
-            ? formatDate(new Date(item.created_at))
-            : "";
-
-        return `
-          <a
-            class="newsItem"
-            href="${escapeHTML(url)}"
-            target="_blank"
-            rel="noopener">
-
-            <div class="newsMeta">
-              HACKER NEWS · ${points} points · ${comments} comments
-            </div>
-
-            <div class="newsTitle">
-              ${escapeHTML(title)}
-            </div>
-
-            <div class="newsTime">
-              ${escapeHTML(created)}
-            </div>
-
-          </a>
-        `;
-
-      }).join("");
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML =
-      `<div class="empty">
-        Hacker News could not be reached right now.
-        Nothing has been invented to fill the gap.
-      </div>`;
-  }
 }
 
 
-/* =========================================================
-   REDDIT
-========================================================= */
+/* ---------- AI ---------- */
 
-async function fetchReddit(subreddit){
+function predictBallY(ai, paddle, side){
+
+  let bx=ball.x;
+  let by=ball.y;
+
+  let vx=ball.vx;
+  let vy=ball.vy;
+
+  if((side==="left" && vx>=0) ||
+     (side==="right" && vx<=0)){
+    return canvas.height/2;
+  }
+
+  let distance;
+
+  if(side==="left"){
+    distance=paddle.x-bx;
+  }else{
+    distance=bx-(paddle.x+paddle.w);
+  }
+
+  distance=Math.abs(distance);
+
+  let time=distance/Math.max(Math.abs(vx),.01);
+
+  let predicted=by+vy*time;
 
   /*
-   * Reddit's public JSON endpoint is attempted directly.
-   * Browser/API policies can change; failure is handled honestly.
-   */
-  const url =
-    `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/hot.json?limit=12&raw_json=1`;
+    Reflect predicted trajectory against top/bottom.
+  */
 
-  const response =
-    await fetch(url,{
-      headers:{
-        "Accept":"application/json"
-      },
-      cache:"no-store"
-    });
+  const margin=20;
 
-  if(!response.ok){
-    throw new Error(
-      "Reddit HTTP " + response.status
-    );
+  while(predicted<margin || predicted>canvas.height-margin){
+
+    if(predicted<margin){
+      predicted=margin+(margin-predicted);
+    }
+
+    if(predicted>canvas.height-margin){
+      predicted=(canvas.height-margin)-(predicted-(canvas.height-margin));
+    }
   }
 
-  return response.json();
+  const uncertainty=
+    (1-ai.prediction)*rand(-130,130);
+
+  return predicted+uncertainty;
 }
 
-async function loadReddit(){
 
-  const box =
-    $("redditNews");
+function think(ai,paddle,side){
 
-  box.innerHTML =
-    `<div class="loading">Loading Reddit…</div>`;
+  const target=predictBallY(ai,paddle,side);
 
-  try{
+  let center=paddle.y+paddle.h/2;
 
-    const results = [];
+  let error=target-center;
 
-    for(const subreddit of CONFIG.REDDIT_SUBREDDITS){
+  /*
+    Accuracy controls how closely it tracks target.
+  */
 
-      try{
+  let control=
+    error *
+    (.035+
+      ai.reaction*.025+
+      ai.accuracy*.025);
 
-        const data =
-          await fetchReddit(subreddit);
+  /*
+    Adaptive competitors react harder after conceding points.
+  */
 
-        const children =
-          data &&
-          data.data &&
-          Array.isArray(data.data.children)
-            ? data.data.children
-            : [];
+  if(ai.strategy==="AGGRESSIVE"){
+    control*=1.25;
+  }
 
-        children.slice(0,6).forEach(child => {
+  if(ai.strategy==="DEFENSIVE"){
+    control*=.82;
+  }
 
-          const p = child.data;
+  if(ai.strategy==="PRECISION"){
+    control*=1.08;
+  }
 
-          if(p){
-            results.push({
-              subreddit,
-              title:p.title,
-              url:
-                "https://www.reddit.com" +
-                (p.permalink || ""),
-              score:p.score || 0,
-              created:p.created_utc
-            });
-          }
+  if(ai.strategy==="CHAOTIC"){
+    control*=rand(.65,1.35);
+  }
 
-        });
+  const maxSpeed=
+    7.5+
+    ai.reaction*2+
+    ai.aggression*.8;
 
-      }catch(err){
-        console.warn(
-          "Reddit subreddit failed:",
-          subreddit,
-          err
+  paddle.vy=clamp(control,-maxSpeed,maxSpeed);
+
+  paddle.y+=paddle.vy*gameSpeed;
+
+  paddle.y=clamp(
+    paddle.y,
+    0,
+    canvas.height-paddle.h
+  );
+}
+
+
+/* ---------- BALL PHYSICS ---------- */
+
+function updateBall(){
+
+  ball.x+=ball.vx*gameSpeed;
+  ball.y+=ball.vy*gameSpeed;
+
+  if(ball.y-ball.radius<=0){
+    ball.y=ball.radius;
+    ball.vy=Math.abs(ball.vy);
+  }
+
+  if(ball.y+ball.radius>=canvas.height){
+    ball.y=canvas.height-ball.radius;
+    ball.vy=-Math.abs(ball.vy);
+  }
+
+  /*
+    Left collision
+  */
+
+  if(
+    ball.vx<0 &&
+    ball.x-ball.radius<=leftPaddle.x+leftPaddle.w &&
+    ball.x>leftPaddle.x &&
+    ball.y>=leftPaddle.y &&
+    ball.y<=leftPaddle.y+leftPaddle.h
+  ){
+
+    ball.x=leftPaddle.x+leftPaddle.w+ball.radius;
+
+    let relative=
+      (ball.y-(leftPaddle.y+leftPaddle.h/2))/
+      (leftPaddle.h/2);
+
+    let angle=relative*5.7;
+
+    ball.vx=Math.abs(ball.vx)*1.035+
+      leftAI.accuracy*.08;
+
+    ball.vy=angle;
+
+    ball.vy=clamp(ball.vy,-10,10);
+  }
+
+
+  /*
+    Right collision
+  */
+
+  if(
+    ball.vx>0 &&
+    ball.x+ball.radius>=rightPaddle.x &&
+    ball.x<rightPaddle.x+rightPaddle.w &&
+    ball.y>=rightPaddle.y &&
+    ball.y<=rightPaddle.y+rightPaddle.h
+  ){
+
+    ball.x=rightPaddle.x-ball.radius;
+
+    let relative=
+      (ball.y-(rightPaddle.y+rightPaddle.h/2))/
+      (rightPaddle.h/2);
+
+    let angle=relative*5.7;
+
+    ball.vx=-Math.abs(ball.vx)*1.035-
+      rightAI.accuracy*.08;
+
+    ball.vy=angle;
+
+    ball.vy=clamp(ball.vy,-10,10);
+  }
+
+
+  if(ball.x<-30){
+    scorePoint(rightAI,leftAI);
+  }
+
+  if(ball.x>canvas.width+30){
+    scorePoint(leftAI,rightAI);
+  }
+}
+
+
+/* ---------- POINT ---------- */
+
+function scorePoint(winner,loser){
+
+  if(matchState!=="playing") return;
+
+  const snapshot={
+    x:ball.x,
+    y:ball.y,
+    vx:ball.vx,
+    vy:ball.vy,
+    winner:winner.name,
+    loser:loser.name,
+    leftY:leftPaddle.y,
+    rightY:rightPaddle.y
+  };
+
+  pointHistory.push(snapshot);
+
+  winner.pointsFor++;
+  loser.pointsAgainst++;
+
+  winner.xp+=12;
+  loser.xp+=5;
+
+  winner.recentForm+=1;
+  loser.recentForm-=.5;
+
+  winner.streak++;
+  loser.streak=0;
+
+  winner.bestStreak=
+    Math.max(winner.bestStreak,winner.streak);
+
+  state.points++;
+  state.totalPoints++;
+
+  const winnerScore=
+    pointHistory.filter(p=>p.winner===winner.name).length;
+
+  const loserScore=
+    pointHistory.filter(p=>p.winner===loser.name).length;
+
+  state.currentScore={
+    left:winner===leftAI ? winnerScore : loserScore,
+    right:winner===rightAI ? winnerScore : loserScore
+  };
+
+  updateScoreDisplay();
+
+  /*
+    Learn immediately.
+  */
+
+  learn(winner,true);
+  learn(loser,false);
+
+  /*
+    Snapshot then reset ball.
+  */
+
+  ball={
+    x:canvas.width/2,
+    y:canvas.height/2,
+    vx:(winner===leftAI?1:-1)*rand(6,8),
+    vy:rand(-4.5,4.5),
+    radius:8
+  };
+
+  triggerReplay(snapshot,winner,loser,winnerScore,loserScore);
+
+  if(winnerScore>=WIN_SCORE || loserScore>=WIN_SCORE){
+
+    setTimeout(()=>{
+      if(matchState==="playing"){
+        finishMatch(
+          winnerScore>=WIN_SCORE ? winner : loser,
+          winnerScore>=WIN_SCORE ? loser : winner
         );
+      }
+    },700);
+  }
+}
+
+
+/* ---------- LEARNING ---------- */
+
+function learn(ai,won){
+
+  const reward=won?1:-.25;
+
+  ai.memory.push({
+    reward,
+    t:Date.now()
+  });
+
+  if(ai.memory.length>50){
+    ai.memory.shift();
+  }
+
+  const lr=ai.learningRate;
+
+  if(won){
+
+    ai.prediction+=lr*.35;
+    ai.accuracy+=lr*.2;
+    ai.reaction+=lr*.12;
+
+  }else{
+
+    ai.prediction+=lr*.05;
+    ai.defense+=lr*.2;
+    ai.adaptation+=lr*.25;
+  }
+
+  ai.prediction=clamp(ai.prediction,.5,1.5);
+  ai.accuracy=clamp(ai.accuracy,.5,1.5);
+  ai.reaction=clamp(ai.reaction,.5,1.5);
+  ai.defense=clamp(ai.defense,.5,1.5);
+  ai.adaptation=clamp(ai.adaptation,.5,1.5);
+}
+
+
+/* ---------- MATCH END ---------- */
+
+function finishMatch(winner,loser){
+
+  matchState="finished";
+
+  winner.wins++;
+  loser.losses++;
+
+  winner.recentForm+=3;
+  loser.recentForm-=2;
+
+  winner.xp+=50;
+
+  if(winner.xp>=100){
+    winner.generation++;
+    winner.xp=0;
+    mutate(winner);
+  }
+
+  const result={
+    era:state.era,
+    match:state.match,
+    winner:winner.name,
+    loser:loser.name,
+    time:Date.now()
+  };
+
+  state.matchHistory.unshift(result);
+
+  if(state.matchHistory.length>30){
+    state.matchHistory.pop();
+  }
+
+  log(
+    "MATCH COMPLETE :: "+
+    winner.name+" DEFEATED "+loser.name
+  );
+
+  toast(
+    winner.name+" WINS THE MATCH"
+  );
+
+  /*
+    Championship condition:
+    Every competitor gets a fair amount of matches.
+    Once one competitor reaches 5 wins in this era,
+    declare champion and restart era.
+  */
+
+  if(winner.wins>=5){
+
+    setTimeout(()=>{
+      crownChampion(winner);
+    },1200);
+
+  }else{
+
+    setTimeout(resetMatch,1100);
+  }
+
+  save();
+  updateUI();
+}
+
+
+/* ---------- MUTATION ---------- */
+
+function mutate(ai){
+
+  const oldStrategy=ai.strategy;
+
+  ai.strategy=choice(
+    strategies.filter(s=>s!==oldStrategy)
+  );
+
+  const mutation=rand(.92,1.10);
+
+  ai.reaction*=mutation;
+  ai.prediction*=mutation;
+  ai.accuracy*=mutation;
+  ai.aggression*=mutation;
+  ai.defense*=mutation;
+
+  ai.lastMutation=
+    oldStrategy+" → "+ai.strategy;
+
+  state.generation++;
+
+  log(
+    "EVOLUTION :: "+
+    ai.name+
+    " changed strategy to "+
+    ai.strategy+
+    " [GEN "+ai.generation+"]"
+  );
+}
+
+
+/* ---------- CHAMPION ---------- */
+
+function crownChampion(winner){
+
+  if(matchState==="champion") return;
+
+  matchState="champion";
+
+  winner.championships++;
+
+  state.championHistory.unshift({
+    era:state.era,
+    champion:winner.name,
+    time:Date.now(),
+    championships:winner.championships
+  });
+
+  log(
+    "🏆 ERA "+state.era+
+    " CHAMPION :: "+
+    winner.name+
+    " :: ALL-TIME TITLES "+
+    winner.championships
+  );
+
+  toast(
+    "🏆 "+winner.name+
+    " IS THE CHAMPION OF ERA "+
+    state.era
+  );
+
+  mutate(winner);
+
+  save();
+  updateUI();
+
+  /*
+    New era.
+    Championship history is NEVER erased.
+  */
+
+  setTimeout(()=>{
+
+    state.era++;
+
+    for(const ai of state.competitors){
+
+      ai.wins=0;
+      ai.losses=0;
+      ai.pointsFor=0;
+      ai.pointsAgainst=0;
+      ai.streak=0;
+      ai.recentForm*=.25;
+
+      /*
+        Everyone evolves slightly between eras.
+      */
+
+      if(Math.random()<.65){
+        mutate(ai);
       }
     }
 
-    if(!results.length){
+    state.generation++;
 
-      box.innerHTML =
-        `<div class="empty">
-          Reddit could not provide data to this browser right now.
-          This is a source/API limitation, not fabricated content.
-        </div>`;
-
-      return;
-    }
-
-    results.sort(
-      (a,b) => b.score - a.score
+    log(
+      "∞ NEW ERA "+state.era+
+      " INITIALIZED :: CHAMPIONSHIP ARCHIVE PRESERVED"
     );
 
-    box.innerHTML =
-      results.slice(0,12).map(item => {
+    resetMatch();
+    save();
+    updateUI();
 
-        const date =
-          new Date(item.created * 1000);
+  },2500);
+}
 
-        return `
-          <a
-            class="newsItem"
-            href="${escapeHTML(item.url)}"
-            target="_blank"
-            rel="noopener">
 
-            <div class="newsMeta">
-              r/${escapeHTML(item.subreddit)}
-              · ${Number(item.score).toLocaleString()} points
-            </div>
+/* ---------- DRAW GAME ---------- */
 
-            <div class="newsTitle">
-              ${escapeHTML(item.title)}
-            </div>
+function drawGame(){
 
-            <div class="newsTime">
-              ${escapeHTML(formatDate(date))}
-            </div>
+  const w=canvas.width;
+  const h=canvas.height;
 
-          </a>
-        `;
+  ctx.clearRect(0,0,w,h);
 
-      }).join("");
+  /*
+    Background.
+  */
 
-  }catch(error){
+  const grad=ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,"#02060b");
+  grad.addColorStop(.5,"#04111a");
+  grad.addColorStop(1,"#02050a");
 
-    console.error(error);
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,w,h);
 
-    box.innerHTML =
-      `<div class="empty">
-        Reddit could not be reached.
-      </div>`;
+  /*
+    Grid.
+  */
+
+  ctx.strokeStyle="rgba(0,234,255,.045)";
+  ctx.lineWidth=1;
+
+  for(let x=0;x<w;x+=50){
+    ctx.beginPath();
+    ctx.moveTo(x,0);
+    ctx.lineTo(x,h);
+    ctx.stroke();
   }
-}
 
-
-/* =========================================================
-   HEADLINES REFRESH
-========================================================= */
-
-async function loadHeadlines(){
-
-  await Promise.allSettled([
-    loadHackerNews(),
-    loadReddit()
-  ]);
-}
-
-
-/* =========================================================
-   LAUGHS
-========================================================= */
-
-async function loadLaughs(){
-
-  const grid =
-    $("laughGrid");
-
-  grid.innerHTML =
-    `<div class="loading">
-      Loading real source media…
-    </div>`;
-
-  const posts = [];
-
-  for(const subreddit of CONFIG.REDDIT_SUBREDDITS){
-
-    try{
-
-      const data =
-        await fetchReddit(subreddit);
-
-      const children =
-        data?.data?.children || [];
-
-      children.forEach(child => {
-
-        const p = child.data;
-
-        if(!p) return;
-
-        const preview =
-          p.preview?.images?.[0]?.source?.url;
-
-        const direct =
-          p.url_overridden_by_dest ||
-          p.url;
-
-        const image =
-          preview ||
-          (
-            /\.(jpg|jpeg|png|gif|webp)(\?|$)/i.test(direct || "")
-              ? direct
-              : ""
-          );
-
-        /*
-         * Only use an actual source image.
-         */
-        if(!image) return;
-
-        posts.push({
-          title:p.title,
-          image:image.replaceAll("&amp;","&"),
-          permalink:
-            "https://www.reddit.com" +
-            (p.permalink || ""),
-          subreddit,
-          score:p.score || 0
-        });
-
-      });
-
-    }catch(error){
-
-      console.warn(
-        "Laugh source unavailable:",
-        subreddit,
-        error
-      );
-    }
+  for(let y=0;y<h;y+=50){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(w,y);
+    ctx.stroke();
   }
 
   /*
-   * Sort hottest first.
-   */
-  posts.sort(
-    (a,b) => b.score - a.score
+    Center line.
+  */
+
+  ctx.strokeStyle="rgba(255,255,255,.12)";
+  ctx.setLineDash([8,12]);
+
+  ctx.beginPath();
+  ctx.moveTo(w/2,0);
+  ctx.lineTo(w/2,h);
+  ctx.stroke();
+
+  ctx.setLineDash([]);
+
+
+  /*
+    Paddles.
+  */
+
+  drawPaddle(
+    leftPaddle,
+    leftAI ? leftAI.color : "#00eaff"
   );
 
-  if(!posts.length){
+  drawPaddle(
+    rightPaddle,
+    rightAI ? rightAI.color : "#ff2bd6"
+  );
 
-    grid.innerHTML =
-      `<div class="empty">
-        No source images were available right now.
-        I am deliberately not generating replacement thumbnails
-        and pretending they came from Reddit.
-      </div>`;
 
-    return;
+  /*
+    Ball glow.
+  */
+
+  if(ball){
+
+    const color=
+      ball.vx<0
+      ? (leftAI?leftAI.color:"#00eaff")
+      : (rightAI?rightAI.color:"#ff2bd6");
+
+    ctx.shadowBlur=28;
+    ctx.shadowColor=color;
+
+    ctx.fillStyle=color;
+
+    ctx.beginPath();
+    ctx.arc(ball.x,ball.y,ball.radius,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.shadowBlur=0;
   }
 
-  grid.innerHTML =
-    posts.slice(0,24).map(post => `
 
-      <article class="meme">
+  /*
+    Top labels.
+  */
 
-        <a
-          href="${escapeHTML(post.permalink)}"
-          target="_blank"
-          rel="noopener">
+  ctx.font="bold 11px monospace";
+  ctx.fillStyle="rgba(255,255,255,.25)";
+  ctx.fillText(
+    "AUTONOMOUS ARENA // ERA "+state.era,
+    18,24
+  );
 
-          <img
-            src="${escapeHTML(post.image)}"
-            alt="${escapeHTML(post.title)}"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            onerror="this.closest('.meme').remove()">
+  ctx.textAlign="right";
 
-        </a>
+  ctx.fillText(
+    "SIMULATION SPEED "+gameSpeed.toFixed(1)+"×",
+    w-18,24
+  );
 
-        <div class="memeBody">
+  ctx.textAlign="left";
+}
 
-          <div class="memeTitle">
-            ${escapeHTML(post.title)}
+
+function drawPaddle(p,color){
+
+  if(!p)return;
+
+  ctx.shadowBlur=18;
+  ctx.shadowColor=color;
+
+  ctx.fillStyle=color;
+
+  ctx.fillRect(
+    p.x,p.y,p.w,p.h
+  );
+
+  ctx.shadowBlur=0;
+
+  ctx.fillStyle="rgba(255,255,255,.55)";
+  ctx.fillRect(
+    p.x+(p.w*.25),
+    p.y+5,
+    2,
+    p.h-10
+  );
+}
+
+
+/* ---------- REPLAY ---------- */
+
+let replayActive=false;
+let replayStart=0;
+let replaySnapshot=null;
+let replaySpeed=3;
+let replayFrame=0;
+
+
+function triggerReplay(snapshot,winner,loser,ws,ls){
+
+  replaySnapshot=snapshot;
+  replayActive=true;
+  replayStart=performance.now();
+  replayFrame=0;
+
+  replaySpeed=3;
+
+  document.getElementById("replay").classList.add("show");
+
+  document.getElementById("replayText").textContent=
+    winner.name+" SCORED // "+ws+" — "+ls;
+
+  document.getElementById("replayMultiplier").textContent=
+    "3.0×";
+
+  /*
+    Replay automatically accelerates.
+    It remains short enough not to stall the league.
+  */
+
+  setTimeout(()=>{
+
+    if(replayActive){
+      replaySpeed=5;
+    }
+
+  },900);
+
+  setTimeout(()=>{
+
+    if(replayActive){
+      replaySpeed=8;
+    }
+
+  },1500);
+
+  setTimeout(()=>{
+
+    if(replayActive){
+      replaySpeed=12;
+    }
+
+  },2000);
+
+  setTimeout(()=>{
+
+    if(replayActive){
+      skipReplay();
+    }
+
+  },2500);
+}
+
+
+function drawReplay(){
+
+  if(!replayActive || !replaySnapshot)return;
+
+  const w=replayCanvas.width;
+  const h=replayCanvas.height;
+
+  rctx.fillStyle="#010407";
+  rctx.fillRect(0,0,w,h);
+
+  /*
+    Stylized reconstructed point.
+  */
+
+  rctx.strokeStyle="rgba(0,234,255,.07)";
+
+  for(let x=0;x<w;x+=50){
+    rctx.beginPath();
+    rctx.moveTo(x,0);
+    rctx.lineTo(x,h);
+    rctx.stroke();
+  }
+
+  for(let y=0;y<h;y+=50){
+    rctx.beginPath();
+    rctx.moveTo(0,y);
+    rctx.lineTo(w,y);
+    rctx.stroke();
+  }
+
+  rctx.strokeStyle="rgba(255,255,255,.15)";
+  rctx.setLineDash([8,12]);
+
+  rctx.beginPath();
+  rctx.moveTo(w/2,0);
+  rctx.lineTo(w/2,h);
+  rctx.stroke();
+
+  rctx.setLineDash([]);
+
+
+  const elapsed=
+    (performance.now()-replayStart)/1000;
+
+  /*
+    Bounce reconstruction.
+  */
+
+  let t=elapsed*replaySpeed;
+
+  let x=
+    replaySnapshot.x-
+    replaySnapshot.vx*t*18;
+
+  let y=
+    replaySnapshot.y-
+    replaySnapshot.vy*t*18;
+
+  /*
+    Keep visually inside arena.
+  */
+
+  x=((x%w)+w)%w;
+  y=((y%h)+h)%h;
+
+
+  rctx.shadowBlur=25;
+  rctx.shadowColor="#ff2bd6";
+
+  rctx.fillStyle="#ff2bd6";
+
+  rctx.beginPath();
+  rctx.arc(x,y,11,0,Math.PI*2);
+  rctx.fill();
+
+  rctx.shadowBlur=0;
+
+
+  /*
+    paddles.
+  */
+
+  rctx.fillStyle=leftAI?leftAI.color:"#00eaff";
+
+  rctx.fillRect(
+    45,
+    replaySnapshot.leftY,
+    15,
+    110
+  );
+
+  rctx.fillStyle=rightAI?rightAI.color:"#ff2bd6";
+
+  rctx.fillRect(
+    w-60,
+    replaySnapshot.rightY,
+    15,
+    110
+  );
+
+
+  rctx.font="bold 13px monospace";
+  rctx.fillStyle="rgba(255,255,255,.7)";
+
+  rctx.fillText(
+    "INSTANT REPLAY",
+    20,
+    28
+  );
+
+  document.getElementById("replayMultiplier").textContent=
+    replaySpeed.toFixed(1)+"×";
+}
+
+
+function skipReplay(){
+
+  replayActive=false;
+
+  document.getElementById("replay").classList.remove("show");
+}
+
+
+/* ---------- MAIN LOOP ---------- */
+
+function loop(now){
+
+  const dt=Math.min(50,now-lastFrame);
+  lastFrame=now;
+
+  if(running && !replayActive){
+
+    accumulator+=dt;
+
+    if(matchState==="playing"){
+
+      think(
+        leftAI,
+        leftPaddle,
+        "left"
+      );
+
+      think(
+        rightAI,
+        rightPaddle,
+        "right"
+      );
+
+      updateBall();
+    }
+  }
+
+  drawGame();
+
+  if(replayActive){
+    drawReplay();
+  }
+
+  updateThoughts();
+
+  requestAnimationFrame(loop);
+}
+
+
+/* ---------- UI ---------- */
+
+function updateScoreDisplay(){
+
+  const left=
+    pointHistory.filter(
+      p=>p.winner===leftAI.name
+    ).length;
+
+  const right=
+    pointHistory.filter(
+      p=>p.winner===rightAI.name
+    ).length;
+
+  document.getElementById("score").textContent=
+    left+" — "+right;
+}
+
+
+function updateUI(){
+
+  if(!leftAI || !rightAI)return;
+
+  document.getElementById("leftName").textContent=
+    leftAI.name;
+
+  document.getElementById("rightName").textContent=
+    rightAI.name;
+
+  document.getElementById("leftMeta").textContent=
+    leftAI.strategy+
+    " • GEN "+leftAI.generation+
+    " • "+Math.round(leftAI.accuracy*100)+"% ACC";
+
+  document.getElementById("rightMeta").textContent=
+    rightAI.strategy+
+    " • GEN "+rightAI.generation+
+    " • "+Math.round(rightAI.accuracy*100)+"% ACC";
+
+  document.getElementById("season").textContent=
+    state.era;
+
+  document.getElementById("matchNumber").textContent=
+    state.match;
+
+  document.getElementById("pointNumber").textContent=
+    fmt(state.totalPoints);
+
+  document.getElementById("totalMatches").textContent=
+    fmt(state.totalMatches);
+
+  document.getElementById("totalPoints").textContent=
+    fmt(state.totalPoints);
+
+  document.getElementById("totalChampions").textContent=
+    fmt(state.championHistory.length);
+
+  document.getElementById("generation").textContent=
+    state.generation;
+
+  updateStandings();
+  updateEvolution();
+  updateHistory();
+  updateArchive();
+}
+
+
+function updateStandings(){
+
+  const sorted=[...state.competitors].sort(
+    (a,b)=>
+      (b.championships*1000+b.wins*10-b.losses)-
+      (a.championships*1000+a.wins*10-a.losses)
+  );
+
+  const html=sorted.map((ai,i)=>{
+
+    const total=ai.wins+ai.losses;
+
+    const rate=
+      total
+      ? ai.wins/total*100
+      : 0;
+
+    return `
+      <div class="row">
+        <div class="rank">${i+1}</div>
+
+        <div>
+          <div class="name ${ai.championships?'champion':''}">
+            ${ai.name}
+            ${ai.championships
+              ? `<span class="badge">👑 ${ai.championships}</span>`
+              : ""}
           </div>
 
-          <div class="memeSource">
-            r/${escapeHTML(post.subreddit)}
-            · ${Number(post.score).toLocaleString()} points
+          <div class="miniBar">
+            <i style="width:${clamp(rate,2,100)}%"></i>
+          </div>
+        </div>
+
+        <div class="wins">${ai.wins}W</div>
+
+        <div class="champs">
+          ${ai.championships}🏆
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  document.getElementById("standings").innerHTML=html;
+}
+
+
+function updateEvolution(){
+
+  const sorted=[...state.competitors]
+    .sort((a,b)=>b.generation-a.generation);
+
+  document.getElementById("evolutionCards").innerHTML=
+    sorted.slice(0,8).map(ai=>`
+
+      <div style="
+        display:grid;
+        grid-template-columns:120px 1fr;
+        gap:12px;
+        align-items:center;
+        padding:10px 0;
+        border-bottom:1px solid #10202e;
+      ">
+
+        <div style="font-weight:1000;color:${ai.color}">
+          ${ai.name}
+        </div>
+
+        <div>
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            font-size:10px;
+            color:#718a9c;
+          ">
+            <span>
+              GEN ${ai.generation} • ${ai.strategy}
+            </span>
+
+            <span>
+              ${(ai.accuracy*100).toFixed(0)}% ACC
+            </span>
+          </div>
+
+          <div class="miniBar">
+            <i style="
+              width:${clamp(ai.accuracy/1.5*100,5,100)}%;
+              background:${ai.color};
+            "></i>
+          </div>
+
+          <div style="
+            font:9px monospace;
+            color:#506a7e;
+            margin-top:4px;
+          ">
+            MUTATION: ${ai.lastMutation}
           </div>
 
         </div>
-
-      </article>
+      </div>
 
     `).join("");
 }
 
 
-/* =========================================================
-   CALCULATOR
-========================================================= */
+function updateHistory(){
 
-$("calcForm").addEventListener("submit",function(e){
+  const items=state.matchHistory.slice(0,10);
 
-  e.preventDefault();
+  document.getElementById("history").innerHTML=
+    items.length
+    ? items.map(x=>`
 
-  const value =
-    $("calcInput").value.trim();
+      <div class="event">
+        <span class="eventTime">
+          ERA ${x.era}
+        </span>
 
-  const result =
-    calculateExpression(value);
+        <span>
+          <b class="green">${x.winner}</b>
+          defeated
+          <b class="pink">${x.loser}</b>
+        </span>
+      </div>
 
-  if(result === null){
+    `).join("")
+    : `<div style="color:#506a7e;font-size:11px">
+        Waiting for the first match...
+       </div>`;
+}
 
-    $("calcResult").textContent =
-      "Could not evaluate that expression.";
 
-    return;
+function updateArchive(){
+
+  const counts={};
+
+  for(const ai of state.competitors){
+    counts[ai.name]=ai.championships;
   }
 
-  $("calcResult").textContent =
-    String(result);
-});
+  const sorted=Object.entries(counts)
+    .sort((a,b)=>b[1]-a[1]);
+
+  document.getElementById("championshipArchive").innerHTML=
+    sorted.map(([name,count],i)=>`
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:11px 5px;
+        border-bottom:1px solid #10202e;
+      ">
+
+        <span>
+          <span style="
+            color:#536c80;
+            display:inline-block;
+            width:28px;
+          ">#${i+1}</span>
+
+          <b class="${count?'champion':''}">
+            ${name}
+          </b>
+        </span>
+
+        <span class="highlight">
+          ${count} CHAMPIONSHIP${count===1?"":"S"}
+        </span>
+
+      </div>
+
+    `).join("");
+}
 
 
-/* =========================================================
-   TIMER
-========================================================= */
+function updateThoughts(){
 
-let timerInterval = null;
+  if(!leftAI || !rightAI)return;
 
-function startTimer(){
+  const leftMessages=[
+    "predicting trajectory...",
+    "calculating rebound angle...",
+    "studying opponent timing...",
+    "updating tactical memory...",
+    "optimizing paddle position...",
+    "searching historical patterns...",
+    "testing counter-strategy...",
+    "minimizing error..."
+  ];
 
-  clearInterval(timerInterval);
+  const rightMessages=[
+    "mapping trajectory...",
+    "evaluating opponent...",
+    "learning from previous point...",
+    "calculating interception...",
+    "testing defensive model...",
+    "optimizing reaction...",
+    "running prediction...",
+    "updating neural strategy..."
+  ];
 
-  let remaining =
-    Math.max(
-      1,
-      Number($("timerInput").value || 1)
+  document.getElementById("leftThought").innerHTML=
+    choice(leftMessages)+
+    ' <span class="cursor">█</span>';
+
+  document.getElementById("rightThought").innerHTML=
+    choice(rightMessages)+
+    ' <span class="cursor">█</span>';
+}
+
+
+/* ---------- LOG ---------- */
+
+function log(message){
+
+  const el=document.getElementById("systemLog");
+
+  const div=document.createElement("div");
+
+  div.innerHTML=
+    `<span style="color:#345269">[${nowTime()}]</span> ${message}`;
+
+  el.prepend(div);
+
+  while(el.children.length>60){
+    el.removeChild(el.lastChild);
+  }
+}
+
+
+/* ---------- TOAST ---------- */
+
+let toastTimer;
+
+function toast(message){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=message;
+
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2400);
+}
+
+
+/* ---------- CONTROLS ---------- */
+
+function togglePause(){
+
+  running=!running;
+
+  document.getElementById("liveStatus").textContent=
+    running
+    ? "SIMULATION ONLINE"
+    : "SIMULATION PAUSED";
+
+  toast(
+    running
+    ? "SIMULATION RESUMED"
+    : "SIMULATION PAUSED"
+  );
+}
+
+
+function changeGameSpeed(amount){
+
+  gameSpeed=clamp(
+    gameSpeed+amount,
+    .25,
+    8
+  );
+
+  toast(
+    "SIMULATION SPEED "+
+    gameSpeed.toFixed(1)+"×"
+  );
+}
+
+
+function newLeague(){
+
+  const ok=confirm(
+    "Start a new era from scratch?\n\n"+
+    "ALL-TIME CHAMPIONSHIP RECORDS WILL BE PRESERVED."
+  );
+
+  if(!ok)return;
+
+  state.era++;
+
+  for(const ai of state.competitors){
+
+    ai.wins=0;
+    ai.losses=0;
+    ai.pointsFor=0;
+    ai.pointsAgainst=0;
+    ai.streak=0;
+    ai.recentForm=0;
+
+    ai.generation++;
+
+    mutate(ai);
+  }
+
+  log(
+    "MANUAL ERA RESET :: "+
+    "HISTORY PRESERVED"
+  );
+
+  save();
+
+  resetMatch();
+  updateUI();
+}
+
+
+function scrollToId(id){
+
+  document.getElementById(id)?.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+
+function scrollToGame(){
+
+  document.getElementById("game")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+}
+
+
+/* ---------- INITIALIZATION ---------- */
+
+resetMatch();
+
+log(
+  "∞ PONG LEAGUE CORE ONLINE"
+);
+
+log(
+  "11 AUTONOMOUS COMPETITORS DETECTED"
+);
+
+log(
+  "PERSISTENT CHAMPIONSHIP ARCHIVE ONLINE"
+);
+
+log(
+  "EVOLUTION SYSTEM ONLINE"
+);
+
+log(
+  "INSTANT REPLAY SYSTEM ONLINE"
+);
+
+log(
+  "NO FINAL MATCH DETECTED"
+);
+
+updateUI();
+
+requestAnimationFrame(loop);
+
+
+/* ---------- AUTO SAVE ---------- */
+
+setInterval(save,5000);
+
+
+/* ---------- PERIODIC AI EVOLUTION ---------- */
+
+setInterval(()=>{
+
+  if(!running)return;
+
+  /*
+    Every few minutes, randomly allow competitors
+    to evolve even without a generation-up event.
+  */
+
+  const ai=choice(state.competitors);
+
+  if(Math.random()<.45){
+
+    mutate(ai);
+
+    log(
+      "BACKGROUND EVOLUTION :: "+
+      ai.name+
+      " :: "+ai.strategy
     );
 
-  function render(){
-
-    const mins =
-      Math.floor(remaining / 60);
-
-    const secs =
-      remaining % 60;
-
-    $("timerResult").textContent =
-      `${mins}:${String(secs).padStart(2,"0")}`;
-
-    if(remaining <= 0){
-
-      clearInterval(timerInterval);
-
-      $("timerResult").textContent =
-        "⏰ TIME.";
-
-      try{
-        document.title = "⏰ TIME — THE MEGA SITE";
-        setTimeout(()=>{
-          document.title = "THE MEGA SITE";
-        },3000);
-      }catch{}
-    }
-
-    remaining--;
+    save();
+    updateUI();
   }
 
-  render();
-
-  timerInterval =
-    setInterval(render,1000);
-}
+},15000);
 
 
-/* =========================================================
-   STOPWATCH
-========================================================= */
+/* ---------- PERIODIC FORM DECAY ---------- */
 
-let stopwatchStartTime = 0;
-let stopwatchElapsed = 0;
-let stopwatchInterval = null;
+setInterval(()=>{
 
-function renderStopwatch(){
-
-  const elapsed =
-    stopwatchElapsed +
-    (
-      stopwatchInterval
-        ? Date.now() - stopwatchStartTime
-        : 0
-    );
-
-  const ms =
-    elapsed % 1000;
-
-  const totalSeconds =
-    Math.floor(elapsed / 1000);
-
-  const seconds =
-    totalSeconds % 60;
-
-  const minutes =
-    Math.floor(totalSeconds / 60) % 60;
-
-  const hours =
-    Math.floor(totalSeconds / 3600);
-
-  $("stopwatchDisplay").textContent =
-    `${String(hours).padStart(2,"0")}:` +
-    `${String(minutes).padStart(2,"0")}:` +
-    `${String(seconds).padStart(2,"0")}.` +
-    `${String(ms).padStart(3,"0")}`;
-}
-
-function stopwatchStart(){
-
-  if(stopwatchInterval) return;
-
-  stopwatchStartTime =
-    Date.now();
-
-  stopwatchInterval =
-    setInterval(renderStopwatch,25);
-}
-
-function stopwatchStop(){
-
-  if(!stopwatchInterval) return;
-
-  stopwatchElapsed +=
-    Date.now() - stopwatchStartTime;
-
-  clearInterval(stopwatchInterval);
-
-  stopwatchInterval = null;
-
-  renderStopwatch();
-}
-
-function stopwatchReset(){
-
-  clearInterval(stopwatchInterval);
-
-  stopwatchInterval = null;
-  stopwatchElapsed = 0;
-  stopwatchStartTime = 0;
-
-  renderStopwatch();
-}
-
-
-/* =========================================================
-   PASSWORD
-========================================================= */
-
-function generatePassword(){
-
-  const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ" +
-    "abcdefghijkmnopqrstuvwxyz" +
-    "23456789!@#$%^&*_-+=";
-
-  let result = "";
-
-  for(let i=0;i<24;i++){
-    result += chars[randomInt(chars.length)];
+  for(const ai of state.competitors){
+    ai.recentForm*=.97;
   }
 
-  $("passwordResult").value = result;
-}
-
-
-/* =========================================================
-   UUID
-========================================================= */
-
-function generateUUID(){
-
-  if(crypto.randomUUID){
-    $("uuidResult").value =
-      crypto.randomUUID();
-    return;
-  }
-
-  const bytes =
-    new Uint8Array(16);
-
-  crypto.getRandomValues(bytes);
-
-  bytes[6] =
-    (bytes[6] & 0x0f) | 0x40;
-
-  bytes[8] =
-    (bytes[8] & 0x3f) | 0x80;
-
-  const hex =
-    [...bytes]
-      .map(x => x.toString(16).padStart(2,"0"))
-      .join("");
-
-  $("uuidResult").value =
-    [
-      hex.slice(0,8),
-      hex.slice(8,12),
-      hex.slice(12,16),
-      hex.slice(16,20),
-      hex.slice(20)
-    ].join("-");
-}
-
-
-/* =========================================================
-   KNOWLEDGE
-========================================================= */
-
-const knowledge = [
-
-  "Bananas are berries, botanically speaking, while strawberries are accessory fruits rather than true berries.",
-
-  "A day on Venus is longer than a Venusian year: Venus rotates once in about 243 Earth days but orbits the Sun in about 225.",
-
-  "Octopuses have three hearts. Two pump blood toward the gills and one pumps it around the body.",
-
-  "The first computer mouse was made of wood.",
-
-  "Honey can remain edible for extremely long periods when properly sealed because its chemistry is hostile to many microorganisms.",
-
-  "The HTTP status code 404 became famous as the web's standard response for a missing resource.",
-
-  "The QWERTY keyboard layout predates modern computers; it was developed for mechanical typewriters.",
-
-  "A group of flamingos is commonly called a flamboyance.",
-
-  "The shortest war in recorded history was the Anglo-Zanzibar War of 1896, which lasted well under an hour.",
-
-  "Some bamboo species can grow remarkably quickly under ideal conditions, with recorded rates measured in many centimeters per day.",
-
-  "The word 'robot' comes from the Czech word 'robota', associated with forced labor.",
-
-  "Lightning can heat the surrounding air to temperatures hotter than the surface of the Sun.",
-
-  "The tiny dot over a lowercase i or j is called a tittle.",
-
-  "The internet and the World Wide Web are not the same thing. The Web is one service that operates over the internet.",
-
-  "A leap second has historically been used to keep UTC approximately aligned with Earth's irregular rotation.",
-
-  "Wombat droppings are famously cube-shaped.",
-
-  "The Eiffel Tower can change height slightly with temperature because metal expands when heated.",
-
-  "The Moon is slowly moving away from Earth, by roughly a few centimeters per year.",
-
-  "The first website is still available as an archived piece of computing history.",
-
-  "A standard IPv4 address contains 32 bits.",
-
-  "A standard IPv6 address contains 128 bits.",
-
-  "CSS stands for Cascading Style Sheets.",
-
-  "JavaScript was originally created in the 1990s and was first released under the name LiveScript.",
-
-  "HTML is a markup language rather than a conventional programming language.",
-
-  "The ampersand character '&' originated as a ligature of the Latin word 'et', meaning 'and'.",
-
-  "A googol is 10^100.",
-
-  "A googolplex is 10 raised to the power of a googol.",
-
-  "The Pacific Ocean is larger than Earth's entire land area.",
-
-  "Sound cannot travel through a vacuum because it needs a medium through which to propagate.",
-
-  "The observable universe contains an enormous number of galaxies, but estimates have changed substantially as astronomical observations improved."
-
-];
-
-let knowledgeHistory = [];
-
-function newKnowledge(){
-
-  if(
-    knowledgeHistory.length >= knowledge.length
-  ){
-    knowledgeHistory = [];
-  }
-
-  const available =
-    knowledge
-      .map((_,i)=>i)
-      .filter(i=>!knowledgeHistory.includes(i));
-
-  const index =
-    available[randomInt(available.length)];
-
-  knowledgeHistory.push(index);
-
-  $("knowledgeText").textContent =
-    knowledge[index];
-
-  $("randomMeta").textContent =
-    `Fact ${knowledgeHistory.length} of ${knowledge.length} in this cycle. No fake infinity.`;
-}
-
-
-/* =========================================================
-   DO THE THING
-========================================================= */
-
-const things = [
-
-  "Drink some water, then come back and continue conquering the internet.",
-
-  "Open a random Wikipedia article and give yourself five minutes to learn something unrelated.",
-
-  "Look up the weather where you are and decide whether your current clothes were a strategic error.",
-
-  "Clean one tiny area of your workspace. One area. Do not accidentally start renovating the house.",
-
-  "Write down the single most important thing you want done today.",
-
-  "Take a screenshot of your current browser tabs. Future-you may appreciate the evidence.",
-
-  "Search the name of your town plus 'history' and find something weird that happened nearby.",
-
-  "Listen to a radio station from another country for five minutes.",
-
-  "Find the oldest photograph you can access of a place you know.",
-
-  "Open a map and trace a route you have never traveled.",
-
-  "Learn one keyboard shortcut you do not currently know.",
-
-  "Close three tabs you have not used today.",
-
-  "Find one website that existed before social media became dominant.",
-
-  "Write one sentence describing what you want your future self to remember about today.",
-
-  "Try explaining something you understand to an imaginary five-year-old. If you cannot, you may have discovered what to learn next.",
-
-  "Pick a random number from 1 to 100 and make it your completely arbitrary lucky number for the next hour.",
-
-  "Search the web for a scientific question you have always wondered about.",
-
-  "Put your phone down for five minutes and stare dramatically into the middle distance.",
-
-  "Check the Headlines section. Something in the world has almost certainly changed since the last time you looked.",
-
-  "Ask Jeeves a question you genuinely want answered."
-];
-
-let thingHistory = [];
-
-function doTheThing(){
-
-  if(thingHistory.length >= things.length){
-    thingHistory = [];
-  }
-
-  const available =
-    things
-      .map((_,i)=>i)
-      .filter(i=>!thingHistory.includes(i));
-
-  const index =
-    available[randomInt(available.length)];
-
-  thingHistory.push(index);
-
-  $("knowledgeText").textContent =
-    things[index];
-
-  $("randomMeta").textContent =
-    `Thing ${thingHistory.length} of ${things.length} in this cycle.`;
-
-}
-
-
-/* =========================================================
-   NUMBER GAME
-========================================================= */
-
-let secretNumber =
-  randomInt(100) + 1;
-
-let guessAttempts = 0;
-
-function guessNumber(){
-
-  const guess =
-    Number($("guessInput").value);
-
-  if(
-    !Number.isInteger(guess) ||
-    guess < 1 ||
-    guess > 100
-  ){
-    $("guessResult").textContent =
-      "Enter a whole number from 1 to 100.";
-    return;
-  }
-
-  guessAttempts++;
-
-  if(guess === secretNumber){
-
-    $("guessResult").textContent =
-      `🎉 Correct! You got it in ${guessAttempts} attempt${guessAttempts === 1 ? "" : "s"}.`;
-
-    secretNumber =
-      randomInt(100) + 1;
-
-    guessAttempts = 0;
-
-    return;
-  }
-
-  if(guess < secretNumber){
-
-    $("guessResult").textContent =
-      "Too low.";
-  }else{
-
-    $("guessResult").textContent =
-      "Too high.";
-  }
-}
-
-
-/* =========================================================
-   COIN
-========================================================= */
-
-function flipCoin(){
-
-  const result =
-    randomInt(2) === 0
-      ? "HEADS"
-      : "TAILS";
-
-  $("coinResult").textContent =
-    result;
-}
-
-
-/* =========================================================
-   DICE
-========================================================= */
-
-function rollDice(){
-
-  let sides =
-    Number($("diceSides").value);
-
-  if(!Number.isInteger(sides)){
-    sides = 20;
-  }
-
-  sides =
-    Math.min(100,Math.max(2,sides));
-
-  $("diceResult").textContent =
-    `d${sides} → ${randomInt(sides)+1}`;
-}
-
-
-/* =========================================================
-   NOTES
-========================================================= */
-
-const notesKey =
-  "megaSiteScratchpad";
-
-$("notes").value =
-  localStorage.getItem(notesKey) || "";
-
-$("notes").addEventListener(
-  "input",
-  function(){
-    localStorage.setItem(
-      notesKey,
-      $("notes").value
-    );
-  }
-);
-
-function clearNotes(){
-
-  if(
-    !confirm(
-      "Clear your locally saved scratchpad?"
-    )
-  ) return;
-
-  $("notes").value = "";
-
-  localStorage.removeItem(notesKey);
-}
-
-
-/* =========================================================
-   COMMAND PALETTE
-========================================================= */
-
-function openCommand(){
-
-  $("commandModal").classList.add("open");
-
-  $("commandSearch").value = "";
-
-  $("commandSearch").focus();
-}
-
-function closeCommand(){
-
-  $("commandModal")
-    .classList.remove("open");
-}
-
-$("commandModal").addEventListener(
-  "click",
-  function(e){
-
-    if(e.target === this){
-      closeCommand();
-    }
-  }
-);
-
-$("commandSearch").addEventListener(
-  "input",
-  function(){
-
-    const q =
-      this.value.toLowerCase();
-
-    document
-      .querySelectorAll(".commandItem")
-      .forEach(item=>{
-
-        item.style.display =
-          item.textContent
-            .toLowerCase()
-            .includes(q)
-              ? "block"
-              : "none";
-
-      });
-  }
-);
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(
-      (e.ctrlKey || e.metaKey) &&
-      e.key.toLowerCase() === "k"
-    ){
-
-      e.preventDefault();
-      openCommand();
-
-      return;
-    }
-
-    if(
-      e.key === "/" &&
-      document.activeElement.tagName !== "INPUT" &&
-      document.activeElement.tagName !== "TEXTAREA"
-    ){
-
-      e.preventDefault();
-
-      $("searchInput").focus();
-
-      return;
-    }
-
-    if(e.key === "Escape"){
-      closeCommand();
-    }
-  }
-);
-
-
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-window.addEventListener(
-  "scroll",
-  function(){
-
-    if(window.scrollY > 700){
-      $("backTop").classList.add("show");
-    }else{
-      $("backTop").classList.remove("show");
-    }
-  },
-  {passive:true}
-);
-
-
-/* =========================================================
-   LOAD EXTERNAL DATA
-========================================================= */
-
-loadHeadlines();
-loadLaughs();
-
-
-/* =========================================================
-   INITIAL GENERATORS
-========================================================= */
-
-generatePassword();
-generateUUID();
-newKnowledge();
-
-
-/* =========================================================
-   FINAL CONSOLE MESSAGE
-========================================================= */
-
-console.log(
-  "%cTHE MEGA SITE%c loaded.",
-  "color:#42dfff;font-size:20px;font-weight:900",
-  "color:#fff;font-size:14px"
-);
-
-console.log(
-  "This site intentionally refuses to fabricate external data."
-);
+},10000);
 
 </script>
 
