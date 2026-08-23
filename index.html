@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEON PONG LEAGUE // INFINITE CHAMPIONSHIPS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NEON/PONG — Infinite AI League</title>
 
 <style>
 :root{
-  --bg:#03040a;
-  --panel:#090d18;
-  --panel2:#0d1322;
-  --line:#1a2942;
+  --bg:#02040a;
+  --panel:#080d17;
+  --panel2:#0c1422;
+  --line:#1b2c45;
   --cyan:#00eaff;
-  --pink:#ff2bd6;
+  --pink:#ff27d9;
   --green:#4dff91;
   --yellow:#ffe66d;
-  --red:#ff4568;
-  --text:#e9f7ff;
-  --muted:#71839d;
+  --red:#ff496d;
+  --white:#effaff;
+  --muted:#6c809b;
 }
 
 *{box-sizing:border-box}
@@ -26,8 +26,8 @@ html,body{
   margin:0;
   min-height:100%;
   background:
-    radial-gradient(circle at 50% -10%,#12234a 0,#050814 35%,#020307 75%);
-  color:var(--text);
+    radial-gradient(circle at 50% -15%,#102a55 0,#050916 38%,#010206 80%);
+  color:var(--white);
   font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -40,7 +40,7 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.12;
+  opacity:.10;
   background:
     linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
@@ -50,60 +50,59 @@ body:before{
 header{
   position:sticky;
   top:0;
-  z-index:50;
+  z-index:100;
+  background:rgba(2,4,10,.92);
+  backdrop-filter:blur(14px);
   border-bottom:1px solid #18304c;
-  background:rgba(3,5,12,.92);
-  backdrop-filter:blur(12px);
 }
 
 .header-inner{
   max-width:1500px;
   margin:auto;
-  padding:16px 22px;
+  padding:15px 22px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
 }
 
 .logo{
+  font-size:clamp(17px,2.7vw,28px);
   font-weight:1000;
-  font-size:clamp(18px,3vw,30px);
   letter-spacing:3px;
-  color:white;
-  text-shadow:
-    0 0 8px var(--cyan),
-    0 0 25px rgba(0,234,255,.45);
+  text-shadow:0 0 12px rgba(0,234,255,.7);
 }
 
-.logo span{color:var(--pink)}
+.logo span{
+  color:var(--pink);
+}
 
 .status{
   display:flex;
   align-items:center;
   gap:8px;
-  font-size:12px;
-  color:#9db0c8;
+  color:#8295ad;
+  font-size:10px;
+  letter-spacing:2px;
   text-transform:uppercase;
-  letter-spacing:1px;
 }
 
 .status-dot{
-  width:9px;
-  height:9px;
-  background:var(--green);
+  width:8px;
+  height:8px;
   border-radius:50%;
+  background:var(--green);
   box-shadow:0 0 15px var(--green);
   animation:pulse 1s infinite;
 }
 
 @keyframes pulse{
-  50%{opacity:.35;transform:scale(.75)}
+  50%{opacity:.35;transform:scale(.7)}
 }
 
 main{
   width:min(1500px,96%);
-  margin:22px auto 80px;
+  margin:22px auto 70px;
 }
 
 .hero{
@@ -116,78 +115,76 @@ main{
 
 .kicker{
   color:var(--cyan);
-  font-size:11px;
-  letter-spacing:4px;
   font-weight:bold;
+  font-size:10px;
+  letter-spacing:4px;
 }
 
 h1{
   margin:7px 0;
-  font-size:clamp(30px,5vw,62px);
-  line-height:.95;
-  letter-spacing:-2px;
+  font-size:clamp(32px,5.2vw,64px);
+  line-height:.92;
+  letter-spacing:-3px;
 }
 
 .hero p{
-  max-width:800px;
+  max-width:850px;
   color:#91a5be;
   line-height:1.6;
   margin:10px 0 0;
 }
 
 .season-box{
-  text-align:right;
-  border:1px solid #23405f;
-  padding:15px 20px;
+  min-width:185px;
+  padding:15px 18px;
+  border:1px solid #24415f;
   border-radius:14px;
-  background:linear-gradient(145deg,#0b1323,#060a12);
-  min-width:180px;
+  background:linear-gradient(145deg,#0c1627,#050912);
 }
 
 .season-box small{
-  color:#657994;
   display:block;
+  color:#60738d;
   text-transform:uppercase;
   letter-spacing:2px;
 }
 
 .season-box strong{
   display:block;
-  font-size:27px;
+  margin-top:5px;
   color:var(--yellow);
-  margin-top:4px;
+  font-size:28px;
 }
 
-.grid{
+.main-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(300px,.8fr);
+  grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);
   gap:18px;
 }
 
 .panel{
-  border:1px solid var(--line);
   background:
-    linear-gradient(145deg,rgba(14,21,37,.96),rgba(5,8,15,.96));
+    linear-gradient(145deg,rgba(12,19,33,.97),rgba(4,7,13,.97));
+  border:1px solid var(--line);
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  box-shadow:0 20px 60px rgba(0,0,0,.38);
 }
 
 .panel-head{
-  padding:13px 17px;
-  border-bottom:1px solid #15243a;
+  padding:12px 16px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:10px;
+  justify-content:space-between;
+  border-bottom:1px solid #14253a;
   background:rgba(255,255,255,.015);
 }
 
 .panel-title{
-  font-size:12px;
-  letter-spacing:2px;
-  font-weight:900;
+  font-size:10px;
+  font-weight:1000;
   text-transform:uppercase;
+  letter-spacing:2px;
 }
 
 .live{
@@ -196,26 +193,26 @@ h1{
 
 .live:before{
   content:"●";
-  margin-right:7px;
+  margin-right:6px;
   animation:pulse 1s infinite;
 }
 
-.game-wrap{
+.arena-wrap{
   padding:14px;
 }
 
 .scorebar{
   display:grid;
   grid-template-columns:1fr auto 1fr;
+  gap:12px;
   align-items:center;
-  gap:15px;
   margin-bottom:12px;
 }
 
 .player{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
 .player.right{
@@ -223,50 +220,49 @@ h1{
   text-align:right;
 }
 
-.player-name{
+.avatar{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid currentColor;
+  border-radius:10px;
   font-weight:1000;
+  background:#060a12;
+}
+
+.player-name{
   font-size:18px;
+  font-weight:1000;
 }
 
 .player-style{
-  font-size:10px;
-  color:#6d819b;
-  text-transform:uppercase;
-  letter-spacing:1px;
   margin-top:3px;
-}
-
-.avatar{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  font-weight:1000;
-  border:1px solid currentColor;
+  color:#60738c;
+  font-size:9px;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 .score{
   font-size:34px;
   font-weight:1000;
   letter-spacing:4px;
-  color:white;
-  text-shadow:0 0 18px rgba(0,234,255,.4);
+  text-shadow:0 0 20px rgba(0,234,255,.4);
+  white-space:nowrap;
 }
 
-#game{
+#arena{
   position:relative;
   width:100%;
   aspect-ratio:16/9;
-  background:
-    radial-gradient(circle at 50% 50%,rgba(0,234,255,.08),transparent 42%),
-    linear-gradient(90deg,rgba(0,234,255,.035),transparent 45%,rgba(255,43,214,.035));
-  border:1px solid #24415f;
+  border:1px solid #294561;
   border-radius:12px;
   overflow:hidden;
+  background:#02050b;
   box-shadow:
-    inset 0 0 60px rgba(0,0,0,.8),
-    0 0 35px rgba(0,0,0,.45);
+    inset 0 0 80px rgba(0,0,0,.85),
+    0 0 30px rgba(0,0,0,.5);
 }
 
 canvas{
@@ -275,55 +271,49 @@ canvas{
   height:100%;
 }
 
-.replay-overlay{
+.replay{
   position:absolute;
-  inset:0;
-  pointer-events:none;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
   display:none;
-  align-items:flex-start;
-  justify-content:center;
-  padding-top:18px;
+  pointer-events:none;
+  z-index:5;
 }
 
-.replay-overlay.show{
-  display:flex;
+.replay.show{
+  display:block;
 }
 
 .replay-badge{
+  background:rgba(255,27,210,.9);
   padding:8px 15px;
   border-radius:999px;
-  background:rgba(255,25,180,.88);
   color:white;
-  font-size:11px;
-  letter-spacing:2px;
+  font-size:10px;
   font-weight:1000;
-  box-shadow:0 0 30px rgba(255,43,214,.6);
-  animation:replayGlow .45s infinite alternate;
+  letter-spacing:2px;
+  box-shadow:0 0 28px rgba(255,39,217,.65);
 }
 
-@keyframes replayGlow{
-  from{transform:scale(1)}
-  to{transform:scale(1.04)}
-}
-
-.game-info{
+.info-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin-top:10px;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px;
+  margin-top:9px;
 }
 
 .stat{
-  background:#070b14;
-  border:1px solid #17273d;
-  border-radius:10px;
-  padding:10px;
+  padding:9px;
+  border:1px solid #17283e;
+  border-radius:9px;
+  background:#060a12;
 }
 
 .stat small{
   display:block;
-  color:#60748f;
-  font-size:9px;
+  color:#5c7089;
+  font-size:8px;
   text-transform:uppercase;
   letter-spacing:1px;
 }
@@ -331,29 +321,54 @@ canvas{
 .stat strong{
   display:block;
   margin-top:5px;
-  font-size:16px;
+  font-size:15px;
 }
 
 .commentary{
-  margin-top:10px;
+  margin-top:9px;
   min-height:44px;
-  border-left:3px solid var(--cyan);
   padding:9px 12px;
+  border-left:3px solid var(--cyan);
   background:#050912;
-  color:#a8bbd1;
-  font-size:12px;
+  color:#a8bad0;
+  font-size:11px;
   line-height:1.5;
 }
 
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:9px;
+}
+
+button{
+  border:1px solid #24415d;
+  background:#08101b;
+  color:#abc0d8;
+  border-radius:8px;
+  padding:8px 11px;
+  cursor:pointer;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+button:hover{
+  color:white;
+  border-color:var(--cyan);
+  box-shadow:0 0 16px rgba(0,234,255,.13);
+}
+
 .bracket{
-  padding:15px;
+  padding:14px;
 }
 
 .bracket-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  min-height:300px;
+  gap:8px;
 }
 
 .round{
@@ -363,20 +378,19 @@ canvas{
 }
 
 .round-title{
-  color:#657994;
+  color:#637792;
   text-align:center;
-  font-size:9px;
+  font-size:8px;
   letter-spacing:2px;
   text-transform:uppercase;
-  margin-bottom:3px;
 }
 
 .match{
   position:relative;
-  border:1px solid #182a42;
-  border-radius:9px;
-  background:#070b14;
+  border:1px solid #182b43;
+  border-radius:8px;
   overflow:hidden;
+  background:#060a12;
 }
 
 .match.current{
@@ -384,28 +398,30 @@ canvas{
   box-shadow:0 0 18px rgba(77,255,145,.16);
 }
 
-.match.current:before{
-  content:"CURRENT";
+.match.current:after{
+  content:"LIVE";
   position:absolute;
-  top:0;
   right:0;
-  font-size:7px;
+  top:0;
   padding:3px 5px;
-  color:#00130a;
   background:var(--green);
-  font-weight:bold;
+  color:#00150a;
+  font-size:6px;
+  font-weight:1000;
 }
 
 .team{
-  padding:8px 9px;
   display:flex;
   justify-content:space-between;
   gap:5px;
-  font-size:10px;
-  border-bottom:1px solid #111d2d;
+  padding:8px;
+  font-size:9px;
+  border-bottom:1px solid #111e30;
 }
 
-.team:last-child{border-bottom:0}
+.team:last-child{
+  border-bottom:0;
+}
 
 .team.winner{
   color:white;
@@ -413,42 +429,42 @@ canvas{
 }
 
 .team.loser{
-  color:#38465a;
-  opacity:.45;
+  color:#364357;
+  opacity:.42;
   text-decoration:line-through;
 }
 
 .team.active{
   color:var(--cyan);
-  font-weight:900;
+  font-weight:1000;
 }
 
 .team-score{
-  color:#6d819b;
+  color:#60758e;
 }
 
 .history{
-  margin-top:18px;
+  padding:8px 13px 14px;
 }
 
-.history-table{
+.history table{
   width:100%;
   border-collapse:collapse;
-  font-size:11px;
-}
-
-.history-table th,
-.history-table td{
-  padding:9px 10px;
-  text-align:left;
-  border-bottom:1px solid #15243a;
-}
-
-.history-table th{
-  color:#60748f;
   font-size:9px;
-  text-transform:uppercase;
+}
+
+.history th,
+.history td{
+  padding:8px 5px;
+  text-align:left;
+  border-bottom:1px solid #142238;
+}
+
+.history th{
+  color:#5e718a;
+  font-size:7px;
   letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 .champion{
@@ -456,20 +472,20 @@ canvas{
   font-weight:1000;
 }
 
-.lower{
+.lower-grid{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:18px;
   margin-top:18px;
 }
 
-.leader-list{
-  padding:8px 14px 14px;
+.list{
+  padding:7px 14px 14px;
 }
 
 .leader{
   display:grid;
-  grid-template-columns:28px 1fr auto;
+  grid-template-columns:27px 1fr auto;
   gap:8px;
   align-items:center;
   padding:10px 0;
@@ -477,99 +493,72 @@ canvas{
 }
 
 .rank{
-  color:#536985;
+  color:#526780;
   font-weight:bold;
 }
 
 .leader-name{
-  font-weight:bold;
-  font-size:12px;
+  font-size:11px;
+  font-weight:1000;
 }
 
 .leader-meta{
-  font-size:9px;
-  color:#5e728c;
   margin-top:2px;
+  color:#5d7088;
+  font-size:8px;
 }
 
-.leader-value{
+.value{
   color:var(--cyan);
   font-weight:1000;
 }
 
 .records{
-  padding:14px;
+  padding:12px;
   display:grid;
-  gap:8px;
+  gap:7px;
 }
 
 .record{
-  padding:12px;
-  border-radius:10px;
-  background:#070b14;
-  border:1px solid #16263b;
+  padding:11px;
+  border:1px solid #16283e;
+  border-radius:9px;
+  background:#060a12;
 }
 
 .record small{
-  color:#60748f;
+  color:#5d7089;
+  font-size:7px;
   text-transform:uppercase;
   letter-spacing:1px;
-  font-size:8px;
 }
 
 .record strong{
   display:block;
-  margin-top:5px;
-  color:white;
-}
-
-.controlbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:10px;
-}
-
-button{
-  cursor:pointer;
-  border:1px solid #24405d;
-  background:#09111e;
-  color:#bcd0e8;
-  border-radius:8px;
-  padding:8px 12px;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-button:hover{
-  border-color:var(--cyan);
-  color:white;
-  box-shadow:0 0 15px rgba(0,234,255,.12);
+  margin-top:4px;
 }
 
 footer{
-  margin-top:30px;
+  margin-top:28px;
   text-align:center;
-  color:#40516a;
-  font-size:10px;
+  color:#3e5069;
+  font-size:9px;
   letter-spacing:1px;
-  line-height:1.7;
+  line-height:1.8;
 }
 
-@media(max-width:1000px){
-  .grid{grid-template-columns:1fr}
-  .lower{grid-template-columns:1fr}
+@media(max-width:1050px){
+  .main-grid{grid-template-columns:1fr}
+  .lower-grid{grid-template-columns:1fr}
 }
 
 @media(max-width:650px){
   .hero{grid-template-columns:1fr}
-  .season-box{text-align:left}
-  .scorebar{gap:6px}
+  .scorebar{gap:5px}
   .player-name{font-size:13px}
-  .score{font-size:25px}
-  .game-info{grid-template-columns:repeat(2,1fr)}
-  .bracket-grid{min-height:250px}
+  .player-style{font-size:7px}
+  .score{font-size:24px}
+  .info-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -579,9 +568,10 @@ footer{
 <header>
   <div class="header-inner">
     <div class="logo">NEON<span>/</span>PONG // INFINITE LEAGUE</div>
+
     <div class="status">
       <span class="status-dot"></span>
-      SIMULATION ONLINE
+      PHYSICS ENGINE ONLINE
     </div>
   </div>
 </header>
@@ -591,11 +581,14 @@ footer{
 <section class="hero">
   <div>
     <div class="kicker">AUTONOMOUS COMPETITION SYSTEM</div>
+
     <h1>THE MACHINES<br>ARE PLAYING.</h1>
+
     <p>
-      An endless simulated Pong league where specialized competitors
-      predict, adapt, attack, defend, make mistakes, learn from rallies,
-      and fight through championship seasons forever.
+      An endless AI Pong league. Every return gets faster.
+      Every competitor has a different strategy, reaction profile
+      and prediction model. Winners advance. Losers disappear.
+      Champions return to defend the crown.
     </p>
   </div>
 
@@ -605,24 +598,28 @@ footer{
   </div>
 </section>
 
-<div class="grid">
+<div class="main-grid">
 
 <section class="panel">
+
   <div class="panel-head">
     <div class="panel-title">Live arena</div>
     <div class="panel-title live">LIVE</div>
   </div>
 
-  <div class="game-wrap">
+  <div class="arena-wrap">
 
     <div class="scorebar">
 
       <div class="player">
+
         <div class="avatar" id="leftAvatar">N</div>
+
         <div>
           <div class="player-name" id="leftName">NEON</div>
-          <div class="player-style" id="leftStyle">Precision</div>
+          <div class="player-style" id="leftStyle">PRECISION</div>
         </div>
+
       </div>
 
       <div class="score">
@@ -632,95 +629,126 @@ footer{
       </div>
 
       <div class="player right">
+
         <div>
           <div class="player-name" id="rightName">VECTOR</div>
-          <div class="player-style" id="rightStyle">Aggressive</div>
+          <div class="player-style" id="rightStyle">AGGRESSIVE</div>
         </div>
+
         <div class="avatar" id="rightAvatar">V</div>
+
       </div>
 
     </div>
 
-    <div id="game">
-      <canvas id="canvas"></canvas>
+    <div id="arena">
 
-      <div class="replay-overlay" id="replayOverlay">
+      <canvas id="gameCanvas"></canvas>
+
+      <div class="replay" id="replay">
         <div class="replay-badge">
-          INSTANT REPLAY // <span id="replaySpeed">3.0X</span>
+          INSTANT REPLAY //
+          <span id="replaySpeed">3.0X</span>
         </div>
       </div>
+
     </div>
 
-    <div class="game-info">
+    <div class="info-grid">
+
       <div class="stat">
-        <small>Volley speed</small>
-        <strong id="speedStat">0</strong>
+        <small>Ball speed</small>
+        <strong id="speed">0</strong>
       </div>
+
       <div class="stat">
-        <small>Rally</small>
-        <strong id="rallyStat">0</strong>
+        <small>Current rally</small>
+        <strong id="rally">0</strong>
       </div>
+
       <div class="stat">
         <small>Longest rally</small>
-        <strong id="longestStat">0</strong>
+        <strong id="longest">0</strong>
       </div>
+
       <div class="stat">
-        <small>Game state</small>
-        <strong id="stateStat">LIVE</strong>
+        <small>Match state</small>
+        <strong id="state">LIVE</strong>
       </div>
+
+      <div class="stat">
+        <small>Replay speed</small>
+        <strong id="replayStat">3X</strong>
+      </div>
+
     </div>
 
     <div class="commentary" id="commentary">
-      COMMENTATOR: The arena is live. Two competitors are entering the simulation...
+      COMMENTATOR: Welcome to the Infinite League. The machines are ready.
     </div>
 
-    <div class="controlbar">
+    <div class="controls">
       <button onclick="togglePause()">Pause / Resume</button>
       <button onclick="toggleCommentary()">Commentary</button>
-      <button onclick="forceReplay()">Replay last point</button>
-      <button onclick="newSeason()">New season</button>
+      <button onclick="showReplay()">Replay Last Point</button>
+      <button onclick="resetSeason()">Reset Simulation</button>
     </div>
 
   </div>
+
 </section>
 
 <section class="panel">
+
   <div class="panel-head">
     <div class="panel-title">Championship bracket</div>
-    <div class="panel-title" id="bracketStatus">Season 1</div>
+    <div class="panel-title" id="bracketSeason">SEASON 1</div>
   </div>
 
   <div class="bracket">
+
     <div class="bracket-grid">
 
       <div class="round">
+
         <div class="round-title">Quarterfinals</div>
+
         <div id="q1"></div>
         <div id="q2"></div>
         <div id="q3"></div>
         <div id="q4"></div>
+
       </div>
 
       <div class="round">
+
         <div class="round-title">Semifinals</div>
+
         <div id="s1"></div>
         <div id="s2"></div>
+
       </div>
 
       <div class="round">
+
         <div class="round-title">Championship</div>
+
         <div id="final"></div>
+
       </div>
 
     </div>
+
   </div>
 
   <div class="panel-head">
-    <div class="panel-title">Previous champions</div>
+    <div class="panel-title">Championship history</div>
   </div>
 
-  <div style="padding:10px 14px 15px">
-    <table class="history-table">
+  <div class="history">
+
+    <table>
+
       <thead>
         <tr>
           <th>Season</th>
@@ -729,38 +757,50 @@ footer{
           <th>Streak</th>
         </tr>
       </thead>
+
       <tbody id="history"></tbody>
+
     </table>
+
   </div>
+
 </section>
 
 </div>
 
-<div class="lower">
+<div class="lower-grid">
 
 <section class="panel">
+
   <div class="panel-head">
     <div class="panel-title">Championship leaders</div>
   </div>
-  <div class="leader-list" id="champLeaders"></div>
+
+  <div class="list" id="championshipLeaders"></div>
+
 </section>
 
 <section class="panel">
+
   <div class="panel-head">
     <div class="panel-title">Rally leaders</div>
   </div>
-  <div class="leader-list" id="rallyLeaders"></div>
+
+  <div class="list" id="rallyLeaders"></div>
+
 </section>
 
 <section class="panel">
+
   <div class="panel-head">
     <div class="panel-title">Arena records</div>
   </div>
 
   <div class="records">
+
     <div class="record">
-      <small>Fastest volley</small>
-      <strong id="fastestRecord">0</strong>
+      <small>Fastest recorded volley</small>
+      <strong id="fastest">0</strong>
     </div>
 
     <div class="record">
@@ -770,192 +810,283 @@ footer{
 
     <div class="record">
       <small>Most championships</small>
-      <strong id="mostChamp">Nobody yet</strong>
+      <strong id="mostChampionships">Nobody yet</strong>
     </div>
 
     <div class="record">
       <small>Longest championship streak</small>
       <strong id="bestStreak">0</strong>
     </div>
+
   </div>
+
 </section>
 
 </div>
 
 <footer>
   NEON/PONG INFINITE LEAGUE<br>
-  THE SIMULATION CONTINUES UNTIL SOMEONE STOPS THE TAB.
+  PHYSICS • STRATEGY • COMPETITION • FOREVER
 </footer>
 
 </main>
 
 <script>
+"use strict";
+
 /* ============================================================
-   NEON PONG — INFINITE LEAGUE
-   Self-contained browser simulation
+   NEON/PONG
+   Continuous Collision AI Pong Engine
    ============================================================ */
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("gameCanvas");
+const ctx=canvas.getContext("2d");
 
-let W = 1200;
-let H = 675;
+let W=1200;
+let H=675;
+let dpr=1;
 
-function resize(){
-  const rect = canvas.getBoundingClientRect();
-  const dpr = Math.min(window.devicePixelRatio || 1,2);
+function resizeCanvas(){
 
-  W = Math.max(500,rect.width);
-  H = Math.max(280,rect.height);
+  const r=canvas.getBoundingClientRect();
 
-  canvas.width = W*dpr;
-  canvas.height = H*dpr;
+  dpr=Math.min(window.devicePixelRatio||1,2);
+
+  W=Math.max(500,r.width);
+  H=Math.max(280,r.height);
+
+  canvas.width=Math.floor(W*dpr);
+  canvas.height=Math.floor(H*dpr);
 
   ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  if(leftPaddle){
+    leftPaddle.x=42;
+    rightPaddle.x=W-54;
+  }
 }
 
-window.addEventListener("resize",resize);
-resize();
+window.addEventListener("resize",resizeCanvas);
 
 /* ============================================================
    COMPETITORS
    ============================================================ */
 
-const competitors = [
+const competitors=[
   {
     name:"NEON",
     color:"#00eaff",
-    style:"Precision",
-    aggression:.48,
-    prediction:.94,
-    reaction:.95,
-    error:.045,
-    target:.92,
-    adaptability:.90
+    style:"PRECISION",
+    prediction:.96,
+    reaction:.94,
+    aggression:.45,
+    error:.035,
+    targeting:.92,
+    adaptability:.92
   },
   {
     name:"VECTOR",
-    color:"#ff2bd6",
-    style:"Aggressive",
-    aggression:.88,
-    prediction:.82,
+    color:"#ff27d9",
+    style:"AGGRESSIVE",
+    prediction:.84,
     reaction:.84,
+    aggression:.90,
     error:.075,
-    target:.82,
-    adaptability:.77
+    targeting:.82,
+    adaptability:.78
   },
   {
     name:"TITAN",
     color:"#ffe66d",
-    style:"Power",
-    aggression:.75,
-    prediction:.72,
-    reaction:.78,
+    style:"POWER",
+    prediction:.76,
+    reaction:.79,
+    aggression:.78,
     error:.085,
-    target:.72,
-    adaptability:.65
+    targeting:.75,
+    adaptability:.69
   },
   {
     name:"PULSE",
     color:"#4dff91",
-    style:"Defensive",
-    aggression:.28,
-    prediction:.97,
-    reaction:.96,
-    error:.035,
-    target:.86,
-    adaptability:.94
+    style:"DEFENSIVE",
+    prediction:.98,
+    reaction:.97,
+    aggression:.25,
+    error:.025,
+    targeting:.88,
+    adaptability:.95
   },
   {
     name:"NOVA",
-    color:"#9f7cff",
-    style:"Trickster",
-    aggression:.67,
-    prediction:.80,
+    color:"#9d7cff",
+    style:"TRICKSTER",
+    prediction:.83,
     reaction:.87,
+    aggression:.66,
     error:.095,
-    target:.95,
-    adaptability:.93
+    targeting:.97,
+    adaptability:.95
   },
   {
     name:"OMEGA",
-    color:"#ff5964",
-    style:"Counter",
-    aggression:.55,
-    prediction:.93,
+    color:"#ff4f70",
+    style:"COUNTER",
+    prediction:.94,
     reaction:.91,
-    error:.055,
-    target:.90,
-    adaptability:.98
+    aggression:.56,
+    error:.045,
+    targeting:.91,
+    adaptability:.99
   },
   {
     name:"APEX",
-    color:"#ff9f43",
-    style:"Speed",
-    aggression:.72,
-    prediction:.86,
-    reaction:.98,
+    color:"#ff9c43",
+    style:"SPEED",
+    prediction:.87,
+    reaction:.99,
+    aggression:.74,
     error:.065,
-    target:.78,
-    adaptability:.76
+    targeting:.80,
+    adaptability:.80
   },
   {
     name:"GHOST",
-    color:"#c4d7ff",
-    style:"Unpredictable",
-    aggression:.61,
-    prediction:.85,
-    reaction:.82,
+    color:"#c8d8ff",
+    style:"UNPREDICTABLE",
+    prediction:.86,
+    reaction:.83,
+    aggression:.62,
     error:.11,
-    target:.98,
-    adaptability:.99
+    targeting:.99,
+    adaptability:1
   }
 ];
 
-/* ============================================================
-   PERSISTENT STATS
-   ============================================================ */
-
-const stats = {};
+const stats={};
 
 for(const c of competitors){
-  stats[c.name] = {
+
+  stats[c.name]={
     wins:0,
     losses:0,
     championships:0,
     streak:0,
     bestStreak:0,
-    rallies:0,
     points:0,
+    totalRallies:0,
     longestRally:0
   };
+
 }
 
-let season = 1;
-let championHistory = [];
-let globalLongestRally = 0;
-let globalFastest = 0;
-let globalBestStreak = 0;
-
 /* ============================================================
-   BRACKET
+   LEAGUE STATE
    ============================================================ */
 
-let bracket = {
+let season=1;
+let history=[];
+
+let bracket={
   quarter:[],
   semi:[],
   final:null
 };
 
-let currentRound = "quarter";
-let currentMatch = 0;
+let round="quarter";
+let matchIndex=0;
 
-function shuffledCompetitors(){
-  return [...competitors].sort(()=>Math.random()-.5);
+let globalLongest=0;
+let globalFastest=0;
+let globalBestStreak=0;
+
+/* ============================================================
+   PHYSICS CONSTANTS
+   ============================================================ */
+
+/*
+  These values are intentionally fast.
+
+  Speed is expressed in logical arena pixels per frame at
+  60Hz-equivalent simulation. The fixed-step engine below
+  makes the physics stable even if rendering fluctuates.
+*/
+
+const START_SPEED=9.5;
+const MAX_SPEED=16.8;
+
+const BALL_RADIUS=7;
+
+const PADDLE_W=12;
+const PADDLE_H=112;
+
+const FIXED_DT=1/120;
+
+/* ============================================================
+   PHYSICS OBJECTS
+   ============================================================ */
+
+let leftPaddle=null;
+let rightPaddle=null;
+let ball=null;
+
+function makePaddle(side){
+
+  return{
+    side,
+    x:side==="left"?42:W-54,
+    y:H/2-PADDLE_H/2,
+    w:PADDLE_W,
+    h:PADDLE_H,
+    target:H/2,
+    previousY:H/2-PADDLE_H/2
+  };
+
 }
 
-function makeMatch(a,b){
-  return {
+function makeBall(direction){
+
+  /*
+    Start fast immediately.
+
+    Small initial vertical angle prevents repetitive perfectly
+    horizontal opening rallies.
+  */
+
+  let angle=(Math.random()-.5)*.65;
+
+  return{
+    x:W/2,
+    y:H/2,
+    vx:Math.cos(angle)*START_SPEED*direction,
+    vy:Math.sin(angle)*START_SPEED,
+    radius:BALL_RADIUS
+  };
+
+}
+
+/* ============================================================
+   BRACKET CREATION
+   ============================================================ */
+
+function shuffle(array){
+
+  const a=[...array];
+
+  for(let i=a.length-1;i>0;i--){
+
+    const j=Math.floor(Math.random()*(i+1));
+
+    [a[i],a[j]]=[a[j],a[i]];
+
+  }
+
+  return a;
+}
+
+function match(a,b){
+
+  return{
     a,
     b,
     scoreA:0,
@@ -964,416 +1095,757 @@ function makeMatch(a,b){
     loser:null,
     finished:false
   };
+
 }
 
 function createSeason(){
-  const pool = shuffledCompetitors();
 
-  /*
-    Returning champion receives a bye.
-    To preserve an 8-player visual bracket, the champion's
-    quarterfinal opponent becomes the bye marker.
-  */
+  const players=shuffle(competitors);
 
-  bracket.quarter = [];
+  bracket.quarter=[];
 
-  for(let i=0;i<8;i+=2){
-    bracket.quarter.push(makeMatch(pool[i],pool[i+1]));
+  for(let i=0;i<players.length;i+=2){
+    bracket.quarter.push(
+      match(players[i],players[i+1])
+    );
   }
 
-  bracket.semi = [null,null];
-  bracket.final = null;
+  bracket.semi=[
+    null,
+    null
+  ];
 
-  currentRound = "quarter";
-  currentMatch = 0;
+  bracket.final=null;
 
-  loadCurrentMatch();
+  round="quarter";
+  matchIndex=0;
+
+  loadMatch();
   renderBracket();
+
 }
 
-function currentObject(){
-  if(currentRound==="quarter") return bracket.quarter[currentMatch];
-  if(currentRound==="semi") return bracket.semi[currentMatch];
+/* ============================================================
+   CURRENT MATCH
+   ============================================================ */
+
+function currentMatch(){
+
+  if(round==="quarter"){
+    return bracket.quarter[matchIndex];
+  }
+
+  if(round==="semi"){
+    return bracket.semi[matchIndex];
+  }
+
   return bracket.final;
 }
 
 /* ============================================================
-   GAME PHYSICS
+   GAME INITIALIZATION
    ============================================================ */
 
-let leftPaddle;
-let rightPaddle;
-let ball;
+function loadMatch(){
 
-let paused=false;
-let commentaryOn=true;
+  const m=currentMatch();
 
-let rally=0;
-let pointRally=0;
-let maxRally=0;
-let volleySpeed=0;
+  if(!m || !m.a || !m.b)return;
 
-let replayFrames=[];
-let replayIndex=0;
-let replaying=false;
-let replaySpeed=3;
-let replayAccumulator=0;
+  leftPaddle=makePaddle("left");
+  rightPaddle=makePaddle("right");
 
-const MAX_SPEED = 15.5;
-const MIN_SPEED = 8.2;
-
-function createPaddle(side){
-  return {
-    x:side==="left"?42:W-54,
-    y:H/2-55,
-    w:12,
-    h:110,
-    side,
-    targetY:H/2
-  };
-}
-
-function resetBall(direction){
-  const angle=(Math.random()-.5)*.55;
-
-  ball={
-    x:W/2,
-    y:H/2,
-    vx:direction * MIN_SPEED,
-    vy:Math.sin(angle)*MIN_SPEED,
-    radius:7
-  };
+  ball=makeBall(
+    Math.random()<.5?1:-1
+  );
 
   rally=0;
   pointRally=0;
-  volleySpeed=MIN_SPEED;
-  replayFrames=[];
-}
 
-function loadCurrentMatch(){
-  const match=currentObject();
-
-  if(!match) return;
-
-  leftPaddle=createPaddle("left");
-  rightPaddle=createPaddle("right");
-
-  resetBall(Math.random()<.5?1:-1);
-
-  updateNames(match.a,match.b);
+  updatePlayerUI(m.a,m.b);
 
   commentary(
-    "COMMENTATOR: " +
-    match.a.name +
-    " and " +
-    match.b.name +
-    " enter the arena. " +
-    match.a.style +
-    " versus " +
-    match.b.style +
+    "COMMENTATOR: "+m.a.name+
+    " enters with "+m.a.style+
+    " strategy. "+m.b.name+
+    " answers with "+m.b.style+
     "."
   );
+
 }
 
-function updateNames(a,b){
-  document.getElementById("leftName").textContent=a.name;
-  document.getElementById("rightName").textContent=b.name;
+/* ============================================================
+   AI
+   ============================================================ */
 
-  document.getElementById("leftStyle").textContent=a.style;
-  document.getElementById("rightStyle").textContent=b.style;
+let rally=0;
+let pointRally=0;
 
-  document.getElementById("leftAvatar").textContent=a.name[0];
-  document.getElementById("rightAvatar").textContent=b.name[0];
+function reflectedBallYAtX(targetX){
 
-  document.getElementById("leftAvatar").style.color=a.color;
-  document.getElementById("rightAvatar").style.color=b.color;
-}
+  if(!ball)return H/2;
 
-function predictTarget(paddle,player){
-  const movingToward =
-    paddle.side==="left" ? ball.vx<0 : ball.vx>0;
+  const dx=targetX-ball.x;
 
-  let target;
-
-  if(movingToward){
-
-    const distance=Math.abs(paddle.x-ball.x);
-    const t=Math.min(2,distance/Math.max(1,Math.abs(ball.vx)));
-
-    target=ball.y+ball.vy*t;
-
-    /*
-      Intentionally imperfect prediction.
-      Stronger prediction values produce more accurate positioning,
-      while every competitor retains a small error envelope.
-    */
-
-    const uncertainty =
-      (1-player.prediction)*100 +
-      player.error*70;
-
-    target += (Math.random()-.5)*uncertainty;
-
-  }else{
-
-    /*
-      Strategic repositioning.
-      Aggressive players sit slightly higher/lower to prepare
-      for attacking returns.
-    */
-
-    target=H/2;
-
-    if(player.aggression>.7){
-      target += Math.sin(performance.now()/550)*45;
-    }
+  if(
+    (dx<0 && ball.vx>=0) ||
+    (dx>0 && ball.vx<=0)
+  ){
+    return H/2;
   }
 
-  return Math.max(30,Math.min(H-30,target));
+  let t=dx/ball.vx;
+
+  if(t<0)t=0;
+
+  let predicted=ball.y+ball.vy*t;
+
+  /*
+    Reflect against top/bottom walls mathematically.
+    This gives the AI a real predicted landing position
+    instead of simply following the current ball.
+  */
+
+  const top=BALL_RADIUS;
+  const bottom=H-BALL_RADIUS;
+
+  const range=bottom-top;
+
+  let relative=predicted-top;
+
+  const period=range*2;
+
+  relative=((relative%period)+period)%period;
+
+  if(relative>range){
+    relative=period-relative;
+  }
+
+  return top+relative;
 }
 
 function updateAI(paddle,player,dt){
 
-  paddle.targetY=predictTarget(paddle,player);
+  paddle.previousY=paddle.y;
 
-  const reaction =
-    0.09 +
-    player.reaction*0.18;
+  const incoming=
+    paddle.side==="left"
+      ?ball.vx<0
+      :ball.vx>0;
 
-  const difference=paddle.targetY-(paddle.y+paddle.h/2);
+  let target;
+
+  if(incoming){
+
+    const landing=
+      reflectedBallYAtX(
+        paddle.x+
+        (paddle.side==="left"
+          ?paddle.w
+          :0)
+      );
+
+    /*
+      Prediction noise represents imperfect cognition.
+      It grows slightly with speed.
+    */
+
+    const speed=Math.hypot(ball.vx,ball.vy);
+
+    const speedPenalty=
+      Math.max(
+        0,
+        (speed-START_SPEED)/(
+          MAX_SPEED-START_SPEED
+        )
+      );
+
+    const uncertainty=
+      (
+        (1-player.prediction)*90+
+        player.error*80+
+        speedPenalty*25
+      );
+
+    target=
+      landing+
+      (Math.random()-.5)*uncertainty;
+
+    /*
+      Aggressive competitors bias their paddle toward
+      a more attack-oriented contact position.
+    */
+
+    if(player.aggression>.7){
+
+      target+=
+        Math.sin(
+          performance.now()/380
+        )*16*player.aggression;
+
+    }
+
+  }else{
+
+    /*
+      Reset toward a strategic ready position rather than
+      instantly snapping to center.
+    */
+
+    target=
+      H/2+
+      Math.sin(
+        performance.now()/700
+      )*30*player.aggression;
+
+  }
+
+  target=Math.max(
+    paddle.h/2+8,
+    Math.min(
+      H-paddle.h/2-8,
+      target
+    )
+  );
+
+  paddle.target=target;
 
   /*
-    Smooth movement prevents robotic instant tracking.
+    Reaction speed is smooth rather than instantaneous.
   */
 
-  paddle.y += difference * reaction * dt * 8;
+  const center=paddle.y+paddle.h/2;
 
-  /*
-    Small physical bounds.
-  */
+  const difference=target-center;
 
-  paddle.y=Math.max(10,Math.min(H-paddle.h-10,paddle.y));
+  const response=
+    (
+      .11+
+      player.reaction*.19
+    )*dt*60;
+
+  paddle.y+=difference*response;
+
+  paddle.y=Math.max(
+    8,
+    Math.min(
+      H-paddle.h-8,
+      paddle.y
+    )
+  );
+
 }
 
 /* ============================================================
-   STRATEGIC CONTACT
+   SWEPT COLLISION DETECTION
    ============================================================ */
 
-function paddleCollision(paddle,player){
+/*
+  This is the important part.
 
-  const hit =
-    ball.x-ball.radius < paddle.x+paddle.w &&
-    ball.x+ball.radius > paddle.x &&
-    ball.y+ball.radius > paddle.y &&
-    ball.y-ball.radius < paddle.y+paddle.h;
+  We do NOT merely ask:
 
-  if(!hit) return false;
+      "Is the ball inside the paddle right now?"
+
+  At high speed that can miss the paddle entirely.
+
+  Instead we calculate the exact time within the current
+  physics step at which the ball crosses the paddle's x plane,
+  then calculate its y position at that instant.
+
+  This prevents high-speed tunneling.
+*/
+
+function paddleHitTime(paddle,oldX,oldY,newX,newY){
+
+  const movingRight=newX>oldX;
+  const movingLeft=newX<oldX;
+
+  if(paddle.side==="left" && !movingLeft)return null;
+  if(paddle.side==="right" && !movingRight)return null;
+
+  const faceX=
+    paddle.side==="left"
+      ?paddle.x+paddle.w+ball.radius
+      :paddle.x-ball.radius;
+
+  let denominator=newX-oldX;
+
+  if(Math.abs(denominator)<0.000001){
+    return null;
+  }
+
+  const t=(faceX-oldX)/denominator;
+
+  if(t<0 || t>1){
+    return null;
+  }
+
+  const hitY=
+    oldY+
+    (newY-oldY)*t;
+
+  if(
+    hitY>=paddle.y-ball.radius &&
+    hitY<=paddle.y+paddle.h+ball.radius
+  ){
+    return{
+      t,
+      y:hitY
+    };
+  }
+
+  return null;
+}
+
+/* ============================================================
+   PADDLE RESPONSE
+   ============================================================ */
+
+function hitPaddle(paddle,player,hit){
+
+  const relative=
+    (
+      hit.y-
+      (paddle.y+paddle.h/2)
+    )/
+    (paddle.h/2);
 
   /*
-    Only accept collision when moving toward paddle.
-    This prevents the classic "ball through paddle / double hit"
-    bug.
+    Edge contacts create steeper angles.
   */
 
-  if(paddle.side==="left" && ball.vx>=0) return false;
-  if(paddle.side==="right" && ball.vx<=0) return false;
+  let angle=
+    relative*1.12;
 
   /*
-    Contact position controls return angle.
+    Targeting error.
+
+    Better competitors can intentionally choose contact
+    locations, weaker competitors have greater variation.
   */
 
-  const relative =
-    (ball.y-(paddle.y+paddle.h/2))/(paddle.h/2);
+  const targetNoise=
+    (
+      1-player.targeting
+    )*.65+
+    player.error*.45;
+
+  angle+=
+    (Math.random()-.5)*
+    targetNoise;
+
+  angle=Math.max(
+    -1.18,
+    Math.min(1.18,angle)
+  );
+
+  const oldSpeed=
+    Math.hypot(
+      ball.vx,
+      ball.vy
+    );
 
   /*
-    Strategy determines how strongly the AI tries to exploit
-    the paddle position.
+    Every volley becomes faster.
+
+    Early acceleration is dramatic.
+    Later acceleration eases toward MAX_SPEED.
   */
 
-  const strategicBias =
-    (Math.random()-.5) *
-    (1-player.target) *
-    .55;
+  const remaining=
+    Math.max(
+      0,
+      MAX_SPEED-oldSpeed
+    );
 
-  let angle =
-    relative*1.12 +
-    strategicBias;
+  const acceleration=
+    Math.min(
+      1.75,
+      .75+
+      remaining*.10
+    );
 
-  /*
-    Clamp angle to keep the game watchable.
-  */
-
-  angle=Math.max(-1.18,Math.min(1.18,angle));
-
-  /*
-    Every volley gets faster.
-    The acceleration is strong at the beginning and gradually
-    softens near the ceiling.
-  */
-
-  const oldSpeed=Math.hypot(ball.vx,ball.vy);
-
-  const acceleration =
-    0.65 +
-    Math.min(1.15,oldSpeed/12);
-
-  const newSpeed=
+  const speed=
     Math.min(
       MAX_SPEED,
       oldSpeed+acceleration
     );
 
-  const direction=paddle.side==="left"?1:-1;
+  const direction=
+    paddle.side==="left"
+      ?1
+      :-1;
 
   ball.vx=
-    Math.cos(angle)*newSpeed*direction;
+    Math.cos(angle)*
+    speed*
+    direction;
 
   ball.vy=
-    Math.sin(angle)*newSpeed;
+    Math.sin(angle)*
+    speed;
 
   /*
-    Place ball outside paddle to guarantee no tunneling.
+    Crucial separation step.
+
+    Move the ball completely outside the paddle before
+    continuing the simulation. This prevents it from being
+    detected again on the next physics iteration.
   */
 
   if(paddle.side==="left"){
-    ball.x=paddle.x+paddle.w+ball.radius+1;
+
+    ball.x=
+      paddle.x+
+      paddle.w+
+      ball.radius+
+      .5;
+
   }else{
-    ball.x=paddle.x-ball.radius-1;
+
+    ball.x=
+      paddle.x-
+      ball.radius-
+      .5;
+
   }
 
   rally++;
   pointRally++;
 
-  volleySpeed=newSpeed;
+  globalFastest=
+    Math.max(globalFastest,speed);
 
-  globalFastest=Math.max(globalFastest,newSpeed);
+  globalLongest=
+    Math.max(
+      globalLongest,
+      pointRally
+    );
 
-  replayFrames=[];
+  if(speed>14 && Math.random()<.25){
 
-  /*
-    Generate a little commentary.
-  */
+    commentary(
+      "COMMENTATOR: "+speed.toFixed(1)+
+      " SPEED! THIS RALLY IS ENTERING THE DANGER ZONE!"
+    );
 
-  if(commentaryOn && Math.random()<.17){
-    if(newSpeed>14){
-      commentary("COMMENTATOR: THAT BALL IS MOVING!");
-    }else if(Math.abs(relative)>.75){
-      commentary("COMMENTATOR: Beautiful edge placement!");
-    }else if(player.aggression>.75){
-      commentary("COMMENTATOR: The attacker is pressing hard!");
-    }else{
-      commentary("COMMENTATOR: Clean read. Perfect return.");
-    }
+  }else if(
+    Math.abs(relative)>.78 &&
+    Math.random()<.25
+  ){
+
+    commentary(
+      "COMMENTATOR: EDGE CONTACT! "+player.name+
+      " found the angle!"
+    );
+
+  }else if(Math.random()<.12){
+
+    commentary(
+      "COMMENTATOR: "+player.name+
+      " reads it perfectly."
+    );
+
   }
 
-  return true;
 }
 
 /* ============================================================
-   POINTS / GAMES
+   PHYSICS STEP
+   ============================================================ */
+
+function physicsStep(){
+
+  const m=currentMatch();
+
+  if(!m || !ball || replaying)return;
+
+  updateAI(leftPaddle,m.a,FIXED_DT);
+  updateAI(rightPaddle,m.b,FIXED_DT);
+
+  /*
+    We allow the ball to cross multiple collision surfaces
+    in a single fixed step if necessary.
+
+    Usually there will only be zero or one collision.
+  */
+
+  let remaining=1;
+  let iterations=0;
+
+  while(remaining>0 && iterations<4){
+
+    iterations++;
+
+    const oldX=ball.x;
+    const oldY=ball.y;
+
+    const newX=
+      ball.x+
+      ball.vx*remaining;
+
+    const newY=
+      ball.y+
+      ball.vy*remaining;
+
+    /*
+      Candidate collisions.
+    */
+
+    let earliest=null;
+    let collisionType=null;
+
+    const leftHit=
+      paddleHitTime(
+        leftPaddle,
+        oldX,
+        oldY,
+        newX,
+        newY
+      );
+
+    const rightHit=
+      paddleHitTime(
+        rightPaddle,
+        oldX,
+        oldY,
+        newX,
+        newY
+      );
+
+    if(leftHit){
+      earliest=leftHit;
+      collisionType="left";
+    }
+
+    if(
+      rightHit &&
+      (
+        !earliest ||
+        rightHit.t<earliest.t
+      )
+    ){
+      earliest=rightHit;
+      collisionType="right";
+    }
+
+    /*
+      If paddle collision occurs, advance only to the
+      collision point.
+    */
+
+    if(earliest){
+
+      const travel=earliest.t;
+
+      ball.x=
+        oldX+
+        (newX-oldX)*travel;
+
+      ball.y=
+        oldY+
+        (newY-oldY)*travel;
+
+      if(collisionType==="left"){
+
+        hitPaddle(
+          leftPaddle,
+          m.a,
+          earliest
+        );
+
+      }else{
+
+        hitPaddle(
+          rightPaddle,
+          m.b,
+          earliest
+        );
+
+      }
+
+      remaining*=(1-travel);
+
+      continue;
+    }
+
+    /*
+      No paddle collision.
+      Move normally.
+    */
+
+    ball.x=newX;
+    ball.y=newY;
+
+    remaining=0;
+  }
+
+  /*
+    Top/bottom walls.
+
+    These are resolved after the movement and reflected
+    without allowing the ball to remain embedded.
+  */
+
+  if(ball.y-ball.radius<0){
+
+    ball.y=ball.radius;
+    ball.vy=Math.abs(ball.vy);
+
+  }else if(ball.y+ball.radius>H){
+
+    ball.y=H-ball.radius;
+    ball.vy=-Math.abs(ball.vy);
+
+  }
+
+  /*
+    Goal planes.
+
+    There are NO invisible "goal zones" in the middle.
+
+    The point only occurs after the ball has genuinely crossed
+    the complete left or right boundary.
+  */
+
+  if(ball.x+ball.radius<0){
+
+    scorePoint("right");
+
+  }else if(ball.x-ball.radius>W){
+
+    scorePoint("left");
+
+  }
+
+}
+
+/* ============================================================
+   SCORING
    ============================================================ */
 
 function scorePoint(side){
 
-  const match=currentObject();
+  const m=currentMatch();
 
-  if(!match) return;
+  if(!m || m.finished)return;
 
-  const scorer=
-    side==="left" ? match.a : match.b;
+  const winner=
+    side==="left"
+      ?m.a
+      :m.b;
 
-  const opponent=
-    side==="left" ? match.b : match.a;
+  const loser=
+    side==="left"
+      ?m.b
+      :m.a;
 
   if(side==="left"){
-    match.scoreA++;
+    m.scoreA++;
   }else{
-    match.scoreB++;
+    m.scoreB++;
   }
 
-  stats[scorer.name].points++;
-  stats[scorer.name].rallies+=pointRally;
+  stats[winner.name].points++;
 
-  stats[scorer.name].longestRally=
+  stats[winner.name].totalRallies+=
+    pointRally;
+
+  stats[winner.name].longestRally=
     Math.max(
-      stats[scorer.name].longestRally,
+      stats[winner.name].longestRally,
       pointRally
     );
 
-  globalLongestRally=
-    Math.max(globalLongestRally,pointRally);
-
-  maxRally=Math.max(maxRally,pointRally);
-
-  document.getElementById("leftScore").textContent=match.scoreA;
-  document.getElementById("rightScore").textContent=match.scoreB;
+  globalLongest=
+    Math.max(
+      globalLongest,
+      pointRally
+    );
 
   commentary(
-    "COMMENTATOR: " +
-    scorer.name +
-    " takes the point after a " +
-    pointRally +
-    "-volley exchange!"
+    "COMMENTATOR: "+winner.name+
+    " wins the point after a "+
+    pointRally+
+    "-volley rally!"
   );
 
-  createReplay();
+  startReplay();
 
   /*
-    Games are first-to-7, with a 2-point margin once both
-    players reach 6.
+    First to 7, win by 2.
   */
 
-  const a=match.scoreA;
-  const b=match.scoreB;
+  const a=m.scoreA;
+  const b=m.scoreB;
 
-  const won =
+  const gameOver=
     (a>=7 || b>=7) &&
     Math.abs(a-b)>=2;
 
-  if(won){
+  if(gameOver){
 
-    const winner=a>b?match.a:match.b;
-    const loser=a>b?match.b:match.a;
+    finishMatch(
+      a>b?m.a:m.b,
+      a>b?m.b:m.a
+    );
 
-    finishMatch(winner,loser);
     return;
   }
 
-  resetBall(side==="left"?-1:1);
+  /*
+    Reset the rally while preserving the match score.
+  */
+
+  pointRally=0;
+
+  const direction=
+    side==="left"
+      ?-1
+      :1;
+
+  ball=makeBall(direction);
+
 }
+
+/* ============================================================
+   MATCH / BRACKET ADVANCEMENT
+   ============================================================ */
 
 function finishMatch(winner,loser){
 
-  const match=currentObject();
+  const m=currentMatch();
 
-  match.winner=winner;
-  match.loser=loser;
-  match.finished=true;
+  m.winner=winner;
+  m.loser=loser;
+  m.finished=true;
 
   stats[winner.name].wins++;
   stats[loser.name].losses++;
 
   commentary(
-    "COMMENTATOR: " +
-    winner.name +
-    " WINS! " +
-    loser.name +
-    " is eliminated."
+    "COMMENTATOR: "+winner.name+
+    " WINS THE MATCH! "+loser.name+
+    " IS ELIMINATED."
   );
 
-  setTimeout(()=>{
-    advanceBracket(winner,loser);
-  },900);
+  setTimeout(
+    ()=>advanceBracket(winner,loser),
+    900
+  );
+
 }
 
 function advanceBracket(winner,loser){
 
-  if(currentRound==="quarter"){
+  if(round==="quarter"){
 
-    const nextIndex=Math.floor(currentMatch/2);
+    const next=Math.floor(matchIndex/2);
 
-    if(!bracket.semi[nextIndex]){
-      bracket.semi[nextIndex]={
+    if(!bracket.semi[next]){
+
+      bracket.semi[next]={
         a:null,
         b:null,
         scoreA:0,
@@ -1382,47 +1854,39 @@ function advanceBracket(winner,loser){
         loser:null,
         finished:false
       };
+
     }
 
-    const semi=bracket.semi[nextIndex];
+    const s=bracket.semi[next];
 
-    if(!semi.a) semi.a=winner;
-    else semi.b=winner;
+    if(!s.a)s.a=winner;
+    else s.b=winner;
 
-    currentMatch++;
+    matchIndex++;
 
-    if(currentMatch>=4){
+    if(matchIndex>=4){
 
-      currentRound="semi";
-      currentMatch=0;
+      round="semi";
+      matchIndex=0;
 
-      /*
-        Champion receives conceptual bye next season by being
-        placed into the final path. The visual bracket remains
-        simple and readable.
-      */
     }
 
-  }else if(currentRound==="semi"){
+  }else if(round==="semi"){
 
-    const finalists=[];
+    const s=bracket.semi[matchIndex];
 
-    for(const s of bracket.semi){
-      if(s && s.winner) finalists.push(s.winner);
-    }
+    s.winner=winner;
+    s.loser=loser;
+    s.finished=true;
 
-    const semi=bracket.semi[currentMatch];
+    if(matchIndex===0){
 
-    if(semi){
-      semi.winner=winner;
-      semi.loser=loser;
-    }
+      matchIndex=1;
 
-    if(currentMatch===0){
-      currentMatch=1;
     }else{
-      currentRound="final";
-      currentMatch=0;
+
+      round="final";
+      matchIndex=0;
 
       bracket.final={
         a:bracket.semi[0].winner,
@@ -1433,6 +1897,7 @@ function advanceBracket(winner,loser){
         loser:null,
         finished:false
       };
+
     }
 
   }else{
@@ -1442,21 +1907,25 @@ function advanceBracket(winner,loser){
     bracket.final.finished=true;
 
     finishSeason(winner);
+
     return;
+
   }
 
   renderBracket();
 
-  setTimeout(loadCurrentMatch,300);
+  setTimeout(loadMatch,350);
+
 }
 
 /* ============================================================
-   SEASONS
+   CHAMPIONSHIPS
    ============================================================ */
 
 function finishSeason(winner){
 
   stats[winner.name].championships++;
+
   stats[winner.name].streak++;
 
   for(const c of competitors){
@@ -1464,6 +1933,7 @@ function finishSeason(winner){
     if(c.name!==winner.name){
       stats[c.name].streak=0;
     }
+
   }
 
   stats[winner.name].bestStreak=
@@ -1478,210 +1948,345 @@ function finishSeason(winner){
       stats[winner.name].streak
     );
 
-  championHistory.unshift({
+  history.unshift({
     season,
-    winner:winner.name,
-    score:
+    champion:winner.name,
+    final:
       bracket.final.scoreA+
       " - "+
       bracket.final.scoreB,
     streak:stats[winner.name].streak
   });
 
-  if(championHistory.length>12){
-    championHistory.length=12;
+  if(history.length>20){
+    history.length=20;
   }
 
   commentary(
-    "COMMENTATOR: " +
-    winner.name +
-    " IS THE CHAMPION OF SEASON " +
-    season +
-    "!"
+    "COMMENTATOR: "+winner.name+
+    " IS THE SEASON "+season+
+    " CHAMPION! THE CROWN IS THEIRS."
   );
 
   setTimeout(()=>{
+
     season++;
+
     createSeason();
+
     renderAllStats();
-  },1600);
+
+  },1800);
+
 }
 
-function newSeason(){
-  season++;
+function resetSeason(){
+
+  season=1;
+  history=[];
+
+  for(const c of competitors){
+
+    stats[c.name]={
+      wins:0,
+      losses:0,
+      championships:0,
+      streak:0,
+      bestStreak:0,
+      points:0,
+      totalRallies:0,
+      longestRally:0
+    };
+
+  }
+
+  globalLongest=0;
+  globalFastest=0;
+  globalBestStreak=0;
+
   createSeason();
   renderAllStats();
+
 }
 
 /* ============================================================
    REPLAY
    ============================================================ */
 
-function createReplay(){
+let replaying=false;
+let replaySpeed=3;
+
+function startReplay(){
 
   /*
-    Replay samples are captured during gameplay.
-    They are rendered over the same arena, never as a popup.
+    Replay is deliberately short and visual.
+    The live game is not hidden.
   */
 
-  replayFrames=[];
-  replayIndex=0;
-
-  for(let i=0;i<18;i++){
-    replayFrames.push({
-      x:ball.x,
-      y:ball.y,
-      vx:ball.vx,
-      vy:ball.vy
-    });
-  }
-
-  replaySpeed=Math.min(
-    14,
-    3 + Math.floor(globalFastest/2)
-  );
+  replaySpeed=
+    Math.min(
+      12,
+      3+
+      Math.floor(
+        Math.max(0,globalFastest-10)
+      )
+    );
 
   replaying=true;
 
-  const overlay=
-    document.getElementById("replayOverlay");
-
-  overlay.classList.add("show");
-
-  document.getElementById("replaySpeed").textContent=
-    replaySpeed.toFixed(1)+"X";
-
-  setTimeout(()=>{
-    replaying=false;
-    overlay.classList.remove("show");
-  },Math.max(250,800/replaySpeed));
-}
-
-function forceReplay(){
-
-  if(replayFrames.length===0){
-    commentary("COMMENTATOR: No replay is available yet.");
-    return;
-  }
-
-  replaying=true;
-
-  document.getElementById("replayOverlay")
+  document.getElementById("replay")
     .classList.add("show");
 
   document.getElementById("replaySpeed")
-    .textContent=replaySpeed.toFixed(1)+"X";
+    .textContent=
+    replaySpeed.toFixed(1)+"X";
+
+  document.getElementById("replayStat")
+    .textContent=
+    replaySpeed.toFixed(1)+"X";
 
   setTimeout(()=>{
+
     replaying=false;
-    document.getElementById("replayOverlay")
+
+    document.getElementById("replay")
       .classList.remove("show");
-  },350);
+
+  },Math.max(240,700/replaySpeed));
+
+}
+
+function showReplay(){
+
+  if(!ball)return;
+
+  startReplay();
+
+}
+
+/* ============================================================
+   COMMENTARY
+   ============================================================ */
+
+let commentaryEnabled=true;
+
+function commentary(text){
+
+  if(!commentaryEnabled)return;
+
+  document.getElementById("commentary")
+    .textContent=text;
+
+}
+
+function toggleCommentary(){
+
+  commentaryEnabled=!commentaryEnabled;
+
+  if(commentaryEnabled){
+
+    commentary(
+      "COMMENTATOR: Feed restored. I'm back."
+    );
+
+  }else{
+
+    document.getElementById("commentary")
+      .textContent=
+      "COMMENTARY MUTED";
+
+  }
+
+}
+
+let paused=false;
+
+function togglePause(){
+
+  paused=!paused;
+
 }
 
 /* ============================================================
    RENDERING
    ============================================================ */
 
-function drawBackground(){
+function arenaBackground(){
 
-  ctx.fillStyle="#03050b";
+  ctx.fillStyle="#02050b";
   ctx.fillRect(0,0,W,H);
 
-  const glow=ctx.createRadialGradient(
-    W/2,H/2,0,
-    W/2,H/2,W*.55
+  const glow=
+    ctx.createRadialGradient(
+      W/2,H/2,
+      0,
+      W/2,H/2,
+      W*.65
+    );
+
+  glow.addColorStop(
+    0,
+    "rgba(0,234,255,.10)"
   );
 
-  glow.addColorStop(0,"rgba(0,234,255,.09)");
-  glow.addColorStop(.45,"rgba(0,234,255,.025)");
-  glow.addColorStop(1,"rgba(0,0,0,0)");
+  glow.addColorStop(
+    .5,
+    "rgba(0,234,255,.018)"
+  );
+
+  glow.addColorStop(
+    1,
+    "rgba(0,0,0,0)"
+  );
 
   ctx.fillStyle=glow;
   ctx.fillRect(0,0,W,H);
 
   /*
-    Arena grid
+    Arena grid.
   */
 
-  ctx.strokeStyle="rgba(90,130,170,.055)";
+  ctx.strokeStyle=
+    "rgba(100,150,190,.045)";
+
   ctx.lineWidth=1;
 
   for(let x=0;x<W;x+=45){
+
     ctx.beginPath();
     ctx.moveTo(x,0);
     ctx.lineTo(x,H);
     ctx.stroke();
+
   }
 
   for(let y=0;y<H;y+=45){
+
     ctx.beginPath();
     ctx.moveTo(0,y);
     ctx.lineTo(W,y);
     ctx.stroke();
+
   }
 
   /*
-    Center line
+    Center court line.
   */
 
   ctx.setLineDash([8,13]);
-  ctx.strokeStyle="rgba(0,234,255,.18)";
+
+  ctx.strokeStyle=
+    "rgba(0,234,255,.18)";
+
   ctx.beginPath();
+
   ctx.moveTo(W/2,0);
   ctx.lineTo(W/2,H);
+
   ctx.stroke();
+
   ctx.setLineDash([]);
+
 }
 
-function glowRect(x,y,w,h,color){
+function drawGlowRect(x,y,w,h,color){
 
   ctx.save();
 
   ctx.shadowColor=color;
-  ctx.shadowBlur=20;
+  ctx.shadowBlur=22;
 
   ctx.fillStyle=color;
-  ctx.fillRect(x,y,w,h);
+
+  ctx.fillRect(
+    x,y,w,h
+  );
 
   ctx.restore();
+
 }
 
-function draw(){
+function render(){
 
-  drawBackground();
+  arenaBackground();
 
-  if(leftPaddle){
-    const left=currentObject()?.a;
-    const right=currentObject()?.b;
+  const m=currentMatch();
 
-    glowRect(
+  if(leftPaddle && m){
+
+    drawGlowRect(
       leftPaddle.x,
       leftPaddle.y,
       leftPaddle.w,
       leftPaddle.h,
-      left?.color || "#00eaff"
+      m.a.color
     );
 
-    glowRect(
+    drawGlowRect(
       rightPaddle.x,
       rightPaddle.y,
       rightPaddle.w,
       rightPaddle.h,
-      right?.color || "#ff2bd6"
+      m.b.color
     );
+
   }
 
   if(ball){
 
+    /*
+      Ball trail gets stronger with speed.
+    */
+
+    const speed=
+      Math.hypot(
+        ball.vx,
+        ball.vy
+      );
+
+    const trail=
+      Math.min(
+        6,
+        1+
+        (speed-START_SPEED)/2
+      );
+
     ctx.save();
 
-    ctx.shadowColor="#ffffff";
-    ctx.shadowBlur=25;
+    ctx.strokeStyle=
+      speed>14
+        ?"rgba(255,39,217,.62)"
+        :"rgba(0,234,255,.38)";
+
+    ctx.lineWidth=
+      speed>14?4:2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      ball.x-ball.vx*trail,
+      ball.y-ball.vy*trail
+    );
+
+    ctx.lineTo(
+      ball.x,
+      ball.y
+    );
+
+    ctx.stroke();
+
+    ctx.shadowColor=
+      speed>14
+        ?"rgba(255,39,217,1)"
+        :"rgba(255,255,255,1)";
+
+    ctx.shadowBlur=
+      speed>14?32:22;
 
     ctx.fillStyle="#fff";
 
     ctx.beginPath();
+
     ctx.arc(
       ball.x,
       ball.y,
@@ -1689,275 +2294,308 @@ function draw(){
       0,
       Math.PI*2
     );
+
     ctx.fill();
 
     ctx.restore();
 
-    /*
-      Speed trail
-    */
-
-    const speed=Math.hypot(ball.vx,ball.vy);
-
-    ctx.strokeStyle=
-      speed>13
-      ?"rgba(255,43,214,.55)"
-      :"rgba(0,234,255,.35)";
-
-    ctx.lineWidth=3;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      ball.x-ball.vx*2.5,
-      ball.y-ball.vy*2.5
-    );
-
-    ctx.lineTo(ball.x,ball.y);
-
-    ctx.stroke();
   }
 
   /*
-    Replay visual: emphasize trajectory while keeping
-    the live arena visible.
+    Replay visual remains on top of the live arena.
   */
 
   if(replaying && ball){
 
     ctx.save();
 
-    ctx.globalAlpha=.28;
-    ctx.strokeStyle="#ff2bd6";
+    ctx.strokeStyle=
+      "rgba(255,39,217,.7)";
+
     ctx.lineWidth=2;
+
+    ctx.globalAlpha=.5;
 
     ctx.beginPath();
 
-    ctx.moveTo(ball.x,ball.y);
+    for(let i=0;i<12;i++){
 
-    for(let i=1;i<10;i++){
+      const x=
+        ball.x-
+        ball.vx*i*1.5;
 
-      const px=
-        ball.x-ball.vx*i*1.5;
+      const y=
+        ball.y-
+        ball.vy*i*1.5;
 
-      const py=
-        ball.y-ball.vy*i*1.5;
+      if(i===0)ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
 
-      ctx.lineTo(px,py);
     }
 
     ctx.stroke();
 
     ctx.restore();
+
   }
+
 }
 
 /* ============================================================
-   UPDATE LOOP
+   FIXED TIMESTEP LOOP
    ============================================================ */
 
-let last=performance.now();
+let lastTime=performance.now();
+let accumulator=0;
 
-function loop(now){
+function frame(now){
 
-  const dt=Math.min(.033,(now-last)/1000);
-  last=now;
+  const elapsed=
+    Math.min(
+      .1,
+      (now-lastTime)/1000
+    );
 
-  if(!paused && !replaying){
+  lastTime=now;
 
-    const match=currentObject();
+  if(!paused){
 
-    if(match && ball){
+    accumulator+=elapsed;
 
-      updateAI(
-        leftPaddle,
-        match.a,
-        dt
-      );
+    /*
+      Physics always runs at a fixed 120Hz.
+      Rendering can fluctuate independently.
+    */
 
-      updateAI(
-        rightPaddle,
-        match.b,
-        dt
-      );
+    while(accumulator>=FIXED_DT){
 
-      ball.x+=ball.vx;
-      ball.y+=ball.vy;
+      physicsStep();
 
-      /*
-        Top/bottom collision.
-      */
+      accumulator-=FIXED_DT;
 
-      if(ball.y-ball.radius<=0){
-
-        ball.y=ball.radius;
-        ball.vy=Math.abs(ball.vy);
-
-      }else if(ball.y+ball.radius>=H){
-
-        ball.y=H-ball.radius;
-        ball.vy=-Math.abs(ball.vy);
-      }
-
-      paddleCollision(leftPaddle,match.a);
-      paddleCollision(rightPaddle,match.b);
-
-      /*
-        Point ends only when the ball is genuinely outside
-        the arena, preventing accidental paddle tunneling.
-      */
-
-      if(ball.x < -30){
-        scorePoint("right");
-
-      }else if(ball.x > W+30){
-        scorePoint("left");
-      }
     }
+
   }
 
-  draw();
+  render();
   updateUI();
 
-  requestAnimationFrame(loop);
-}
+  requestAnimationFrame(frame);
 
-requestAnimationFrame(loop);
+}
 
 /* ============================================================
    UI
    ============================================================ */
 
+function updatePlayerUI(a,b){
+
+  document.getElementById("leftName")
+    .textContent=a.name;
+
+  document.getElementById("rightName")
+    .textContent=b.name;
+
+  document.getElementById("leftStyle")
+    .textContent=a.style;
+
+  document.getElementById("rightStyle")
+    .textContent=b.style;
+
+  document.getElementById("leftAvatar")
+    .textContent=a.name[0];
+
+  document.getElementById("rightAvatar")
+    .textContent=b.name[0];
+
+  document.getElementById("leftAvatar")
+    .style.color=a.color;
+
+  document.getElementById("rightAvatar")
+    .style.color=b.color;
+
+  document.getElementById("leftScore")
+    .textContent="0";
+
+  document.getElementById("rightScore")
+    .textContent="0";
+
+}
+
 function updateUI(){
 
-  document.getElementById("season").textContent=season;
-  document.getElementById("bracketStatus").textContent=
-    "Season "+season;
+  document.getElementById("season")
+    .textContent=season;
 
-  document.getElementById("speedStat").textContent=
-    volleySpeed.toFixed(1);
+  document.getElementById("bracketSeason")
+    .textContent=
+    "SEASON "+season;
 
-  document.getElementById("rallyStat").textContent=
-    pointRally;
+  document.getElementById("speed")
+    .textContent=
+    ball
+      ?Math.hypot(ball.vx,ball.vy).toFixed(1)
+      :"0";
 
-  document.getElementById("longestStat").textContent=
-    globalLongestRally;
+  document.getElementById("rally")
+    .textContent=pointRally;
 
-  document.getElementById("stateStat").textContent=
-    replaying?"REPLAY":
-    paused?"PAUSED":
-    "LIVE";
-}
+  document.getElementById("longest")
+    .textContent=globalLongest;
 
-function commentary(text){
+  document.getElementById("state")
+    .textContent=
+      replaying
+        ?"REPLAY"
+        :paused
+          ?"PAUSED"
+          :"LIVE";
 
-  if(!commentaryOn) return;
+  document.getElementById("fastest")
+    .textContent=
+    globalFastest.toFixed(1);
 
-  document.getElementById("commentary")
-    .textContent=text;
-}
+  document.getElementById("longestRecord")
+    .textContent=
+    globalLongest;
 
-function togglePause(){
-  paused=!paused;
-}
+  document.getElementById("bestStreak")
+    .textContent=
+    globalBestStreak;
 
-function toggleCommentary(){
-  commentaryOn=!commentaryOn;
-
-  if(commentaryOn){
-    commentary("COMMENTATOR: Audio feed restored. Let us continue.");
-  }else{
-    document.getElementById("commentary")
-      .textContent="COMMENTARY MUTED";
-  }
 }
 
 /* ============================================================
-   BRACKET RENDER
+   BRACKET UI
    ============================================================ */
 
-function teamHTML(player,match,isCurrent){
+function teamHTML(player,m){
 
   if(!player){
-    return `
+
+    return`
       <div class="team">
         <span>— TBD —</span>
-        <span class="team-score"></span>
+        <span></span>
       </div>
     `;
+
   }
 
-  let cls="";
+  let classes="";
 
-  if(match?.winner?.name===player.name){
-    cls="winner";
-  }
-
-  if(match?.loser?.name===player.name){
-    cls="loser";
+  if(
+    m &&
+    m.winner &&
+    m.winner.name===player.name
+  ){
+    classes+=" winner";
   }
 
   if(
-    match &&
-    !match.finished &&
-    currentObject()===match
+    m &&
+    m.loser &&
+    m.loser.name===player.name
   ){
-    cls+=" active";
+    classes+=" loser";
+  }
+
+  if(
+    m &&
+    !m.finished &&
+    currentMatch()===m
+  ){
+    classes+=" active";
   }
 
   let score="";
 
-  if(match){
-    if(match.a?.name===player.name){
-      score=match.scoreA;
-    }else if(match.b?.name===player.name){
-      score=match.scoreB;
+  if(m){
+
+    if(
+      m.a &&
+      m.a.name===player.name
+    ){
+      score=m.scoreA;
     }
+
+    if(
+      m.b &&
+      m.b.name===player.name
+    ){
+      score=m.scoreB;
+    }
+
   }
 
-  return `
-    <div class="team ${cls}">
+  return`
+    <div class="team${classes}">
       <span>${player.name}</span>
       <span class="team-score">${score}</span>
     </div>
   `;
+
 }
 
-function matchHTML(match){
+function matchHTML(m){
 
-  if(!match){
-    return `
+  if(!m){
+
+    return`
       <div class="match">
-        <div class="team">—</div>
-        <div class="team">—</div>
+        <div class="team">
+          <span>—</span>
+        </div>
+        <div class="team">
+          <span>—</span>
+        </div>
       </div>
     `;
+
   }
 
-  const current=match===currentObject();
-
-  return `
-    <div class="match ${current?"current":""}">
-      ${teamHTML(match.a,match,current)}
-      ${teamHTML(match.b,match,current)}
+  return`
+    <div class="match ${
+      currentMatch()===m &&
+      !m.finished
+        ?"current"
+        :""
+    }">
+      ${teamHTML(m.a,m)}
+      ${teamHTML(m.b,m)}
     </div>
   `;
+
 }
 
 function renderBracket(){
 
   for(let i=0;i<4;i++){
-    document.getElementById("q"+(i+1)).innerHTML=
-      matchHTML(bracket.quarter[i]);
+
+    document.getElementById("q"+(i+1))
+      .innerHTML=
+      matchHTML(
+        bracket.quarter[i]
+      );
+
   }
 
   for(let i=0;i<2;i++){
-    document.getElementById("s"+(i+1)).innerHTML=
-      matchHTML(bracket.semi[i]);
+
+    document.getElementById("s"+(i+1))
+      .innerHTML=
+      matchHTML(
+        bracket.semi[i]
+      );
+
   }
 
-  document.getElementById("final").innerHTML=
-    matchHTML(bracket.final);
+  document.getElementById("final")
+    .innerHTML=
+    matchHTML(
+      bracket.final
+    );
+
 }
 
 /* ============================================================
@@ -1966,109 +2604,135 @@ function renderBracket(){
 
 function renderAllStats(){
 
-  const list=[...competitors]
+  const championshipOrder=
+    [...competitors]
     .sort(
       (a,b)=>
         stats[b.name].championships-
-        stats[a.name].championships
+        stats[a.name].championships ||
+        stats[b.name].wins-
+        stats[a.name].wins
     );
 
-  document.getElementById("champLeaders").innerHTML=
-    list.map((c,i)=>`
+  document.getElementById(
+    "championshipLeaders"
+  ).innerHTML=
+  championshipOrder.map((c,i)=>{
 
+    const s=stats[c.name];
+
+    return`
       <div class="leader">
-        <div class="rank">#${i+1}</div>
+
+        <div class="rank">
+          #${i+1}
+        </div>
 
         <div>
-          <div class="leader-name">${c.name}</div>
+          <div class="leader-name">
+            ${c.name}
+          </div>
+
           <div class="leader-meta">
-            ${stats[c.name].wins} wins ·
-            ${stats[c.name].losses} losses
+            ${s.wins} W ·
+            ${s.losses} L ·
+            ${s.streak} current streak
           </div>
         </div>
 
-        <div class="leader-value">
-          ${stats[c.name].championships}
+        <div class="value">
+          ${s.championships}
         </div>
+
       </div>
+    `;
 
-    `).join("");
+  }).join("");
 
-  const rallies=[...competitors]
+  const rallyOrder=
+    [...competitors]
     .sort(
       (a,b)=>
         stats[b.name].longestRally-
         stats[a.name].longestRally
     );
 
-  document.getElementById("rallyLeaders").innerHTML=
-    rallies.map((c,i)=>`
+  document.getElementById(
+    "rallyLeaders"
+  ).innerHTML=
+  rallyOrder.map((c,i)=>{
 
+    const s=stats[c.name];
+
+    return`
       <div class="leader">
-        <div class="rank">#${i+1}</div>
+
+        <div class="rank">
+          #${i+1}
+        </div>
 
         <div>
-          <div class="leader-name">${c.name}</div>
+          <div class="leader-name">
+            ${c.name}
+          </div>
+
           <div class="leader-meta">
-            ${stats[c.name].rallies} total rally volleys
+            ${s.totalRallies} total rally volleys
           </div>
         </div>
 
-        <div class="leader-value">
-          ${stats[c.name].longestRally}
+        <div class="value">
+          ${s.longestRally}
         </div>
+
       </div>
+    `;
 
-    `).join("");
+  }).join("");
 
-  document.getElementById("fastestRecord").textContent=
-    globalFastest.toFixed(1);
+  const top=championshipOrder[0];
 
-  document.getElementById("longestRecord").textContent=
-    globalLongestRally;
+  document.getElementById(
+    "mostChampionships"
+  ).textContent=
+    top &&
+    stats[top.name].championships>0
+      ?top.name+
+       " — "+
+       stats[top.name].championships
+      :"Nobody yet";
 
-  const champ=list[0];
-
-  document.getElementById("mostChamp").textContent=
-    champ && stats[champ.name].championships>0
-      ? champ.name+" — "+
-        stats[champ.name].championships
-      : "Nobody yet";
-
-  document.getElementById("bestStreak").textContent=
-    globalBestStreak;
-
-  document.getElementById("history").innerHTML=
-    championHistory.map(h=>`
+  document.getElementById("history")
+    .innerHTML=
+    history.map(h=>`
 
       <tr>
         <td>${h.season}</td>
-        <td class="champion">${h.winner}</td>
-        <td>${h.score}</td>
+        <td class="champion">${h.champion}</td>
+        <td>${h.final}</td>
         <td>${h.streak}</td>
       </tr>
 
     `).join("");
+
 }
 
 /* ============================================================
-   INITIALIZE
+   START
    ============================================================ */
 
+resizeCanvas();
+
 createSeason();
+
 renderAllStats();
 
-commentary(
-  "COMMENTATOR: Welcome to the Neon/Pong Infinite League. " +
-  "The machines are ready."
+requestAnimationFrame(frame);
+
+setInterval(
+  renderAllStats,
+  1000
 );
-
-/*
-  Periodically refresh leaderboard display.
-  The actual simulation remains frame-driven.
-*/
-
-setInterval(renderAllStats,1000);
 
 </script>
 
