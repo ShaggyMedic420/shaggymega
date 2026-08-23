@@ -3,533 +3,862 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>∞ PONG LEAGUE — Autonomous Intelligence Championship</title>
+<meta name="theme-color" content="#050812">
+<title>∞ PONG LEAGUE — Autonomous Arena</title>
 
 <style>
 :root{
-  --bg:#03050a;
-  --panel:#080d16;
-  --panel2:#0c1420;
-  --line:#183047;
-  --cyan:#00eaff;
-  --green:#35ff9a;
-  --pink:#ff2bd6;
-  --yellow:#ffe66d;
-  --red:#ff4568;
-  --text:#dcecff;
-  --muted:#6e8298;
-  --shadow:0 0 30px rgba(0,234,255,.08);
+    --bg:#03050a;
+    --panel:#07101a;
+    --panel2:#0a1621;
+    --line:#173044;
+    --cyan:#00eaff;
+    --pink:#ff2bd6;
+    --green:#35ff9a;
+    --yellow:#ffe66d;
+    --orange:#ff9e4a;
+    --text:#d9f3ff;
+    --muted:#698296;
+    --danger:#ff496f;
 }
 
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
-html,body{
-  margin:0;
-  min-height:100%;
-  background:
-    radial-gradient(circle at 50% -10%,#10283a 0,#03050a 45%),
-    #03050a;
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  overflow-x:hidden;
+    margin:0;
+    background:
+        radial-gradient(circle at 50% -10%,#102a3d 0,#03050a 42%),
+        #03050a;
+    color:var(--text);
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    overflow-x:hidden;
 }
 
 body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.12;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 3px,
-      rgba(255,255,255,.025) 4px
-    );
-  z-index:999;
-}
-
-header{
-  padding:24px 20px 14px;
-  text-align:center;
-  border-bottom:1px solid #102437;
-  background:rgba(3,7,13,.86);
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(14px);
-}
-
-.logo{
-  font-weight:1000;
-  letter-spacing:.12em;
-  font-size:clamp(22px,4vw,42px);
-  color:#fff;
-  text-shadow:
-    0 0 8px var(--cyan),
-    0 0 30px rgba(0,234,255,.45);
-}
-
-.logo span{
-  color:var(--cyan);
-}
-
-.subtitle{
-  margin-top:5px;
-  color:var(--muted);
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-
-nav{
-  margin-top:15px;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.045;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #fff 0px,
+            #fff 1px,
+            transparent 1px,
+            transparent 4px
+        );
 }
 
 button{
-  border:1px solid #20445d;
-  background:#09131e;
-  color:#bfe9ff;
-  padding:8px 12px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:800;
-  transition:.15s;
+    font:inherit;
 }
 
-button:hover{
-  color:white;
-  border-color:var(--cyan);
-  box-shadow:0 0 14px rgba(0,234,255,.18);
-  transform:translateY(-1px);
+a{
+    color:inherit;
 }
 
-button.active{
-  background:#063347;
-  border-color:var(--cyan);
-  color:white;
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(18px);
+    background:rgba(3,5,10,.88);
+    border-bottom:1px solid #122535;
 }
+
+.header-inner{
+    max-width:1450px;
+    margin:auto;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:12px 20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:1000;
+    letter-spacing:.08em;
+}
+
+.logo{
+    width:42px;
+    height:42px;
+    border:1px solid var(--cyan);
+    display:grid;
+    place-items:center;
+    color:var(--cyan);
+    box-shadow:
+        0 0 20px rgba(0,234,255,.25),
+        inset 0 0 20px rgba(0,234,255,.08);
+    font-size:20px;
+}
+
+.brand-title{
+    font-size:15px;
+}
+
+.brand-sub{
+    color:var(--muted);
+    font:10px monospace;
+    margin-top:3px;
+}
+
+.nav{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.nav button,
+.control{
+    border:1px solid #1b3447;
+    background:#07101a;
+    color:#9fb9c9;
+    padding:8px 11px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.04em;
+}
+
+.nav button:hover,
+.control:hover{
+    color:#fff;
+    border-color:var(--cyan);
+    background:#0b1a26;
+}
+
+/* ---------------------------------------------------------
+   MAIN
+--------------------------------------------------------- */
 
 main{
-  width:min(1500px,96vw);
-  margin:auto;
-  padding:18px 0 50px;
+    max-width:1450px;
+    margin:auto;
+    padding:25px 20px 80px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1.65fr .85fr;
-  gap:16px;
+.hero{
+    text-align:center;
+    padding:30px 10px 25px;
 }
 
-@media(max-width:1000px){
-  .grid{grid-template-columns:1fr}
+.kicker{
+    color:var(--cyan);
+    font:11px monospace;
+    letter-spacing:.25em;
+    text-transform:uppercase;
 }
 
-.panel{
-  background:
-    linear-gradient(145deg,rgba(12,22,34,.95),rgba(5,10,17,.95));
-  border:1px solid var(--line);
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
+h1{
+    margin:9px 0 7px;
+    font-size:clamp(32px,6vw,76px);
+    line-height:.95;
+    letter-spacing:-.055em;
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            var(--cyan),
+            #fff,
+            var(--pink)
+        );
+    background-size:300% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleFlow 8s linear infinite;
 }
 
-.panelHead{
-  padding:12px 15px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+@keyframes titleFlow{
+    to{
+        background-position:300% 0;
+    }
 }
 
-.panelTitle{
-  font-size:12px;
-  font-weight:1000;
-  letter-spacing:.15em;
-  text-transform:uppercase;
+.hero p{
+    color:var(--muted);
+    max-width:760px;
+    margin:0 auto;
+    line-height:1.6;
 }
 
-.live{
-  color:var(--green);
-  font-size:10px;
-  font-weight:1000;
+.broadcast{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:18px;
 }
 
-.live:before{
-  content:"";
-  display:inline-block;
-  width:7px;
-  height:7px;
-  margin-right:6px;
-  background:var(--green);
-  border-radius:50%;
-  box-shadow:0 0 10px var(--green);
+.live-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    border:1px solid #26445a;
+    background:#06101a;
+    padding:7px 11px;
+    color:#8fa9ba;
+    font:10px monospace;
 }
 
-.stage{
-  padding:14px;
+.live-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+    animation:pulse 1s infinite;
 }
 
-#game{
-  display:block;
-  width:100%;
-  aspect-ratio:16/9;
-  background:#010407;
-  border:1px solid #17334a;
-  border-radius:8px;
-  box-shadow:
-    inset 0 0 50px rgba(0,234,255,.03),
-    0 0 30px rgba(0,0,0,.5);
+@keyframes pulse{
+    50%{
+        opacity:.3;
+        transform:scale(.7);
+    }
 }
 
-.scoreboard{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  gap:10px;
-  align-items:center;
-  margin-top:12px;
+/* ---------------------------------------------------------
+   GAME
+--------------------------------------------------------- */
+
+.game-shell{
+    border:1px solid #1b384d;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,234,255,.035),
+            transparent 40%,
+            rgba(255,43,214,.035)
+        ),
+        #040a10;
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.55),
+        0 0 50px rgba(0,234,255,.04);
+}
+
+.game-top{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    border-bottom:1px solid #132b3c;
 }
 
 .player{
-  padding:12px;
-  background:#050b12;
-  border:1px solid #12273a;
-  border-radius:8px;
+    min-width:0;
 }
 
-.player.right{text-align:right}
-
-.aiName{
-  font-weight:1000;
-  font-size:16px;
+.player.right{
+    text-align:right;
 }
 
-.aiMeta{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+.player-name{
+    font-size:clamp(20px,3vw,34px);
+    font-weight:1000;
+    letter-spacing:-.04em;
+}
+
+.player.left .player-name{
+    color:var(--cyan);
+}
+
+.player.right .player-name{
+    color:var(--pink);
+}
+
+.player-meta{
+    margin-top:4px;
+    color:#597285;
+    font:10px monospace;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .score{
-  font-size:34px;
-  font-weight:1000;
-  color:#fff;
-  text-align:center;
-  min-width:90px;
+    min-width:160px;
+    text-align:center;
 }
 
-.vs{
-  font-size:9px;
-  color:var(--muted);
-  text-align:center;
+.score-label{
+    color:#526a7b;
+    font:9px monospace;
+    letter-spacing:.15em;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  padding:0 14px 14px;
+.score-number{
+    font:1000 38px/1 monospace;
+    color:#fff;
+    text-shadow:
+        0 0 20px rgba(255,255,255,.18);
 }
 
-.stat{
-  padding:10px;
-  background:#050b12;
-  border:1px solid #12273a;
-  border-radius:7px;
-  text-align:center;
+.arena-wrap{
+    position:relative;
+    width:100%;
+    background:#010408;
 }
 
-.stat b{
-  display:block;
-  font-size:16px;
-  color:white;
+#game{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16/8;
+    max-height:650px;
 }
 
-.stat span{
-  font-size:9px;
-  color:var(--muted);
-  text-transform:uppercase;
+.arena-overlay{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
 }
 
-.thought{
-  margin-top:10px;
-  color:#76a0bb;
-  font-family:monospace;
-  font-size:11px;
-  min-height:18px;
+.corner{
+    position:absolute;
+    color:#446175;
+    font:9px monospace;
 }
 
-.thought .cursor{
-  color:var(--cyan);
+.corner.tl{
+    top:13px;
+    left:15px;
 }
 
-.side{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
+.corner.tr{
+    top:13px;
+    right:15px;
 }
 
-.standings{
-  padding:10px;
+.corner.bl{
+    bottom:13px;
+    left:15px;
 }
 
-.row{
-  display:grid;
-  grid-template-columns:30px 1fr 45px 55px;
-  gap:8px;
-  align-items:center;
-  padding:9px 7px;
-  border-bottom:1px solid #0f2131;
-  font-size:12px;
+.corner.br{
+    bottom:13px;
+    right:15px;
 }
 
-.row:last-child{border-bottom:0}
-
-.rank{
-  color:var(--muted);
-  text-align:center;
-  font-weight:1000;
+.match-controls{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    padding:12px;
+    border-top:1px solid #132b3c;
+    background:#050c13;
 }
 
-.name{
-  font-weight:900;
+/* ---------------------------------------------------------
+   COMMENTATOR
+--------------------------------------------------------- */
+
+.commentator{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:14px;
+    align-items:center;
+    padding:15px;
+    border:1px solid #1b384d;
+    border-top:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,43,214,.045),
+            rgba(0,234,255,.045)
+        );
 }
 
-.wins{
-  color:var(--green);
-  text-align:right;
+.mic{
+    width:48px;
+    height:48px;
+    border:1px solid var(--pink);
+    display:grid;
+    place-items:center;
+    color:var(--pink);
+    font-size:20px;
+    box-shadow:0 0 25px rgba(255,43,214,.12);
 }
 
-.champs{
-  color:var(--yellow);
-  text-align:right;
+.commentator-label{
+    color:#6d8494;
+    font:9px monospace;
+    letter-spacing:.15em;
 }
 
-.miniBar{
-  height:3px;
-  background:#0c1b29;
-  border-radius:3px;
-  overflow:hidden;
-  margin-top:4px;
+.commentary{
+    margin-top:4px;
+    font-weight:850;
+    font-size:14px;
+    line-height:1.45;
 }
 
-.miniBar i{
-  display:block;
-  height:100%;
-  background:linear-gradient(90deg,var(--cyan),var(--green));
+.commentary:after{
+    content:"";
+    display:inline-block;
+    width:6px;
+    height:13px;
+    margin-left:5px;
+    background:var(--pink);
+    animation:blink .7s infinite;
 }
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* ---------------------------------------------------------
+   REPLAY
+--------------------------------------------------------- */
 
 .replay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.82);
-  z-index:500;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  backdrop-filter:blur(10px);
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.86);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.replay.show{display:flex}
-
-.replayBox{
-  width:min(1000px,96vw);
-  background:#050a11;
-  border:1px solid #254b65;
-  border-radius:14px;
-  box-shadow:0 0 80px rgba(0,234,255,.16);
-  padding:15px;
+.replay.show{
+    display:flex;
 }
 
-.replayHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+.replay-box{
+    width:min(1100px,100%);
+    border:1px solid #36546a;
+    background:#03070c;
+    box-shadow:
+        0 40px 120px rgba(0,0,0,.8),
+        0 0 80px rgba(255,43,214,.08);
 }
 
-.replayTitle{
-  font-weight:1000;
-  color:var(--pink);
-  letter-spacing:.15em;
+.replay-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:12px 15px;
+    border-bottom:1px solid #1b3446;
+}
+
+.replay-title{
+    color:var(--pink);
+    font:1000 11px monospace;
+    letter-spacing:.16em;
+}
+
+.replay-speed{
+    color:var(--yellow);
+    font:1000 11px monospace;
 }
 
 #replayCanvas{
-  display:block;
-  width:100%;
-  aspect-ratio:16/9;
-  background:#010407;
-  border:1px solid #17334a;
-  border-radius:8px;
+    width:100%;
+    display:block;
+    aspect-ratio:16/8;
+    background:#010204;
 }
 
-.replayInfo{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-  font-family:monospace;
-  font-size:11px;
-  color:var(--muted);
+.replay-footer{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+    padding:10px 15px;
+    color:#61798a;
+    font:10px monospace;
 }
 
-.sectionGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  margin-top:16px;
+/* ---------------------------------------------------------
+   DASHBOARD
+--------------------------------------------------------- */
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(12,minmax(0,1fr));
+    gap:15px;
+    margin-top:15px;
 }
 
-@media(max-width:1000px){
-  .sectionGrid{grid-template-columns:1fr}
+.card{
+    grid-column:span 4;
+    border:1px solid #153044;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.018),
+            transparent
+        ),
+        #061019;
+    min-width:0;
 }
 
-.content{
-  padding:14px;
+.card.wide{
+    grid-column:span 8;
 }
 
-.event{
-  display:flex;
-  gap:10px;
-  padding:9px 0;
-  border-bottom:1px solid #10202e;
-  font-size:11px;
+.card.full{
+    grid-column:1/-1;
 }
 
-.event:last-child{border-bottom:0}
-
-.eventTime{
-  color:var(--cyan);
-  font-family:monospace;
-  white-space:nowrap;
+.card-title{
+    padding:12px 14px;
+    border-bottom:1px solid #122b3d;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    color:#9ab3c2;
+    font:1000 10px monospace;
+    letter-spacing:.13em;
+    text-transform:uppercase;
 }
 
-.evo{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
+.card-body{
+    padding:14px;
 }
 
-.evoCard{
-  background:#050b12;
-  border:1px solid #12273a;
-  border-radius:7px;
-  padding:10px;
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+    gap:8px;
 }
 
-.evoCard b{
-  display:block;
-  color:white;
-  font-size:13px;
+.stat{
+    background:#07141e;
+    border:1px solid #102b3c;
+    padding:13px;
 }
 
-.evoCard span{
-  display:block;
-  margin-top:3px;
-  color:var(--muted);
-  font-size:9px;
+.stat-value{
+    color:#fff;
+    font:1000 22px monospace;
 }
 
-.log{
-  height:180px;
-  overflow:auto;
-  font:10px/1.6 monospace;
-  color:#7995a9;
+.stat-label{
+    color:#536d7f;
+    font:9px monospace;
+    margin-top:4px;
 }
 
-.log div{
-  border-bottom:1px solid #0b1925;
-  padding:2px 0;
+/* ---------------------------------------------------------
+   STANDINGS
+--------------------------------------------------------- */
+
+.row{
+    display:grid;
+    grid-template-columns:
+        30px minmax(0,1fr) 50px 55px;
+    gap:8px;
+    align-items:center;
+    padding:9px 4px;
+    border-bottom:1px solid #0d2332;
 }
 
-.highlight{
-  color:var(--yellow);
+.row:last-child{
+    border-bottom:0;
 }
 
-.cyan{color:var(--cyan)}
-.green{color:var(--green)}
-.pink{color:var(--pink)}
-.red{color:var(--red)}
-
-.footer{
-  margin-top:20px;
-  text-align:center;
-  color:#405669;
-  font-size:10px;
-  letter-spacing:.1em;
-  padding:20px;
+.rank{
+    color:#425b6c;
+    font:11px monospace;
 }
 
-#toast{
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  z-index:1000;
-  background:#07131e;
-  border:1px solid var(--cyan);
-  color:#dff8ff;
-  padding:12px 15px;
-  border-radius:8px;
-  font-size:11px;
-  box-shadow:0 0 25px rgba(0,234,255,.18);
-  transform:translateY(100px);
-  opacity:0;
-  transition:.25s;
-}
-
-#toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.badge{
-  display:inline-block;
-  padding:3px 6px;
-  border:1px solid #25445b;
-  border-radius:4px;
-  color:#8db4ca;
-  font-size:8px;
-  margin-left:5px;
+.name{
+    font-weight:900;
+    font-size:12px;
 }
 
 .champion{
-  color:var(--yellow);
-  text-shadow:0 0 8px rgba(255,230,109,.3);
+    color:var(--yellow);
 }
 
-.controlRow{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+.badge{
+    font-size:9px;
+    color:var(--yellow);
 }
 
-input[type=range]{
-  accent-color:var(--cyan);
+.wins,
+.champs{
+    color:#7e98a9;
+    font:10px monospace;
+    text-align:right;
 }
 
-.bigNumber{
-  font-size:27px;
-  font-weight:1000;
-  color:white;
+.miniBar{
+    height:3px;
+    margin-top:5px;
+    background:#102432;
+    overflow:hidden;
 }
 
-.center{
-  text-align:center;
+.miniBar i{
+    display:block;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--pink)
+        );
 }
 
-.danger{
-  border-color:#653041;
-  color:#ff8096;
+/* ---------------------------------------------------------
+   EVENTS
+--------------------------------------------------------- */
+
+.event{
+    display:grid;
+    grid-template-columns:75px 1fr;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid #0d2332;
+    font-size:11px;
+}
+
+.eventTime{
+    color:#40586a;
+    font:9px monospace;
+}
+
+.green{
+    color:var(--green);
+}
+
+.pink{
+    color:var(--pink);
+}
+
+/* ---------------------------------------------------------
+   SYSTEM LOG
+--------------------------------------------------------- */
+
+.log{
+    height:240px;
+    overflow:auto;
+    font:10px/1.7 monospace;
+    color:#6d8798;
+    background:#03080d;
+    padding:10px;
+}
+
+.log::-webkit-scrollbar{
+    width:5px;
+}
+
+.log::-webkit-scrollbar-thumb{
+    background:#173246;
+}
+
+/* ---------------------------------------------------------
+   AI THOUGHTS
+--------------------------------------------------------- */
+
+.thought-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.thought{
+    border:1px solid #122b3d;
+    background:#040b11;
+    padding:12px;
+}
+
+.thought-name{
+    font-weight:1000;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.thought-text{
+    color:#668194;
+    font:10px monospace;
+}
+
+.cursor{
+    color:var(--green);
+}
+
+/* ---------------------------------------------------------
+   ARCHIVE
+--------------------------------------------------------- */
+
+.archive{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:8px;
+}
+
+.archive-card{
+    padding:13px;
+    border:1px solid #173044;
+    background:#050c13;
+}
+
+.archive-card .champ{
+    font-size:17px;
+    font-weight:1000;
+    color:var(--yellow);
+}
+
+.archive-card .era{
+    color:#4d6577;
+    font:9px monospace;
+    margin-top:5px;
+}
+
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:
+        translate(-50%,20px);
+    z-index:800;
+    padding:12px 18px;
+    border:1px solid var(--cyan);
+    background:#06121b;
+    color:#fff;
+    font:1000 11px monospace;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.toast.show{
+    opacity:1;
+    transform:
+        translate(-50%,0);
+}
+
+/* ---------------------------------------------------------
+   FOOTER
+--------------------------------------------------------- */
+
+footer{
+    max-width:1450px;
+    margin:auto;
+    padding:30px 20px 60px;
+    color:#3d5667;
+    font:10px/1.7 monospace;
+    text-align:center;
+}
+
+footer strong{
+    color:#668194;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media(max-width:900px){
+
+    .nav{
+        display:none;
+    }
+
+    .game-top{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .score{
+        grid-column:1/-1;
+        grid-row:1;
+    }
+
+    .player{
+        grid-row:2;
+    }
+
+    .card,
+    .card.wide{
+        grid-column:1/-1;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+@media(max-width:560px){
+
+    main{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .header-inner{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .game-top{
+        padding:10px;
+    }
+
+    .player-name{
+        font-size:18px;
+    }
+
+    .player-meta{
+        font-size:8px;
+    }
+
+    .score-number{
+        font-size:30px;
+    }
+
+    .thought-grid{
+        grid-template-columns:1fr;
+    }
+
+    .row{
+        grid-template-columns:
+            24px minmax(0,1fr) 42px 45px;
+    }
 }
 </style>
 </head>
@@ -537,409 +866,968 @@ input[type=range]{
 <body>
 
 <header>
-  <div class="logo"><span>∞</span> PONG LEAGUE</div>
-  <div class="subtitle">
-    AUTONOMOUS INTELLIGENCE • ENDLESS COMPETITION • NO FINAL MATCH
-  </div>
+    <div class="header-inner">
 
-  <nav>
-    <button class="active" onclick="scrollToGame()">LIVE ARENA</button>
-    <button onclick="scrollToId('standingsPanel')">STANDINGS</button>
-    <button onclick="scrollToId('evolutionPanel')">EVOLUTION</button>
-    <button onclick="scrollToId('historyPanel')">HISTORY</button>
-    <button onclick="togglePause()">PAUSE</button>
-    <button onclick="newLeague()">NEW ERA</button>
-  </nav>
+        <div class="brand">
+
+            <div class="logo">∞</div>
+
+            <div>
+                <div class="brand-title">
+                    INFINITE PONG LEAGUE
+                </div>
+
+                <div class="brand-sub">
+                    AUTONOMOUS COMPETITIVE SIMULATION
+                </div>
+            </div>
+
+        </div>
+
+        <nav class="nav">
+
+            <button onclick="scrollToGame()">
+                ARENA
+            </button>
+
+            <button onclick="scrollToId('standingsCard')">
+                STANDINGS
+            </button>
+
+            <button onclick="scrollToId('evolutionCard')">
+                EVOLUTION
+            </button>
+
+            <button onclick="scrollToId('archiveCard')">
+                ARCHIVE
+            </button>
+
+            <button onclick="scrollToId('logCard')">
+                SYSTEM
+            </button>
+
+        </nav>
+
+    </div>
 </header>
+
 
 <main>
 
-<div class="grid">
+    <section class="hero">
 
-<section class="panel">
-  <div class="panelHead">
-    <div class="panelTitle">LIVE AUTONOMOUS ARENA</div>
-    <div class="live" id="liveStatus">SIMULATION ONLINE</div>
-  </div>
+        <div class="kicker">
+            BROADCAST NETWORK // 24/∞
+        </div>
 
-  <div class="stage">
-    <canvas id="game" width="1200" height="675"></canvas>
+        <h1>
+            THE PONG<br>
+            SINGULARITY
+        </h1>
 
-    <div class="scoreboard">
-      <div class="player">
-        <div class="aiName" id="leftName">—</div>
-        <div class="aiMeta" id="leftMeta">—</div>
-        <div class="thought" id="leftThought"></div>
-      </div>
+        <p>
+            Eleven autonomous competitors.
+            One arena.
+            Infinite seasons.
+            Every rally teaches the next one.
+            Every championship remains in the record forever.
+        </p>
 
-      <div>
-        <div class="score" id="score">0 — 0</div>
-        <div class="vs">FIRST TO 7</div>
-      </div>
+        <div class="broadcast">
 
-      <div class="player right">
-        <div class="aiName" id="rightName">—</div>
-        <div class="aiMeta" id="rightMeta">—</div>
-        <div class="thought" id="rightThought"></div>
-      </div>
-    </div>
-  </div>
+            <div class="live-pill">
+                <span class="live-dot"></span>
+                <span id="liveStatus">
+                    SIMULATION ONLINE
+                </span>
+            </div>
 
-  <div class="stats">
-    <div class="stat">
-      <b id="season">1</b>
-      <span>Era</span>
-    </div>
-    <div class="stat">
-      <b id="matchNumber">1</b>
-      <span>Match</span>
-    </div>
-    <div class="stat">
-      <b id="pointNumber">0</b>
-      <span>Points</span>
-    </div>
-    <div class="stat">
-      <b id="replaySpeed">3.0×</b>
-      <span>Replay speed</span>
-    </div>
-  </div>
-</section>
+            <div class="live-pill">
+                ERA
+                <b id="season">1</b>
+            </div>
+
+            <div class="live-pill">
+                MATCH
+                <b id="matchNumber">1</b>
+            </div>
+
+            <div class="live-pill">
+                GENERATION
+                <b id="generation">1</b>
+            </div>
+
+        </div>
+
+    </section>
 
 
-<aside class="side">
+    <!-- =====================================================
+         MAIN ARENA
+    ====================================================== -->
 
-<section class="panel" id="standingsPanel">
-  <div class="panelHead">
-    <div class="panelTitle">WORLD RANKING</div>
-    <div class="live">11 COMPETITORS</div>
-  </div>
-  <div class="standings" id="standings"></div>
-</section>
+    <section class="game-shell" id="arena">
 
+        <div class="game-top">
 
-<section class="panel">
-  <div class="panelHead">
-    <div class="panelTitle">LEAGUE CORE</div>
-  </div>
+            <div class="player left">
 
-  <div class="content">
-    <div class="evo">
-      <div class="evoCard">
-        <b id="totalMatches">0</b>
-        <span>Matches</span>
-      </div>
+                <div
+                    class="player-name"
+                    id="leftName"
+                >
+                    LOADING
+                </div>
 
-      <div class="evoCard">
-        <b id="totalPoints">0</b>
-        <span>Points</span>
-      </div>
+                <div
+                    class="player-meta"
+                    id="leftMeta"
+                >
+                    INITIALIZING
+                </div>
 
-      <div class="evoCard">
-        <b id="totalChampions">0</b>
-        <span>Championships</span>
-      </div>
-
-      <div class="evoCard">
-        <b id="generation">1</b>
-        <span>Evolution</span>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="controlRow">
-      <button onclick="changeGameSpeed(.5)">− SPEED</button>
-      <button onclick="changeGameSpeed(1)">+ SPEED</button>
-      <button onclick="togglePause()">PAUSE / PLAY</button>
-    </div>
-  </div>
-</section>
-
-</aside>
-</div>
+            </div>
 
 
-<div class="sectionGrid">
+            <div class="score">
 
-<section class="panel" id="evolutionPanel">
-  <div class="panelHead">
-    <div class="panelTitle">🧬 EVOLUTION LABORATORY</div>
-    <div class="cyan">LIVE</div>
-  </div>
+                <div class="score-label">
+                    LIVE SCORE
+                </div>
 
-  <div class="content" id="evolutionCards"></div>
-</section>
+                <div
+                    class="score-number"
+                    id="score"
+                >
+                    0 — 0
+                </div>
 
-
-<section class="panel">
-  <div class="panelHead">
-    <div class="panelTitle">⚡ SYSTEM TELEMETRY</div>
-  </div>
-
-  <div class="content">
-    <div class="log" id="systemLog"></div>
-  </div>
-</section>
+            </div>
 
 
-<section class="panel" id="historyPanel">
-  <div class="panelHead">
-    <div class="panelTitle">📜 ETERNAL HISTORY</div>
-  </div>
+            <div class="player right">
 
-  <div class="content">
-    <div id="history"></div>
-  </div>
-</section>
+                <div
+                    class="player-name"
+                    id="rightName"
+                >
+                    LOADING
+                </div>
 
-</div>
+                <div
+                    class="player-meta"
+                    id="rightMeta"
+                >
+                    INITIALIZING
+                </div>
 
+            </div>
 
-<section class="panel" style="margin-top:16px">
-  <div class="panelHead">
-    <div class="panelTitle">🏆 ALL-TIME CHAMPIONSHIP ARCHIVE</div>
-    <div class="highlight">PERSISTENT</div>
-  </div>
-
-  <div class="content">
-    <div id="championshipArchive"></div>
-  </div>
-</section>
+        </div>
 
 
-<section class="panel" style="margin-top:16px">
-  <div class="panelHead">
-    <div class="panelTitle">ABOUT THE MACHINE</div>
-  </div>
+        <div class="arena-wrap">
 
-  <div class="content" style="line-height:1.7;font-size:12px;color:#8da6b8">
-    The Pong League is an endless browser-based evolutionary simulation.
-    Every competitor maintains its own strategic parameters, performance
-    history and championship record. Competitors adapt after matches and
-    mutate their strategies between eras.
+            <canvas
+                id="game"
+                width="1280"
+                height="640"
+            ></canvas>
 
-    <br><br>
+            <div class="arena-overlay">
 
-    <span class="cyan">The objective is simple:</span>
-    become champion.
+                <div class="corner tl">
+                    CONTINUOUS PHYSICS
+                </div>
 
-    <br><br>
+                <div class="corner tr">
+                    CCD // SUBSTEP
+                </div>
 
-    <span class="pink">The problem:</span>
-    there are ten other machines trying to do exactly the same thing.
+                <div class="corner bl">
+                    AUTONOMOUS ARENA
+                </div>
 
-    <br><br>
+                <div class="corner br">
+                    NO SCRIPTED WINNER
+                </div>
 
-    There is no final match. When an era ends, the league begins again.
-    Championships remain attached to their winners forever in this browser's
-    persistent archive.
+            </div>
 
-    <br><br>
-
-    <span class="green">The simulation continues for as long as this page is open.</span>
-  </div>
-</section>
+        </div>
 
 
-<div class="footer">
-  ∞ PONG LEAGUE • AUTONOMOUS SIMULATION • LOCAL PERSISTENCE • NO END CONDITION
-</div>
+        <div class="match-controls">
+
+            <button
+                class="control"
+                onclick="togglePause()"
+            >
+                ⏯ PAUSE / RESUME
+            </button>
+
+            <button
+                class="control"
+                onclick="changeGameSpeed(-.5)"
+            >
+                − SPEED
+            </button>
+
+            <button
+                class="control"
+                onclick="changeGameSpeed(.5)"
+            >
+                + SPEED
+            </button>
+
+            <button
+                class="control"
+                onclick="changeGameSpeed(2)"
+            >
+                ⚡ TURBO
+            </button>
+
+            <button
+                class="control"
+                onclick="newLeague()"
+            >
+                ♻ NEW ERA
+            </button>
+
+        </div>
+
+
+        <!-- COMMENTATOR -->
+
+        <div class="commentator">
+
+            <div class="mic">
+                🎙
+            </div>
+
+            <div>
+
+                <div class="commentator-label">
+                    LIVE COMMENTARY // ARENA NETWORK
+                </div>
+
+                <div
+                    class="commentary"
+                    id="commentary"
+                >
+                    The arena is coming online...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LIVE STATS
+    ====================================================== -->
+
+    <section class="grid">
+
+        <div class="card full">
+
+            <div class="card-title">
+                <span>LIVE TELEMETRY</span>
+                <span>REAL-TIME</span>
+            </div>
+
+            <div class="card-body">
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div
+                            class="stat-value"
+                            id="totalMatches"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            TOTAL MATCHES
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div
+                            class="stat-value"
+                            id="totalPoints"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            TOTAL POINTS
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div
+                            class="stat-value"
+                            id="totalChampions"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            CHAMPIONSHIPS AWARDED
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div
+                            class="stat-value"
+                            id="pointNumber"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            LIFETIME RALLIES
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STANDINGS -->
+
+        <div
+            class="card wide"
+            id="standingsCard"
+        >
+
+            <div class="card-title">
+
+                <span>
+                    WORLD CHAMPIONSHIP STANDINGS
+                </span>
+
+                <span>
+                    11 COMPETITORS
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div id="standings"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MATCH HISTORY -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <span>
+                    RECENT RESULTS
+                </span>
+
+            </div>
+
+            <div
+                class="card-body"
+                id="history"
+            ></div>
+
+        </div>
+
+
+        <!-- EVOLUTION -->
+
+        <div
+            class="card wide"
+            id="evolutionCard"
+        >
+
+            <div class="card-title">
+
+                <span>
+                    NEURAL EVOLUTION MONITOR
+                </span>
+
+                <span>
+                    LIVE
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div id="evolutionCards"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI THOUGHTS -->
+
+        <div class="card">
+
+            <div class="card-title">
+                AI TELEMETRY
+            </div>
+
+            <div class="card-body">
+
+                <div class="thought-grid">
+
+                    <div class="thought">
+
+                        <div
+                            class="thought-name"
+                            id="leftThoughtName"
+                        >
+                            LEFT
+                        </div>
+
+                        <div
+                            class="thought-text"
+                            id="leftThought"
+                        >
+                            calculating...
+                        </div>
+
+                    </div>
+
+                    <div class="thought">
+
+                        <div
+                            class="thought-name"
+                            id="rightThoughtName"
+                        >
+                            RIGHT
+                        </div>
+
+                        <div
+                            class="thought-text"
+                            id="rightThought"
+                        >
+                            calculating...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAMPIONSHIP ARCHIVE -->
+
+        <div
+            class="card full"
+            id="archiveCard"
+        >
+
+            <div class="card-title">
+
+                <span>
+                    PERMANENT CHAMPIONSHIP ARCHIVE
+                </span>
+
+                <span>
+                    NEVER ERASED
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div
+                    class="archive"
+                    id="championshipArchive"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM -->
+
+        <div
+            class="card full"
+            id="logCard"
+        >
+
+            <div class="card-title">
+
+                <span>
+                    ARENA SYSTEM LOG
+                </span>
+
+                <span>
+                    LOCAL PERSISTENCE
+                </span>
+
+            </div>
+
+            <div
+                class="log"
+                id="systemLog"
+            ></div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
-<div class="replay" id="replay">
-  <div class="replayBox">
+<footer>
 
-    <div class="replayHeader">
-      <div class="replayTitle">⚡ INSTANT REPLAY</div>
-      <button onclick="skipReplay()">SKIP</button>
+    <strong>∞ INFINITE PONG LEAGUE</strong><br>
+
+    An endlessly running browser simulation.
+    Competitors learn, mutate, compete and accumulate
+    permanent championship records.<br><br>
+
+    The simulation is deterministic only within its
+    current browser state. Your league is saved locally
+    in this browser using localStorage.
+
+</footer>
+
+
+<!-- =========================================================
+     REPLAY OVERLAY
+========================================================= -->
+
+<div
+    class="replay"
+    id="replay"
+>
+
+    <div class="replay-box">
+
+        <div class="replay-head">
+
+            <div
+                class="replay-title"
+                id="replayText"
+            >
+                INSTANT REPLAY
+            </div>
+
+            <div
+                class="replay-speed"
+                id="replayMultiplier"
+            >
+                3× SLOW-MO
+            </div>
+
+        </div>
+
+        <canvas
+            id="replayCanvas"
+            width="1280"
+            height="640"
+        ></canvas>
+
+        <div class="replay-footer">
+
+            <span>
+                ACTUAL RECORDED PHYSICS
+            </span>
+
+            <button
+                class="control"
+                onclick="skipReplay()"
+            >
+                SKIP REPLAY
+            </button>
+
+        </div>
+
     </div>
 
-    <canvas id="replayCanvas" width="1200" height="675"></canvas>
-
-    <div class="replayInfo">
-      <span id="replayText">POINT RECONSTRUCTION</span>
-      <span id="replayMultiplier">3.0×</span>
-    </div>
-
-  </div>
 </div>
 
 
-<div id="toast"></div>
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
+"use strict";
+
 /* =========================================================
    ∞ PONG LEAGUE
-   Complete standalone simulation
+   COMPLETE SIMULATION ENGINE
    ========================================================= */
 
+const canvas =
+    document.getElementById("game");
 
-/* ---------- CANVAS ---------- */
+const ctx =
+    canvas.getContext("2d");
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const replayCanvas =
+    document.getElementById("replayCanvas");
 
-const replayCanvas = document.getElementById("replayCanvas");
-const rctx = replayCanvas.getContext("2d");
-
-
-/* ---------- STORAGE ---------- */
-
-const SAVE_KEY = "infinite_pong_league_v2";
+const rctx =
+    replayCanvas.getContext("2d");
 
 
-/* ---------- UTILITIES ---------- */
+/* ---------------------------------------------------------
+   CONFIGURATION
+--------------------------------------------------------- */
 
-function clamp(v,min,max){
-  return Math.max(min,Math.min(max,v));
+const CONFIG = {
+
+    WIN_SCORE: 7,
+
+    PHYSICS_HZ: 120,
+
+    MAX_ACCUMULATOR: .25,
+
+    MAX_SPEED: 25,
+
+    MIN_SPEED: 7,
+
+    START_SPEED: 8.5,
+
+    SPEED_GROWTH: 1.012,
+
+    PADDLE_WIDTH: 16,
+
+    PADDLE_HEIGHT: 112,
+
+    PADDLE_MARGIN: 45,
+
+    BALL_RADIUS: 8,
+
+    MAX_TRAIL: 24,
+
+    REPLAY_START_SLOWMO: 3,
+
+    STORAGE_KEY:
+        "infinite_pong_league_epic_v4"
+
+};
+
+
+/* ---------------------------------------------------------
+   UTILITIES
+--------------------------------------------------------- */
+
+function clamp(
+    value,
+    min,
+    max
+){
+    return Math.max(
+        min,
+        Math.min(max,value)
+    );
 }
 
-function rand(min,max){
-  return Math.random()*(max-min)+min;
-}
 
-function choice(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
-}
-
-function fmt(n){
-  return Number(n||0).toLocaleString();
-}
-
-function nowTime(){
-  return new Date().toLocaleTimeString([],{
-    hour:"2-digit",
-    minute:"2-digit",
-    second:"2-digit"
-  });
+function rand(
+    min,
+    max
+){
+    return (
+        Math.random()*
+        (max-min)
+    )+min;
 }
 
 
-/* ---------- COMPETITORS ---------- */
+function pick(array){
+    return array[
+        Math.floor(
+            Math.random()*
+            array.length
+        )
+    ];
+}
 
-const names = [
-  "NEON",
-  "ORACLE",
-  "TITAN",
-  "MIRAGE",
-  "VECTOR",
-  "NOVA",
-  "OMEGA",
-  "SPECTRE",
-  "APEX",
-  "CIRCUIT",
-  "VOID"
+
+function lerp(a,b,t){
+    return a+(b-a)*t;
+}
+
+
+function fmt(number){
+    return Number(
+        number||0
+    ).toLocaleString();
+}
+
+
+function timeString(){
+
+    return new Date()
+        .toLocaleTimeString(
+            [],
+            {
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit"
+            }
+        );
+}
+
+
+/* ---------------------------------------------------------
+   COMPETITORS
+--------------------------------------------------------- */
+
+const NAMES = [
+    "NEON",
+    "ORACLE",
+    "TITAN",
+    "MIRAGE",
+    "VECTOR",
+    "NOVA",
+    "OMEGA",
+    "SPECTRE",
+    "APEX",
+    "CIRCUIT",
+    "VOID"
 ];
 
-const colors = [
-  "#00eaff",
-  "#35ff9a",
-  "#ff2bd6",
-  "#ffe66d",
-  "#ff657d",
-  "#9d7bff",
-  "#00ffa6",
-  "#ff9e4a",
-  "#6ee7ff",
-  "#d6ff4f",
-  "#ff4fcb"
-];
 
-const strategies = [
-  "PREDICTIVE",
-  "AGGRESSIVE",
-  "DEFENSIVE",
-  "ADAPTIVE",
-  "COUNTER",
-  "PRECISION",
-  "CHAOTIC",
-  "PATIENT"
+const COLORS = [
+    "#00eaff",
+    "#35ff9a",
+    "#ff2bd6",
+    "#ffe66d",
+    "#ff657d",
+    "#9d7bff",
+    "#00ffa6",
+    "#ff9e4a",
+    "#6ee7ff",
+    "#d6ff4f",
+    "#ff4fcb"
 ];
 
 
-function makeCompetitor(i){
-  return {
-    id:i,
-    name:names[i],
-    color:colors[i],
+const STRATEGIES = [
+    "PREDICTIVE",
+    "AGGRESSIVE",
+    "DEFENSIVE",
+    "ADAPTIVE",
+    "COUNTER",
+    "PRECISION",
+    "CHAOTIC",
+    "PATIENT",
+    "PRESSURE",
+    "ANGLE",
+    "BALANCED"
+];
 
-    wins:0,
-    losses:0,
 
-    pointsFor:0,
-    pointsAgainst:0,
+function createCompetitor(id){
 
-    championships:0,
+    return {
 
-    streak:0,
-    bestStreak:0,
+        id,
 
-    generation:1,
-    xp:0,
+        name:NAMES[id],
 
-    strategy:choice(strategies),
+        color:COLORS[id],
 
-    reaction:rand(.78,1.15),
-    prediction:rand(.72,1.16),
-    accuracy:rand(.76,1.15),
-    aggression:rand(.75,1.2),
-    defense:rand(.75,1.18),
-    adaptation:rand(.75,1.2),
+        strategy:pick(
+            STRATEGIES
+        ),
 
-    learningRate:rand(.015,.055),
+        wins:0,
 
-    memory:[],
+        losses:0,
 
-    recentForm:0,
+        championships:0,
 
-    lastMutation:"INITIALIZED"
-  };
+        pointsFor:0,
+
+        pointsAgainst:0,
+
+        streak:0,
+
+        bestStreak:0,
+
+        generation:1,
+
+        experience:0,
+
+        adaptation:rand(
+            .72,
+            1.08
+        ),
+
+        reaction:rand(
+            .75,
+            1.12
+        ),
+
+        prediction:rand(
+            .72,
+            1.10
+        ),
+
+        precision:rand(
+            .75,
+            1.12
+        ),
+
+        aggression:rand(
+            .72,
+            1.12
+        ),
+
+        defense:rand(
+            .72,
+            1.12
+        ),
+
+        consistency:rand(
+            .72,
+            1.10
+        ),
+
+        risk:rand(
+            .6,
+            1.25
+        ),
+
+        learningRate:rand(
+            .008,
+            .022
+        ),
+
+        form:0,
+
+        mutation:"INITIALIZED",
+
+        memory:[]
+
+    };
 }
 
 
-function defaultState(){
-  return {
-    era:1,
-    match:0,
-    points:0,
-    totalMatches:0,
-    totalPoints:0,
-    generation:1,
+/* ---------------------------------------------------------
+   PERSISTENCE
+--------------------------------------------------------- */
 
-    championHistory:[],
-    matchHistory:[],
+function freshState(){
 
-    competitors:names.map((_,i)=>makeCompetitor(i))
-  };
+    return {
+
+        era:1,
+
+        match:0,
+
+        totalMatches:0,
+
+        totalPoints:0,
+
+        generation:1,
+
+        championHistory:[],
+
+        matchHistory:[],
+
+        competitors:
+            NAMES.map(
+                (_,i)=>
+                    createCompetitor(i)
+            )
+
+    };
 }
 
 
-let state;
+function loadState(){
 
-try{
-  state=JSON.parse(localStorage.getItem(SAVE_KEY)) || defaultState();
-}catch{
-  state=defaultState();
+    try{
+
+        const raw =
+            localStorage.getItem(
+                CONFIG.STORAGE_KEY
+            );
+
+        if(!raw)
+            return freshState();
+
+        const parsed =
+            JSON.parse(raw);
+
+        if(
+            !parsed ||
+            !Array.isArray(
+                parsed.competitors
+            ) ||
+            parsed.competitors.length!==11
+        ){
+            return freshState();
+        }
+
+        return parsed;
+
+    }catch{
+
+        return freshState();
+
+    }
 }
 
-if(!state.competitors || state.competitors.length!==11){
-  state=defaultState();
+
+let state =
+    loadState();
+
+
+function saveState(){
+
+    try{
+
+        localStorage.setItem(
+            CONFIG.STORAGE_KEY,
+            JSON.stringify(state)
+        );
+
+    }catch{
+
+        /* Storage unavailable.
+           Simulation continues. */
+
+    }
 }
 
 
-/* ---------- SAVE ---------- */
-
-function save(){
-  try{
-    localStorage.setItem(SAVE_KEY,JSON.stringify(state));
-  }catch(e){}
-}
-
-
-/* ---------- MATCH ---------- */
+/* ---------------------------------------------------------
+   MATCH STATE
+--------------------------------------------------------- */
 
 let leftAI;
 let rightAI;
@@ -949,1446 +1837,4676 @@ let rightPaddle;
 
 let ball;
 
-let running=true;
-let gameSpeed=1;
+let scoreLeft=0;
+let scoreRight=0;
 
-let lastFrame=performance.now();
-let accumulator=0;
+let matchStatus="playing";
 
-let pointHistory=[];
+let simulationRunning=true;
 
-const WIN_SCORE=7;
+let simulationSpeed=1;
 
-let matchState="playing";
+let physicsAccumulator=0;
+
+let lastFrameTime=
+    performance.now();
 
 
-function selectOpponents(){
+/* ---------------------------------------------------------
+   REPLAY STATE
+--------------------------------------------------------- */
 
-  let ranking=[...state.competitors]
-    .sort((a,b)=>
-      (b.wins-b.losses*0.4+b.recentForm*.2)-
-      (a.wins-a.losses*0.4+a.recentForm*.2)
+let replayActive=false;
+
+let replayFrames=[];
+
+let replayCursor=0;
+
+let replaySpeed=3;
+
+let replayLastTime=
+    performance.now();
+
+let replayWinner=null;
+
+
+/* ---------------------------------------------------------
+   COMMENTATOR
+--------------------------------------------------------- */
+
+const COMMENTARY = {
+
+    intro:[
+        "And we are LIVE! Eleven competitors are fighting for another piece of permanent history!",
+        "The arena lights are up. The algorithms are awake. Somebody is about to have a very bad day.",
+        "Here we go! Another match in the never-ending Pong League.",
+        "No scripted champion. No predetermined outcome. Just physics, strategy and increasingly angry paddles."
+    ],
+
+    rally:[
+        "That rally is getting dangerous!",
+        "Look at the prediction on that return!",
+        "Neither competitor wants to give up the angle!",
+        "The pace is climbing!",
+        "That ball is moving with absolutely no respect for human reaction time!",
+        "What a read!",
+        "They're learning from every exchange!",
+        "This is becoming a ridiculous rally!",
+        "The paddles are getting smaller and the ball is getting faster!",
+        "Somebody blinked. Fortunately, neither AI did."
+    ],
+
+    save:[
+        "WHAT A SAVE!",
+        "That was inches from disaster!",
+        "A phenomenal defensive read!",
+        "How did that paddle get there?",
+        "The prediction engine just earned its electricity bill!",
+        "That looked impossible!",
+        "An absolutely desperate return!"
+    ],
+
+    hit:[
+        "Clean contact!",
+        "Perfect angle!",
+        "That's exactly where you want to catch it!",
+        "A nasty return off the edge!",
+        "Beautiful placement!",
+        "That was calculated!"
+    ],
+
+    point:[
+        "AND THAT'S THE POINT!",
+        "POINT! The arena erupts!",
+        "There it is! Somebody finally cracked!",
+        "A brutal finish!",
+        "The rally ends and the scoreboard moves!",
+        "That one is going straight into the replay package!"
+    ],
+
+    matchPoint:[
+        "MATCH POINT! Everything comes down to this!",
+        "MATCH POINT! One more mistake and this is over!",
+        "This is the moment. History is waiting."
+    ],
+
+    championship:[
+        "WE HAVE A CHAMPION!",
+        "THE ERA BELONGS TO THEM!",
+        "History has just been written!",
+        "Another championship enters the permanent archive!"
+    ],
+
+    comeback:[
+        "WAIT A SECOND — WE MAY HAVE A COMEBACK!",
+        "The momentum has completely changed!",
+        "This match is NOT finished!",
+        "What a turnaround!"
+    ]
+
+};
+
+
+let commentaryTimer=null;
+
+
+function sayCommentary(
+    text
+){
+
+    const element =
+        document.getElementById(
+            "commentary"
+        );
+
+    if(!element)
+        return;
+
+    element.textContent=text;
+
+}
+
+
+function randomCommentary(
+    group
+){
+
+    const list =
+        COMMENTARY[group];
+
+    if(!list)
+        return;
+
+    sayCommentary(
+        pick(list)
     );
 
-  /* Occasionally force variety so the league doesn't become repetitive. */
+}
 
-  let a=ranking[Math.floor(Math.random()*Math.min(6,ranking.length))];
 
-  let candidates=state.competitors.filter(x=>x.id!==a.id);
+function scheduleCommentary(
+    group,
+    delay=0
+){
 
-  let b;
+    clearTimeout(
+        commentaryTimer
+    );
 
-  if(Math.random()<.65){
-    b=choice(candidates.slice().sort(
-      (x,y)=>Math.abs(x.wins-a.wins)-Math.abs(y.wins-a.wins)
-    ).slice(0,5));
-  }else{
-    b=choice(candidates);
-  }
+    commentaryTimer =
+        setTimeout(
+            ()=>{
+                randomCommentary(
+                    group
+                );
+            },
+            delay
+        );
+}
 
-  leftAI=a;
-  rightAI=b;
+
+/* ---------------------------------------------------------
+   MATCHMAKING
+--------------------------------------------------------- */
+
+function selectPlayers(){
+
+    const ranked =
+        [...state.competitors]
+        .sort(
+            (a,b)=>
+                rankingScore(b)-
+                rankingScore(a)
+        );
+
+
+    /*
+       Weighted matchmaking.
+
+       Top competitors appear more often,
+       but nobody becomes permanently excluded.
+    */
+
+    const pool =
+        ranked.slice(
+            0,
+            9
+        );
+
+
+    leftAI =
+        pick(pool);
+
+
+    const opponents =
+        state.competitors
+        .filter(
+            ai =>
+                ai.id!==leftAI.id
+        );
+
+
+    /*
+       Occasionally force unusual matchups.
+    */
+
+    if(
+        Math.random()<.22
+    ){
+
+        rightAI =
+            pick(opponents);
+
+    }else{
+
+        const preferred =
+            opponents.filter(
+                ai =>
+                    Math.abs(
+                        ai.wins-
+                        leftAI.wins
+                    )<=4
+            );
+
+        rightAI =
+            pick(
+                preferred.length
+                ? preferred
+                : opponents
+            );
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   RANKING
+--------------------------------------------------------- */
+
+function rankingScore(ai){
+
+    return (
+        ai.championships*10000+
+        ai.wins*100+
+        ai.streak*8+
+        ai.form*5+
+        ai.experience*.01
+    );
+}
+
+
+/* ---------------------------------------------------------
+   MATCH RESET
+--------------------------------------------------------- */
+
+function createPaddles(){
+
+    leftPaddle = {
+
+        x:
+            CONFIG.PADDLE_MARGIN,
+
+        y:
+            canvas.height/2-
+            CONFIG.PADDLE_HEIGHT/2,
+
+        w:
+            CONFIG.PADDLE_WIDTH,
+
+        h:
+            CONFIG.PADDLE_HEIGHT,
+
+        velocity:0,
+
+        targetY:
+            canvas.height/2
+
+    };
+
+
+    rightPaddle = {
+
+        x:
+            canvas.width-
+            CONFIG.PADDLE_MARGIN-
+            CONFIG.PADDLE_WIDTH,
+
+        y:
+            canvas.height/2-
+            CONFIG.PADDLE_HEIGHT/2,
+
+        w:
+            CONFIG.PADDLE_WIDTH,
+
+        h:
+            CONFIG.PADDLE_HEIGHT,
+
+        velocity:0,
+
+        targetY:
+            canvas.height/2
+
+    };
+
+}
+
+
+function createBall(
+    direction
+){
+
+    const angle =
+        rand(
+            -0.55,
+            0.55
+        );
+
+    const speed =
+        CONFIG.START_SPEED;
+
+
+    ball = {
+
+        x:
+            canvas.width/2,
+
+        y:
+            canvas.height/2,
+
+        vx:
+            Math.cos(angle)*
+            speed*
+            direction,
+
+        vy:
+            Math.sin(angle)*
+            speed,
+
+        radius:
+            CONFIG.BALL_RADIUS,
+
+        speed,
+
+        hits:0,
+
+        rallyFrames:0,
+
+        trail:[],
+
+        lastHit:null,
+
+        flash:0
+
+    };
+
 }
 
 
 function resetMatch(){
 
-  selectOpponents();
+    selectPlayers();
 
-  leftPaddle={
-    x:45,
-    y:canvas.height/2-55,
-    w:15,
-    h:110,
-    vy:0
-  };
+    scoreLeft=0;
 
-  rightPaddle={
-    x:canvas.width-60,
-    y:canvas.height/2-55,
-    w:15,
-    h:110,
-    vy:0
-  };
+    scoreRight=0;
 
-  ball={
-    x:canvas.width/2,
-    y:canvas.height/2,
-    vx:choice([-1,1])*rand(6,8),
-    vy:rand(-4.5,4.5),
-    radius:8
-  };
+    matchStatus="playing";
 
-  state.match++;
-  state.totalMatches++;
+    state.match++;
 
-  state.points=0;
-  pointHistory=[];
+    state.totalMatches++;
 
-  matchState="playing";
+    createPaddles();
 
-  updateUI();
-
-  log(
-    "MATCH "+state.match+
-    " ONLINE :: "+
-    leftAI.name+" vs "+rightAI.name
-  );
-}
-
-
-/* ---------- AI ---------- */
-
-function predictBallY(ai, paddle, side){
-
-  let bx=ball.x;
-  let by=ball.y;
-
-  let vx=ball.vx;
-  let vy=ball.vy;
-
-  if((side==="left" && vx>=0) ||
-     (side==="right" && vx<=0)){
-    return canvas.height/2;
-  }
-
-  let distance;
-
-  if(side==="left"){
-    distance=paddle.x-bx;
-  }else{
-    distance=bx-(paddle.x+paddle.w);
-  }
-
-  distance=Math.abs(distance);
-
-  let time=distance/Math.max(Math.abs(vx),.01);
-
-  let predicted=by+vy*time;
-
-  /*
-    Reflect predicted trajectory against top/bottom.
-  */
-
-  const margin=20;
-
-  while(predicted<margin || predicted>canvas.height-margin){
-
-    if(predicted<margin){
-      predicted=margin+(margin-predicted);
-    }
-
-    if(predicted>canvas.height-margin){
-      predicted=(canvas.height-margin)-(predicted-(canvas.height-margin));
-    }
-  }
-
-  const uncertainty=
-    (1-ai.prediction)*rand(-130,130);
-
-  return predicted+uncertainty;
-}
-
-
-function think(ai,paddle,side){
-
-  const target=predictBallY(ai,paddle,side);
-
-  let center=paddle.y+paddle.h/2;
-
-  let error=target-center;
-
-  /*
-    Accuracy controls how closely it tracks target.
-  */
-
-  let control=
-    error *
-    (.035+
-      ai.reaction*.025+
-      ai.accuracy*.025);
-
-  /*
-    Adaptive competitors react harder after conceding points.
-  */
-
-  if(ai.strategy==="AGGRESSIVE"){
-    control*=1.25;
-  }
-
-  if(ai.strategy==="DEFENSIVE"){
-    control*=.82;
-  }
-
-  if(ai.strategy==="PRECISION"){
-    control*=1.08;
-  }
-
-  if(ai.strategy==="CHAOTIC"){
-    control*=rand(.65,1.35);
-  }
-
-  const maxSpeed=
-    7.5+
-    ai.reaction*2+
-    ai.aggression*.8;
-
-  paddle.vy=clamp(control,-maxSpeed,maxSpeed);
-
-  paddle.y+=paddle.vy*gameSpeed;
-
-  paddle.y=clamp(
-    paddle.y,
-    0,
-    canvas.height-paddle.h
-  );
-}
-
-
-/* ---------- BALL PHYSICS ---------- */
-
-function updateBall(){
-
-  ball.x+=ball.vx*gameSpeed;
-  ball.y+=ball.vy*gameSpeed;
-
-  if(ball.y-ball.radius<=0){
-    ball.y=ball.radius;
-    ball.vy=Math.abs(ball.vy);
-  }
-
-  if(ball.y+ball.radius>=canvas.height){
-    ball.y=canvas.height-ball.radius;
-    ball.vy=-Math.abs(ball.vy);
-  }
-
-  /*
-    Left collision
-  */
-
-  if(
-    ball.vx<0 &&
-    ball.x-ball.radius<=leftPaddle.x+leftPaddle.w &&
-    ball.x>leftPaddle.x &&
-    ball.y>=leftPaddle.y &&
-    ball.y<=leftPaddle.y+leftPaddle.h
-  ){
-
-    ball.x=leftPaddle.x+leftPaddle.w+ball.radius;
-
-    let relative=
-      (ball.y-(leftPaddle.y+leftPaddle.h/2))/
-      (leftPaddle.h/2);
-
-    let angle=relative*5.7;
-
-    ball.vx=Math.abs(ball.vx)*1.035+
-      leftAI.accuracy*.08;
-
-    ball.vy=angle;
-
-    ball.vy=clamp(ball.vy,-10,10);
-  }
-
-
-  /*
-    Right collision
-  */
-
-  if(
-    ball.vx>0 &&
-    ball.x+ball.radius>=rightPaddle.x &&
-    ball.x<rightPaddle.x+rightPaddle.w &&
-    ball.y>=rightPaddle.y &&
-    ball.y<=rightPaddle.y+rightPaddle.h
-  ){
-
-    ball.x=rightPaddle.x-ball.radius;
-
-    let relative=
-      (ball.y-(rightPaddle.y+rightPaddle.h/2))/
-      (rightPaddle.h/2);
-
-    let angle=relative*5.7;
-
-    ball.vx=-Math.abs(ball.vx)*1.035-
-      rightAI.accuracy*.08;
-
-    ball.vy=angle;
-
-    ball.vy=clamp(ball.vy,-10,10);
-  }
-
-
-  if(ball.x<-30){
-    scorePoint(rightAI,leftAI);
-  }
-
-  if(ball.x>canvas.width+30){
-    scorePoint(leftAI,rightAI);
-  }
-}
-
-
-/* ---------- POINT ---------- */
-
-function scorePoint(winner,loser){
-
-  if(matchState!=="playing") return;
-
-  const snapshot={
-    x:ball.x,
-    y:ball.y,
-    vx:ball.vx,
-    vy:ball.vy,
-    winner:winner.name,
-    loser:loser.name,
-    leftY:leftPaddle.y,
-    rightY:rightPaddle.y
-  };
-
-  pointHistory.push(snapshot);
-
-  winner.pointsFor++;
-  loser.pointsAgainst++;
-
-  winner.xp+=12;
-  loser.xp+=5;
-
-  winner.recentForm+=1;
-  loser.recentForm-=.5;
-
-  winner.streak++;
-  loser.streak=0;
-
-  winner.bestStreak=
-    Math.max(winner.bestStreak,winner.streak);
-
-  state.points++;
-  state.totalPoints++;
-
-  const winnerScore=
-    pointHistory.filter(p=>p.winner===winner.name).length;
-
-  const loserScore=
-    pointHistory.filter(p=>p.winner===loser.name).length;
-
-  state.currentScore={
-    left:winner===leftAI ? winnerScore : loserScore,
-    right:winner===rightAI ? winnerScore : loserScore
-  };
-
-  updateScoreDisplay();
-
-  /*
-    Learn immediately.
-  */
-
-  learn(winner,true);
-  learn(loser,false);
-
-  /*
-    Snapshot then reset ball.
-  */
-
-  ball={
-    x:canvas.width/2,
-    y:canvas.height/2,
-    vx:(winner===leftAI?1:-1)*rand(6,8),
-    vy:rand(-4.5,4.5),
-    radius:8
-  };
-
-  triggerReplay(snapshot,winner,loser,winnerScore,loserScore);
-
-  if(winnerScore>=WIN_SCORE || loserScore>=WIN_SCORE){
-
-    setTimeout(()=>{
-      if(matchState==="playing"){
-        finishMatch(
-          winnerScore>=WIN_SCORE ? winner : loser,
-          winnerScore>=WIN_SCORE ? loser : winner
-        );
-      }
-    },700);
-  }
-}
-
-
-/* ---------- LEARNING ---------- */
-
-function learn(ai,won){
-
-  const reward=won?1:-.25;
-
-  ai.memory.push({
-    reward,
-    t:Date.now()
-  });
-
-  if(ai.memory.length>50){
-    ai.memory.shift();
-  }
-
-  const lr=ai.learningRate;
-
-  if(won){
-
-    ai.prediction+=lr*.35;
-    ai.accuracy+=lr*.2;
-    ai.reaction+=lr*.12;
-
-  }else{
-
-    ai.prediction+=lr*.05;
-    ai.defense+=lr*.2;
-    ai.adaptation+=lr*.25;
-  }
-
-  ai.prediction=clamp(ai.prediction,.5,1.5);
-  ai.accuracy=clamp(ai.accuracy,.5,1.5);
-  ai.reaction=clamp(ai.reaction,.5,1.5);
-  ai.defense=clamp(ai.defense,.5,1.5);
-  ai.adaptation=clamp(ai.adaptation,.5,1.5);
-}
-
-
-/* ---------- MATCH END ---------- */
-
-function finishMatch(winner,loser){
-
-  matchState="finished";
-
-  winner.wins++;
-  loser.losses++;
-
-  winner.recentForm+=3;
-  loser.recentForm-=2;
-
-  winner.xp+=50;
-
-  if(winner.xp>=100){
-    winner.generation++;
-    winner.xp=0;
-    mutate(winner);
-  }
-
-  const result={
-    era:state.era,
-    match:state.match,
-    winner:winner.name,
-    loser:loser.name,
-    time:Date.now()
-  };
-
-  state.matchHistory.unshift(result);
-
-  if(state.matchHistory.length>30){
-    state.matchHistory.pop();
-  }
-
-  log(
-    "MATCH COMPLETE :: "+
-    winner.name+" DEFEATED "+loser.name
-  );
-
-  toast(
-    winner.name+" WINS THE MATCH"
-  );
-
-  /*
-    Championship condition:
-    Every competitor gets a fair amount of matches.
-    Once one competitor reaches 5 wins in this era,
-    declare champion and restart era.
-  */
-
-  if(winner.wins>=5){
-
-    setTimeout(()=>{
-      crownChampion(winner);
-    },1200);
-
-  }else{
-
-    setTimeout(resetMatch,1100);
-  }
-
-  save();
-  updateUI();
-}
-
-
-/* ---------- MUTATION ---------- */
-
-function mutate(ai){
-
-  const oldStrategy=ai.strategy;
-
-  ai.strategy=choice(
-    strategies.filter(s=>s!==oldStrategy)
-  );
-
-  const mutation=rand(.92,1.10);
-
-  ai.reaction*=mutation;
-  ai.prediction*=mutation;
-  ai.accuracy*=mutation;
-  ai.aggression*=mutation;
-  ai.defense*=mutation;
-
-  ai.lastMutation=
-    oldStrategy+" → "+ai.strategy;
-
-  state.generation++;
-
-  log(
-    "EVOLUTION :: "+
-    ai.name+
-    " changed strategy to "+
-    ai.strategy+
-    " [GEN "+ai.generation+"]"
-  );
-}
-
-
-/* ---------- CHAMPION ---------- */
-
-function crownChampion(winner){
-
-  if(matchState==="champion") return;
-
-  matchState="champion";
-
-  winner.championships++;
-
-  state.championHistory.unshift({
-    era:state.era,
-    champion:winner.name,
-    time:Date.now(),
-    championships:winner.championships
-  });
-
-  log(
-    "🏆 ERA "+state.era+
-    " CHAMPION :: "+
-    winner.name+
-    " :: ALL-TIME TITLES "+
-    winner.championships
-  );
-
-  toast(
-    "🏆 "+winner.name+
-    " IS THE CHAMPION OF ERA "+
-    state.era
-  );
-
-  mutate(winner);
-
-  save();
-  updateUI();
-
-  /*
-    New era.
-    Championship history is NEVER erased.
-  */
-
-  setTimeout(()=>{
-
-    state.era++;
-
-    for(const ai of state.competitors){
-
-      ai.wins=0;
-      ai.losses=0;
-      ai.pointsFor=0;
-      ai.pointsAgainst=0;
-      ai.streak=0;
-      ai.recentForm*=.25;
-
-      /*
-        Everyone evolves slightly between eras.
-      */
-
-      if(Math.random()<.65){
-        mutate(ai);
-      }
-    }
-
-    state.generation++;
-
-    log(
-      "∞ NEW ERA "+state.era+
-      " INITIALIZED :: CHAMPIONSHIP ARCHIVE PRESERVED"
+    createBall(
+        Math.random()<.5
+        ? -1
+        : 1
     );
 
-    resetMatch();
-    save();
+    replayFrames=[];
+
+    replayActive=false;
+
     updateUI();
 
-  },2500);
+    sayCommentary(
+        `${leftAI.name} versus ${rightAI.name}. `+
+        `The arena is ready.`
+    );
+
+    logEvent(
+        `MATCH ${state.match} ONLINE :: `+
+        `${leftAI.name} vs ${rightAI.name}`
+    );
+
 }
 
 
-/* ---------- DRAW GAME ---------- */
+/* ---------------------------------------------------------
+   AI PREDICTION
+--------------------------------------------------------- */
 
-function drawGame(){
+function futureBallY(
+    ai,
+    paddle,
+    side
+){
 
-  const w=canvas.width;
-  const h=canvas.height;
+    if(
+        side==="left" &&
+        ball.vx>=0
+    ){
+        return canvas.height/2;
+    }
 
-  ctx.clearRect(0,0,w,h);
-
-  /*
-    Background.
-  */
-
-  const grad=ctx.createLinearGradient(0,0,w,h);
-  grad.addColorStop(0,"#02060b");
-  grad.addColorStop(.5,"#04111a");
-  grad.addColorStop(1,"#02050a");
-
-  ctx.fillStyle=grad;
-  ctx.fillRect(0,0,w,h);
-
-  /*
-    Grid.
-  */
-
-  ctx.strokeStyle="rgba(0,234,255,.045)";
-  ctx.lineWidth=1;
-
-  for(let x=0;x<w;x+=50){
-    ctx.beginPath();
-    ctx.moveTo(x,0);
-    ctx.lineTo(x,h);
-    ctx.stroke();
-  }
-
-  for(let y=0;y<h;y+=50){
-    ctx.beginPath();
-    ctx.moveTo(0,y);
-    ctx.lineTo(w,y);
-    ctx.stroke();
-  }
-
-  /*
-    Center line.
-  */
-
-  ctx.strokeStyle="rgba(255,255,255,.12)";
-  ctx.setLineDash([8,12]);
-
-  ctx.beginPath();
-  ctx.moveTo(w/2,0);
-  ctx.lineTo(w/2,h);
-  ctx.stroke();
-
-  ctx.setLineDash([]);
+    if(
+        side==="right" &&
+        ball.vx<=0
+    ){
+        return canvas.height/2;
+    }
 
 
-  /*
-    Paddles.
-  */
-
-  drawPaddle(
-    leftPaddle,
-    leftAI ? leftAI.color : "#00eaff"
-  );
-
-  drawPaddle(
-    rightPaddle,
-    rightAI ? rightAI.color : "#ff2bd6"
-  );
+    const targetX =
+        side==="left"
+        ? paddle.x+
+          paddle.w
+        : paddle.x;
 
 
-  /*
-    Ball glow.
-  */
-
-  if(ball){
-
-    const color=
-      ball.vx<0
-      ? (leftAI?leftAI.color:"#00eaff")
-      : (rightAI?rightAI.color:"#ff2bd6");
-
-    ctx.shadowBlur=28;
-    ctx.shadowColor=color;
-
-    ctx.fillStyle=color;
-
-    ctx.beginPath();
-    ctx.arc(ball.x,ball.y,ball.radius,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.shadowBlur=0;
-  }
+    const distance =
+        Math.abs(
+            targetX-
+            ball.x
+        );
 
 
-  /*
-    Top labels.
-  */
+    const seconds =
+        distance/
+        Math.max(
+            Math.abs(
+                ball.vx
+            ),
+            .001
+        );
 
-  ctx.font="bold 11px monospace";
-  ctx.fillStyle="rgba(255,255,255,.25)";
-  ctx.fillText(
-    "AUTONOMOUS ARENA // ERA "+state.era,
-    18,24
-  );
 
-  ctx.textAlign="right";
+    let predicted =
+        ball.y+
+        ball.vy*
+        seconds;
 
-  ctx.fillText(
-    "SIMULATION SPEED "+gameSpeed.toFixed(1)+"×",
-    w-18,24
-  );
 
-  ctx.textAlign="left";
+    /*
+       Reflect prediction from top/bottom walls.
+    */
+
+    const minY =
+        ball.radius;
+
+    const maxY =
+        canvas.height-
+        ball.radius;
+
+
+    while(
+        predicted<
+            minY ||
+        predicted>
+            maxY
+    ){
+
+        if(
+            predicted<
+            minY
+        ){
+
+            predicted =
+                minY+
+                (
+                    minY-
+                    predicted
+                );
+
+        }
+
+        if(
+            predicted>
+            maxY
+        ){
+
+            predicted =
+                maxY-
+                (
+                    predicted-
+                    maxY
+                );
+
+        }
+
+    }
+
+
+    /*
+       Better competitors are less noisy.
+
+       Worse competitors sometimes intentionally
+       make imperfect predictions.
+    */
+
+    const uncertainty =
+        (
+            1-
+            ai.prediction
+        )*
+        rand(
+            -90,
+            90
+        );
+
+
+    /*
+       Adaptive competitors learn the current rally.
+    */
+
+    const adaptiveBonus =
+        ai.strategy==="ADAPTIVE"
+        ? Math.min(
+            ball.hits*1.5,
+            35
+        )
+        : 0;
+
+
+    return (
+        predicted+
+        uncertainty-
+        adaptiveBonus
+    );
+
 }
 
 
-function drawPaddle(p,color){
+/* ---------------------------------------------------------
+   AI CONTROL
+--------------------------------------------------------- */
 
-  if(!p)return;
+function updateAI(
+    ai,
+    paddle,
+    side,
+    dt
+){
 
-  ctx.shadowBlur=18;
-  ctx.shadowColor=color;
+    const target =
+        futureBallY(
+            ai,
+            paddle,
+            side
+        );
 
-  ctx.fillStyle=color;
 
-  ctx.fillRect(
-    p.x,p.y,p.w,p.h
-  );
+    paddle.targetY =
+        target-
+        paddle.h/2;
 
-  ctx.shadowBlur=0;
 
-  ctx.fillStyle="rgba(255,255,255,.55)";
-  ctx.fillRect(
-    p.x+(p.w*.25),
-    p.y+5,
-    2,
-    p.h-10
-  );
+    let error =
+        paddle.targetY-
+        paddle.y;
+
+
+    let acceleration =
+        1050+
+        ai.reaction*
+        420;
+
+
+    /*
+       Strategy modifiers.
+    */
+
+    switch(
+        ai.strategy
+    ){
+
+        case "AGGRESSIVE":
+            acceleration*=1.18;
+            break;
+
+        case "DEFENSIVE":
+            acceleration*=.88;
+            break;
+
+        case "PRECISION":
+            acceleration*=.95;
+            break;
+
+        case "CHAOTIC":
+            acceleration*=
+                rand(.75,1.25);
+            break;
+
+        case "PATIENT":
+            acceleration*=.86;
+            break;
+
+        case "PRESSURE":
+            acceleration*=1.12;
+            break;
+
+        case "ANGLE":
+            acceleration*=1.04;
+            break;
+
+        case "BALANCED":
+            acceleration*=1;
+            break;
+
+    }
+
+
+    /*
+       Don't make AI perfect.
+
+       A little imperfect control is what keeps
+       the competition entertaining.
+    */
+
+    const consistency =
+        clamp(
+            ai.consistency,
+            .65,
+            1.15
+        );
+
+
+    const noise =
+        rand(
+            -1,
+            1
+        )*
+        55*
+        (1-consistency);
+
+
+    error += noise;
+
+
+    const desiredVelocity =
+        clamp(
+            error*
+            7.5*
+            consistency,
+            -900,
+            900
+        );
+
+
+    const maxAcceleration =
+        acceleration*
+        dt;
+
+
+    const delta =
+        clamp(
+            desiredVelocity-
+            paddle.velocity,
+            -maxAcceleration,
+            maxAcceleration
+        );
+
+
+    paddle.velocity+=delta;
+
+
+    /*
+       Natural braking.
+    */
+
+    paddle.velocity *=
+        Math.pow(
+            .0005,
+            dt
+        );
+
+
+    paddle.y +=
+        paddle.velocity*
+        dt;
+
+
+    paddle.y =
+        clamp(
+            paddle.y,
+            0,
+            canvas.height-
+            paddle.h
+        );
+
 }
 
 
-/* ---------- REPLAY ---------- */
+/* ---------------------------------------------------------
+   COLLISION MATH
+--------------------------------------------------------- */
 
-let replayActive=false;
-let replayStart=0;
-let replaySnapshot=null;
-let replaySpeed=3;
-let replayFrame=0;
+function paddleCollision(
+    paddle,
+    oldX,
+    oldY,
+    newX,
+    newY,
+    movingRight
+){
+
+    /*
+       Determine whether the ball crossed the
+       paddle plane during this physics step.
+    */
+
+    const plane =
+        movingRight
+        ? paddle.x
+        : paddle.x+
+          paddle.w;
 
 
-function triggerReplay(snapshot,winner,loser,ws,ls){
+    const oldEdge =
+        movingRight
+        ? oldX+
+          ball.radius
+        : oldX-
+          ball.radius;
 
-  replaySnapshot=snapshot;
-  replayActive=true;
-  replayStart=performance.now();
-  replayFrame=0;
 
-  replaySpeed=3;
+    const newEdge =
+        movingRight
+        ? newX+
+          ball.radius
+        : newX-
+          ball.radius;
 
-  document.getElementById("replay").classList.add("show");
 
-  document.getElementById("replayText").textContent=
-    winner.name+" SCORED // "+ws+" — "+ls;
+    const crossed =
+        movingRight
+        ? (
+            oldEdge<
+                plane &&
+            newEdge>=
+                plane
+        )
+        : (
+            oldEdge>
+                plane &&
+            newEdge<=
+                plane
+        );
 
-  document.getElementById("replayMultiplier").textContent=
-    "3.0×";
 
-  /*
-    Replay automatically accelerates.
-    It remains short enough not to stall the league.
-  */
+    if(!crossed)
+        return null;
 
-  setTimeout(()=>{
 
-    if(replayActive){
-      replaySpeed=5;
-    }
+    const denominator =
+        newEdge-
+        oldEdge;
 
-  },900);
 
-  setTimeout(()=>{
+    if(
+        Math.abs(
+            denominator
+        )<0.000001
+    )
+        return null;
 
-    if(replayActive){
-      replaySpeed=8;
-    }
 
-  },1500);
+    const t =
+        clamp(
+            (
+                plane-
+                oldEdge
+            )/
+            denominator,
+            0,
+            1
+        );
 
-  setTimeout(()=>{
 
-    if(replayActive){
-      replaySpeed=12;
-    }
+    const collisionY =
+        oldY+
+        (
+            newY-
+            oldY
+        )*
+        t;
 
-  },2000);
 
-  setTimeout(()=>{
+    const inside =
+        collisionY>=paddle.y-
+            ball.radius &&
+        collisionY<=
+            paddle.y+
+            paddle.h+
+            ball.radius;
 
-    if(replayActive){
-      skipReplay();
-    }
 
-  },2500);
+    if(!inside)
+        return null;
+
+
+    return {
+
+        t,
+
+        y:
+            collisionY
+
+    };
+
 }
 
 
-function drawReplay(){
+/* ---------------------------------------------------------
+   PHYSICS STEP
+--------------------------------------------------------- */
 
-  if(!replayActive || !replaySnapshot)return;
+function physicsStep(
+    dt
+){
 
-  const w=replayCanvas.width;
-  const h=replayCanvas.height;
+    if(
+        matchStatus!=="playing"
+    )
+        return;
 
-  rctx.fillStyle="#010407";
-  rctx.fillRect(0,0,w,h);
 
-  /*
-    Stylized reconstructed point.
-  */
+    updateAI(
+        leftAI,
+        leftPaddle,
+        "left",
+        dt
+    );
 
-  rctx.strokeStyle="rgba(0,234,255,.07)";
 
-  for(let x=0;x<w;x+=50){
+    updateAI(
+        rightAI,
+        rightPaddle,
+        "right",
+        dt
+    );
+
+
+    /*
+       Substeps scale with speed.
+
+       This is what stops high-speed balls from
+       tunneling through paddles.
+    */
+
+    const movement =
+        Math.max(
+            Math.abs(ball.vx),
+            Math.abs(ball.vy)
+        )*
+        dt;
+
+
+    const steps =
+        clamp(
+            Math.ceil(
+                movement/
+                4
+            ),
+            1,
+            12
+        );
+
+
+    const subDt =
+        dt/
+        steps;
+
+
+    for(
+        let step=0;
+        step<steps;
+        step++
+    ){
+
+        const oldX=ball.x;
+
+        const oldY=ball.y;
+
+
+        ball.x +=
+            ball.vx*
+            subDt;
+
+
+        ball.y +=
+            ball.vy*
+            subDt;
+
+
+        /*
+           Wall collisions.
+        */
+
+        if(
+            ball.y-
+            ball.radius<=0
+        ){
+
+            ball.y=
+                ball.radius;
+
+            ball.vy=
+                Math.abs(
+                    ball.vy
+                );
+
+            ball.flash=1;
+
+            registerHit(
+                null,
+                "TOP WALL"
+            );
+
+        }
+
+
+        if(
+            ball.y+
+            ball.radius>=
+            canvas.height
+        ){
+
+            ball.y=
+                canvas.height-
+                ball.radius;
+
+            ball.vy=
+                -Math.abs(
+                    ball.vy
+                );
+
+            ball.flash=1;
+
+            registerHit(
+                null,
+                "BOTTOM WALL"
+            );
+
+        }
+
+
+        /*
+           Left paddle.
+        */
+
+        if(
+            ball.vx<0
+        ){
+
+            const collision =
+                paddleCollision(
+                    leftPaddle,
+                    oldX,
+                    oldY,
+                    ball.x,
+                    ball.y,
+                    false
+                );
+
+
+            if(collision){
+
+                performPaddleHit(
+                    leftAI,
+                    leftPaddle,
+                    collision.y,
+                    true
+                );
+
+            }
+
+        }
+
+
+        /*
+           Right paddle.
+        */
+
+        if(
+            ball.vx>0
+        ){
+
+            const collision =
+                paddleCollision(
+                    rightPaddle,
+                    oldX,
+                    oldY,
+                    ball.x,
+                    ball.y,
+                    true
+                );
+
+
+            if(collision){
+
+                performPaddleHit(
+                    rightAI,
+                    rightPaddle,
+                    collision.y,
+                    false
+                );
+
+            }
+
+        }
+
+
+        /*
+           Score checks happen only after collision
+           checks. This prevents a successful edge
+           collision from accidentally becoming a goal.
+        */
+
+        if(
+            ball.x+
+            ball.radius<
+            -20
+        ){
+
+            pointScored(
+                rightAI,
+                leftAI
+            );
+
+            return;
+
+        }
+
+
+        if(
+            ball.x-
+            ball.radius>
+            canvas.width+
+            20
+        ){
+
+            pointScored(
+                leftAI,
+                rightAI
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+       Accelerating ball.
+
+       The acceleration is intentionally modest so
+       rallies can develop while still eventually
+       becoming terrifying.
+    */
+
+    const currentSpeed =
+        Math.hypot(
+            ball.vx,
+            ball.vy
+        );
+
+
+    const targetSpeed =
+        clamp(
+            CONFIG.START_SPEED*
+            Math.pow(
+                CONFIG.SPEED_GROWTH,
+                ball.hits
+            ),
+            CONFIG.MIN_SPEED,
+            CONFIG.MAX_SPEED
+        );
+
+
+    if(
+        currentSpeed<
+        targetSpeed
+    ){
+
+        const ratio =
+            targetSpeed/
+            Math.max(
+                currentSpeed,
+                .001
+            );
+
+        ball.vx*=
+            1+
+            (ratio-1)*
+            .035;
+
+        ball.vy*=
+            1+
+            (ratio-1)*
+            .035;
+
+    }
+
+
+    /*
+       Trail.
+    */
+
+    ball.trail.push({
+        x:ball.x,
+        y:ball.y
+    });
+
+
+    if(
+        ball.trail.length>
+        CONFIG.MAX_TRAIL
+    ){
+
+        ball.trail.shift();
+
+    }
+
+
+    ball.rallyFrames++;
+
+    ball.flash=
+        Math.max(
+            0,
+            ball.flash-
+            dt*4
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   PADDLE HIT
+--------------------------------------------------------- */
+
+function performPaddleHit(
+    ai,
+    paddle,
+    collisionY,
+    leftSide
+){
+
+    /*
+       Put ball exactly outside paddle.
+    */
+
+    if(leftSide){
+
+        ball.x=
+            paddle.x+
+            paddle.w+
+            ball.radius+
+            .05;
+
+    }else{
+
+        ball.x=
+            paddle.x-
+            ball.radius-
+            .05;
+
+    }
+
+
+    /*
+       Relative hit position:
+
+       -1 = top edge
+        0 = center
+       +1 = bottom edge
+    */
+
+    let relative =
+        (
+            collisionY-
+            (
+                paddle.y+
+                paddle.h/2
+            )
+        )/
+        (
+            paddle.h/2
+        );
+
+
+    relative =
+        clamp(
+            relative,
+            -1,
+            1
+        );
+
+
+    /*
+       Strategy-specific angle behavior.
+    */
+
+    let anglePower=7.8;
+
+
+    if(
+        ai.strategy==="ANGLE"
+    ){
+        anglePower=9.3;
+    }
+
+
+    if(
+        ai.strategy==="PRECISION"
+    ){
+        anglePower=7.1;
+    }
+
+
+    if(
+        ai.strategy==="CHAOTIC"
+    ){
+
+        relative +=
+            rand(
+                -.16,
+                .16
+            );
+
+        relative=
+            clamp(
+                relative,
+                -1,
+                1
+            );
+
+    }
+
+
+    /*
+       Current speed.
+    */
+
+    const speed=
+        clamp(
+            Math.hypot(
+                ball.vx,
+                ball.vy
+            )*
+            1.018,
+            CONFIG.MIN_SPEED,
+            CONFIG.MAX_SPEED
+        );
+
+
+    const newVertical=
+        relative*
+        anglePower;
+
+
+    /*
+       Preserve a healthy horizontal component.
+    */
+
+    const horizontal =
+        Math.sqrt(
+            Math.max(
+                1,
+                speed*speed-
+                newVertical*
+                newVertical
+            )
+        );
+
+
+    if(leftSide){
+
+        ball.vx=
+            Math.abs(
+                horizontal
+            );
+
+    }else{
+
+        ball.vx=
+            -Math.abs(
+                horizontal
+            );
+
+    }
+
+
+    ball.vy=
+        newVertical;
+
+
+    /*
+       Edge hits are harder and more visually
+       interesting.
+    */
+
+    const edge =
+        Math.abs(
+            relative
+        )>.72;
+
+
+    ball.hits++;
+
+    ball.lastHit=
+        ai.name;
+
+    ball.flash=
+        edge
+        ? 1
+        : .55;
+
+
+    /*
+       Learning signal.
+
+       The AI gets more experience from making
+       difficult returns.
+    */
+
+    ai.experience++;
+
+    ai.form +=
+        edge
+        ? .35
+        : .12;
+
+
+    if(
+        ball.hits%4===0
+    ){
+
+        scheduleCommentary(
+            edge
+            ? "hit"
+            : "rally",
+            0
+        );
+
+    }
+
+
+    if(edge){
+
+        createImpact(
+            ball.x,
+            ball.y,
+            ai.color,
+            12
+        );
+
+    }else{
+
+        createImpact(
+            ball.x,
+            ball.y,
+            ai.color,
+            6
+        );
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   HIT REGISTRATION
+--------------------------------------------------------- */
+
+function registerHit(
+    ai,
+    label
+){
+
+    if(
+        ai
+    ){
+
+        ai.experience++;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   POINT RECORDING
+--------------------------------------------------------- */
+
+function pointScored(
+    winner,
+    loser
+){
+
+    if(
+        matchStatus!=="playing"
+    )
+        return;
+
+
+    /*
+       Save the actual final frame before anything
+       changes.
+    */
+
+    recordReplayFrame();
+
+
+    if(
+        winner===leftAI
+    ){
+
+        scoreLeft++;
+
+    }else{
+
+        scoreRight++;
+
+    }
+
+
+    winner.pointsFor++;
+
+    loser.pointsAgainst++;
+
+
+    winner.experience+=20;
+
+    loser.experience+=5;
+
+
+    winner.streak++;
+
+    winner.bestStreak=
+        Math.max(
+            winner.bestStreak,
+            winner.streak
+        );
+
+
+    loser.streak=0;
+
+
+    winner.form+=2;
+
+    loser.form-=1;
+
+
+    state.totalPoints++;
+
+
+    learnFromPoint(
+        winner,
+        true
+    );
+
+
+    learnFromPoint(
+        loser,
+        false
+    );
+
+
+    updateUI();
+
+
+    /*
+       Commentary.
+    */
+
+    if(
+        Math.abs(
+            scoreLeft-
+            scoreRight
+        )>=3
+    ){
+
+        scheduleCommentary(
+            "comeback",
+            0
+        );
+
+    }else{
+
+        scheduleCommentary(
+            "point",
+            0
+        );
+
+    }
+
+
+    if(
+        scoreLeft===
+            CONFIG.WIN_SCORE-1 ||
+        scoreRight===
+            CONFIG.WIN_SCORE-1
+    ){
+
+        setTimeout(
+            ()=>{
+                randomCommentary(
+                    "matchPoint"
+                );
+            },
+            250
+        );
+
+    }
+
+
+    /*
+       Freeze the live physics during replay.
+    */
+
+    matchStatus="replay";
+
+
+    startReplay(
+        winner
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   LEARNING
+--------------------------------------------------------- */
+
+function learnFromPoint(
+    ai,
+    won
+){
+
+    const reward =
+        won
+        ? 1
+        : -.35;
+
+
+    ai.memory.push({
+        reward,
+        rally:
+            ball.hits,
+        time:
+            Date.now()
+    });
+
+
+    if(
+        ai.memory.length>
+        80
+    ){
+
+        ai.memory.shift();
+
+    }
+
+
+    const lr=
+        ai.learningRate;
+
+
+    if(won){
+
+        ai.prediction +=
+            lr*
+            .25;
+
+        ai.precision +=
+            lr*
+            .16;
+
+        ai.consistency +=
+            lr*
+            .08;
+
+        ai.adaptation +=
+            lr*
+            .12;
+
+    }else{
+
+        ai.defense +=
+            lr*
+            .18;
+
+        ai.adaptation +=
+            lr*
+            .25;
+
+    }
+
+
+    /*
+       Bounded learning.
+
+       The AIs can improve forever, but cannot
+       mathematically converge to an impossible
+       100% perfect state.
+    */
+
+    ai.prediction=
+        clamp(
+            ai.prediction,
+            .55,
+            1.35
+        );
+
+    ai.precision=
+        clamp(
+            ai.precision,
+            .55,
+            1.35
+        );
+
+    ai.consistency=
+        clamp(
+            ai.consistency,
+            .55,
+            1.25
+        );
+
+    ai.adaptation=
+        clamp(
+            ai.adaptation,
+            .55,
+            1.35
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   REPLAY RECORDING
+--------------------------------------------------------- */
+
+function recordReplayFrame(){
+
+    if(!ball)
+        return;
+
+
+    replayFrames.push({
+
+        x:ball.x,
+
+        y:ball.y,
+
+        leftY:leftPaddle.y,
+
+        rightY:rightPaddle.y,
+
+        vx:ball.vx,
+
+        vy:ball.vy,
+
+        hit:ball.hits
+
+    });
+
+
+    /*
+       Keep enough history for long rallies without
+       allowing a pathological browser tab to consume
+       unbounded memory.
+    */
+
+    if(
+        replayFrames.length>
+        1800
+    ){
+
+        replayFrames.shift();
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   REPLAY
+--------------------------------------------------------- */
+
+function startReplay(
+    winner
+){
+
+    if(
+        !replayFrames.length
+    ){
+
+        continueAfterReplay();
+        return;
+
+    }
+
+
+    replayActive=true;
+
+    replayWinner=
+        winner;
+
+    replayCursor=0;
+
+    replaySpeed=
+        CONFIG.REPLAY_START_SLOWMO;
+
+    replayLastTime=
+        performance.now();
+
+
+    document
+        .getElementById(
+            "replay"
+        )
+        .classList.add("show");
+
+
+    document
+        .getElementById(
+            "replayText"
+        )
+        .textContent=
+        `${winner.name} SCORES // `+
+        `${scoreLeft} — ${scoreRight}`;
+
+
+    document
+        .getElementById(
+            "replayMultiplier"
+        )
+        .textContent=
+        "3× SLOW-MO";
+
+
+    sayCommentary(
+        `${winner.name} finds the opening! `+
+        `Let's see exactly how it happened.`
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   REPLAY UPDATE
+--------------------------------------------------------- */
+
+function updateReplay(
+    now
+){
+
+    if(
+        !replayActive
+    )
+        return;
+
+
+    const elapsed =
+        Math.min(
+            60,
+            now-
+            replayLastTime
+        );
+
+
+    replayLastTime=now;
+
+
+    /*
+       Start very slow.
+
+       Then accelerate through the replay:
+       
+       3x slow motion
+       2x slow motion
+       1.5x slow motion
+       normal
+       1.5x
+       2x
+       3x
+       
+       This makes the important collision readable
+       while still ending with energy.
+    */
+
+    const progress =
+        replayCursor/
+        Math.max(
+            replayFrames.length-1,
+            1
+        );
+
+
+    if(
+        progress<.35
+    ){
+
+        replaySpeed=3;
+
+    }else if(
+        progress<.52
+    ){
+
+        replaySpeed=2;
+
+    }else if(
+        progress<.68
+    ){
+
+        replaySpeed=1.5;
+
+    }else if(
+        progress<.82
+    ){
+
+        replaySpeed=1;
+
+    }else if(
+        progress<.92
+    ){
+
+        replaySpeed=.67;
+
+    }else{
+
+        replaySpeed=.45;
+
+    }
+
+
+    /*
+       "Slow motion factor".
+
+       3 = one third speed.
+       .45 = more than 2x normal speed.
+    */
+
+    const normalFPS=
+        CONFIG.PHYSICS_HZ;
+
+
+    replayCursor +=
+        (
+            elapsed/
+            1000
+        )*
+        normalFPS*
+        (
+            1/
+            replaySpeed
+        );
+
+
+    document
+        .getElementById(
+            "replayMultiplier"
+        )
+        .textContent =
+        replaySpeed>=1
+        ? `${replaySpeed.toFixed(1)}× SLOW-MO`
+        : `${(
+            1/
+            replaySpeed
+        ).toFixed(1)}× SPEED`;
+
+
+    if(
+        replayCursor>=
+        replayFrames.length-1
+    ){
+
+        skipReplay();
+        return;
+
+    }
+
+
+    drawReplay(
+        replayCursor
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   REPLAY RENDER
+--------------------------------------------------------- */
+
+function drawReplay(
+    cursor
+){
+
+    const width=
+        replayCanvas.width;
+
+    const height=
+        replayCanvas.height;
+
+
+    rctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+       Background.
+    */
+
+    const gradient=
+        rctx.createRadialGradient(
+            width/2,
+            height/2,
+            20,
+            width/2,
+            height/2,
+            width
+        );
+
+
+    gradient.addColorStop(
+        0,
+        "#0a1822"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#010306"
+    );
+
+
+    rctx.fillStyle=
+        gradient;
+
+    rctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+       Grid.
+    */
+
+    rctx.strokeStyle=
+        "rgba(0,234,255,.045)";
+
+    rctx.lineWidth=1;
+
+
+    for(
+        let x=0;
+        x<width;
+        x+=50
+    ){
+
+        rctx.beginPath();
+
+        rctx.moveTo(
+            x,
+            0
+        );
+
+        rctx.lineTo(
+            x,
+            height
+        );
+
+        rctx.stroke();
+
+    }
+
+
+    for(
+        let y=0;
+        y<height;
+        y+=50
+    ){
+
+        rctx.beginPath();
+
+        rctx.moveTo(
+            0,
+            y
+        );
+
+        rctx.lineTo(
+            width,
+            y
+        );
+
+        rctx.stroke();
+
+    }
+
+
+    /*
+       Center line.
+    */
+
+    rctx.strokeStyle=
+        "rgba(255,255,255,.12)";
+
+    rctx.setLineDash([
+        8,
+        12
+    ]);
+
     rctx.beginPath();
-    rctx.moveTo(x,0);
-    rctx.lineTo(x,h);
-    rctx.stroke();
-  }
 
-  for(let y=0;y<h;y+=50){
+    rctx.moveTo(
+        width/2,
+        0
+    );
+
+    rctx.lineTo(
+        width/2,
+        height
+    );
+
+    rctx.stroke();
+
+    rctx.setLineDash([]);
+
+
+    const floor=
+        Math.floor(cursor);
+
+    const a=
+        replayFrames[
+            clamp(
+                floor,
+                0,
+                replayFrames.length-1
+            )
+        ];
+
+    const b=
+        replayFrames[
+            clamp(
+                floor+1,
+                0,
+                replayFrames.length-1
+            )
+        ];
+
+
+    const t=
+        cursor-floor;
+
+
+    const x=
+        lerp(
+            a.x,
+            b.x,
+            t
+        );
+
+
+    const y=
+        lerp(
+            a.y,
+            b.y,
+            t
+        );
+
+
+    const leftY=
+        lerp(
+            a.leftY,
+            b.leftY,
+            t
+        );
+
+
+    const rightY=
+        lerp(
+            a.rightY,
+            b.rightY,
+            t
+        );
+
+
+    /*
+       Actual trajectory trail.
+
+       This is based entirely on recorded frames.
+    */
+
+    for(
+        let i=16;
+        i>=1;
+        i--
+    ){
+
+        const index=
+            floor-
+            i*
+            2;
+
+
+        if(index<0)
+            continue;
+
+
+        const frame=
+            replayFrames[
+                index
+            ];
+
+
+        const alpha=
+            (
+                1-
+                i/17
+            )*
+            .45;
+
+
+        rctx.fillStyle=
+            replayWinner
+            ? hexToRgba(
+                replayWinner.color,
+                alpha
+            )
+            : `rgba(
+                255,
+                43,
+                214,
+                ${alpha}
+            )`;
+
+
+        rctx.beginPath();
+
+        rctx.arc(
+            frame.x,
+            frame.y,
+            4+
+            (
+                16-i
+            )*.18,
+            0,
+            Math.PI*2
+        );
+
+        rctx.fill();
+
+    }
+
+
+    /*
+       Paddles.
+    */
+
+    drawReplayPaddle(
+        45,
+        leftY,
+        "#00eaff"
+    );
+
+
+    drawReplayPaddle(
+        width-60,
+        rightY,
+        "#ff2bd6"
+    );
+
+
+    /*
+       Ball.
+    */
+
+    const ballColor =
+        replayWinner
+        ? replayWinner.color
+        : "#ff2bd6";
+
+
+    rctx.shadowBlur=35;
+
+    rctx.shadowColor=
+        ballColor;
+
+    rctx.fillStyle=
+        "#ffffff";
+
+
     rctx.beginPath();
-    rctx.moveTo(0,y);
-    rctx.lineTo(w,y);
-    rctx.stroke();
-  }
 
-  rctx.strokeStyle="rgba(255,255,255,.15)";
-  rctx.setLineDash([8,12]);
+    rctx.arc(
+        x,
+        y,
+        9,
+        0,
+        Math.PI*2
+    );
 
-  rctx.beginPath();
-  rctx.moveTo(w/2,0);
-  rctx.lineTo(w/2,h);
-  rctx.stroke();
-
-  rctx.setLineDash([]);
+    rctx.fill();
 
 
-  const elapsed=
-    (performance.now()-replayStart)/1000;
-
-  /*
-    Bounce reconstruction.
-  */
-
-  let t=elapsed*replaySpeed;
-
-  let x=
-    replaySnapshot.x-
-    replaySnapshot.vx*t*18;
-
-  let y=
-    replaySnapshot.y-
-    replaySnapshot.vy*t*18;
-
-  /*
-    Keep visually inside arena.
-  */
-
-  x=((x%w)+w)%w;
-  y=((y%h)+h)%h;
+    rctx.shadowBlur=0;
 
 
-  rctx.shadowBlur=25;
-  rctx.shadowColor="#ff2bd6";
+    /*
+       Broadcast labels.
+    */
 
-  rctx.fillStyle="#ff2bd6";
+    rctx.fillStyle=
+        "rgba(255,255,255,.6)";
 
-  rctx.beginPath();
-  rctx.arc(x,y,11,0,Math.PI*2);
-  rctx.fill();
-
-  rctx.shadowBlur=0;
-
-
-  /*
-    paddles.
-  */
-
-  rctx.fillStyle=leftAI?leftAI.color:"#00eaff";
-
-  rctx.fillRect(
-    45,
-    replaySnapshot.leftY,
-    15,
-    110
-  );
-
-  rctx.fillStyle=rightAI?rightAI.color:"#ff2bd6";
-
-  rctx.fillRect(
-    w-60,
-    replaySnapshot.rightY,
-    15,
-    110
-  );
+    rctx.font=
+        "bold 11px monospace";
 
 
-  rctx.font="bold 13px monospace";
-  rctx.fillStyle="rgba(255,255,255,.7)";
+    rctx.fillText(
+        "ACTUAL RECORDED PHYSICS",
+        18,
+        24
+    );
 
-  rctx.fillText(
-    "INSTANT REPLAY",
-    20,
-    28
-  );
 
-  document.getElementById("replayMultiplier").textContent=
-    replaySpeed.toFixed(1)+"×";
+    rctx.fillStyle=
+        ballColor;
+
+
+    rctx.fillText(
+        "INSTANT REPLAY",
+        18,
+        height-18
+    );
+
 }
 
+
+function drawReplayPaddle(
+    x,
+    y,
+    color
+){
+
+    rctx.shadowBlur=25;
+
+    rctx.shadowColor=
+        color;
+
+    rctx.fillStyle=
+        color;
+
+    rctx.fillRect(
+        x,
+        y,
+        CONFIG.PADDLE_WIDTH,
+        CONFIG.PADDLE_HEIGHT
+    );
+
+    rctx.shadowBlur=0;
+
+}
+
+
+/* ---------------------------------------------------------
+   REPLAY END
+--------------------------------------------------------- */
 
 function skipReplay(){
 
-  replayActive=false;
+    if(!replayActive)
+        return;
 
-  document.getElementById("replay").classList.remove("show");
+
+    replayActive=false;
+
+    replayCursor=0;
+
+    document
+        .getElementById(
+            "replay"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    replayFrames=[];
+
+
+    continueAfterReplay();
+
 }
 
 
-/* ---------- MAIN LOOP ---------- */
+function continueAfterReplay(){
 
-function loop(now){
+    matchStatus="playing";
 
-  const dt=Math.min(50,now-lastFrame);
-  lastFrame=now;
 
-  if(running && !replayActive){
+    /*
+       Start the next rally from the player who
+       just scored.
 
-    accumulator+=dt;
+       The losing player serves after conceding.
+    */
 
-    if(matchState==="playing"){
+    const direction =
+        ball &&
+        ball.vx<0
+        ? -1
+        : 1;
 
-      think(
-        leftAI,
-        leftPaddle,
-        "left"
-      );
 
-      think(
-        rightAI,
-        rightPaddle,
-        "right"
-      );
+    createBall(
+        direction
+    );
 
-      updateBall();
+
+    /*
+       Keep the paddle positions from the end
+       of the previous rally.
+    */
+
+    ball.y=
+        canvas.height/2;
+
+
+    scheduleCommentary(
+        "rally",
+        450
+    );
+
+
+    if(
+        scoreLeft>=
+        CONFIG.WIN_SCORE ||
+        scoreRight>=
+        CONFIG.WIN_SCORE
+    ){
+
+        finishMatch();
+
     }
-  }
 
-  drawGame();
-
-  if(replayActive){
-    drawReplay();
-  }
-
-  updateThoughts();
-
-  requestAnimationFrame(loop);
 }
 
 
-/* ---------- UI ---------- */
+/* ---------------------------------------------------------
+   MATCH END
+--------------------------------------------------------- */
 
-function updateScoreDisplay(){
+function finishMatch(){
 
-  const left=
-    pointHistory.filter(
-      p=>p.winner===leftAI.name
-    ).length;
+    if(
+        matchStatus==="champion"
+    )
+        return;
 
-  const right=
-    pointHistory.filter(
-      p=>p.winner===rightAI.name
-    ).length;
 
-  document.getElementById("score").textContent=
-    left+" — "+right;
+    const winner =
+        scoreLeft>=
+        CONFIG.WIN_SCORE
+        ? leftAI
+        : rightAI;
+
+
+    const loser =
+        winner===leftAI
+        ? rightAI
+        : leftAI;
+
+
+    matchStatus="finished";
+
+
+    winner.wins++;
+
+    loser.losses++;
+
+
+    winner.form+=8;
+
+    loser.form-=4;
+
+
+    const result={
+
+        era:
+            state.era,
+
+        match:
+            state.match,
+
+        winner:
+            winner.name,
+
+        loser:
+            loser.name,
+
+        score:
+            `${scoreLeft}-${scoreRight}`,
+
+        timestamp:
+            Date.now()
+
+    };
+
+
+    state.matchHistory.unshift(
+        result
+    );
+
+
+    if(
+        state.matchHistory.length>
+        50
+    ){
+
+        state.matchHistory.pop();
+
+    }
+
+
+    /*
+       Evolution.
+    */
+
+    evolveAfterMatch(
+        winner,
+        loser
+    );
+
+
+    logEvent(
+        `MATCH COMPLETE :: `+
+        `${winner.name} ${scoreLeft}-${scoreRight} `+
+        `${loser.name}`
+    );
+
+
+    sayCommentary(
+        `${winner.name} wins the match! `+
+        `What a battle.`
+    );
+
+
+    /*
+       Championship threshold.
+
+       Five match wins in the current era.
+    */
+
+    if(
+        winner.wins>=5
+    ){
+
+        setTimeout(
+            ()=>{
+                crownChampion(
+                    winner
+                );
+            },
+            900
+        );
+
+    }else{
+
+        setTimeout(
+            ()=>{
+                resetMatch();
+            },
+            1200
+        );
+
+    }
+
+
+    saveState();
+
 }
 
+
+/* ---------------------------------------------------------
+   EVOLUTION
+--------------------------------------------------------- */
+
+function evolveAfterMatch(
+    winner,
+    loser
+){
+
+    const lr=
+        winner.learningRate;
+
+
+    winner.prediction +=
+        lr*.20;
+
+    winner.precision +=
+        lr*.15;
+
+    winner.adaptation +=
+        lr*.12;
+
+
+    loser.defense +=
+        lr*.18;
+
+    loser.adaptation +=
+        lr*.22;
+
+
+    /*
+       Occasional mutations.
+
+       Not every match mutates everybody.
+       This creates actual generations rather than
+       meaningless random stat changes every frame.
+    */
+
+    if(
+        Math.random()<.38
+    ){
+
+        mutateCompetitor(
+            winner
+        );
+
+    }
+
+
+    if(
+        Math.random()<.18
+    ){
+
+        mutateCompetitor(
+            loser
+        );
+
+    }
+
+
+    winner.generation++;
+
+    loser.generation++;
+
+
+    state.generation++;
+
+
+    boundAI(
+        winner
+    );
+
+    boundAI(
+        loser
+    );
+
+}
+
+
+function boundAI(ai){
+
+    ai.prediction=
+        clamp(
+            ai.prediction,
+            .55,
+            1.35
+        );
+
+    ai.precision=
+        clamp(
+            ai.precision,
+            .55,
+            1.35
+        );
+
+    ai.adaptation=
+        clamp(
+            ai.adaptation,
+            .55,
+            1.35
+        );
+
+    ai.defense=
+        clamp(
+            ai.defense,
+            .55,
+            1.35
+        );
+
+    ai.consistency=
+        clamp(
+            ai.consistency,
+            .55,
+            1.25
+        );
+
+}
+
+
+function mutateCompetitor(
+    ai
+){
+
+    const previous=
+        ai.strategy;
+
+
+    const alternatives=
+        STRATEGIES.filter(
+            strategy =>
+                strategy!==previous
+        );
+
+
+    /*
+       Most mutations are subtle.
+
+       A rare major mutation creates dramatic
+       changes in the league.
+    */
+
+    const major=
+        Math.random()<.08;
+
+
+    ai.strategy=
+        pick(
+            alternatives
+        );
+
+
+    const factor=
+        major
+        ? rand(
+            .90,
+            1.14
+        )
+        : rand(
+            .97,
+            1.04
+        );
+
+
+    ai.reaction*=factor;
+
+    ai.prediction*=factor;
+
+    ai.precision*=factor;
+
+    ai.aggression*=factor;
+
+    ai.defense*=factor;
+
+    ai.consistency*=factor;
+
+
+    ai.mutation=
+        `${previous} → ${ai.strategy}`;
+
+
+    logEvent(
+        `EVOLUTION :: ${ai.name} :: `+
+        `${ai.mutation}`
+    );
+
+
+    boundAI(
+        ai
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   CHAMPION
+--------------------------------------------------------- */
+
+function crownChampion(
+    winner
+){
+
+    matchStatus="champion";
+
+
+    winner.championships++;
+
+
+    state.championHistory.unshift({
+
+        era:
+            state.era,
+
+        champion:
+            winner.name,
+
+        championships:
+            winner.championships,
+
+        timestamp:
+            Date.now()
+
+    });
+
+
+    logEvent(
+        `🏆 ERA ${state.era} CHAMPION :: `+
+        `${winner.name} :: `+
+        `${winner.championships} ALL-TIME TITLES`
+    );
+
+
+    sayCommentary(
+        `🏆 ${winner.name} IS THE CHAMPION OF ERA `+
+        `${state.era}! `+
+        `Another title enters the permanent archive!`
+    );
+
+
+    createChampionBurst(
+        winner.color
+    );
+
+
+    saveState();
+
+
+    setTimeout(
+        ()=>{
+            beginNextEra();
+        },
+        3000
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   NEXT ERA
+--------------------------------------------------------- */
+
+function beginNextEra(){
+
+    state.era++;
+
+    state.generation++;
+
+
+    /*
+       Reset competitive records.
+
+       NEVER reset championships.
+    */
+
+    for(
+        const ai of state.competitors
+    ){
+
+        ai.wins=0;
+
+        ai.losses=0;
+
+        ai.pointsFor=0;
+
+        ai.pointsAgainst=0;
+
+        ai.streak=0;
+
+        ai.form*=.25;
+
+
+        /*
+           Small chance of mutation between eras.
+        */
+
+        if(
+            Math.random()<.55
+        ){
+
+            mutateCompetitor(
+                ai
+            );
+
+        }
+
+    }
+
+
+    logEvent(
+        `∞ ERA ${state.era} INITIALIZED :: `+
+        `HISTORICAL ARCHIVE PRESERVED`
+    );
+
+
+    saveState();
+
+    resetMatch();
+
+}
+
+
+/* ---------------------------------------------------------
+   DRAW GAME
+--------------------------------------------------------- */
+
+function drawGame(){
+
+    const width=
+        canvas.width;
+
+    const height=
+        canvas.height;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+       Background.
+    */
+
+    const gradient=
+        ctx.createRadialGradient(
+            width/2,
+            height/2,
+            20,
+            width/2,
+            height/2,
+            width
+        );
+
+
+    gradient.addColorStop(
+        0,
+        "#071722"
+    );
+
+    gradient.addColorStop(
+        .55,
+        "#03080e"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#010306"
+    );
+
+
+    ctx.fillStyle=
+        gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+       Arena grid.
+    */
+
+    ctx.strokeStyle=
+        "rgba(0,234,255,.045)";
+
+    ctx.lineWidth=1;
+
+
+    for(
+        let x=0;
+        x<width;
+        x+=50
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            0
+        );
+
+        ctx.lineTo(
+            x,
+            height
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    for(
+        let y=0;
+        y<height;
+        y+=50
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            0,
+            y
+        );
+
+        ctx.lineTo(
+            width,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    /*
+       Center line.
+    */
+
+    ctx.strokeStyle=
+        "rgba(255,255,255,.13)";
+
+    ctx.setLineDash([
+        9,
+        13
+    ]);
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        width/2,
+        0
+    );
+
+    ctx.lineTo(
+        width/2,
+        height
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+
+    /*
+       Ball trail.
+    */
+
+    if(
+        ball &&
+        ball.trail
+    ){
+
+        for(
+            let i=0;
+            i<ball.trail.length;
+            i++
+        ){
+
+            const point=
+                ball.trail[i];
+
+
+            const alpha=
+                i/
+                ball.trail.length*
+                .38;
+
+
+            ctx.fillStyle=
+                ball.vx>0
+                ? hexToRgba(
+                    rightAI.color,
+                    alpha
+                )
+                : hexToRgba(
+                    leftAI.color,
+                    alpha
+                );
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                point.x,
+                point.y,
+                3+
+                i/
+                ball.trail.length*
+                4,
+                0,
+                Math.PI*2
+            );
+
+            ctx.fill();
+
+        }
+
+    }
+
+
+    /*
+       Paddles.
+    */
+
+    if(leftPaddle){
+
+        drawPaddle(
+            leftPaddle,
+            leftAI.color
+        );
+
+    }
+
+
+    if(rightPaddle){
+
+        drawPaddle(
+            rightPaddle,
+            rightAI.color
+        );
+
+    }
+
+
+    /*
+       Ball.
+    */
+
+    if(ball){
+
+        const color =
+            ball.vx<0
+            ? leftAI.color
+            : rightAI.color;
+
+
+        const radius=
+            ball.radius+
+            ball.flash*
+            4;
+
+
+        ctx.shadowBlur=
+            25+
+            ball.flash*
+            35;
+
+        ctx.shadowColor=
+            color;
+
+        ctx.fillStyle=
+            "#fff";
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            ball.x,
+            ball.y,
+            radius,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+
+        ctx.shadowBlur=0;
+
+    }
+
+
+    /*
+       Arena HUD.
+    */
+
+    ctx.font=
+        "bold 10px monospace";
+
+    ctx.fillStyle=
+        "rgba(255,255,255,.32)";
+
+
+    ctx.fillText(
+        `ERA ${state.era} // MATCH ${state.match}`,
+        18,
+        24
+    );
+
+
+    ctx.textAlign="right";
+
+
+    ctx.fillText(
+        `${simulationSpeed.toFixed(1)}× SIM`,
+        width-18,
+        24
+    );
+
+
+    ctx.textAlign="left";
+
+
+    if(
+        ball
+    ){
+
+        ctx.fillStyle=
+            "rgba(255,255,255,.22)";
+
+        ctx.fillText(
+            `RALLY ${ball.hits} HITS`,
+            18,
+            height-18
+        );
+
+
+        ctx.textAlign="right";
+
+
+        ctx.fillText(
+            `${Math.hypot(
+                ball.vx,
+                ball.vy
+            ).toFixed(1)} PX/FRAME`,
+            width-18,
+            height-18
+        );
+
+
+        ctx.textAlign="left";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   PADDLE DRAW
+--------------------------------------------------------- */
+
+function drawPaddle(
+    paddle,
+    color
+){
+
+    ctx.shadowBlur=24;
+
+    ctx.shadowColor=
+        color;
+
+    ctx.fillStyle=
+        color;
+
+
+    ctx.fillRect(
+        paddle.x,
+        paddle.y,
+        paddle.w,
+        paddle.h
+    );
+
+
+    /*
+       Hot center.
+    */
+
+    ctx.fillStyle=
+        "rgba(255,255,255,.35)";
+
+
+    ctx.fillRect(
+        paddle.x+
+        paddle.w*.35,
+        paddle.y+
+        paddle.h*.18,
+        paddle.w*.3,
+        paddle.h*.64
+    );
+
+
+    ctx.shadowBlur=0;
+
+}
+
+
+/* ---------------------------------------------------------
+   PARTICLES
+--------------------------------------------------------- */
+
+let particles=[];
+
+
+function createImpact(
+    x,
+    y,
+    color,
+    amount
+){
+
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
+        const angle=
+            rand(
+                0,
+                Math.PI*2
+            );
+
+
+        const speed=
+            rand(
+                40,
+                220
+            );
+
+
+        particles.push({
+
+            x,
+
+            y,
+
+            vx:
+                Math.cos(angle)*
+                speed,
+
+            vy:
+                Math.sin(angle)*
+                speed,
+
+            life:
+                rand(
+                    .25,
+                    .7
+                ),
+
+            max:
+                .7,
+
+            color
+
+        });
+
+    }
+
+
+    if(
+        particles.length>
+        500
+    ){
+
+        particles.splice(
+            0,
+            particles.length-
+            500
+        );
+
+    }
+
+}
+
+
+function updateParticles(
+    dt
+){
+
+    for(
+        let i=particles.length-1;
+        i>=0;
+        i--
+    ){
+
+        const p=
+            particles[i];
+
+
+        p.x+=
+            p.vx*
+            dt;
+
+        p.y+=
+            p.vy*
+            dt;
+
+
+        p.vx*=
+            Math.pow(
+                .02,
+                dt
+            );
+
+        p.vy*=
+            Math.pow(
+                .02,
+                dt
+            );
+
+
+        p.life-=dt;
+
+
+        if(
+            p.life<=0
+        ){
+
+            particles.splice(
+                i,
+                1
+            );
+
+        }
+
+    }
+
+}
+
+
+function drawParticles(){
+
+    for(
+        const p of particles
+    ){
+
+        ctx.globalAlpha=
+            clamp(
+                p.life/
+                p.max,
+                0,
+                1
+            );
+
+
+        ctx.fillStyle=
+            p.color;
+
+
+        ctx.fillRect(
+            p.x,
+            p.y,
+            2,
+            2
+        );
+
+    }
+
+
+    ctx.globalAlpha=1;
+
+}
+
+
+function createChampionBurst(
+    color
+){
+
+    for(
+        let i=0;
+        i<180;
+        i++
+    ){
+
+        const angle=
+            rand(
+                0,
+                Math.PI*2
+            );
+
+        const speed=
+            rand(
+                80,
+                500
+            );
+
+
+        particles.push({
+
+            x:
+                canvas.width/2,
+
+            y:
+                canvas.height/2,
+
+            vx:
+                Math.cos(angle)*
+                speed,
+
+            vy:
+                Math.sin(angle)*
+                speed,
+
+            life:
+                rand(
+                    .7,
+                    2
+                ),
+
+            max:2,
+
+            color
+
+        });
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   COLOR UTILITY
+--------------------------------------------------------- */
+
+function hexToRgba(
+    hex,
+    alpha
+){
+
+    const value=
+        hex.replace(
+            "#",
+            ""
+        );
+
+
+    const bigint=
+        parseInt(
+            value,
+            16
+        );
+
+
+    const r=
+        (bigint>>16)&255;
+
+    const g=
+        (bigint>>8)&255;
+
+    const b=
+        bigint&255;
+
+
+    return `rgba(
+        ${r},
+        ${g},
+        ${b},
+        ${alpha}
+    )`;
+
+}
+
+
+/* ---------------------------------------------------------
+   SYSTEM LOG
+--------------------------------------------------------- */
+
+function logEvent(
+    message
+){
+
+    const log=
+        document.getElementById(
+            "systemLog"
+        );
+
+
+    if(!log)
+        return;
+
+
+    const entry=
+        document.createElement(
+            "div"
+        );
+
+
+    entry.innerHTML=
+        `<span style="
+            color:#365166
+        ">[${timeString()}]</span> `+
+        escapeHTML(
+            message
+        );
+
+
+    log.prepend(
+        entry
+    );
+
+
+    while(
+        log.children.length>
+        80
+    ){
+
+        log.removeChild(
+            log.lastChild
+        );
+
+    }
+
+}
+
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value
+    ).replace(
+        /[&<>"']/g,
+        char=>({
+
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+
+        })[char]
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   UI
+--------------------------------------------------------- */
 
 function updateUI(){
 
-  if(!leftAI || !rightAI)return;
+    if(
+        !leftAI ||
+        !rightAI
+    )
+        return;
 
-  document.getElementById("leftName").textContent=
-    leftAI.name;
 
-  document.getElementById("rightName").textContent=
-    rightAI.name;
+    setText(
+        "leftName",
+        leftAI.name
+    );
 
-  document.getElementById("leftMeta").textContent=
-    leftAI.strategy+
-    " • GEN "+leftAI.generation+
-    " • "+Math.round(leftAI.accuracy*100)+"% ACC";
 
-  document.getElementById("rightMeta").textContent=
-    rightAI.strategy+
-    " • GEN "+rightAI.generation+
-    " • "+Math.round(rightAI.accuracy*100)+"% ACC";
+    setText(
+        "rightName",
+        rightAI.name
+    );
 
-  document.getElementById("season").textContent=
-    state.era;
 
-  document.getElementById("matchNumber").textContent=
-    state.match;
+    setText(
+        "leftMeta",
+        `${leftAI.strategy} • `+
+        `GEN ${leftAI.generation} • `+
+        `${Math.round(
+            leftAI.precision*100
+        )}% PRECISION`
+    );
 
-  document.getElementById("pointNumber").textContent=
-    fmt(state.totalPoints);
 
-  document.getElementById("totalMatches").textContent=
-    fmt(state.totalMatches);
+    setText(
+        "rightMeta",
+        `${rightAI.strategy} • `+
+        `GEN ${rightAI.generation} • `+
+        `${Math.round(
+            rightAI.precision*100
+        )}% PRECISION`
+    );
 
-  document.getElementById("totalPoints").textContent=
-    fmt(state.totalPoints);
 
-  document.getElementById("totalChampions").textContent=
-    fmt(state.championHistory.length);
+    setText(
+        "score",
+        `${scoreLeft} — ${scoreRight}`
+    );
 
-  document.getElementById("generation").textContent=
-    state.generation;
 
-  updateStandings();
-  updateEvolution();
-  updateHistory();
-  updateArchive();
+    setText(
+        "season",
+        state.era
+    );
+
+
+    setText(
+        "matchNumber",
+        state.match
+    );
+
+
+    setText(
+        "generation",
+        state.generation
+    );
+
+
+    setText(
+        "totalMatches",
+        fmt(
+            state.totalMatches
+        )
+    );
+
+
+    setText(
+        "totalPoints",
+        fmt(
+            state.totalPoints
+        )
+    );
+
+
+    setText(
+        "pointNumber",
+        fmt(
+            state.totalPoints
+        )
+    );
+
+
+    setText(
+        "totalChampions",
+        fmt(
+            state.championHistory.length
+        )
+    );
+
+
+    setText(
+        "leftThoughtName",
+        leftAI.name
+    );
+
+
+    setText(
+        "rightThoughtName",
+        rightAI.name
+    );
+
+
+    updateStandings();
+
+    updateHistory();
+
+    updateEvolution();
+
+    updateArchive();
+
 }
 
+
+function setText(
+    id,
+    value
+){
+
+    const element=
+        document.getElementById(
+            id
+        );
+
+
+    if(element){
+
+        element.textContent=
+            value;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   STANDINGS
+--------------------------------------------------------- */
 
 function updateStandings(){
 
-  const sorted=[...state.competitors].sort(
-    (a,b)=>
-      (b.championships*1000+b.wins*10-b.losses)-
-      (a.championships*1000+a.wins*10-a.losses)
-  );
+    const container=
+        document.getElementById(
+            "standings"
+        );
 
-  const html=sorted.map((ai,i)=>{
 
-    const total=ai.wins+ai.losses;
+    if(!container)
+        return;
 
-    const rate=
-      total
-      ? ai.wins/total*100
-      : 0;
 
-    return `
-      <div class="row">
-        <div class="rank">${i+1}</div>
+    const ranking=
+        [...state.competitors]
+        .sort(
+            (a,b)=>
+                rankingScore(b)-
+                rankingScore(a)
+        );
 
-        <div>
-          <div class="name ${ai.championships?'champion':''}">
-            ${ai.name}
-            ${ai.championships
-              ? `<span class="badge">👑 ${ai.championships}</span>`
-              : ""}
-          </div>
 
-          <div class="miniBar">
-            <i style="width:${clamp(rate,2,100)}%"></i>
-          </div>
-        </div>
+    container.innerHTML=
+        ranking
+        .map(
+            (ai,index)=>{
 
-        <div class="wins">${ai.wins}W</div>
+                const matches=
+                    ai.wins+
+                    ai.losses;
 
-        <div class="champs">
-          ${ai.championships}🏆
-        </div>
-      </div>
-    `;
-  }).join("");
 
-  document.getElementById("standings").innerHTML=html;
+                const winRate=
+                    matches
+                    ? ai.wins/
+                      matches*
+                      100
+                    : 0;
+
+
+                return `
+
+                    <div class="row">
+
+                        <div class="rank">
+                            ${index+1}
+                        </div>
+
+                        <div>
+
+                            <div class="
+                                name
+                                ${
+                                    ai.championships
+                                    ? "champion"
+                                    : ""
+                                }
+                            ">
+
+                                ${escapeHTML(
+                                    ai.name
+                                )}
+
+                                ${
+                                    ai.championships
+                                    ? `
+                                        <span class="
+                                            badge
+                                        ">
+                                            👑
+                                            ${ai.championships}
+                                        </span>
+                                      `
+                                    : ""
+                                }
+
+                            </div>
+
+                            <div class="miniBar">
+
+                                <i
+                                    style="
+                                        width:${clamp(
+                                            winRate,
+                                            2,
+                                            100
+                                        )}%;
+                                    "
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+                        <div class="wins">
+                            ${ai.wins}W
+                        </div>
+
+                        <div class="champs">
+                            ${ai.championships}🏆
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
 }
 
 
-function updateEvolution(){
-
-  const sorted=[...state.competitors]
-    .sort((a,b)=>b.generation-a.generation);
-
-  document.getElementById("evolutionCards").innerHTML=
-    sorted.slice(0,8).map(ai=>`
-
-      <div style="
-        display:grid;
-        grid-template-columns:120px 1fr;
-        gap:12px;
-        align-items:center;
-        padding:10px 0;
-        border-bottom:1px solid #10202e;
-      ">
-
-        <div style="font-weight:1000;color:${ai.color}">
-          ${ai.name}
-        </div>
-
-        <div>
-
-          <div style="
-            display:flex;
-            justify-content:space-between;
-            font-size:10px;
-            color:#718a9c;
-          ">
-            <span>
-              GEN ${ai.generation} • ${ai.strategy}
-            </span>
-
-            <span>
-              ${(ai.accuracy*100).toFixed(0)}% ACC
-            </span>
-          </div>
-
-          <div class="miniBar">
-            <i style="
-              width:${clamp(ai.accuracy/1.5*100,5,100)}%;
-              background:${ai.color};
-            "></i>
-          </div>
-
-          <div style="
-            font:9px monospace;
-            color:#506a7e;
-            margin-top:4px;
-          ">
-            MUTATION: ${ai.lastMutation}
-          </div>
-
-        </div>
-      </div>
-
-    `).join("");
-}
-
+/* ---------------------------------------------------------
+   HISTORY
+--------------------------------------------------------- */
 
 function updateHistory(){
 
-  const items=state.matchHistory.slice(0,10);
+    const container=
+        document.getElementById(
+            "history"
+        );
 
-  document.getElementById("history").innerHTML=
-    items.length
-    ? items.map(x=>`
 
-      <div class="event">
-        <span class="eventTime">
-          ERA ${x.era}
-        </span>
+    if(!container)
+        return;
 
-        <span>
-          <b class="green">${x.winner}</b>
-          defeated
-          <b class="pink">${x.loser}</b>
-        </span>
-      </div>
 
-    `).join("")
-    : `<div style="color:#506a7e;font-size:11px">
-        Waiting for the first match...
-       </div>`;
+    if(
+        !state.matchHistory.length
+    ){
+
+        container.innerHTML=
+            `<div style="
+                color:#526a7b;
+                font-size:11px
+            ">
+                No completed matches yet.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML=
+        state.matchHistory
+        .slice(
+            0,
+            12
+        )
+        .map(
+            result=>`
+
+            <div class="event">
+
+                <span class="eventTime">
+                    E${result.era}
+                    /
+                    M${result.match}
+                </span>
+
+                <span>
+
+                    <b class="green">
+                        ${escapeHTML(
+                            result.winner
+                        )}
+                    </b>
+
+                    <br>
+
+                    defeated
+
+                    <b class="pink">
+                        ${escapeHTML(
+                            result.loser
+                        )}
+                    </b>
+
+                    <br>
+
+                    <span style="
+                        color:#526a7b;
+                        font:9px monospace;
+                    ">
+                        ${result.score}
+                    </span>
+
+                </span>
+
+            </div>
+
+        `
+        )
+        .join("");
+
 }
 
+
+/* ---------------------------------------------------------
+   EVOLUTION
+--------------------------------------------------------- */
+
+function updateEvolution(){
+
+    const container=
+        document.getElementById(
+            "evolutionCards"
+        );
+
+
+    if(!container)
+        return;
+
+
+    const list=
+        [...state.competitors]
+        .sort(
+            (a,b)=>
+                b.generation-
+                a.generation
+        );
+
+
+    container.innerHTML=
+        list
+        .map(
+            ai=>`
+
+            <div style="
+                display:grid;
+                grid-template-columns:
+                    120px minmax(0,1fr);
+                gap:12px;
+                align-items:center;
+                padding:11px 0;
+                border-bottom:
+                    1px solid #102433;
+            ">
+
+                <div>
+
+                    <div style="
+                        font-weight:1000;
+                        color:${ai.color};
+                    ">
+                        ${escapeHTML(
+                            ai.name
+                        )}
+                    </div>
+
+                    <div style="
+                        color:#435c6d;
+                        font:8px monospace;
+                        margin-top:3px;
+                    ">
+                        GEN ${ai.generation}
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div style="
+                        display:flex;
+                        justify-content:
+                            space-between;
+                        color:#71899a;
+                        font:9px monospace;
+                    ">
+
+                        <span>
+                            ${ai.strategy}
+                        </span>
+
+                        <span>
+                            ${Math.round(
+                                ai.precision*
+                                100
+                            )}%
+                        </span>
+
+                    </div>
+
+                    <div class="miniBar">
+
+                        <i
+                            style="
+                                width:${clamp(
+                                    ai.precision/
+                                    1.35*
+                                    100,
+                                    3,
+                                    100
+                                )}%;
+                                background:
+                                    ${ai.color};
+                            "
+                        ></i>
+
+                    </div>
+
+                    <div style="
+                        color:#435c6d;
+                        font:8px monospace;
+                        margin-top:4px;
+                    ">
+                        ${escapeHTML(
+                            ai.mutation
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `
+        )
+        .join("");
+
+}
+
+
+/* ---------------------------------------------------------
+   ARCHIVE
+--------------------------------------------------------- */
 
 function updateArchive(){
 
-  const counts={};
+    const container=
+        document.getElementById(
+            "championshipArchive"
+        );
 
-  for(const ai of state.competitors){
-    counts[ai.name]=ai.championships;
-  }
 
-  const sorted=Object.entries(counts)
-    .sort((a,b)=>b[1]-a[1]);
+    if(!container)
+        return;
 
-  document.getElementById("championshipArchive").innerHTML=
-    sorted.map(([name,count],i)=>`
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:11px 5px;
-        border-bottom:1px solid #10202e;
-      ">
+    const list=
+        [...state.competitors]
+        .sort(
+            (a,b)=>
+                b.championships-
+                a.championships
+        );
 
-        <span>
-          <span style="
-            color:#536c80;
-            display:inline-block;
-            width:28px;
-          ">#${i+1}</span>
 
-          <b class="${count?'champion':''}">
-            ${name}
-          </b>
-        </span>
+    container.innerHTML=
+        list
+        .map(
+            ai=>`
 
-        <span class="highlight">
-          ${count} CHAMPIONSHIP${count===1?"":"S"}
-        </span>
+            <div class="archive-card">
 
-      </div>
+                <div class="champ">
+                    ${
+                        ai.championships
+                        ? "👑 "
+                        : ""
+                    }
+                    ${escapeHTML(
+                        ai.name
+                    )}
+                </div>
 
-    `).join("");
+                <div class="era">
+                    ${ai.championships}
+                    CAREER
+                    CHAMPIONSHIPS
+                </div>
+
+            </div>
+
+        `
+        )
+        .join("");
+
 }
 
 
-function updateThoughts(){
+/* ---------------------------------------------------------
+   THOUGHT DISPLAY
+--------------------------------------------------------- */
 
-  if(!leftAI || !rightAI)return;
+const THOUGHTS=[
 
-  const leftMessages=[
-    "predicting trajectory...",
-    "calculating rebound angle...",
-    "studying opponent timing...",
+    "predicting rebound geometry...",
+
+    "sampling opponent reaction time...",
+
+    "evaluating paddle edge risk...",
+
     "updating tactical memory...",
-    "optimizing paddle position...",
-    "searching historical patterns...",
-    "testing counter-strategy...",
-    "minimizing error..."
-  ];
 
-  const rightMessages=[
-    "mapping trajectory...",
-    "evaluating opponent...",
-    "learning from previous point...",
-    "calculating interception...",
-    "testing defensive model...",
-    "optimizing reaction...",
-    "running prediction...",
-    "updating neural strategy..."
-  ];
+    "calculating intercept window...",
 
-  document.getElementById("leftThought").innerHTML=
-    choice(leftMessages)+
-    ' <span class="cursor">█</span>';
+    "testing alternate return angle...",
 
-  document.getElementById("rightThought").innerHTML=
-    choice(rightMessages)+
-    ' <span class="cursor">█</span>';
+    "studying rally momentum...",
+
+    "optimizing defensive position...",
+
+    "searching previous match patterns...",
+
+    "estimating collision probability...",
+
+    "minimizing prediction error...",
+
+    "evaluating aggression threshold..."
+
+];
+
+
+let thoughtClock=0;
+
+
+function updateThoughts(
+    dt
+){
+
+    thoughtClock+=dt;
+
+
+    if(
+        thoughtClock<
+        .22
+    )
+        return;
+
+
+    thoughtClock=0;
+
+
+    const left=
+        document.getElementById(
+            "leftThought"
+        );
+
+
+    const right=
+        document.getElementById(
+            "rightThought"
+        );
+
+
+    if(left){
+
+        left.innerHTML=
+            escapeHTML(
+                pick(
+                    THOUGHTS
+                )
+            )+
+            ` <span class="cursor">█</span>`;
+
+    }
+
+
+    if(right){
+
+        right.innerHTML=
+            escapeHTML(
+                pick(
+                    THOUGHTS
+                )
+            )+
+            ` <span class="cursor">█</span>`;
+
+    }
+
 }
 
 
-/* ---------- LOG ---------- */
-
-function log(message){
-
-  const el=document.getElementById("systemLog");
-
-  const div=document.createElement("div");
-
-  div.innerHTML=
-    `<span style="color:#345269">[${nowTime()}]</span> ${message}`;
-
-  el.prepend(div);
-
-  while(el.children.length>60){
-    el.removeChild(el.lastChild);
-  }
-}
-
-
-/* ---------- TOAST ---------- */
-
-let toastTimer;
-
-function toast(message){
-
-  const el=document.getElementById("toast");
-
-  el.textContent=message;
-
-  el.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer=setTimeout(()=>{
-    el.classList.remove("show");
-  },2400);
-}
-
-
-/* ---------- CONTROLS ---------- */
+/* ---------------------------------------------------------
+   CONTROLS
+--------------------------------------------------------- */
 
 function togglePause(){
 
-  running=!running;
+    simulationRunning=
+        !simulationRunning;
 
-  document.getElementById("liveStatus").textContent=
-    running
-    ? "SIMULATION ONLINE"
-    : "SIMULATION PAUSED";
 
-  toast(
-    running
-    ? "SIMULATION RESUMED"
-    : "SIMULATION PAUSED"
-  );
+    setText(
+        "liveStatus",
+        simulationRunning
+        ? "SIMULATION ONLINE"
+        : "SIMULATION PAUSED"
+    );
+
+
+    sayCommentary(
+        simulationRunning
+        ? "And we're back! The arena is live."
+        : "Time freeze! The simulation is paused."
+    );
+
 }
 
 
-function changeGameSpeed(amount){
+function changeGameSpeed(
+    amount
+){
 
-  gameSpeed=clamp(
-    gameSpeed+amount,
-    .25,
-    8
-  );
+    simulationSpeed=
+        clamp(
+            simulationSpeed+
+            amount,
+            .25,
+            10
+        );
 
-  toast(
-    "SIMULATION SPEED "+
-    gameSpeed.toFixed(1)+"×"
-  );
+
+    showToast(
+        `SIMULATION SPEED ${simulationSpeed.toFixed(1)}×`
+    );
+
 }
 
 
 function newLeague(){
 
-  const ok=confirm(
-    "Start a new era from scratch?\n\n"+
-    "ALL-TIME CHAMPIONSHIP RECORDS WILL BE PRESERVED."
-  );
+    const confirmed=
+        window.confirm(
+            "Start a brand-new competitive era?\n\n"+
+            "All-time championships will remain permanently."
+        );
 
-  if(!ok)return;
 
-  state.era++;
+    if(!confirmed)
+        return;
 
-  for(const ai of state.competitors){
 
-    ai.wins=0;
-    ai.losses=0;
-    ai.pointsFor=0;
-    ai.pointsAgainst=0;
-    ai.streak=0;
-    ai.recentForm=0;
+    beginNextEra();
 
-    ai.generation++;
-
-    mutate(ai);
-  }
-
-  log(
-    "MANUAL ERA RESET :: "+
-    "HISTORY PRESERVED"
-  );
-
-  save();
-
-  resetMatch();
-  updateUI();
 }
 
 
-function scrollToId(id){
-
-  document.getElementById(id)?.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-}
-
+/* ---------------------------------------------------------
+   NAVIGATION
+--------------------------------------------------------- */
 
 function scrollToGame(){
 
-  document.getElementById("game")
-    .scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
+    document
+        .getElementById(
+            "arena"
+        )
+        ?.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
 }
 
 
-/* ---------- INITIALIZATION ---------- */
+function scrollToId(
+    id
+){
+
+    document
+        .getElementById(
+            id
+        )
+        ?.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
+
+let toastTimer=null;
+
+
+function showToast(
+    message
+){
+
+    const element=
+        document.getElementById(
+            "toast"
+        );
+
+
+    if(!element)
+        return;
+
+
+    element.textContent=
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer=
+        setTimeout(
+            ()=>{
+                element.classList.remove(
+                    "show"
+                );
+            },
+            1800
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   MAIN FIXED-TIMESTEP LOOP
+--------------------------------------------------------- */
+
+function animationFrame(
+    now
+){
+
+    let frameDelta=
+        (
+            now-
+            lastFrameTime
+        )/
+        1000;
+
+
+    lastFrameTime=now;
+
+
+    /*
+       Browser tab switching can produce enormous
+       deltas. Never attempt to simulate minutes of
+       physics in one frame.
+    */
+
+    frameDelta=
+        Math.min(
+            frameDelta,
+            CONFIG.MAX_ACCUMULATOR
+        );
+
+
+    /*
+       Simulation speed modifies accumulated time,
+       not physics itself.
+
+       This keeps the actual physics stable.
+    */
+
+    if(
+        simulationRunning &&
+        !replayActive
+    ){
+
+        physicsAccumulator +=
+            frameDelta*
+            simulationSpeed;
+
+
+        const fixedDt=
+            1/
+            CONFIG.PHYSICS_HZ;
+
+
+        let safety=0;
+
+
+        while(
+            physicsAccumulator>=
+                fixedDt &&
+            safety<30
+        ){
+
+            physicsStep(
+                fixedDt
+            );
+
+
+            /*
+               Record the exact state AFTER
+               each fixed physics update.
+            */
+
+            if(
+                matchStatus==="playing"
+            ){
+
+                recordReplayFrame();
+
+            }
+
+
+            physicsAccumulator -=
+                fixedDt;
+
+
+            safety++;
+
+        }
+
+    }
+
+
+    updateParticles(
+        frameDelta
+    );
+
+
+    updateThoughts(
+        frameDelta
+    );
+
+
+    drawGame();
+
+    drawParticles();
+
+
+    updateReplay(
+        now
+    );
+
+
+    requestAnimationFrame(
+        animationFrame
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   AUTOSAVE
+--------------------------------------------------------- */
+
+setInterval(
+    ()=>{
+        saveState();
+    },
+    5000
+);
+
+
+/* ---------------------------------------------------------
+   PERIODIC EVOLUTION
+--------------------------------------------------------- */
+
+setInterval(
+    ()=>{
+
+        /*
+           Tiny amount of natural evolution.
+
+           This happens slowly enough that it doesn't
+           make the simulation jump around constantly.
+        */
+
+        if(
+            Math.random()<.35
+        ){
+
+            const ai=
+                pick(
+                    state.competitors
+                );
+
+
+            ai.experience+=1;
+
+
+            if(
+                Math.random()<.18
+            ){
+
+                mutateCompetitor(
+                    ai
+                );
+
+            }
+
+
+            saveState();
+
+            updateUI();
+
+        }
+
+    },
+    18000
+);
+
+
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
 
 resetMatch();
 
-log(
-  "∞ PONG LEAGUE CORE ONLINE"
+
+sayCommentary(
+    pick(
+        COMMENTARY.intro
+    )
 );
 
-log(
-  "11 AUTONOMOUS COMPETITORS DETECTED"
+
+logEvent(
+    "∞ PONG LEAGUE CORE ONLINE"
 );
 
-log(
-  "PERSISTENT CHAMPIONSHIP ARCHIVE ONLINE"
+
+logEvent(
+    "FIXED TIMESTEP PHYSICS :: 120 HZ"
 );
 
-log(
-  "EVOLUTION SYSTEM ONLINE"
+
+logEvent(
+    "CONTINUOUS COLLISION DETECTION :: ONLINE"
 );
 
-log(
-  "INSTANT REPLAY SYSTEM ONLINE"
+
+logEvent(
+    "SUBSTEP ANTI-TUNNELING :: ONLINE"
 );
 
-log(
-  "NO FINAL MATCH DETECTED"
+
+logEvent(
+    "RECORDED FRAME REPLAY :: ONLINE"
 );
+
+
+logEvent(
+    "AI LEARNING SYSTEM :: ONLINE"
+);
+
+
+logEvent(
+    "PERMANENT CHAMPIONSHIP ARCHIVE :: ONLINE"
+);
+
+
+logEvent(
+    "11 COMPETITORS DETECTED"
+);
+
+
+logEvent(
+    "NO PREDETERMINED CHAMPION"
+);
+
 
 updateUI();
 
-requestAnimationFrame(loop);
+
+requestAnimationFrame(
+    animationFrame
+);
 
 
-/* ---------- AUTO SAVE ---------- */
+/* ---------------------------------------------------------
+   KEYBOARD SHORTCUTS
+--------------------------------------------------------- */
 
-setInterval(save,5000);
+window.addEventListener(
+    "keydown",
+    event=>{
 
+        if(
+            event.code==="Space"
+        ){
 
-/* ---------- PERIODIC AI EVOLUTION ---------- */
+            event.preventDefault();
 
-setInterval(()=>{
+            togglePause();
 
-  if(!running)return;
-
-  /*
-    Every few minutes, randomly allow competitors
-    to evolve even without a generation-up event.
-  */
-
-  const ai=choice(state.competitors);
-
-  if(Math.random()<.45){
-
-    mutate(ai);
-
-    log(
-      "BACKGROUND EVOLUTION :: "+
-      ai.name+
-      " :: "+ai.strategy
-    );
-
-    save();
-    updateUI();
-  }
-
-},15000);
+        }
 
 
-/* ---------- PERIODIC FORM DECAY ---------- */
+        if(
+            event.key==="ArrowUp"
+        ){
 
-setInterval(()=>{
+            changeGameSpeed(
+                .5
+            );
 
-  for(const ai of state.competitors){
-    ai.recentForm*=.97;
-  }
+        }
 
-},10000);
+
+        if(
+            event.key==="ArrowDown"
+        ){
+
+            changeGameSpeed(
+                -.5
+            );
+
+        }
+
+
+        if(
+            event.key==="r" ||
+            event.key==="R"
+        ){
+
+            if(
+                replayActive
+            ){
+
+                skipReplay();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   VISIBILITY HANDLING
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "visibilitychange",
+    ()=>{
+
+        /*
+           Don't let a backgrounded tab return with
+           an enormous physics backlog.
+        */
+
+        if(
+            document.hidden
+        ){
+
+            physicsAccumulator=0;
+
+            lastFrameTime=
+                performance.now();
+
+        }
+
+    }
+);
 
 </script>
 
