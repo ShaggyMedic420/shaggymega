@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>∞ NEON PONG LEAGUE</title>
+
 <style>
 :root{
   --bg:#02040a;
-  --panel:#080c17;
+  --panel:#080d18;
   --panel2:#0d1424;
   --cyan:#00f6ff;
   --pink:#ff2bd6;
@@ -16,31 +17,52 @@
   --yellow:#ffe66d;
   --red:#ff4567;
   --white:#edfaff;
-  --muted:#70819c;
+  --muted:#73839c;
   --line:rgba(255,255,255,.09);
 }
+
 *{box-sizing:border-box}
-html{background:var(--bg)}
-body{
+
+html,body{
   margin:0;
-  color:var(--white);
-  background:
-    radial-gradient(circle at 50% -20%,#17245d 0,#080b1c 32%,#02040a 75%);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  min-height:100vh;
+  min-height:100%;
+  background:var(--bg);
 }
+
+body{
+  color:var(--white);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background:
+    radial-gradient(
+      circle at 50% -15%,
+      #17265f 0,
+      #080b1b 34%,
+      #02040a 72%
+    );
+}
+
 body:before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.12;
+  opacity:.1;
   background:
     linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:42px 42px;
 }
-button{font:inherit}
+
+button{
+  font:inherit;
+}
+
 header{
   position:sticky;
   top:0;
@@ -49,6 +71,7 @@ header{
   backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);
 }
+
 .header{
   max-width:1500px;
   margin:auto;
@@ -58,24 +81,28 @@ header{
   justify-content:space-between;
   gap:15px;
 }
+
 .logo{
   font-size:21px;
   font-weight:1000;
   letter-spacing:-1px;
 }
+
 .logo b{
   color:var(--cyan);
   text-shadow:0 0 20px var(--cyan);
 }
+
 .status{
   display:flex;
   align-items:center;
   gap:8px;
+  color:#ff536d;
   font-size:10px;
   letter-spacing:1.5px;
-  font-weight:900;
-  color:#ff536d;
+  font-weight:1000;
 }
+
 .status i{
   width:8px;
   height:8px;
@@ -84,37 +111,54 @@ header{
   box-shadow:0 0 15px #ff3155;
   animation:pulse 1s infinite;
 }
+
 @keyframes pulse{
-  50%{opacity:.3;transform:scale(.65)}
+  50%{
+    opacity:.3;
+    transform:scale(.65);
+  }
 }
+
 main{
   width:min(1500px,calc(100% - 24px));
   margin:16px auto 70px;
 }
+
 .seasonbar{
   display:grid;
   grid-template-columns:1fr auto 1fr;
   gap:10px;
   margin-bottom:12px;
 }
+
 .info{
   padding:11px 14px;
   border:1px solid var(--line);
   background:rgba(255,255,255,.025);
   border-radius:13px;
 }
-.info.center{text-align:center}
+
+.info.center{
+  text-align:center;
+}
+
+.info:last-child{
+  text-align:right;
+}
+
 .label{
   color:var(--muted);
   font-size:8px;
   letter-spacing:2px;
   font-weight:1000;
 }
+
 .value{
   margin-top:3px;
   font-size:16px;
   font-weight:1000;
 }
+
 .game-head{
   display:grid;
   grid-template-columns:1fr auto 1fr;
@@ -122,29 +166,45 @@ main{
   gap:15px;
   margin-bottom:10px;
 }
+
 .player{
   padding:12px 16px;
   border-radius:15px;
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.012)
+    );
 }
-.player.right{text-align:right}
+
+.player.right{
+  text-align:right;
+}
+
 .player .name{
   font-size:clamp(18px,3vw,31px);
   font-weight:1000;
 }
+
 .player .meta{
   color:var(--muted);
   font-size:10px;
   margin-top:4px;
 }
+
 .score{
   font-size:clamp(42px,6vw,70px);
   line-height:.9;
   font-weight:1000;
   text-align:center;
 }
-.score .colon{color:#34425c}
+
+.score .colon{
+  color:#34425c;
+}
+
 .matchtype{
   text-align:center;
   color:var(--muted);
@@ -153,30 +213,42 @@ main{
   font-weight:1000;
   margin-top:4px;
 }
+
 .arena-shell{
   padding:7px;
   border-radius:20px;
   border:1px solid rgba(0,246,255,.25);
-  background:linear-gradient(135deg,rgba(0,246,255,.045),rgba(255,43,214,.04));
-  box-shadow:0 0 80px rgba(0,246,255,.07),inset 0 0 35px rgba(0,0,0,.5);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,246,255,.045),
+      rgba(255,43,214,.04)
+    );
+  box-shadow:
+    0 0 80px rgba(0,246,255,.07),
+    inset 0 0 35px rgba(0,0,0,.5);
 }
+
 .arena{
   position:relative;
   overflow:hidden;
   border-radius:14px;
   background:#02040a;
 }
+
 #game{
   display:block;
   width:100%;
   height:auto;
   aspect-ratio:16/9;
 }
+
 .overlay{
   position:absolute;
   inset:0;
   pointer-events:none;
 }
+
 .announce{
   position:absolute;
   left:50%;
@@ -184,44 +256,54 @@ main{
   transform:translate(-50%,-50%) scale(.92);
   opacity:0;
   text-align:center;
-  transition:.14s;
+  transition:.12s;
 }
+
 .announce.show{
   opacity:1;
   transform:translate(-50%,-50%) scale(1);
 }
+
 .announce .big{
   font-size:clamp(30px,6vw,78px);
   font-weight:1000;
   text-shadow:0 0 35px currentColor;
 }
+
 .announce .small{
   color:#a8b8d1;
   font-size:10px;
   letter-spacing:3px;
   font-weight:1000;
 }
+
 .replay{
   position:absolute;
   left:50%;
   top:50%;
-  width:42%;
-  height:48%;
+  width:46%;
+  height:50%;
   transform:translate(-50%,-50%);
   border-radius:14px;
   overflow:hidden;
   display:none;
-  background:rgba(2,4,10,.84);
+  background:rgba(2,4,10,.86);
   border:1px solid rgba(255,230,109,.5);
   box-shadow:0 0 55px rgba(255,230,109,.12);
 }
-.replay.on{display:block}
+
+.replay.on{
+  display:block;
+}
+
 #replayCanvas{
   width:100%;
   height:100%;
   display:block;
 }
-.replay-title,.replay-speed{
+
+.replay-title,
+.replay-speed{
   position:absolute;
   top:8px;
   padding:4px 7px;
@@ -231,26 +313,36 @@ main{
   font-weight:1000;
   letter-spacing:1.5px;
 }
+
 .replay-title{
   left:8px;
   color:var(--yellow);
 }
+
 .replay-speed{
   right:8px;
   color:var(--yellow);
 }
+
 .dashboard{
   display:grid;
   grid-template-columns:1.2fr .8fr .8fr;
   gap:12px;
   margin-top:12px;
 }
+
 .panel{
   border:1px solid var(--line);
   border-radius:15px;
-  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    );
   overflow:hidden;
 }
+
 .panel-title{
   padding:10px 13px;
   border-bottom:1px solid var(--line);
@@ -262,38 +354,51 @@ main{
   letter-spacing:1.7px;
   color:#9bacC5;
 }
+
 .commentary{
   min-height:140px;
   max-height:190px;
   overflow:hidden;
   padding:8px 13px;
 }
+
 .comment{
   padding:7px 0;
   border-bottom:1px solid rgba(255,255,255,.04);
   font-size:11px;
 }
-.comment strong{color:var(--cyan)}
+
+.comment strong{
+  color:var(--cyan);
+}
+
 .telemetry{
   display:grid;
   grid-template-columns:1fr 1fr;
 }
+
 .stat{
   padding:11px 12px;
   border-bottom:1px solid var(--line);
 }
-.stat:nth-child(odd){border-right:1px solid var(--line)}
+
+.stat:nth-child(odd){
+  border-right:1px solid var(--line);
+}
+
 .statname{
   color:var(--muted);
   font-size:8px;
   text-transform:uppercase;
   letter-spacing:1px;
 }
+
 .statvalue{
   font-size:19px;
   font-weight:1000;
   margin-top:2px;
 }
+
 .bar{
   height:5px;
   margin-top:6px;
@@ -301,17 +406,26 @@ main{
   border-radius:20px;
   overflow:hidden;
 }
+
 .bar i{
   display:block;
   height:100%;
   width:50%;
   border-radius:20px;
-  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--purple),
+      var(--pink)
+    );
   box-shadow:0 0 14px var(--cyan);
 }
+
 .next{
   padding:12px;
 }
+
 .next-card{
   border:1px solid rgba(255,255,255,.07);
   border-radius:10px;
@@ -319,40 +433,47 @@ main{
   margin-bottom:8px;
   background:rgba(255,255,255,.02);
 }
+
 .next-card.live{
   border-color:rgba(0,246,255,.5);
   box-shadow:0 0 20px rgba(0,246,255,.08);
 }
+
 .next-card .tiny{
   color:var(--muted);
   font-size:7px;
   letter-spacing:1.5px;
   font-weight:1000;
 }
+
 .next-card .teams{
   margin-top:5px;
   font-weight:900;
   font-size:12px;
 }
+
 .bracket-panel{
   margin-top:12px;
 }
+
 .bracket-wrap{
   overflow-x:auto;
   padding:12px;
 }
+
 .bracket{
   min-width:980px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:10px;
-  align-items:stretch;
 }
+
 .roundcol{
   display:flex;
   flex-direction:column;
   gap:8px;
 }
+
 .round-title{
   text-align:center;
   font-size:8px;
@@ -361,6 +482,7 @@ main{
   font-weight:1000;
   margin-bottom:2px;
 }
+
 .bracket-match{
   position:relative;
   min-height:72px;
@@ -370,10 +492,12 @@ main{
   background:rgba(255,255,255,.018);
   transition:.2s;
 }
+
 .bracket-match.current{
   border-color:rgba(0,246,255,.6);
   box-shadow:0 0 20px rgba(0,246,255,.1);
 }
+
 .bracket-match.current:after{
   content:"CURRENT";
   position:absolute;
@@ -383,9 +507,11 @@ main{
   font-size:6px;
   font-weight:1000;
 }
+
 .bracket-match.next{
   border-color:rgba(255,230,109,.35);
 }
+
 .team{
   min-height:24px;
   display:flex;
@@ -397,75 +523,86 @@ main{
   font-size:9px;
   font-weight:800;
 }
+
 .team.winner{
   font-weight:1000;
   color:var(--green);
   background:rgba(55,255,145,.05);
 }
+
 .team.loser{
   opacity:.3;
   text-decoration:line-through;
 }
+
 .team.live{
   color:var(--cyan);
   background:rgba(0,246,255,.06);
 }
-.team.bye{
-  color:var(--yellow);
-}
+
 .champ{
   color:var(--yellow);
   font-size:7px;
 }
+
 .records{
   margin-top:12px;
 }
+
 .record-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:1px;
   background:var(--line);
 }
+
 .record{
   min-height:110px;
   padding:13px;
   background:var(--panel);
 }
+
 .record .rtitle{
   color:var(--muted);
   font-size:8px;
   letter-spacing:1px;
   font-weight:1000;
 }
+
 .record .leader{
   margin-top:8px;
   font-size:18px;
   font-weight:1000;
 }
-.record .leader span{
-  color:var(--cyan);
-}
+
 .record .rvalue{
   margin-top:3px;
   color:var(--yellow);
   font-size:12px;
   font-weight:1000;
 }
+
 .record .sub{
   color:#52627b;
   font-size:8px;
   margin-top:5px;
 }
+
 .stats-table{
   margin-top:12px;
 }
-.table-scroll{overflow-x:auto}
+
+.table-scroll{
+  overflow-x:auto;
+}
+
 table{
   width:100%;
   border-collapse:collapse;
   min-width:900px;
   font-size:10px;
 }
+
 th{
   color:var(--muted);
   font-size:8px;
@@ -473,18 +610,42 @@ th{
   letter-spacing:1px;
   text-align:left;
 }
+
 th,td{
   padding:9px 11px;
   border-bottom:1px solid rgba(255,255,255,.045);
 }
-td strong{font-size:11px}
-.rank{color:var(--muted);width:35px}
-.gold{color:var(--yellow)}
-.green{color:var(--green)}
-.power{color:var(--cyan)}
-.champion-row{
-  background:linear-gradient(90deg,rgba(255,230,109,.045),transparent);
+
+td strong{
+  font-size:11px;
 }
+
+.rank{
+  color:var(--muted);
+  width:35px;
+}
+
+.gold{
+  color:var(--yellow);
+}
+
+.green{
+  color:var(--green);
+}
+
+.power{
+  color:var(--cyan);
+}
+
+.champion-row{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,230,109,.045),
+      transparent
+    );
+}
+
 .badge{
   display:inline-block;
   padding:3px 5px;
@@ -495,31 +656,83 @@ td strong{font-size:11px}
   color:#001015;
   background:var(--cyan);
 }
+
 .footer{
   text-align:center;
   color:#43526a;
   font-size:9px;
   margin:25px 0;
 }
+
 @media(max-width:1050px){
-  .dashboard{grid-template-columns:1fr 1fr}
-  .dashboard>.panel:first-child{grid-column:1/-1}
-  .record-grid{grid-template-columns:repeat(2,1fr)}
+  .dashboard{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .dashboard>.panel:first-child{
+    grid-column:1/-1;
+  }
+
+  .record-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
+
 @media(max-width:650px){
-  main{width:calc(100% - 10px);margin-top:9px}
-  .header{padding:11px}
-  .logo{font-size:15px}
-  .seasonbar{grid-template-columns:1fr 1fr}
-  .seasonbar .center{grid-column:1/-1;grid-row:1}
-  .game-head{gap:5px}
-  .player{padding:8px}
-  .player .name{font-size:14px}
-  .score{font-size:38px}
-  .dashboard{grid-template-columns:1fr}
-  .dashboard>.panel:first-child{grid-column:auto}
-  .record-grid{grid-template-columns:1fr 1fr}
-  .replay{width:55%;height:55%}
+  main{
+    width:calc(100% - 10px);
+    margin-top:9px;
+  }
+
+  .header{
+    padding:11px;
+  }
+
+  .logo{
+    font-size:15px;
+  }
+
+  .seasonbar{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .seasonbar .center{
+    grid-column:1/-1;
+    grid-row:1;
+  }
+
+  .game-head{
+    gap:5px;
+  }
+
+  .player{
+    padding:8px;
+  }
+
+  .player .name{
+    font-size:14px;
+  }
+
+  .score{
+    font-size:38px;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard>.panel:first-child{
+    grid-column:auto;
+  }
+
+  .record-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .replay{
+    width:58%;
+    height:56%;
+  }
 }
 </style>
 </head>
@@ -528,196 +741,351 @@ td strong{font-size:11px}
 
 <header>
   <div class="header">
-    <div class="logo">∞ <b>NEON PONG LEAGUE</b></div>
-    <div class="status"><i></i> LIVE FOREVER</div>
+    <div class="logo">
+      ∞ <b>NEON PONG LEAGUE</b>
+    </div>
+
+    <div class="status">
+      <i></i>
+      LIVE FOREVER
+    </div>
   </div>
 </header>
 
 <main>
 
-  <section class="seasonbar">
-    <div class="info">
-      <div class="label">CURRENT SEASON</div>
-      <div class="value" id="season">SEASON 1</div>
-    </div>
+<section class="seasonbar">
 
-    <div class="info center">
-      <div class="label">LEAGUE STATUS</div>
-      <div class="value" id="leagueStatus">INITIALIZING</div>
-    </div>
-
-    <div class="info" style="text-align:right">
-      <div class="label">CHAMPIONSHIPS COMPLETED</div>
-      <div class="value" id="completedSeasons">0</div>
-    </div>
-  </section>
-
-  <section class="game-head">
-    <div class="player">
-      <div class="name" id="leftName">—</div>
-      <div class="meta" id="leftMeta">—</div>
-    </div>
-
-    <div>
-      <div class="score">
-        <span id="leftScore">0</span>
-        <span class="colon">:</span>
-        <span id="rightScore">0</span>
-      </div>
-      <div class="matchtype" id="matchType">LOADING</div>
-    </div>
-
-    <div class="player right">
-      <div class="name" id="rightName">—</div>
-      <div class="meta" id="rightMeta">—</div>
-    </div>
-  </section>
-
-  <section class="arena-shell">
-    <div class="arena">
-      <canvas id="game" width="1600" height="900"></canvas>
-
-      <div class="overlay">
-
-        <div class="announce" id="announce">
-          <div class="big" id="announceBig"></div>
-          <div class="small" id="announceSmall"></div>
-        </div>
-
-        <div class="replay" id="replay">
-          <canvas id="replayCanvas" width="800" height="450"></canvas>
-          <div class="replay-title">⚡ INSTANT REPLAY</div>
-          <div class="replay-speed" id="replaySpeed">3.0×</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="dashboard">
-
-    <div class="panel">
-      <div class="panel-title">
-        <span>🎙 LIVE COMMENTARY</span>
-        <span id="commentState">LIVE</span>
-      </div>
-      <div class="commentary" id="commentary"></div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-title">
-        <span>⚡ TELEMETRY</span>
-        <span id="phase">MATCH</span>
-      </div>
-
-      <div class="telemetry">
-
-        <div class="stat">
-          <div class="statname">Ball velocity</div>
-          <div class="statvalue" id="velocity">0</div>
-        </div>
-
-        <div class="stat">
-          <div class="statname">Rally</div>
-          <div class="statvalue" id="rally">0</div>
-        </div>
-
-        <div class="stat">
-          <div class="statname">Match speed</div>
-          <div class="statvalue" id="speed">1.00×</div>
-          <div class="bar"><i id="speedBar"></i></div>
-        </div>
-
-        <div class="stat">
-          <div class="statname">AI adaptation</div>
-          <div class="statvalue" id="adapt">0%</div>
-          <div class="bar"><i id="adaptBar"></i></div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-title">
-        <span>📺 MATCH QUEUE</span>
-        <span>LIVE</span>
-      </div>
-      <div class="next" id="queue"></div>
-    </div>
-
-  </section>
-
-  <section class="panel bracket-panel">
-    <div class="panel-title">
-      <span>🏆 LIVE CHAMPIONSHIP BRACKET</span>
-      <span id="bracketStatus">UPDATING</span>
-    </div>
-    <div class="bracket-wrap">
-      <div class="bracket" id="bracket"></div>
-    </div>
-  </section>
-
-  <section class="panel records">
-    <div class="panel-title">
-      <span>👑 ALL-TIME LEAGUE RECORDS</span>
-      <span>CAREER HISTORY</span>
-    </div>
-
-    <div class="record-grid" id="records"></div>
-  </section>
-
-  <section class="panel stats-table">
-    <div class="panel-title">
-      <span>📊 COMPREHENSIVE COMPETITOR STATISTICS</span>
-      <span>ALL TIME</span>
-    </div>
-
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Competitor</th>
-            <th>Style</th>
-            <th>Matches</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Win %</th>
-            <th>Titles</th>
-            <th>Current Streak</th>
-            <th>Best Streak</th>
-            <th>Title Streak</th>
-            <th>Best Title Streak</th>
-            <th>Best Rally</th>
-            <th>Power</th>
-          </tr>
-        </thead>
-        <tbody id="statsBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <div class="footer">
-    NEON PONG LEAGUE • EVERY MATCH MATTERS • EVERY CHAMPION IS REMEMBERED • THE LEAGUE NEVER ENDS
+  <div class="info">
+    <div class="label">CURRENT SEASON</div>
+    <div class="value" id="season">SEASON 1</div>
   </div>
 
+  <div class="info center">
+    <div class="label">LEAGUE STATUS</div>
+    <div class="value" id="leagueStatus">INITIALIZING</div>
+  </div>
+
+  <div class="info">
+    <div class="label">CHAMPIONSHIPS COMPLETED</div>
+    <div class="value" id="completedSeasons">0</div>
+  </div>
+
+</section>
+
+
+<section class="game-head">
+
+  <div class="player">
+    <div class="name" id="leftName">—</div>
+    <div class="meta" id="leftMeta">—</div>
+  </div>
+
+  <div>
+    <div class="score">
+      <span id="leftScore">0</span>
+      <span class="colon">:</span>
+      <span id="rightScore">0</span>
+    </div>
+
+    <div class="matchtype" id="matchType">
+      LOADING
+    </div>
+  </div>
+
+  <div class="player right">
+    <div class="name" id="rightName">—</div>
+    <div class="meta" id="rightMeta">—</div>
+  </div>
+
+</section>
+
+
+<section class="arena-shell">
+
+  <div class="arena">
+
+    <canvas
+      id="game"
+      width="1600"
+      height="900">
+    </canvas>
+
+    <div class="overlay">
+
+      <div class="announce" id="announce">
+
+        <div
+          class="big"
+          id="announceBig">
+        </div>
+
+        <div
+          class="small"
+          id="announceSmall">
+        </div>
+
+      </div>
+
+
+      <div class="replay" id="replay">
+
+        <canvas
+          id="replayCanvas"
+          width="800"
+          height="450">
+        </canvas>
+
+        <div class="replay-title">
+          ⚡ INSTANT REPLAY
+        </div>
+
+        <div
+          class="replay-speed"
+          id="replaySpeed">
+          3.0×
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="dashboard">
+
+  <div class="panel">
+
+    <div class="panel-title">
+      <span>🎙 LIVE COMMENTARY</span>
+      <span>LIVE</span>
+    </div>
+
+    <div
+      class="commentary"
+      id="commentary">
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-title">
+      <span>⚡ TELEMETRY</span>
+      <span id="phase">MATCH</span>
+    </div>
+
+    <div class="telemetry">
+
+      <div class="stat">
+        <div class="statname">
+          Ball velocity
+        </div>
+        <div
+          class="statvalue"
+          id="velocity">
+          0
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="statname">
+          Rally hits
+        </div>
+        <div
+          class="statvalue"
+          id="rally">
+          0
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="statname">
+          Rally speed
+        </div>
+
+        <div
+          class="statvalue"
+          id="speed">
+          1.00×
+        </div>
+
+        <div class="bar">
+          <i id="speedBar"></i>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="statname">
+          AI adaptation
+        </div>
+
+        <div
+          class="statvalue"
+          id="adapt">
+          0%
+        </div>
+
+        <div class="bar">
+          <i id="adaptBar"></i>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-title">
+      <span>📺 MATCH QUEUE</span>
+      <span>LIVE</span>
+    </div>
+
+    <div
+      class="next"
+      id="queue">
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="panel bracket-panel">
+
+  <div class="panel-title">
+
+    <span>
+      🏆 LIVE CHAMPIONSHIP BRACKET
+    </span>
+
+    <span id="bracketStatus">
+      UPDATING
+    </span>
+
+  </div>
+
+  <div class="bracket-wrap">
+
+    <div
+      class="bracket"
+      id="bracket">
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="panel records">
+
+  <div class="panel-title">
+    <span>
+      👑 ALL-TIME LEAGUE RECORDS
+    </span>
+
+    <span>
+      CAREER HISTORY
+    </span>
+  </div>
+
+  <div
+    class="record-grid"
+    id="records">
+  </div>
+
+</section>
+
+
+<section class="panel stats-table">
+
+  <div class="panel-title">
+
+    <span>
+      📊 COMPREHENSIVE COMPETITOR STATISTICS
+    </span>
+
+    <span>
+      ALL TIME
+    </span>
+
+  </div>
+
+  <div class="table-scroll">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>#</th>
+          <th>Competitor</th>
+          <th>Style</th>
+          <th>Matches</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Win %</th>
+          <th>Titles</th>
+          <th>Win Streak</th>
+          <th>Best Streak</th>
+          <th>Title Streak</th>
+          <th>Best Title Streak</th>
+          <th>Best Rally</th>
+          <th>Power</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="statsBody"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+  NEON PONG LEAGUE • EVERY MATCH MATTERS •
+  EVERY CHAMPION IS REMEMBERED • THE LEAGUE NEVER ENDS
+</div>
+
 </main>
+
 
 <script>
 "use strict";
 
 /* =========================================================
    NEON PONG LEAGUE
-   Single-file persistent AI tournament.
+   Fast, watchable, progressively accelerating Pong.
+   Everything runs locally in this one file.
+   ========================================================= */
+
+
+/* =========================================================
+   CANVAS
    ========================================================= */
 
 const GAME=document.getElementById("game");
 const CTX=GAME.getContext("2d");
+
 const REPLAY=document.getElementById("replayCanvas");
 const RCTX=REPLAY.getContext("2d");
 
 const W=GAME.width;
 const H=GAME.height;
+
+
+/* =========================================================
+   COLORS
+   ========================================================= */
 
 const COLORS={
   cyan:"#00f6ff",
@@ -728,6 +1096,51 @@ const COLORS={
   red:"#ff4567",
   white:"#edfaff"
 };
+
+
+/* =========================================================
+   PHYSICS TUNING
+   =========================================================
+
+   The important part:
+
+   START_SPEED
+      Fast immediately.
+
+   ACCELERATION
+      Applied EVERY successful paddle hit.
+
+   MAX_SPEED
+      Prevents the ball from becoming impossible
+      to visually follow.
+
+   WATCHABLE_SPEED
+      We don't simply keep increasing forever.
+      Instead, the acceleration gradually softens
+      as we approach the ceiling.
+
+   This produces:
+
+      FAST
+       ↓
+      FASTER
+       ↓
+      INTENSE
+       ↓
+      INSANE
+       ↓
+      CONTROLLED MAXIMUM
+
+   rather than:
+
+      slow → instant teleporting projectile
+*/
+
+const START_SPEED=18;
+const MAX_SPEED=44;
+
+const BASE_ACCELERATION=1.045;
+
 
 /* =========================================================
    COMPETITORS
@@ -748,7 +1161,9 @@ const roster=[
 ];
 
 let players=roster.map((r,i)=>({
+
   id:i,
+
   name:r[0],
   style:r[1],
   base:r[2],
@@ -772,19 +1187,21 @@ let players=roster.map((r,i)=>({
   currentTitleStreak:0,
   bestTitleStreak:0,
 
-  currentFinalStreak:0,
-
   comebackWins:0,
+
   fastestWin:Infinity,
 
   power:100,
+
   adaptation:0,
 
   seasonsPlayed:0
+
 }));
 
+
 /* =========================================================
-   PERSISTENCE
+   PERSISTENT LEAGUE STATE
    ========================================================= */
 
 let leagueState={
@@ -795,269 +1212,438 @@ let leagueState={
 };
 
 try{
-  const saved=JSON.parse(localStorage.getItem("neonPongLeagueV3"));
+
+  const saved=
+    JSON.parse(
+      localStorage.getItem(
+        "neonPongLeagueV4"
+      )
+    );
 
   if(saved){
-    if(saved.players && Array.isArray(saved.players)){
+
+    if(
+      saved.players &&
+      Array.isArray(saved.players)
+    ){
+
       saved.players.forEach(s=>{
-        const p=players.find(x=>x.id===s.id);
-        if(p)Object.assign(p,s);
+
+        const p=
+          players.find(
+            x=>x.id===s.id
+          );
+
+        if(p){
+          Object.assign(p,s);
+        }
+
       });
+
     }
 
     if(saved.league){
-      Object.assign(leagueState,saved.league);
+
+      Object.assign(
+        leagueState,
+        saved.league
+      );
+
     }
+
   }
+
 }catch(e){}
 
 function save(){
 
   try{
+
     localStorage.setItem(
-      "neonPongLeagueV3",
+      "neonPongLeagueV4",
       JSON.stringify({
         players,
         league:leagueState
       })
     );
+
   }catch(e){}
+
 }
 
+
 /* =========================================================
-   TOURNAMENT
-   =========================================================
-
-   Defending champion:
-     automatic FINAL berth.
-
-   Other 10 players:
-     Round of 10
-       ↓
-     Quarterfinal qualification
-       ↓
-     Semifinals
-       ↓
-     Challenger final
-       ↓
-     Championship final vs defending champion
-*/
-
-let tournament=null;
+   SHUFFLE
+   ========================================================= */
 
 function shuffle(array){
 
   const a=[...array];
 
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+  for(
+    let i=a.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+    [a[i],a[j]]=
+      [a[j],a[i]];
   }
 
   return a;
 }
+
+
+/* =========================================================
+   TOURNAMENT
+   ========================================================= */
+
+let tournament=null;
 
 function newTournament(){
 
   const defending=
     leagueState.defendingChampion===null
       ?null
-      :players.find(p=>p.id===leagueState.defendingChampion);
+      :players.find(
+        p=>p.id===
+          leagueState.defendingChampion
+      );
 
   const challengers=
-    shuffle(players.filter(p=>!defending || p.id!==defending.id));
-
-  /*
-    10 challengers.
-
-    R1: 5 matches -> 5 winners
-    R2: one "wildcard" match structure is resolved
-    To produce a clean 4-player semifinal:
-      top 3 byes + two lowest R1 winners play.
-  */
+    shuffle(
+      players.filter(
+        p=>!defending ||
+        p.id!==defending.id
+      )
+    );
 
   const round1=[];
 
   for(let i=0;i<5;i++){
 
     round1.push({
+
       id:"r1-"+i,
+
       round:1,
+
       a:challengers[i*2],
       b:challengers[i*2+1],
+
       winner:null,
       loser:null,
+
       status:"UPCOMING"
+
     });
+
   }
 
   tournament={
-    defending:defending,
+
+    defending,
+
     round1,
+
     quarter:[
-      {id:"q1",round:2,a:null,b:null,winner:null,loser:null,status:"UPCOMING"},
-      {id:"q2",round:2,a:null,b:null,winner:null,loser:null,status:"UPCOMING"}
+
+      {
+        id:"q1",
+        round:2,
+        a:null,
+        b:null,
+        winner:null,
+        loser:null,
+        status:"UPCOMING"
+      },
+
+      {
+        id:"q2",
+        round:2,
+        a:null,
+        b:null,
+        winner:null,
+        loser:null,
+        status:"UPCOMING"
+      }
+
     ],
+
     semifinal:[
-      {id:"s1",round:3,a:null,b:null,winner:null,loser:null,status:"UPCOMING"},
-      {id:"s2",round:3,a:null,b:null,winner:null,loser:null,status:"UPCOMING"}
+
+      {
+        id:"s1",
+        round:3,
+        a:null,
+        b:null,
+        winner:null,
+        loser:null,
+        status:"UPCOMING"
+      },
+
+      {
+        id:"s2",
+        round:3,
+        a:null,
+        b:null,
+        winner:null,
+        loser:null,
+        status:"UPCOMING"
+      }
+
     ],
+
     challengerFinal:{
+
       id:"cf",
+
       round:4,
+
       a:null,
       b:null,
+
       winner:null,
       loser:null,
+
       status:"UPCOMING"
+
     },
+
     championship:{
+
       id:"champ",
+
       round:5,
+
       a:null,
       b:defending,
+
       winner:null,
       loser:null,
-      status:defending?"UPCOMING":"FINAL"
+
+      status:
+        defending
+          ?"UPCOMING"
+          :"UPCOMING"
+
     },
+
+    wildcard:null,
 
     current:null,
     next:null
+
   };
 
-  /*
-    The five first-round winners are ranked by power.
-    Top three receive quarterfinal byes.
-    Remaining two fight for the final quarterfinal slot.
-  */
-
-  for(const p of challengers){
-    p.seasonsPlayed++;
-  }
-
-  tournament.current=
-    tournament.round1[0];
+  challengers.forEach(
+    p=>p.seasonsPlayed++
+  );
 
   rebuildTournament();
 
-  updateUI();
 }
+
+
+/* =========================================================
+   BRACKET ADVANCEMENT
+   ========================================================= */
 
 function rebuildTournament(){
 
-  /*
-    Find completed round-one winners.
-  */
-
   const finishedR1=
     tournament.round1
-      .filter(m=>m.winner)
-      .map(m=>m.winner);
+      .filter(
+        m=>m.winner
+      )
+      .map(
+        m=>m.winner
+      );
+
+  /*
+    Five first-round winners.
+
+    Top four power-ranked challengers
+    populate the quarterfinal structure.
+
+    The fifth becomes a wildcard.
+  */
 
   if(finishedR1.length===5){
 
-    const sorted=[...finishedR1]
-      .sort((a,b)=>b.power-a.power);
+    const sorted=
+      [...finishedR1]
+      .sort(
+        (a,b)=>
+          b.power-a.power
+      );
 
-    tournament.quarter[0].a=sorted[0];
-    tournament.quarter[0].b=sorted[1];
+    tournament.quarter[0].a=
+      sorted[0];
 
-    tournament.quarter[1].a=sorted[2];
-    tournament.quarter[1].b=sorted[3];
+    tournament.quarter[0].b=
+      sorted[1];
 
-    /*
-      Fifth winner becomes a direct semifinal entrant.
-      This is intentionally a "wildcard bye".
-    */
+    tournament.quarter[1].a=
+      sorted[2];
 
-    tournament.semifinal[0].a=tournament.quarter[0].winner;
-    tournament.semifinal[1].a=tournament.quarter[1].winner;
+    tournament.quarter[1].b=
+      sorted[3];
 
-    /*
-      Fifth winner waits as wildcard.
-    */
+    tournament.wildcard=
+      sorted[4];
 
-    tournament.wildcard=sorted[4];
   }
+
 
   /*
     Quarterfinal winners.
   */
 
-  if(tournament.quarter.every(m=>m.winner)){
+  if(
+    tournament.quarter.every(
+      m=>m.winner
+    )
+  ){
 
-    tournament.semifinal[0].b=tournament.quarter[0].winner;
-    tournament.semifinal[1].b=tournament.quarter[1].winner;
+    tournament.semifinal[0].a=
+      tournament.quarter[0].winner;
+
+    tournament.semifinal[0].b=
+      tournament.wildcard;
+
+    tournament.semifinal[1].a=
+      tournament.quarter[1].winner;
+
+    /*
+      If the wildcard is already used,
+      the remaining semifinal is resolved
+      from the second quarterfinal path.
+    */
+
+    tournament.semifinal[1].b=
+      tournament.quarter[0].winner;
+
   }
 
+
   /*
-    Semifinal winners -> challenger final.
+    Better deterministic path:
+    once semifinals become fully populated,
+    they continue normally.
   */
 
-  if(tournament.semifinal.every(m=>m.winner)){
+  if(
+    tournament.semifinal[0].winner
+  ){
 
-    tournament.challengerFinal.a=tournament.semifinal[0].winner;
-    tournament.challengerFinal.b=tournament.semifinal[1].winner;
+    tournament.challengerFinal.a=
+      tournament.semifinal[0].winner;
+
   }
 
-  /*
-    Challenger final winner -> championship.
-  */
+  if(
+    tournament.semifinal[1].winner
+  ){
 
-  if(tournament.challengerFinal.winner){
+    tournament.challengerFinal.b=
+      tournament.semifinal[1].winner;
+
+  }
+
+
+  if(
+    tournament.challengerFinal.winner
+  ){
 
     tournament.championship.a=
       tournament.challengerFinal.winner;
 
-    tournament.championship.status="UPCOMING";
   }
 
   chooseNextMatches();
+
 }
+
+
+/* =========================================================
+   ALL MATCHES
+   ========================================================= */
 
 function allMatches(){
 
   return [
+
     ...tournament.round1,
+
     ...tournament.quarter,
+
     ...tournament.semifinal,
+
     tournament.challengerFinal,
+
     tournament.championship
+
   ];
+
 }
+
+
+/* =========================================================
+   FIND NEXT MATCH
+   ========================================================= */
 
 function chooseNextMatches(){
 
-  const matches=allMatches();
-
-  const available=matches.filter(m=>
-    m.status==="UPCOMING" &&
-    m.a &&
-    m.b &&
-    !m.winner
-  );
-
-  /*
-    Don't choose the championship until challenger exists.
-  */
+  const matches=
+    allMatches();
 
   const live=
-    matches.find(m=>m.status==="LIVE");
+    matches.find(
+      m=>m.status==="LIVE"
+    );
 
   if(live){
-    tournament.current=live;
-  }else if(!tournament.current ||
-           tournament.current.winner ||
-           tournament.current.status!=="LIVE"){
 
-    tournament.current=available[0]||null;
+    tournament.current=live;
+
+  }else{
+
+    const available=
+      matches.filter(
+        m=>
+          m.status==="UPCOMING" &&
+          m.a &&
+          m.b &&
+          !m.winner
+      );
+
+    tournament.current=
+      available[0]||null;
+
   }
 
-  const current=tournament.current;
+  const available=
+    matches.filter(
+      m=>
+        m.status==="UPCOMING" &&
+        m.a &&
+        m.b &&
+        !m.winner
+    );
 
   tournament.next=
-    available.find(m=>m!==current)||null;
+    available.find(
+      m=>m!==tournament.current
+    )||null;
+
 }
+
 
 /* =========================================================
    GAME STATE
@@ -1070,45 +1656,59 @@ let leftScore=0;
 let rightScore=0;
 
 let rally=0;
-let matchSpeed=1;
-let matchMaxSpeed=3.5;
+
+let ballSpeed=START_SPEED;
 
 let ball={
+
   x:W/2,
   y:H/2,
+
   vx:0,
   vy:0,
+
   r:11
+
 };
 
 let leftPaddle={
+
   x:55,
   y:H/2-80,
+
   w:20,
   h:160,
+
   vy:0
+
 };
 
 let rightPaddle={
+
   x:W-75,
   y:H/2-80,
+
   w:20,
   h:160,
+
   vy:0
+
 };
 
 let particles=[];
 let trail=[];
 
 let matchStart=0;
-let matchPointsStart=0;
+
 let matchReplayCount=0;
 
 let replayFrames=[];
 let replayActive=false;
+
 let replayIndex=0;
 let replaySpeed=3;
 let replayLast=0;
+
 
 /* =========================================================
    START MATCH
@@ -1118,16 +1718,22 @@ function startNextMatch(){
 
   chooseNextMatches();
 
-  const match=tournament.current;
+  const match=
+    tournament.current;
 
-  if(!match)return;
+  if(
+    !match ||
+    !match.a ||
+    !match.b
+  ){
 
-  if(match.status==="FINAL"){
+    /*
+      The tournament has not produced
+      a valid next matchup yet.
+    */
+
     return;
-  }
 
-  if(!match.a || !match.b){
-    return;
   }
 
   leftPlayer=match.a;
@@ -1137,34 +1743,50 @@ function startNextMatch(){
 
   leftScore=0;
   rightScore=0;
+
   rally=0;
 
-  matchSpeed=1;
+  ballSpeed=START_SPEED;
+
   matchReplayCount=0;
 
-  matchStart=performance.now();
-  matchPointsStart=performance.now();
+  matchStart=
+    performance.now();
 
-  leftPaddle.y=H/2-leftPaddle.h/2;
-  rightPaddle.y=H/2-rightPaddle.h/2;
+  leftPaddle.y=
+    H/2-
+    leftPaddle.h/2;
 
-  resetBall(Math.random()<.5?-1:1);
+  rightPaddle.y=
+    H/2-
+    rightPaddle.h/2;
+
+  resetBall(
+    Math.random()<.5
+      ?-1
+      :1
+  );
 
   announce(
     "FIGHT!",
     tournament.championship===match
-      ?"CHAMPIONSHIP MATCH"
+      ?"🏆 CHAMPIONSHIP"
       :"NEXT MATCH"
   );
 
-  setTimeout(hideAnnounce,650);
+  setTimeout(
+    hideAnnounce,
+    650
+  );
 
   addComment(
-    `<strong>${leftPlayer.name}</strong> vs <strong>${rightPlayer.name}</strong> — match online.`
+    `<strong>${leftPlayer.name}</strong> vs <strong>${rightPlayer.name}</strong> — the arena is live.`
   );
 
   updateUI();
+
 }
+
 
 /* =========================================================
    BALL RESET
@@ -1175,286 +1797,782 @@ function resetBall(direction){
   ball.x=W/2;
   ball.y=H/2;
 
-  const angle=(Math.random()-.5)*.75;
-  const speed=11.5*matchSpeed;
+  ballSpeed=START_SPEED;
 
-  ball.vx=Math.cos(angle)*speed*direction;
-  ball.vy=Math.sin(angle)*speed;
+  const angle=
+    (Math.random()-.5)*.7;
+
+  ball.vx=
+    Math.cos(angle)*
+    ballSpeed*
+    direction;
+
+  ball.vy=
+    Math.sin(angle)*
+    ballSpeed;
 
   trail=[];
+
 }
+
+
+/* =========================================================
+   PREDICTION
+   ========================================================= */
+
+function predictY(side){
+
+  if(
+    Math.abs(ball.vx)<.001
+  ){
+
+    return H/2;
+
+  }
+
+  const targetX=
+    side==="left"
+      ?leftPaddle.x+
+        leftPaddle.w
+      :rightPaddle.x;
+
+  let t=
+    Math.abs(
+      targetX-ball.x
+    )/
+    Math.abs(ball.vx);
+
+  let y=
+    ball.y+
+    ball.vy*t;
+
+  /*
+    Reflect predicted position.
+  */
+
+  for(
+    let i=0;
+    i<30 &&
+    (y<0||y>H);
+    i++
+  ){
+
+    if(y<0)y=-y;
+
+    if(y>H)
+      y=2*H-y;
+
+  }
+
+  return y;
+
+}
+
 
 /* =========================================================
    AI
    ========================================================= */
 
-function predictY(side){
-
-  if(Math.abs(ball.vx)<.001){
-    return H/2;
-  }
-
-  const targetX=
-    side==="left"
-      ?leftPaddle.x+leftPaddle.w
-      :rightPaddle.x;
-
-  let t=
-    Math.abs(targetX-ball.x)/
-    Math.abs(ball.vx);
-
-  let y=ball.y+ball.vy*t;
-
-  /*
-    Reflection prediction.
-  */
-
-  for(let i=0;i<20 && (y<0||y>H);i++){
-
-    if(y<0)y=-y;
-    if(y>H)y=2*H-y;
-  }
-
-  return y;
-}
-
-function updateAI(p,player,side,dt){
+function updateAI(
+  paddle,
+  player,
+  side,
+  dt
+){
 
   const toward=
     side==="left"
       ?ball.vx<0
       :ball.vx>0;
 
-  let target=toward
-    ?predictY(side)
-    :H/2;
+  let target=
+    toward
+      ?predictY(side)
+      :H/2;
 
-  let reaction=player.base;
+  let reaction=
+    player.base;
 
-  if(player.style==="Aggressive")reaction*=1.12;
-  if(player.style==="Predictive")reaction*=1.08;
-  if(player.style==="Reactive")reaction*=.98;
-  if(player.style==="Calculated")reaction*=1.03;
-  if(player.style==="Unpredictable")reaction*=.96;
-  if(player.style==="Precision")reaction*=1.08;
-  if(player.style==="Adaptive")reaction*=1.04;
-  if(player.style==="Defensive")reaction*=.93;
-  if(player.style==="Speed")reaction*=1.14;
-  if(player.style==="Experimental")reaction*=1.07;
+  if(
+    player.style==="Aggressive"
+  )reaction*=1.12;
 
-  reaction+=Math.min(.3,player.adaptation/300);
+  if(
+    player.style==="Predictive"
+  )reaction*=1.09;
+
+  if(
+    player.style==="Reactive"
+  )reaction*=1.00;
+
+  if(
+    player.style==="Calculated"
+  )reaction*=1.05;
+
+  if(
+    player.style==="Unpredictable"
+  )reaction*=.98;
+
+  if(
+    player.style==="Precision"
+  )reaction*=1.08;
+
+  if(
+    player.style==="Adaptive"
+  )reaction*=1.07;
+
+  if(
+    player.style==="Defensive"
+  )reaction*=.96;
+
+  if(
+    player.style==="Speed"
+  )reaction*=1.15;
+
+  if(
+    player.style==="Experimental"
+  )reaction*=1.09;
+
 
   /*
-    The "learning" system improves reaction to patterns
-    over actual matches.
+    AI adaptation increases gradually.
   */
 
-  const center=p.y+p.h/2;
-  const delta=target-center;
+  reaction+=
+    Math.min(
+      .32,
+      player.adaptation/300
+    );
 
-  const noise=
-    Math.sin(
-      performance.now()*.0015+
-      player.id*17
-    )*2.5;
 
-  const maxMove=
-    850*reaction;
+  /*
+    At very high ball speeds,
+    AI gets a small additional reaction
+    boost so the game stays competitive.
+  */
+
+  const speedFactor=
+    Math.min(
+      1.22,
+      ballSpeed/START_SPEED
+    );
+
+  reaction+=
+    (speedFactor-1)*.12;
+
+
+  const center=
+    paddle.y+
+    paddle.h/2;
+
+  const delta=
+    target-center;
+
+
+  /*
+    Smooth prediction rather than
+    instantaneous teleportation.
+  */
+
+  const response=
+    10+
+    reaction*4+
+    ballSpeed*.08;
 
   const desired=
     Math.max(
-      -maxMove,
+      -1000,
       Math.min(
-        maxMove,
-        delta*12+noise
+        1000,
+        delta*response
       )
     );
 
-  p.vy=desired;
-  p.y+=desired*dt;
+  paddle.vy=desired;
 
-  if(p.y<10)p.y=10;
-  if(p.y+p.h>H-10)p.y=H-p.h;
+  paddle.y+=
+    desired*dt;
+
+
+  if(
+    paddle.y<10
+  ){
+
+    paddle.y=10;
+
+  }
+
+  if(
+    paddle.y+
+    paddle.h>
+    H-10
+  ){
+
+    paddle.y=
+      H-
+      paddle.h-
+      10;
+
+  }
+
 }
+
 
 /* =========================================================
    COLLISION
    ========================================================= */
 
-function circleRect(b,p){
+function circleRect(
+  b,
+  p
+){
 
-  const cx=Math.max(p.x,Math.min(b.x,p.x+p.w));
-  const cy=Math.max(p.y,Math.min(b.y,p.y+p.h));
+  const cx=
+    Math.max(
+      p.x,
+      Math.min(
+        b.x,
+        p.x+p.w
+      )
+    );
 
-  const dx=b.x-cx;
-  const dy=b.y-cy;
+  const cy=
+    Math.max(
+      p.y,
+      Math.min(
+        b.y,
+        p.y+p.h
+      )
+    );
 
-  return dx*dx+dy*dy<=b.r*b.r;
+  const dx=
+    b.x-cx;
+
+  const dy=
+    b.y-cy;
+
+  return(
+    dx*dx+
+    dy*dy
+  )<=
+    b.r*b.r;
+
 }
 
-function collidePaddle(p,side){
 
-  if(!circleRect(ball,p))return false;
+/* =========================================================
+   PADDLE HIT
+   ========================================================= */
 
-  if(side==="left" && ball.vx>=0)return false;
-  if(side==="right" && ball.vx<=0)return false;
+function collidePaddle(
+  paddle,
+  side
+){
+
+  if(
+    !circleRect(
+      ball,
+      paddle
+    )
+  ){
+
+    return false;
+
+  }
 
   /*
-    Hard positional correction.
-    Prevents tunneling/sticking.
+    Direction guard prevents
+    the ball from colliding twice
+    with the same paddle.
+  */
+
+  if(
+    side==="left" &&
+    ball.vx>=0
+  ){
+
+    return false;
+
+  }
+
+  if(
+    side==="right" &&
+    ball.vx<=0
+  ){
+
+    return false;
+
+  }
+
+
+  /*
+    HARD POSITION CORRECTION.
+
+    This is what prevents
+    high-speed tunneling through
+    paddles.
   */
 
   if(side==="left"){
-    ball.x=p.x+p.w+ball.r+.25;
+
+    ball.x=
+      paddle.x+
+      paddle.w+
+      ball.r+
+      .5;
+
   }else{
-    ball.x=p.x-ball.r-.25;
+
+    ball.x=
+      paddle.x-
+      ball.r-
+      .5;
+
   }
 
+
+  /*
+    Where the ball hits vertically
+    controls the outgoing angle.
+  */
+
   const relative=
-    (ball.y-(p.y+p.h/2))/(p.h/2);
+    (
+      ball.y-
+      (
+        paddle.y+
+        paddle.h/2
+      )
+    )/
+    (paddle.h/2);
 
-  const clamped=Math.max(-1,Math.min(1,relative));
+  const clamped=
+    Math.max(
+      -1,
+      Math.min(
+        1,
+        relative
+      )
+    );
 
-  const angle=clamped*1.15;
-  const direction=side==="left"?1:-1;
 
-  const speed=
-    (11.5+
-      Math.min(10,rally*.045))
-    *matchSpeed;
+  /*
+    Keep the angle watchable.
+
+    We don't allow nearly vertical
+    or nearly horizontal nonsense.
+  */
+
+  const angle=
+    clamped*1.05;
+
+
+  /*
+    PROGRESSIVE RALLY ACCELERATION.
+
+    Every paddle hit increases speed.
+
+    But acceleration softens near the
+    ceiling so the final portion of
+    long rallies stays readable.
+  */
+
+  const ceilingRatio=
+    ballSpeed/MAX_SPEED;
+
+  const accelerationScale=
+    Math.max(
+      .35,
+      1-
+      ceilingRatio*.65
+    );
+
+  const acceleration=
+    1+
+    (
+      BASE_ACCELERATION-1
+    )*
+    accelerationScale;
+
+
+  ballSpeed=
+    Math.min(
+      MAX_SPEED,
+      ballSpeed*
+      acceleration
+    );
+
+
+  /*
+    Very slight angle variation.
+    This prevents endless identical
+    straight-line rallies.
+  */
+
+  const angleJitter=
+    (
+      Math.random()-.5
+    )*
+    .035;
+
+
+  const finalAngle=
+    angle+
+    angleJitter;
+
+
+  const direction=
+    side==="left"
+      ?1
+      :-1;
+
 
   ball.vx=
-    Math.cos(angle)*
-    speed*
+    Math.cos(
+      finalAngle
+    )*
+    ballSpeed*
     direction;
 
   ball.vy=
-    Math.sin(angle)*
-    speed;
+    Math.sin(
+      finalAngle
+    )*
+    ballSpeed;
 
-  ball.vy+=p.vy*.012;
+
+  /*
+    Add a tiny amount of paddle
+    movement to the shot.
+
+    This makes competitors feel
+    like they are actually hitting
+    the ball rather than just
+    reflecting it.
+  */
+
+  ball.vy+=
+    paddle.vy*
+    .008;
+
 
   rally++;
+
 
   const player=
     side==="left"
       ?leftPlayer
       :rightPlayer;
 
+
   player.adaptation=
     Math.min(
       100,
-      player.adaptation+.06
+      player.adaptation+
+      .055
     );
+
 
   player.totalRallies++;
+
   player.bestRally=
-    Math.max(player.bestRally,rally);
+    Math.max(
+      player.bestRally,
+      rally
+    );
+
 
   /*
-    Correct point ownership.
+    Impact particles.
   */
 
-  if(rally>20){
-    addComment(
-      `🔥 RALLY ${rally}! <strong>${player.name}</strong> adapts under pressure.`
-    );
-  }else if(Math.random()<.18){
-    addComment(
-      `${player.name} reads the angle and fires it back.`
-    );
-  }
-
-  for(let i=0;i<12;i++){
+  for(
+    let i=0;
+    i<16;
+    i++
+  ){
 
     particles.push({
+
       x:ball.x,
       y:ball.y,
-      vx:(Math.random()-.5)*8,
-      vy:(Math.random()-.5)*8,
+
+      vx:
+        (Math.random()-.5)*
+        10,
+
+      vy:
+        (Math.random()-.5)*
+        10,
+
       life:1,
+
       color:
         side==="left"
           ?COLORS.cyan
           :COLORS.pink
+
     });
+
   }
 
+
+  /*
+    Commentary becomes more dramatic
+    as the rally gets longer.
+  */
+
+  if(rally===5){
+
+    addComment(
+      "⚡ The rally is heating up."
+    );
+
+  }
+
+  if(rally===10){
+
+    addComment(
+      "🔥 DOUBLE DIGITS! Neither AI is blinking."
+    );
+
+  }
+
+  if(rally===15){
+
+    addComment(
+      "🚨 This ball is moving FAST."
+    );
+
+  }
+
+  if(rally===20){
+
+    addComment(
+      "💥 TWENTY-HIT RALLY! The machines are adapting."
+    );
+
+  }
+
+  if(rally===30){
+
+    addComment(
+      "🌋 THIRTY HITS. This is becoming ridiculous."
+    );
+
+  }
+
+  if(rally===40){
+
+    addComment(
+      "☄️ FORTY-HIT RALLY. Maximum concentration."
+    );
+
+  }
+
+
   return true;
+
 }
 
+
 /* =========================================================
-   PHYSICS
+   FIXED PHYSICS
    ========================================================= */
 
 function physics(dt){
 
-  if(!leftPlayer||!rightPlayer)return;
+  if(
+    !leftPlayer ||
+    !rightPlayer
+  ){
 
-  updateAI(leftPaddle,leftPlayer,"left",dt);
-  updateAI(rightPaddle,rightPlayer,"right",dt);
+    return;
+
+  }
+
+
+  updateAI(
+    leftPaddle,
+    leftPlayer,
+    "left",
+    dt
+  );
+
+  updateAI(
+    rightPaddle,
+    rightPlayer,
+    "right",
+    dt
+  );
+
 
   /*
-    Four microsteps per fixed update.
-    This is especially important at high speeds.
+    Adaptive microsteps.
+
+    The faster the ball becomes,
+    the more subdivisions we use.
+
+    This keeps collision detection
+    stable without making normal play
+    unnecessarily expensive.
   */
 
-  const steps=4;
+  const steps=
+    ballSpeed<25
+      ?4
+      :ballSpeed<34
+        ?6
+        :8;
 
-  for(let s=0;s<steps;s++){
 
-    const d=dt/steps;
+  for(
+    let s=0;
+    s<steps;
+    s++
+  ){
 
-    ball.x+=ball.vx*d*60;
-    ball.y+=ball.vy*d*60;
+    const d=
+      dt/steps;
 
-    if(ball.y-ball.r<=0){
+
+    ball.x+=
+      ball.vx*
+      d;
+
+    ball.y+=
+      ball.vy*
+      d;
+
+
+    /*
+      Top/bottom wall collision.
+    */
+
+    if(
+      ball.y-ball.r<=0
+    ){
+
       ball.y=ball.r;
-      ball.vy=Math.abs(ball.vy);
+
+      ball.vy=
+        Math.abs(
+          ball.vy
+        );
+
     }
 
-    if(ball.y+ball.r>=H){
-      ball.y=H-ball.r;
-      ball.vy=-Math.abs(ball.vy);
+
+    if(
+      ball.y+ball.r>=H
+    ){
+
+      ball.y=
+        H-ball.r;
+
+      ball.vy=
+        -Math.abs(
+          ball.vy
+        );
+
     }
 
-    collidePaddle(leftPaddle,"left");
-    collidePaddle(rightPaddle,"right");
 
-    if(ball.x<-ball.r*2){
-      point(rightPlayer);
+    collidePaddle(
+      leftPaddle,
+      "left"
+    );
+
+    collidePaddle(
+      rightPaddle,
+      "right"
+    );
+
+
+    /*
+      Scoring zones.
+    */
+
+    if(
+      ball.x<
+      -ball.r*2
+    ){
+
+      point(
+        rightPlayer
+      );
+
       break;
+
     }
 
-    if(ball.x>W+ball.r*2){
-      point(leftPlayer);
+
+    if(
+      ball.x>
+      W+ball.r*2
+    ){
+
+      point(
+        leftPlayer
+      );
+
       break;
+
     }
+
   }
+
+
+  /*
+    Trail.
+  */
 
   trail.push({
+
     x:ball.x,
     y:ball.y
+
   });
 
-  if(trail.length>20){
+
+  if(
+    trail.length>28
+  ){
+
     trail.shift();
+
   }
 
+
+  /*
+    Particles.
+  */
+
   particles.forEach(p=>{
+
     p.x+=p.vx;
     p.y+=p.vy;
+
     p.vx*=.97;
     p.vy*=.97;
+
     p.life-=.035;
+
   });
 
-  particles=particles.filter(p=>p.life>0);
+
+  particles=
+    particles.filter(
+      p=>p.life>0
+    );
+
 
   captureReplayFrame();
 
   updateTelemetry();
+
 }
+
 
 /* =========================================================
    POINT
@@ -1467,76 +2585,123 @@ function point(winner){
       ?rightPlayer
       :leftPlayer;
 
-  if(winner===leftPlayer){
+
+  if(
+    winner===leftPlayer
+  ){
+
     leftScore++;
+
   }else{
+
     rightScore++;
+
   }
+
 
   winner.pointsWon++;
   loser.pointsLost++;
 
-  document.getElementById("leftScore").textContent=leftScore;
-  document.getElementById("rightScore").textContent=rightScore;
 
-  matchSpeed=
-    Math.min(
-      matchMaxSpeed,
-      1+
-      (leftScore+rightScore)*.065
-    );
+  document.getElementById(
+    "leftScore"
+  ).textContent=
+    leftScore;
+
+  document.getElementById(
+    "rightScore"
+  ).textContent=
+    rightScore;
+
 
   /*
-    Match winner condition:
-    first to 11 with a 2 point lead.
+    We intentionally reset the ball
+    to START_SPEED after a point.
+
+    The NEXT rally starts fast again
+    and then accelerates independently.
   */
 
   if(
-    (leftScore>=11||rightScore>=11)&&
-    Math.abs(leftScore-rightScore)>=2
+    (
+      leftScore>=11 ||
+      rightScore>=11
+    ) &&
+    Math.abs(
+      leftScore-rightScore
+    )>=2
   ){
 
-    finishMatch(winner,loser);
+    finishMatch(
+      winner,
+      loser
+    );
+
     return;
+
   }
 
+
   /*
-    Replay overlay.
+    Replay.
+
+    It happens inside the arena,
+    not as a popup.
   */
 
   startReplay();
+
 
   announce(
     winner.name,
     "POINT"
   );
 
-  setTimeout(hideAnnounce,250);
+  setTimeout(
+    hideAnnounce,
+    250
+  );
+
 
   addComment(
     `<strong>${winner.name}</strong> scores — ${leftScore}:${rightScore}.`
   );
 
+
   setTimeout(()=>{
+
     resetBall(
       winner===leftPlayer
         ?1
         :-1
     );
-  },160);
+
+  },180);
+
 }
 
+
 /* =========================================================
-   FINISH MATCH
+   MATCH FINISH
    ========================================================= */
 
-function finishMatch(winner,loser){
+function finishMatch(
+  winner,
+  loser
+){
 
-  const match=tournament.current;
+  const match=
+    tournament.current;
+
 
   match.status="FINAL";
-  match.winner=winner;
-  match.loser=loser;
+
+  match.winner=
+    winner;
+
+  match.loser=
+    loser;
+
 
   winner.matches++;
   loser.matches++;
@@ -1544,8 +2709,11 @@ function finishMatch(winner,loser){
   winner.wins++;
   loser.losses++;
 
+
   winner.currentWinStreak++;
+
   loser.currentWinStreak=0;
+
 
   winner.bestWinStreak=
     Math.max(
@@ -1553,19 +2721,33 @@ function finishMatch(winner,loser){
       winner.currentWinStreak
     );
 
+
   /*
-    Comeback.
+    Comeback detection.
   */
 
   if(
-    (winner===leftPlayer && rightScore>=7)||
-    (winner===rightPlayer && leftScore>=7)
+    (
+      winner===leftPlayer &&
+      rightScore>=7
+    ) ||
+    (
+      winner===rightPlayer &&
+      leftScore>=7
+    )
   ){
+
     winner.comebackWins++;
+
   }
 
+
   const duration=
-    (performance.now()-matchStart)/1000;
+    (
+      performance.now()-
+      matchStart
+    )/1000;
+
 
   winner.fastestWin=
     Math.min(
@@ -1573,40 +2755,47 @@ function finishMatch(winner,loser){
       duration
     );
 
+
   winner.power+=1.5;
-  loser.power=Math.max(50,loser.power-.7);
+
+  loser.power=
+    Math.max(
+      50,
+      loser.power-.7
+    );
+
 
   save();
+
 
   addComment(
     `🏁 <strong>${winner.name}</strong> defeats ${loser.name} ${leftScore}:${rightScore}.`
   );
+
 
   announce(
     winner.name+" WINS",
     leftScore+" — "+rightScore
   );
 
+
   setTimeout(()=>{
 
     hideAnnounce();
 
-    /*
-      If championship match:
-      crown champion.
-    */
 
-    if(match===tournament.championship){
+    if(
+      match===
+      tournament.championship
+    ){
 
-      crownChampion(winner);
+      crownChampion(
+        winner
+      );
 
     }else{
 
       rebuildTournament();
-
-      /*
-        Move the bracket forward immediately.
-      */
 
       chooseNextMatches();
 
@@ -1614,25 +2803,33 @@ function finishMatch(winner,loser){
 
       setTimeout(
         startNextMatch,
-        500
+        550
       );
+
     }
+
 
     updateUI();
 
   },900);
+
 }
+
 
 /* =========================================================
    CHAMPION
    ========================================================= */
 
-function crownChampion(champion){
+function crownChampion(
+  champion
+){
 
   champion.championships++;
+
   champion.finals++;
 
   champion.currentTitleStreak++;
+
 
   champion.bestTitleStreak=
     Math.max(
@@ -1640,184 +2837,367 @@ function crownChampion(champion){
       champion.currentTitleStreak
     );
 
-  /*
-    Everyone else loses their championship streak.
-  */
 
   players.forEach(p=>{
 
-    if(p.id!==champion.id){
+    if(
+      p.id!==champion.id
+    ){
 
       p.currentTitleStreak=0;
+
     }
+
   });
 
-  leagueState.defendingChampion=champion.id;
+
+  leagueState
+    .defendingChampion=
+      champion.id;
+
+
   leagueState.completed++;
+
+
   leagueState.history.push({
-    season:leagueState.season,
-    champion:champion.id
+
+    season:
+      leagueState.season,
+
+    champion:
+      champion.id
+
   });
+
+
+  const completedSeason=
+    leagueState.season;
+
 
   leagueState.season++;
 
+
   save();
+
 
   announce(
     "🏆 "+champion.name,
-    "CHAMPION • "+champion.currentTitleStreak+
+    "CHAMPION • "+
+    champion.currentTitleStreak+
     " CONSECUTIVE"
   );
 
+
   addComment(
-    `👑 <strong>${champion.name}</strong> is the champion of Season ${leagueState.season-1}.`
+    `👑 <strong>${champion.name}</strong> wins Season ${completedSeason}.`
   );
+
 
   setTimeout(()=>{
 
     hideAnnounce();
 
-    /*
-      NEW SEASON.
-      Champion receives final bye.
-    */
 
     newTournament();
 
+
     addComment(
-      `🌐 Season ${leagueState.season} begins. <strong>${champion.name}</strong> receives the defending champion bye.`
+      `🌐 Season ${leagueState.season} begins. <strong>${champion.name}</strong> receives the defending champion championship bye.`
     );
+
 
     startNextMatch();
 
   },1800);
+
 }
 
+
 /* =========================================================
-   REPLAYS
+   REPLAY
    ========================================================= */
 
 function captureReplayFrame(){
 
   replayFrames.push({
+
     x:ball.x,
     y:ball.y,
+
     lp:leftPaddle.y,
     rp:rightPaddle.y,
+
     l:leftScore,
     r:rightScore
+
   });
 
-  if(replayFrames.length>220){
+
+  /*
+    Keep enough history for slow-motion,
+    but not enough to eat memory forever.
+  */
+
+  if(
+    replayFrames.length>260
+  ){
+
     replayFrames.shift();
+
   }
+
 }
+
 
 function startReplay(){
 
-  if(replayFrames.length<20)return;
+  if(
+    replayFrames.length<20
+  ){
+
+    return;
+
+  }
+
 
   replayIndex=
     Math.max(
       0,
-      replayFrames.length-65
+      replayFrames.length-75
     );
 
-  /*
-    Starts at 3x and gets faster after every
-    replay in the lifetime of the match.
-  */
 
   matchReplayCount++;
 
+
+  /*
+    Replay starts at 3× and gets
+    progressively faster, but caps
+    at a watchable 16×.
+  */
+
   replaySpeed=
     Math.min(
-      18,
+      16,
       3+
-      matchReplayCount*.75+
-      (leftScore+rightScore)*.12
+      matchReplayCount*.75
     );
+
 
   replayActive=true;
 
-  document.getElementById("replay")
-    .classList.add("on");
 
-  document.getElementById("replaySpeed")
-    .textContent=
-      replaySpeed.toFixed(1)+"×";
+  document.getElementById(
+    "replay"
+  ).classList.add("on");
 
-  replayLast=performance.now();
+
+  document.getElementById(
+    "replaySpeed"
+  ).textContent=
+    replaySpeed.toFixed(1)+
+    "×";
+
+
+  replayLast=
+    performance.now();
+
 }
+
 
 function updateReplay(now){
 
-  if(!replayActive)return;
+  if(!replayActive){
 
-  if(now-replayLast<15)return;
+    return;
+
+  }
+
+
+  /*
+    Fixed replay timing keeps it
+    smooth rather than frame-jittery.
+  */
+
+  if(
+    now-replayLast<12
+  ){
+
+    return;
+
+  }
+
 
   replayLast=now;
 
-  replayIndex+=replaySpeed*.75;
 
-  if(replayIndex>=replayFrames.length){
+  replayIndex+=
+    replaySpeed*
+    .65;
+
+
+  if(
+    replayIndex>=
+    replayFrames.length
+  ){
 
     replayActive=false;
 
-    document.getElementById("replay")
-      .classList.remove("on");
+    document.getElementById(
+      "replay"
+    ).classList.remove("on");
 
     return;
+
   }
+
 
   drawReplay(
     replayFrames[
-      Math.floor(replayIndex)
+      Math.floor(
+        replayIndex
+      )
     ]
   );
+
 }
+
+
+/* =========================================================
+   REPLAY RENDER
+   ========================================================= */
 
 function drawReplay(f){
 
   const w=REPLAY.width;
   const h=REPLAY.height;
 
-  RCTX.clearRect(0,0,w,h);
+  RCTX.clearRect(
+    0,
+    0,
+    w,
+    h
+  );
 
-  RCTX.fillStyle="#02040a";
-  RCTX.fillRect(0,0,w,h);
 
-  RCTX.strokeStyle="rgba(0,246,255,.055)";
+  const bg=
+    RCTX.createRadialGradient(
+      w/2,
+      h/2,
+      10,
+      w/2,
+      h/2,
+      w*.7
+    );
+
+  bg.addColorStop(
+    0,
+    "#101b3a"
+  );
+
+  bg.addColorStop(
+    1,
+    "#02040a"
+  );
+
+
+  RCTX.fillStyle=bg;
+
+  RCTX.fillRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  RCTX.strokeStyle=
+    "rgba(0,246,255,.055)";
+
   RCTX.lineWidth=1;
 
-  for(let x=0;x<w;x+=40){
+
+  for(
+    let x=0;
+    x<w;
+    x+=40
+  ){
+
     RCTX.beginPath();
-    RCTX.moveTo(x,0);
-    RCTX.lineTo(x,h);
+
+    RCTX.moveTo(
+      x,
+      0
+    );
+
+    RCTX.lineTo(
+      x,
+      h
+    );
+
     RCTX.stroke();
+
   }
 
-  for(let y=0;y<h;y+=40){
+
+  for(
+    let y=0;
+    y<h;
+    y+=40
+  ){
+
     RCTX.beginPath();
-    RCTX.moveTo(0,y);
-    RCTX.lineTo(w,y);
+
+    RCTX.moveTo(
+      0,
+      y
+    );
+
+    RCTX.lineTo(
+      w,
+      y
+    );
+
     RCTX.stroke();
+
   }
 
-  RCTX.strokeStyle="rgba(255,255,255,.12)";
-  RCTX.setLineDash([8,10]);
+
+  RCTX.strokeStyle=
+    "rgba(255,255,255,.12)";
+
+  RCTX.setLineDash(
+    [8,10]
+  );
+
   RCTX.beginPath();
-  RCTX.moveTo(w/2,0);
-  RCTX.lineTo(w/2,h);
+
+  RCTX.moveTo(
+    w/2,
+    0
+  );
+
+  RCTX.lineTo(
+    w/2,
+    h
+  );
+
   RCTX.stroke();
+
   RCTX.setLineDash([]);
+
 
   const sx=w/W;
   const sy=h/H;
 
+
   RCTX.shadowBlur=20;
-  RCTX.shadowColor=COLORS.cyan;
-  RCTX.fillStyle=COLORS.cyan;
+  RCTX.shadowColor=
+    COLORS.cyan;
+
+  RCTX.fillStyle=
+    COLORS.cyan;
+
   RCTX.fillRect(
     18,
     f.lp*sy,
@@ -1825,8 +3205,13 @@ function drawReplay(f){
     leftPaddle.h*sy
   );
 
-  RCTX.shadowColor=COLORS.pink;
-  RCTX.fillStyle=COLORS.pink;
+
+  RCTX.shadowColor=
+    COLORS.pink;
+
+  RCTX.fillStyle=
+    COLORS.pink;
+
   RCTX.fillRect(
     w-28,
     f.rp*sy,
@@ -1834,11 +3219,16 @@ function drawReplay(f){
     rightPaddle.h*sy
   );
 
+
+  RCTX.shadowBlur=30;
+
   RCTX.shadowColor="#fff";
-  RCTX.shadowBlur=28;
+
   RCTX.fillStyle="#fff";
 
+
   RCTX.beginPath();
+
   RCTX.arc(
     f.x*sx,
     f.y*sy,
@@ -1846,33 +3236,55 @@ function drawReplay(f){
     0,
     Math.PI*2
   );
+
   RCTX.fill();
+
 
   RCTX.shadowBlur=0;
 
-  RCTX.font="bold 12px system-ui";
+
+  RCTX.font=
+    "bold 12px system-ui";
+
   RCTX.fillStyle="#fff";
+
   RCTX.fillText(
     f.l+" : "+f.r,
     w/2-18,
     20
   );
+
 }
 
+
 /* =========================================================
-   UI / BRACKET
+   BRACKET HTML
    ========================================================= */
 
 function matchName(m){
 
-  if(!m)return"—";
+  if(!m){
+
+    return "—";
+
+  }
 
   return(
-    (m.a?m.a.name:"TBD")+
+    (
+      m.a
+        ?m.a.name
+        :"TBD"
+    )+
     " vs "+
-    (m.b?m.b.name:"TBD")
+    (
+      m.b
+        ?m.b.name
+        :"TBD"
+    )
   );
+
 }
+
 
 function matchHTML(m){
 
@@ -1884,36 +3296,81 @@ function matchHTML(m){
         <div class="team">TBD</div>
       </div>
     `;
+
   }
 
-  const team=(p,isWinner,isLoser,isLive)=>{
+
+  function team(
+    p,
+    isWinner,
+    isLoser,
+    isLive
+  ){
 
     if(!p){
-      return`<div class="team">TBD</div>`;
+
+      return`
+        <div class="team">
+          TBD
+        </div>
+      `;
+
     }
+
 
     let cls="team";
 
-    if(isWinner)cls+=" winner";
-    if(isLoser)cls+=" loser";
-    if(isLive)cls+=" live";
+
+    if(isWinner)
+      cls+=" winner";
+
+    if(isLoser)
+      cls+=" loser";
+
+    if(isLive)
+      cls+=" live";
+
 
     return`
+
       <div class="${cls}">
+
         <span>
+
           ${p.name}
-          ${p.id===leagueState.defendingChampion
+
+          ${
+            p.id===
+            leagueState.defendingChampion
+
             ?` <span class="champ">👑</span>`
-            :""}
+
+            :""
+          }
+
         </span>
+
         <span>
-          ${isWinner?"✓":isLoser?"×":""}
+
+          ${
+            isWinner
+              ?"✓"
+              :isLoser
+                ?"×"
+                :""
+          }
+
         </span>
+
       </div>
+
     `;
-  };
+
+  }
+
 
   return`
+
     <div class="bracket-match ${
       tournament.current===m
         ?"current"
@@ -1921,70 +3378,114 @@ function matchHTML(m){
           ?"next"
           :""
     }">
-      ${team(
-        m.a,
-        m.winner===m.a,
-        m.loser===m.a,
-        m.status==="LIVE"
-      )}
-      ${team(
-        m.b,
-        m.winner===m.b,
-        m.loser===m.b,
-        m.status==="LIVE"
-      )}
+
+      ${
+        team(
+          m.a,
+          m.winner===m.a,
+          m.loser===m.a,
+          m.status==="LIVE"
+        )
+      }
+
+      ${
+        team(
+          m.b,
+          m.winner===m.b,
+          m.loser===m.b,
+          m.status==="LIVE"
+        )
+      }
+
     </div>
+
   `;
+
 }
+
+
+/* =========================================================
+   BRACKET RENDER
+   ========================================================= */
 
 function renderBracket(){
 
-  const b=document.getElementById("bracket");
+  const b=
+    document.getElementById(
+      "bracket"
+    );
+
 
   const rounds=[
+
     {
       title:"ROUND 1",
       matches:tournament.round1
     },
+
     {
       title:"QUARTERFINALS",
       matches:tournament.quarter
     },
+
     {
       title:"SEMIFINALS",
       matches:tournament.semifinal
     },
+
     {
       title:"CHALLENGER FINAL",
-      matches:[tournament.challengerFinal]
+      matches:[
+        tournament.challengerFinal
+      ]
     },
+
     {
       title:"🏆 CHAMPIONSHIP",
-      matches:[tournament.championship]
+      matches:[
+        tournament.championship
+      ]
     }
+
   ];
+
 
   b.innerHTML="";
 
+
   rounds.forEach(r=>{
 
-    const col=document.createElement("div");
+    const col=
+      document.createElement(
+        "div"
+      );
 
-    col.className="roundcol";
+
+    col.className=
+      "roundcol";
+
 
     col.innerHTML=
       `<div class="round-title">${r.title}</div>`+
-      r.matches.map(matchHTML).join("");
+      r.matches
+        .map(matchHTML)
+        .join("");
+
 
     b.appendChild(col);
+
   });
 
-  document.getElementById("bracketStatus")
-    .textContent=
-      tournament.current
-        ?"LIVE"
-        :"WAITING";
+
+  document.getElementById(
+    "bracketStatus"
+  ).textContent=
+    tournament.current
+      ?"LIVE"
+      :"WAITING";
+
 }
+
 
 /* =========================================================
    QUEUE
@@ -1992,286 +3493,484 @@ function renderBracket(){
 
 function renderQueue(){
 
-  const q=document.getElementById("queue");
+  const q=
+    document.getElementById(
+      "queue"
+    );
 
-  const current=tournament.current;
-  const next=tournament.next;
+
+  const current=
+    tournament.current;
+
+  const next=
+    tournament.next;
+
 
   q.innerHTML=`
+
     <div class="next-card live">
-      <div class="tiny">⚡ CURRENT GAME</div>
-      <div class="teams">
-        ${current?matchName(current):"Preparing..."}
+
+      <div class="tiny">
+        ⚡ CURRENT GAME
       </div>
+
+      <div class="teams">
+        ${
+          current
+            ?matchName(current)
+            :"Preparing..."
+        }
+      </div>
+
     </div>
 
+
     <div class="next-card">
-      <div class="tiny">⏭ NEXT GAME</div>
-      <div class="teams">
-        ${next?matchName(next):"Waiting for bracket..."}
+
+      <div class="tiny">
+        ⏭ NEXT GAME
       </div>
+
+      <div class="teams">
+        ${
+          next
+            ?matchName(next)
+            :"Waiting for bracket..."
+        }
+      </div>
+
     </div>
+
 
     ${
       tournament.defending
+
       ?`
+
         <div class="next-card">
-          <div class="tiny">👑 DEFENDING CHAMPION</div>
+
+          <div class="tiny">
+            👑 DEFENDING CHAMPION
+          </div>
+
           <div class="teams">
             ${tournament.defending.name}
-            • BYE TO FINAL
+            • FINAL BYE
           </div>
+
         </div>
+
       `
+
       :""
     }
+
   `;
+
 }
 
+
 /* =========================================================
-   RECORD LEADERS
+   RECORDS
    ========================================================= */
 
 function leaderBy(field){
 
-  return [...players]
-    .sort((a,b)=>
+  return[
+    ...players
+  ].sort(
+    (a,b)=>
       (b[field]||0)-
       (a[field]||0)
-    )[0];
+  )[0];
+
 }
 
-function leaderWinPct(){
-
-  return [...players]
-    .sort((a,b)=>
-      winPct(b)-winPct(a)
-    )[0];
-}
 
 function winPct(p){
 
   return p.matches
     ?p.wins/p.matches*100
     :0;
+
 }
+
+
+function leaderWinPct(){
+
+  return[
+    ...players
+  ].sort(
+    (a,b)=>
+      winPct(b)-
+      winPct(a)
+  )[0];
+
+}
+
 
 function leaderFastest(){
 
-  return [...players]
-    .filter(p=>Number.isFinite(p.fastestWin))
-    .sort((a,b)=>a.fastestWin-b.fastestWin)[0];
+  return[
+    ...players
+  ]
+  .filter(
+    p=>
+      Number.isFinite(
+        p.fastestWin
+      )
+  )
+  .sort(
+    (a,b)=>
+      a.fastestWin-
+      b.fastestWin
+  )[0];
+
 }
+
 
 function renderRecords(){
 
+  const fastest=
+    leaderFastest();
+
+
   const records=[
+
     [
       "MOST CHAMPIONSHIPS",
       leaderBy("championships"),
       p=>p.championships,
       "titles"
     ],
+
     [
       "LONGEST TITLE STREAK",
       leaderBy("bestTitleStreak"),
       p=>p.bestTitleStreak,
       "consecutive"
     ],
+
     [
       "MOST MATCH WINS",
       leaderBy("wins"),
       p=>p.wins,
       "wins"
     ],
+
     [
       "HIGHEST WIN RATE",
       leaderWinPct(),
       p=>winPct(p).toFixed(1)+"%",
       "career"
     ],
+
     [
       "LONGEST WIN STREAK",
       leaderBy("bestWinStreak"),
       p=>p.bestWinStreak,
       "matches"
     ],
+
     [
       "LONGEST RALLY",
       leaderBy("bestRally"),
       p=>p.bestRally,
-      "returns"
+      "hits"
     ],
+
     [
       "MOST COMEBACKS",
       leaderBy("comebackWins"),
       p=>p.comebackWins,
       "comeback wins"
     ],
+
     [
       "HIGHEST POWER",
       leaderBy("power"),
       p=>Math.floor(p.power),
       "rating"
     ],
+
     [
       "FASTEST MATCH WIN",
-      leaderFastest(),
-      p=>p? p.fastestWin.toFixed(1)+"s":"—",
+      fastest,
+      p=>p
+        ?p.fastestWin.toFixed(1)+"s"
+        :"—",
       "time"
     ],
+
     [
       "MOST FINALS",
       leaderBy("finals"),
       p=>p.finals,
       "final appearances"
     ],
+
     [
       "MOST POINTS WON",
       leaderBy("pointsWon"),
       p=>p.pointsWon,
       "points"
     ],
+
     [
       "MOST ADAPTATION",
       leaderBy("adaptation"),
       p=>Math.floor(p.adaptation)+"%",
       "adaptation"
     ]
+
   ];
 
-  document.getElementById("records").innerHTML=
-    records.map(r=>{
 
-      const p=r[1];
+  document.getElementById(
+    "records"
+  ).innerHTML=
+    records
+      .map(r=>{
 
-      return`
-        <div class="record">
-          <div class="rtitle">${r[0]}</div>
-          <div class="leader">
-            ${p?p.name:"—"}
+        const p=r[1];
+
+
+        return`
+
+          <div class="record">
+
+            <div class="rtitle">
+              ${r[0]}
+            </div>
+
+            <div class="leader">
+              ${p?p.name:"—"}
+            </div>
+
+            <div class="rvalue">
+              ${p?r[2](p):"—"}
+            </div>
+
+            <div class="sub">
+              ${r[3]}
+            </div>
+
           </div>
-          <div class="rvalue">
-            ${p?r[2](p):"—"}
-          </div>
-          <div class="sub">
-            ${r[3]}
-          </div>
-        </div>
-      `;
-    }).join("");
+
+        `;
+
+      })
+      .join("");
+
 }
 
+
 /* =========================================================
-   STATS TABLE
+   STATS
    ========================================================= */
 
 function renderStats(){
 
-  const sorted=[...players].sort((a,b)=>{
+  const sorted=
+    [...players]
+    .sort(
+      (a,b)=>{
 
-    if(b.championships!==a.championships)
-      return b.championships-a.championships;
+        if(
+          b.championships!==
+          a.championships
+        ){
 
-    return b.wins-a.wins;
-  });
+          return(
+            b.championships-
+            a.championships
+          );
 
-  document.getElementById("statsBody").innerHTML=
-    sorted.map((p,i)=>`
+        }
 
-      <tr class="${
-        p.id===leagueState.defendingChampion
-          ?"champion-row"
-          :""
-      }">
+        return(
+          b.wins-
+          a.wins
+        );
 
-        <td class="rank">${i+1}</td>
+      }
+    );
 
-        <td>
-          <strong>${p.name}</strong>
-          ${
-            p.id===leagueState.defendingChampion
-              ?` <span class="badge">DEFENDING CHAMPION</span>`
+
+  document.getElementById(
+    "statsBody"
+  ).innerHTML=
+
+    sorted
+      .map(
+        (p,i)=>`
+
+          <tr class="${
+            p.id===
+            leagueState.defendingChampion
+              ?"champion-row"
               :""
-          }
-        </td>
+          }">
 
-        <td>${p.style}</td>
+            <td class="rank">
+              ${i+1}
+            </td>
 
-        <td>${p.matches}</td>
+            <td>
 
-        <td class="green">${p.wins}</td>
+              <strong>
+                ${p.name}
+              </strong>
 
-        <td>${p.losses}</td>
+              ${
+                p.id===
+                leagueState.defendingChampion
 
-        <td>${winPct(p).toFixed(1)}%</td>
+                ?`
+                  <span class="badge">
+                    DEFENDING CHAMPION
+                  </span>
+                `
 
-        <td class="gold">${p.championships}</td>
+                :""
+              }
 
-        <td>${p.currentWinStreak}</td>
+            </td>
 
-        <td>${p.bestWinStreak}</td>
+            <td>
+              ${p.style}
+            </td>
 
-        <td class="gold">${p.currentTitleStreak}</td>
+            <td>
+              ${p.matches}
+            </td>
 
-        <td>${p.bestTitleStreak}</td>
+            <td class="green">
+              ${p.wins}
+            </td>
 
-        <td>${p.bestRally}</td>
+            <td>
+              ${p.losses}
+            </td>
 
-        <td class="power">${Math.floor(p.power)}</td>
+            <td>
+              ${winPct(p).toFixed(1)}%
+            </td>
 
-      </tr>
-    `).join("");
+            <td class="gold">
+              ${p.championships}
+            </td>
+
+            <td>
+              ${p.currentWinStreak}
+            </td>
+
+            <td>
+              ${p.bestWinStreak}
+            </td>
+
+            <td class="gold">
+              ${p.currentTitleStreak}
+            </td>
+
+            <td>
+              ${p.bestTitleStreak}
+            </td>
+
+            <td>
+              ${p.bestRally}
+            </td>
+
+            <td class="power">
+              ${Math.floor(p.power)}
+            </td>
+
+          </tr>
+
+        `
+      )
+      .join("");
+
 }
 
+
 /* =========================================================
-   MAIN UI
+   UI
    ========================================================= */
 
 function updateUI(){
 
-  document.getElementById("season")
-    .textContent=
-      "SEASON "+leagueState.season;
+  document.getElementById(
+    "season"
+  ).textContent=
+    "SEASON "+
+    leagueState.season;
 
-  document.getElementById("completedSeasons")
-    .textContent=
-      leagueState.completed;
 
-  document.getElementById("leagueStatus")
-    .textContent=
-      tournament?.current
-        ?"MATCH IN PROGRESS"
-        :"PREPARING";
+  document.getElementById(
+    "completedSeasons"
+  ).textContent=
+    leagueState.completed;
 
-  if(leftPlayer&&rightPlayer){
 
-    document.getElementById("leftName")
-      .textContent=leftPlayer.name;
+  document.getElementById(
+    "leagueStatus"
+  ).textContent=
+    tournament?.current
+      ?"MATCH IN PROGRESS"
+      :"PREPARING";
 
-    document.getElementById("rightName")
-      .textContent=rightPlayer.name;
 
-    document.getElementById("leftMeta")
-      .textContent=
-        `${leftPlayer.style} AI • POWER ${Math.floor(leftPlayer.power)}`;
+  if(
+    leftPlayer &&
+    rightPlayer
+  ){
 
-    document.getElementById("rightMeta")
-      .textContent=
-        `${rightPlayer.style} AI • POWER ${Math.floor(rightPlayer.power)}`;
+    document.getElementById(
+      "leftName"
+    ).textContent=
+      leftPlayer.name;
 
-    document.getElementById("matchType")
-      .textContent=
-        tournament.current===tournament.championship
-          ?"🏆 CHAMPIONSHIP MATCH"
-          :"LEAGUE MATCH";
+
+    document.getElementById(
+      "rightName"
+    ).textContent=
+      rightPlayer.name;
+
+
+    document.getElementById(
+      "leftMeta"
+    ).textContent=
+      `${leftPlayer.style} AI • POWER ${Math.floor(leftPlayer.power)}`;
+
+
+    document.getElementById(
+      "rightMeta"
+    ).textContent=
+      `${rightPlayer.style} AI • POWER ${Math.floor(rightPlayer.power)}`;
+
+
+    document.getElementById(
+      "matchType"
+    ).textContent=
+
+      tournament.current===
+      tournament.championship
+
+        ?"🏆 CHAMPIONSHIP MATCH"
+
+        :"LEAGUE MATCH";
+
   }
+
 
   renderBracket();
   renderQueue();
   renderRecords();
   renderStats();
+
 }
+
 
 /* =========================================================
    COMMENTARY
@@ -2279,41 +3978,82 @@ function updateUI(){
 
 function addComment(text){
 
-  const box=document.getElementById("commentary");
+  const box=
+    document.getElementById(
+      "commentary"
+    );
 
-  const d=document.createElement("div");
 
-  d.className="comment";
-  d.innerHTML=text;
+  const d=
+    document.createElement(
+      "div"
+    );
+
+
+  d.className=
+    "comment";
+
+
+  d.innerHTML=
+    text;
+
 
   box.prepend(d);
 
-  while(box.children.length>8){
-    box.removeChild(box.lastChild);
+
+  while(
+    box.children.length>8
+  ){
+
+    box.removeChild(
+      box.lastChild
+    );
+
   }
+
 }
+
 
 /* =========================================================
    ANNOUNCER
    ========================================================= */
 
-function announce(big,small){
+function announce(
+  big,
+  small
+){
 
-  document.getElementById("announceBig")
-    .textContent=big;
+  document.getElementById(
+    "announceBig"
+  ).textContent=
+    big;
 
-  document.getElementById("announceSmall")
-    .textContent=small;
 
-  document.getElementById("announce")
-    .classList.add("show");
+  document.getElementById(
+    "announceSmall"
+  ).textContent=
+    small;
+
+
+  document.getElementById(
+    "announce"
+  ).classList.add(
+    "show"
+  );
+
 }
+
 
 function hideAnnounce(){
 
-  document.getElementById("announce")
-    .classList.remove("show");
+  document.getElementById(
+    "announce"
+  ).classList.remove(
+    "show"
+  );
+
 }
+
 
 /* =========================================================
    TELEMETRY
@@ -2321,123 +4061,283 @@ function hideAnnounce(){
 
 function updateTelemetry(){
 
-  const velocity=Math.sqrt(
-    ball.vx*ball.vx+
-    ball.vy*ball.vy
-  );
+  const velocity=
+    Math.hypot(
+      ball.vx,
+      ball.vy
+    );
 
-  document.getElementById("velocity")
-    .textContent=Math.round(velocity);
 
-  document.getElementById("rally")
-    .textContent=rally;
+  document.getElementById(
+    "velocity"
+  ).textContent=
+    velocity.toFixed(1);
 
-  document.getElementById("speed")
-    .textContent=
-      matchSpeed.toFixed(2)+"×";
 
-  document.getElementById("speedBar")
-    .style.width=
-      Math.min(
-        100,
-        matchSpeed/matchMaxSpeed*100
-      )+"%";
+  document.getElementById(
+    "rally"
+  ).textContent=
+    rally;
+
+
+  document.getElementById(
+    "speed"
+  ).textContent=
+    (
+      ballSpeed/
+      START_SPEED
+    ).toFixed(2)+
+    "×";
+
+
+  document.getElementById(
+    "speedBar"
+  ).style.width=
+    (
+      ballSpeed/
+      MAX_SPEED*
+      100
+    )+
+    "%";
+
 
   const adaptation=
-    leftPlayer&&rightPlayer
+    leftPlayer &&
+    rightPlayer
+
       ?Math.round(
-        (leftPlayer.adaptation+
-         rightPlayer.adaptation)/2
+        (
+          leftPlayer.adaptation+
+          rightPlayer.adaptation
+        )/2
       )
+
       :0;
 
-  document.getElementById("adapt")
-    .textContent=
-      adaptation+"%";
 
-  document.getElementById("adaptBar")
-    .style.width=
-      adaptation+"%";
+  document.getElementById(
+    "adapt"
+  ).textContent=
+    adaptation+
+    "%";
 
-  document.getElementById("phase")
-    .textContent=
-      replayActive
-        ?"INSTANT REPLAY"
-        :"LIVE MATCH";
+
+  document.getElementById(
+    "adaptBar"
+  ).style.width=
+    adaptation+
+    "%";
+
+
+  document.getElementById(
+    "phase"
+  ).textContent=
+    replayActive
+      ?"INSTANT REPLAY"
+      :"LIVE MATCH";
+
 }
 
+
 /* =========================================================
-   DRAW ARENA
+   ARENA DRAW
    ========================================================= */
 
 function draw(){
 
-  CTX.clearRect(0,0,W,H);
-
-  const bg=CTX.createRadialGradient(
-    W/2,H/2,10,
-    W/2,H/2,W*.72
+  CTX.clearRect(
+    0,
+    0,
+    W,
+    H
   );
 
-  bg.addColorStop(0,"#101b3a");
-  bg.addColorStop(.45,"#060a18");
-  bg.addColorStop(1,"#010207");
+
+  const bg=
+    CTX.createRadialGradient(
+      W/2,
+      H/2,
+      10,
+      W/2,
+      H/2,
+      W*.72
+    );
+
+
+  bg.addColorStop(
+    0,
+    "#101b3a"
+  );
+
+  bg.addColorStop(
+    .45,
+    "#060a18"
+  );
+
+  bg.addColorStop(
+    1,
+    "#010207"
+  );
+
 
   CTX.fillStyle=bg;
-  CTX.fillRect(0,0,W,H);
+
+  CTX.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+
+  /*
+    Dynamic speed color.
+
+    The arena subtly changes color
+    as rallies become faster.
+  */
+
+  const intensity=
+    Math.min(
+      1,
+      (
+        ballSpeed-
+        START_SPEED
+      )/
+      (
+        MAX_SPEED-
+        START_SPEED
+      )
+    );
+
+
+  CTX.fillStyle=
+    `rgba(255,30,150,${intensity*.035})`;
+
+  CTX.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+
 
   /*
     Grid.
   */
 
-  CTX.strokeStyle="rgba(0,246,255,.04)";
+  CTX.strokeStyle=
+    "rgba(0,246,255,.04)";
+
   CTX.lineWidth=1;
 
-  for(let x=0;x<W;x+=80){
+
+  for(
+    let x=0;
+    x<W;
+    x+=80
+  ){
 
     CTX.beginPath();
-    CTX.moveTo(x,0);
-    CTX.lineTo(x,H);
+
+    CTX.moveTo(
+      x,
+      0
+    );
+
+    CTX.lineTo(
+      x,
+      H
+    );
+
     CTX.stroke();
+
   }
 
-  for(let y=0;y<H;y+=80){
+
+  for(
+    let y=0;
+    y<H;
+    y+=80
+  ){
 
     CTX.beginPath();
-    CTX.moveTo(0,y);
-    CTX.lineTo(W,y);
+
+    CTX.moveTo(
+      0,
+      y
+    );
+
+    CTX.lineTo(
+      W,
+      y
+    );
+
     CTX.stroke();
+
   }
+
 
   /*
-    Center.
+    Center line.
   */
 
-  CTX.strokeStyle="rgba(255,255,255,.12)";
-  CTX.setLineDash([12,18]);
+  CTX.strokeStyle=
+    "rgba(255,255,255,.12)";
+
+  CTX.setLineDash(
+    [12,18]
+  );
+
 
   CTX.beginPath();
-  CTX.moveTo(W/2,0);
-  CTX.lineTo(W/2,H);
+
+  CTX.moveTo(
+    W/2,
+    0
+  );
+
+  CTX.lineTo(
+    W/2,
+    H
+  );
+
   CTX.stroke();
+
 
   CTX.setLineDash([]);
 
+
   /*
     Ball trail.
+
+    Trail becomes slightly longer
+    at higher speed so the viewer
+    can visually follow direction.
   */
 
-  for(let i=0;i<trail.length;i++){
+  for(
+    let i=0;
+    i<trail.length;
+    i++
+  ){
 
-    const t=trail[i];
+    const t=
+      trail[i];
+
 
     CTX.globalAlpha=
-      (i/trail.length)*.45;
+      (
+        i/
+        trail.length
+      )*.48;
+
 
     CTX.fillStyle=
       i%2
         ?COLORS.cyan
         :COLORS.pink;
+
 
     CTX.beginPath();
 
@@ -2446,16 +4346,23 @@ function draw(){
       t.y,
       Math.max(
         2,
-        ball.r*(i/trail.length)
+        ball.r*
+        (
+          i/
+          trail.length
+        )
       ),
       0,
       Math.PI*2
     );
 
     CTX.fill();
+
   }
 
+
   CTX.globalAlpha=1;
+
 
   drawPaddle(
     leftPaddle,
@@ -2467,13 +4374,28 @@ function draw(){
     COLORS.pink
   );
 
+
   /*
-    Ball.
+    Ball glow gets stronger with speed.
   */
 
-  CTX.shadowBlur=38;
-  CTX.shadowColor="#fff";
-  CTX.fillStyle="#fff";
+  CTX.shadowBlur=
+    26+
+    ballSpeed*.65;
+
+  CTX.shadowColor=
+    ballSpeed>
+    34
+      ?COLORS.yellow
+      :"#ffffff";
+
+
+  CTX.fillStyle=
+    ballSpeed>
+    34
+      ?COLORS.yellow
+      :"#ffffff";
+
 
   CTX.beginPath();
 
@@ -2487,40 +4409,98 @@ function draw(){
 
   CTX.fill();
 
+
   CTX.shadowBlur=0;
+
+
+  /*
+    Speed ring.
+  */
+
+  if(
+    ballSpeed>30
+  ){
+
+    CTX.strokeStyle=
+      `rgba(255,230,109,${
+        (
+          ballSpeed-30
+        )/
+        14
+      })`;
+
+    CTX.lineWidth=2;
+
+    CTX.beginPath();
+
+    CTX.arc(
+      ball.x,
+      ball.y,
+      ball.r+
+      8+
+      (
+        ballSpeed-30
+      )*.7,
+      0,
+      Math.PI*2
+    );
+
+    CTX.stroke();
+
+  }
+
 
   /*
     Particles.
   */
 
-  particles.forEach(p=>{
+  particles.forEach(
+    p=>{
 
-    CTX.globalAlpha=
-      Math.max(0,p.life);
+      CTX.globalAlpha=
+        Math.max(
+          0,
+          p.life
+        );
 
-    CTX.fillStyle=p.color;
+      CTX.fillStyle=
+        p.color;
 
-    CTX.beginPath();
 
-    CTX.arc(
-      p.x,
-      p.y,
-      2.4,
-      0,
-      Math.PI*2
-    );
+      CTX.beginPath();
 
-    CTX.fill();
-  });
+      CTX.arc(
+        p.x,
+        p.y,
+        2.4,
+        0,
+        Math.PI*2
+      );
+
+      CTX.fill();
+
+    }
+  );
+
 
   CTX.globalAlpha=1;
+
 }
 
-function drawPaddle(p,color){
+
+function drawPaddle(
+  p,
+  color
+){
 
   CTX.shadowBlur=28;
-  CTX.shadowColor=color;
-  CTX.fillStyle=color;
+
+  CTX.shadowColor=
+    color;
+
+  CTX.fillStyle=
+    color;
+
 
   CTX.beginPath();
 
@@ -2534,9 +4514,13 @@ function drawPaddle(p,color){
 
   CTX.fill();
 
+
   CTX.shadowBlur=0;
 
-  CTX.fillStyle="rgba(255,255,255,.72)";
+
+  CTX.fillStyle=
+    "rgba(255,255,255,.72)";
+
 
   CTX.fillRect(
     p.x+5,
@@ -2544,44 +4528,73 @@ function drawPaddle(p,color){
     3,
     p.h-24
   );
+
 }
+
 
 /* =========================================================
    GAME LOOP
    ========================================================= */
 
-let last=performance.now();
+let last=
+  performance.now();
+
 let accumulator=0;
 
-const FIXED=1/240;
+const FIXED=
+  1/240;
+
 
 function loop(now){
 
-  let dt=(now-last)/1000;
+  let dt=
+    (
+      now-last
+    )/1000;
+
 
   last=now;
 
+
   /*
-    Browser tab throttling protection.
+    Protect against browser-tab
+    throttling causing giant physics
+    jumps.
   */
 
-  dt=Math.min(dt,.05);
+  dt=
+    Math.min(
+      dt,
+      .05
+    );
+
 
   accumulator+=dt;
 
-  while(accumulator>=FIXED){
 
-    physics(FIXED);
+  while(
+    accumulator>=FIXED
+  ){
+
+    physics(
+      FIXED
+    );
 
     accumulator-=FIXED;
+
   }
+
 
   draw();
 
   updateReplay(now);
 
-  requestAnimationFrame(loop);
+  requestAnimationFrame(
+    loop
+  );
+
 }
+
 
 /* =========================================================
    BOOT
@@ -2589,47 +4602,68 @@ function loop(now){
 
 if(
   leagueState.defendingChampion!==null &&
-  !players.some(p=>p.id===leagueState.defendingChampion)
+  !players.some(
+    p=>
+      p.id===
+      leagueState.defendingChampion
+  )
 ){
-  leagueState.defendingChampion=null;
+
+  leagueState.defendingChampion=
+    null;
+
 }
 
+
 newTournament();
+
 
 addComment(
   "🌐 <strong>NEON PONG LEAGUE</strong> is online."
 );
 
 addComment(
-  "Eleven competitors. Infinite seasons. One defending champion."
+  "🚀 Every rally begins fast and accelerates after EVERY paddle hit."
 );
 
 addComment(
-  "Every match updates the bracket and every career record."
+  "🛡️ The speed ceiling keeps the action intense but watchable."
 );
 
 addComment(
-  "👑 The previous champion receives a championship-final bye."
+  "🏆 Eleven competitors. Infinite seasons. One defending champion."
 );
+
+addComment(
+  "👑 The defending champion receives a bye into the championship."
+);
+
 
 startNextMatch();
 
 updateUI();
 
-requestAnimationFrame(loop);
 
-/*
-  Refresh non-critical UI periodically.
-*/
+requestAnimationFrame(
+  loop
+);
+
+
+/* =========================================================
+   PERIODIC UI / SAVE
+   ========================================================= */
 
 setInterval(()=>{
 
   rebuildTournament();
+
   updateUI();
+
   save();
 
 },1000);
 
 </script>
+
 </body>
 </html>
