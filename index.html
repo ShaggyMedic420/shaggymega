@@ -2,1518 +2,1343 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05000d">
-<meta name="description" content="SHAGGYMEGA — the internet superstation.">
-<title>SHAGGYMEGA // THE INTERNET SUPERSTATION</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#070a12">
+<meta name="description" content="The Shaggy Mega Internet Portal — Ask Jeeves, headlines, weather, knowledge, tools, Twitch and the weird wonderful internet.">
+<title>THE SHAGGY MEGA INTERNET PORTAL</title>
 
 <style>
 :root{
- --bg:#030208;
- --panel:#0b0712;
- --panel2:#10091b;
- --cyan:#00f6ff;
- --pink:#ff00d4;
- --purple:#8b45ff;
- --green:#39ff14;
- --yellow:#ffe600;
- --red:#ff3155;
- --orange:#ff8a00;
- --text:#f7f0ff;
- --muted:#91819e;
- --dim:#5d5068;
- --border:rgba(0,246,255,.22);
- --shadow:0 0 28px rgba(0,246,255,.08);
+  --bg:#05070d;
+  --panel:#0b101a;
+  --panel2:#0f1724;
+  --line:#243246;
+  --gold:#f4c95d;
+  --gold2:#ffdf82;
+  --cyan:#55e6ff;
+  --green:#67f58b;
+  --red:#ff667d;
+  --text:#edf4ff;
+  --muted:#91a0b7;
+  --shadow:0 18px 60px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
- margin:0;
- min-height:100vh;
- color:var(--text);
- background:
- radial-gradient(circle at 8% 0%,rgba(139,69,255,.2),transparent 28%),
- radial-gradient(circle at 92% 5%,rgba(255,0,212,.14),transparent 25%),
- radial-gradient(circle at 50% 100%,rgba(0,246,255,.08),transparent 35%),
- var(--bg);
- font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
- overflow-x:hidden;
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(45,75,120,.20),transparent 32rem),
+    radial-gradient(circle at 90% 10%,rgba(244,201,93,.08),transparent 28rem),
+    linear-gradient(180deg,#05070d,#080c14 45%,#05070d);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  min-height:100vh;
 }
 
 body:before{
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:99999;
- opacity:.035;
- background:repeating-linear-gradient(
-  to bottom,
-  transparent 0,
-  transparent 2px,
-  #fff 3px,
-  transparent 4px
- );
-}
-
-body.party{
- animation:hue 5s linear infinite;
-}
-
-@keyframes hue{
- to{filter:hue-rotate(360deg)}
+  content:"";
+  pointer-events:none;
+  position:fixed;
+  inset:0;
+  opacity:.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:linear-gradient(to bottom,black,transparent);
 }
 
 a{
- color:inherit;
- text-decoration:none;
+  color:inherit;
+  text-decoration:none;
 }
 
-button,input,select{
- font:inherit;
+button,input{
+  font:inherit;
 }
 
-button{cursor:pointer}
-
-.wrap{
- width:min(1500px,calc(100% - 24px));
- margin:auto;
+button{
+  cursor:pointer;
 }
-
-.rainbow{
- height:4px;
- background:linear-gradient(
-  90deg,
-  red,orange,yellow,lime,cyan,blue,violet,magenta,red
- );
- background-size:200% 100%;
- animation:rainbow 5s linear infinite;
-}
-
-@keyframes rainbow{
- to{background-position:200% 0}
-}
-
-/* NAV */
 
 .topbar{
- position:sticky;
- top:0;
- z-index:1000;
- backdrop-filter:blur(16px);
- background:rgba(3,2,8,.88);
- border-bottom:1px solid var(--border);
-}
-
-.topbar-inner{
- min-height:48px;
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px;
-}
-
-.logo{
- color:var(--cyan);
- font-weight:1000;
- letter-spacing:2px;
- text-shadow:0 0 12px var(--cyan);
- white-space:nowrap;
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(18px);
+  background:rgba(5,7,13,.82);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .nav{
- display:flex;
- gap:3px;
- overflow-x:auto;
- scrollbar-width:none;
+  max-width:1500px;
+  margin:auto;
+  min-height:64px;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  gap:18px;
 }
 
-.nav::-webkit-scrollbar{display:none}
-
-.nav a{
- color:#aa99b7;
- padding:7px 9px;
- font-size:.72rem;
- white-space:nowrap;
- border:1px solid transparent;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  white-space:nowrap;
 }
 
-.nav a:hover{
- color:var(--cyan);
- border-color:var(--cyan);
+.logo .hat{
+  font-size:29px;
 }
 
-/* HERO */
+.logo span{
+  color:var(--gold);
+}
+
+.navlinks{
+  display:flex;
+  gap:6px;
+  overflow:auto;
+  scrollbar-width:none;
+}
+
+.navlinks::-webkit-scrollbar{display:none}
+
+.navlinks a{
+  color:var(--muted);
+  font-size:13px;
+  padding:8px 10px;
+  border-radius:8px;
+}
+
+.navlinks a:hover{
+  color:white;
+  background:#111b29;
+}
+
+.clock{
+  margin-left:auto;
+  color:var(--cyan);
+  font-family:monospace;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.container{
+  width:min(1500px,calc(100% - 28px));
+  margin:auto;
+}
 
 .hero{
- text-align:center;
- padding:58px 0 30px;
+  padding:54px 0 30px;
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:24px;
 }
 
-.eyebrow{
- color:var(--green);
- font:700 .7rem monospace;
- letter-spacing:4px;
- text-shadow:0 0 10px var(--green);
+.heroMain{
+  padding:38px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:
+    linear-gradient(135deg,rgba(244,201,93,.075),transparent 45%),
+    rgba(11,16,26,.82);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
 }
 
-.hero h1{
- margin:17px 0 0;
- font-size:clamp(3.1rem,9vw,8rem);
- line-height:.8;
- letter-spacing:-6px;
- font-weight:1000;
- text-shadow:
-  4px 4px 0 var(--pink),
-  -4px -4px 0 var(--cyan),
-  0 0 45px rgba(255,0,212,.35);
+.heroMain:after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-130px;
+  top:-130px;
+  border-radius:50%;
+  border:1px solid rgba(244,201,93,.15);
+  box-shadow:0 0 0 30px rgba(244,201,93,.02),
+             0 0 0 70px rgba(244,201,93,.015);
 }
 
-.hero h1 small{
- display:block;
- margin-top:27px;
- font-size:.18em;
- letter-spacing:8px;
- color:var(--yellow);
- text-shadow:0 0 12px var(--yellow);
+.kicker{
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
 }
 
-.hero p{
- max-width:850px;
- margin:45px auto 24px;
- color:var(--muted);
+h1{
+  margin:12px 0;
+  font-size:clamp(38px,6vw,78px);
+  line-height:.92;
+  letter-spacing:-.055em;
 }
 
-/* SEARCH */
-
-.search{
- max-width:950px;
- margin:auto;
+h1 span{
+  color:var(--gold);
 }
 
-.search-main{
- display:flex;
- background:#050208;
- border:2px solid var(--cyan);
- box-shadow:0 0 30px rgba(0,246,255,.12);
+.heroText{
+  max-width:760px;
+  color:#b8c5d7;
+  font-size:17px;
+  line-height:1.65;
 }
 
-.search-main input{
- flex:1;
- min-width:0;
- border:0;
- outline:0;
- background:transparent;
- color:#fff;
- padding:16px;
- font-size:1.05rem;
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:25px;
 }
 
-.search-main button{
- border:0;
- padding:0 23px;
- background:var(--cyan);
- color:#001014;
- font-weight:1000;
+.badge{
+  border:1px solid #29394e;
+  color:#b7c5d8;
+  background:#0b111b;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:12px;
 }
 
-.search-main button:hover{
- background:#fff;
- box-shadow:0 0 20px var(--cyan);
+.badge.live{
+  color:var(--green);
+  border-color:rgba(103,245,139,.3);
 }
 
-.engines{
- display:flex;
- justify-content:center;
- gap:6px;
- margin-top:7px;
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.engine{
- border:1px solid #3c3045;
- background:#08050d;
- color:#89798f;
- padding:5px 9px;
- font-size:.68rem;
+.stat{
+  border:1px solid var(--line);
+  background:rgba(11,16,26,.8);
+  border-radius:18px;
+  padding:22px;
+  min-height:140px;
 }
 
-.engine.active,
-.engine:hover{
- border-color:var(--cyan);
- color:var(--cyan);
+.statLabel{
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:10px;
+  font-weight:800;
 }
 
-/* MARQUEE */
-
-.marquee{
- overflow:hidden;
- white-space:nowrap;
- border-top:1px solid rgba(255,255,255,.06);
- border-bottom:1px solid rgba(255,255,255,.06);
- padding:9px 0;
- margin-bottom:16px;
- color:var(--green);
- font:700 .68rem monospace;
+.statValue{
+  margin-top:13px;
+  font-size:24px;
+  font-family:monospace;
+  color:var(--gold2);
 }
 
-.marquee span{
- display:inline-block;
- animation:marquee 27s linear infinite;
+.statSub{
+  color:#718097;
+  font-size:11px;
+  margin-top:8px;
 }
-
-@keyframes marquee{
- from{transform:translateX(100%)}
- to{transform:translateX(-100%)}
-}
-
-/* GRID */
 
 .grid{
- display:grid;
- grid-template-columns:repeat(12,1fr);
- gap:15px;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:18px;
+  padding-bottom:18px;
 }
 
 .card{
- min-width:0;
- padding:18px;
- background:
- linear-gradient(145deg,rgba(255,255,255,.025),transparent),
- var(--panel);
- border:1px solid rgba(139,69,255,.28);
- box-shadow:var(--shadow);
- transition:.18s;
+  grid-column:span 4;
+  background:
+    linear-gradient(180deg,rgba(16,24,37,.95),rgba(8,12,20,.95));
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,.20);
 }
 
-.card:hover{
- border-color:var(--cyan);
- box-shadow:
- 0 0 28px rgba(0,246,255,.1),
- inset 0 0 25px rgba(0,246,255,.02);
+.card.wide{grid-column:span 8}
+.card.full{grid-column:1/-1}
+.card.half{grid-column:span 6}
+
+.cardHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.card h2{
- margin:0 0 14px;
- color:var(--cyan);
- font-size:.92rem;
- letter-spacing:2px;
- text-transform:uppercase;
+.cardTitle{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
 
-.card h2 span{color:var(--pink)}
-
-.col12{grid-column:span 12}
-.col8{grid-column:span 8}
-.col6{grid-column:span 6}
-.col4{grid-column:span 4}
-
-@media(max-width:950px){
- .col8,.col6,.col4{grid-column:span 12}
+.cardTitle .icon{
+  margin-right:7px;
 }
 
-/* HEADLINES */
-
-.headlines{
- border-color:rgba(255,230,0,.28);
+.cardTools{
+  color:#65758c;
+  font-size:11px;
 }
 
-.headline-toolbar{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- flex-wrap:wrap;
- margin-bottom:12px;
+.cardBody{
+  padding:18px;
 }
-
-.headline-tabs{
- display:flex;
- gap:5px;
- flex-wrap:wrap;
-}
-
-.tab{
- border:1px solid #3c3045;
- background:#08050d;
- color:#887991;
- padding:7px 9px;
- font-size:.68rem;
-}
-
-.tab.active,
-.tab:hover{
- border-color:var(--yellow);
- color:var(--yellow);
-}
-
-.updated{
- color:var(--dim);
- font:700 .65rem monospace;
-}
-
-.headline-grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:8px;
-}
-
-.headline{
- display:block;
- padding:12px;
- background:rgba(255,255,255,.025);
- border-left:3px solid var(--purple);
-}
-
-.headline:hover{
- background:rgba(0,246,255,.035);
- border-left-color:var(--cyan);
-}
-
-.headline-title{
- font-size:.86rem;
- line-height:1.3;
- color:#eee7f5;
-}
-
-.headline-meta{
- margin-top:6px;
- color:#695b73;
- font:700 .62rem monospace;
-}
-
-@media(max-width:700px){
- .headline-grid{grid-template-columns:1fr}
-}
-
-/* TRENDING */
-
-.trend-layout{
- display:grid;
- grid-template-columns:2fr 1fr;
- gap:12px;
-}
-
-.trends{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:6px;
-}
-
-.trend{
- display:flex;
- gap:9px;
- align-items:center;
- padding:9px;
- background:rgba(255,255,255,.025);
- border:1px solid rgba(255,255,255,.05);
-}
-
-.trend:hover{
- border-color:var(--pink);
-}
-
-.rank{
- color:var(--pink);
- font:bold 1rem monospace;
-}
-
-.trend-name{
- color:#ddd2e8;
- font-size:.79rem;
-}
-
-.trend-vol{
- color:#66596e;
- font:700 .6rem monospace;
- margin-top:3px;
-}
-
-.trend-links{
- display:grid;
- gap:7px;
-}
-
-.trend-link{
- border:1px solid #33283a;
- background:#08050d;
- padding:10px;
- color:#a996b4;
- font-size:.72rem;
-}
-
-.trend-link:hover{
- color:var(--cyan);
- border-color:var(--cyan);
-}
-
-@media(max-width:800px){
- .trend-layout{grid-template-columns:1fr}
- .trends{grid-template-columns:1fr}
-}
-
-/* TWITCH */
-
-.twitch{
- border-color:rgba(255,49,85,.38);
-}
-
-.twitch h2{color:var(--red)}
-
-.live{
- display:flex;
- align-items:center;
- gap:7px;
- color:#ff8093;
- font:700 .7rem monospace;
- margin-bottom:10px;
-}
-
-.dot{
- width:9px;
- height:9px;
- border-radius:50%;
- background:var(--red);
- box-shadow:0 0 12px var(--red);
- animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
- 50%{opacity:.25;transform:scale(.7)}
-}
-
-.twitch-player{
- width:100%;
- aspect-ratio:16/9;
- background:#000;
-}
-
-.twitch-player iframe{
- width:100%;
- height:100%;
- border:0;
-}
-
-.lurk{
- margin-top:12px;
- padding:15px;
- border:1px solid rgba(255,49,85,.3);
- background:linear-gradient(
-  90deg,
-  rgba(255,49,85,.07),
-  rgba(151,71,255,.05)
- );
-}
-
-.lurk strong{
- display:block;
- color:#ff7085;
- font-size:1.05rem;
- margin-bottom:5px;
-}
-
-.lurk p{
- margin:0;
- color:#c0afc8;
- font-size:.78rem;
- line-height:1.5;
-}
-
-/* JEEVES */
 
 .jeeves{
- border-color:rgba(255,230,0,.28);
+  min-height:390px;
+}
+
+.jeevesIntro{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:18px;
+}
+
+.avatar{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:
+    linear-gradient(145deg,#f6d274,#8e6418);
+  color:#171006;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  flex:none;
+  box-shadow:0 0 25px rgba(244,201,93,.16);
+}
+
+.speech{
+  color:#c3cfde;
+  line-height:1.55;
+  font-size:14px;
+}
+
+.speech strong{
+  color:var(--gold2);
 }
 
 .chat{
- height:330px;
- overflow-y:auto;
- padding:5px;
- background:
- linear-gradient(rgba(255,255,255,.015),transparent),
- #050308;
- border:1px solid #302638;
+  height:210px;
+  overflow:auto;
+  border:1px solid #1e2a3b;
+  background:#070b12;
+  border-radius:12px;
+  padding:12px;
+  scroll-behavior:smooth;
 }
 
 .msg{
- max-width:90%;
- margin:7px 0;
- padding:10px 12px;
- border-radius:3px;
- line-height:1.45;
- font-size:.82rem;
-}
-
-.msg.user{
- margin-left:auto;
- background:rgba(0,246,255,.07);
- border-right:2px solid var(--cyan);
+  margin:8px 0;
+  max-width:88%;
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.5;
 }
 
 .msg.jeeves{
- background:rgba(255,230,0,.045);
- border-left:2px solid var(--yellow);
+  background:#101a28;
+  border:1px solid #1e3148;
 }
 
-.msg small{
- display:block;
- color:#6f6278;
- font:700 .58rem monospace;
- margin-bottom:4px;
+.msg.user{
+  background:#182117;
+  border:1px solid #29442b;
+  margin-left:auto;
+  color:#d9f3dc;
 }
 
-.chat-form{
- display:flex;
- gap:6px;
- margin-top:8px;
+.chatInput{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
 }
 
-.chat-form input{
- flex:1;
- min-width:0;
- background:#050208;
- color:#fff;
- border:1px solid #45374d;
- padding:11px;
- outline:0;
+.chatInput input{
+  min-width:0;
+  flex:1;
+  background:#080d15;
+  border:1px solid #253449;
+  color:white;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
 }
 
-.chat-form input:focus{
- border-color:var(--yellow);
+.chatInput input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(244,201,93,.08);
 }
 
-.gold{
- border:1px solid var(--yellow);
- background:rgba(255,230,0,.06);
- color:var(--yellow);
- padding:9px 13px;
+.btn{
+  border:1px solid #394a60;
+  background:#111a27;
+  color:#e8f0fb;
+  padding:10px 13px;
+  border-radius:10px;
+  transition:.15s;
 }
 
-.gold:hover{
- background:var(--yellow);
- color:#120e00;
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:#607791;
+  background:#172335;
 }
 
-.jeeves-status{
- margin-top:6px;
- color:#62566a;
- font:700 .6rem monospace;
+.btn.gold{
+  background:linear-gradient(135deg,#d9ad42,#f4cf6d);
+  color:#171106;
+  border-color:#f6d77d;
+  font-weight:900;
 }
 
-/* WEATHER */
-
-.weather-top{
- display:flex;
- justify-content:space-between;
- align-items:center;
+.btn.cyan{
+  color:#001319;
+  background:linear-gradient(135deg,#45dff7,#75edff);
+  border-color:#75edff;
+  font-weight:900;
 }
 
-.weather-temp{
- color:var(--yellow);
- font-size:3rem;
- font-weight:1000;
- text-shadow:0 0 15px rgba(255,230,0,.3);
+.inputRow{
+  display:flex;
+  gap:8px;
 }
 
-.weather-place{
- color:var(--muted);
- font-size:.78rem;
+.inputRow input{
+  flex:1;
+  min-width:0;
+  background:#080d15;
+  color:white;
+  border:1px solid #243246;
+  border-radius:10px;
+  padding:11px 12px;
 }
 
-.weather-icon{
- font-size:3rem;
+.result{
+  margin-top:13px;
+  color:#b9c7d9;
+  font-size:13px;
+  line-height:1.6;
 }
 
-.weather-controls{
- display:flex;
- gap:5px;
- margin-top:10px;
+.result strong{
+  color:white;
 }
 
-.weather-controls input{
- flex:1;
- min-width:0;
- background:#050208;
- border:1px solid #403346;
- color:#fff;
- padding:9px;
- outline:0;
+.newsList{
+  display:grid;
+  gap:2px;
 }
 
-.small{
- border:1px solid var(--cyan);
- background:rgba(0,246,255,.05);
- color:var(--cyan);
- padding:8px 10px;
+.news{
+  display:block;
+  padding:13px 10px;
+  border-bottom:1px solid rgba(255,255,255,.055);
 }
 
-.small:hover{
- background:var(--cyan);
- color:#001014;
+.news:hover{
+  background:#111a26;
 }
 
-.forecast{
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:5px;
- margin-top:12px;
+.newsSource{
+  color:var(--cyan);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
 }
 
-.fc{
- text-align:center;
- padding:7px 3px;
- background:rgba(255,255,255,.025);
- border:1px solid rgba(255,255,255,.05);
- font-size:.63rem;
+.newsTitle{
+  margin-top:4px;
+  font-size:13px;
+  line-height:1.4;
+  color:#dce6f4;
 }
 
-.fc-icon{
- font-size:1.25rem;
- margin:4px;
+.newsTime{
+  margin-top:4px;
+  color:#68788e;
+  font-size:10px;
 }
-
-.fc b{color:var(--yellow)}
-
-.status{
- margin-top:7px;
- color:#64586b;
- font:700 .6rem monospace;
-}
-
-/* GENERATORS */
 
 .generator{
- display:flex;
- flex-direction:column;
+  min-height:250px;
+  display:flex;
+  flex-direction:column;
 }
 
-.generator-output{
- flex:1;
- min-height:135px;
- padding:17px;
- background:
- radial-gradient(circle at 50% 0,rgba(139,69,255,.12),transparent 60%),
- #06030a;
- border:1px solid #33263b;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
- line-height:1.5;
- color:#ddd2e8;
- font-size:.88rem;
+.output{
+  flex:1;
+  min-height:130px;
+  border:1px dashed #2a3c52;
+  border-radius:14px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at center,rgba(85,230,255,.05),transparent 60%),
+    #070c14;
+  color:#dbe7f5;
+  line-height:1.65;
+  font-size:15px;
 }
 
-.generator-output .big{
- color:var(--pink);
- font-size:1.35rem;
- font-weight:1000;
- text-shadow:0 0 12px rgba(255,0,212,.3);
+.output .big{
+  font-size:28px;
+  color:var(--gold2);
+  font-weight:900;
+  display:block;
+  margin-bottom:8px;
 }
 
-.gen-info{
- color:#65586d;
- font:700 .6rem monospace;
- margin:8px 0;
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  flex-wrap:wrap;
 }
-
-.gen-btn{
- width:100%;
- padding:12px;
- border:1px solid var(--pink);
- background:rgba(255,0,212,.05);
- color:var(--pink);
- font-weight:1000;
-}
-
-.gen-btn:hover{
- background:var(--pink);
- color:#170010;
-}
-
-/* TOOLS */
-
-.tools{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:7px;
-}
-
-.tool{
- padding:12px;
- background:rgba(255,255,255,.025);
- border:1px solid rgba(255,255,255,.06);
- color:#cfc2d7;
- text-align:left;
-}
-
-.tool:hover{
- border-color:var(--cyan);
- color:#fff;
-}
-
-.tool b{
- display:block;
- color:var(--cyan);
- margin-bottom:3px;
-}
-
-@media(max-width:650px){
- .tools{grid-template-columns:repeat(2,1fr)}
-}
-
-/* CLOCK */
-
-.clock{
- color:var(--green);
- font:bold 2.5rem monospace;
- text-shadow:0 0 12px var(--green);
-}
-
-.date{
- color:var(--muted);
- margin-top:5px;
-}
-
-/* LINKS */
 
 .links{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
- gap:7px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
 }
 
 .link{
- padding:11px;
- border:1px solid rgba(255,255,255,.06);
- background:rgba(255,255,255,.025);
- color:#cfc3d8;
+  border:1px solid #253448;
+  background:#0a1019;
+  padding:13px;
+  border-radius:11px;
+  color:#b7c6d9;
+  font-size:12px;
 }
 
 .link:hover{
- color:var(--yellow);
- border-color:var(--yellow);
- transform:translateX(2px);
+  color:white;
+  border-color:#536a84;
+  background:#101927;
 }
 
-.link b{
- display:block;
- color:var(--cyan);
- margin-bottom:3px;
+.twitchBox{
+  text-align:center;
+  padding:24px 15px;
 }
 
-/* GAMES */
-
-.game{
- text-align:center;
+.lurk{
+  color:var(--gold2);
+  font-size:21px;
+  font-weight:900;
+  line-height:1.25;
 }
 
-.score{
- color:var(--yellow);
- font:700 .72rem monospace;
- margin-bottom:8px;
+.lurkSub{
+  color:#8d9db3;
+  margin-top:9px;
+  font-size:13px;
+  line-height:1.55;
 }
 
-.gamebutton{
- width:100%;
- min-height:95px;
- border:2px solid var(--purple);
- background:#08040e;
- color:#fff;
- font-size:1.1rem;
+.liveDot{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  background:#ff4261;
+  border-radius:50%;
+  box-shadow:0 0 12px #ff4261;
+  margin-right:7px;
 }
 
-.gamebutton.ready{
- background:var(--red);
+.pulse{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.gamebutton.go{
- background:var(--green);
- color:#001500;
- border-color:var(--green);
+.pulseItem{
+  flex:1;
+  min-width:130px;
+  background:#080e17;
+  border:1px solid #1e2d40;
+  border-radius:12px;
+  padding:13px;
 }
 
-/* FOOTER */
-
-footer{
- text-align:center;
- padding:50px 0 75px;
- color:#5d5066;
- font:700 .68rem monospace;
+.pulseNum{
+  font-size:20px;
+  color:var(--cyan);
+  font-weight:900;
 }
 
-footer .bigfoot{
- color:#a98db7;
- margin-bottom:8px;
+.pulseLabel{
+  color:#6f8098;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
 }
 
-@media(max-width:600px){
- .wrap{width:calc(100% - 12px)}
- .hero{padding-top:40px}
- .hero h1{letter-spacing:-3px}
- .forecast{grid-template-columns:repeat(5,minmax(0,1fr))}
+.footer{
+  margin:35px 0 70px;
+  padding:25px;
+  text-align:center;
+  color:#64748a;
+  font-size:11px;
+  line-height:1.7;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+
+.footer strong{
+  color:#a9b8ca;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  color:#71839a;
+}
+
+.statusDot{
+  width:7px;
+  height:7px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 9px var(--green);
+}
+
+.ticker{
+  overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:#080c13;
+}
+
+.tickerInner{
+  white-space:nowrap;
+  padding:8px 0;
+  color:#77879d;
+  font-size:11px;
+  animation:ticker 45s linear infinite;
+}
+
+.tickerInner span{
+  margin-right:50px;
+}
+
+@keyframes ticker{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-100%)}
+}
+
+.flash{
+  animation:flash .45s ease;
+}
+
+@keyframes flash{
+  0%{box-shadow:0 0 0 rgba(244,201,93,0)}
+  50%{box-shadow:0 0 35px rgba(244,201,93,.35)}
+  100%{box-shadow:0 0 0 rgba(244,201,93,0)}
+}
+
+@media(max-width:1050px){
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .card,
+  .card.wide,
+  .card.half{
+    grid-column:span 6;
+  }
+
+  .card.full{
+    grid-column:1/-1;
+  }
+}
+
+@media(max-width:700px){
+  .nav{
+    padding:9px 12px;
+  }
+
+  .navlinks{
+    display:none;
+  }
+
+  .clock{
+    font-size:11px;
+  }
+
+  .heroMain{
+    padding:24px;
+  }
+
+  .hero{
+    padding-top:25px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card,
+  .card.wide,
+  .card.half{
+    grid-column:1/-1;
+  }
+
+  h1{
+    font-size:45px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="rainbow"></div>
+<!-- =========================================================
+     MICRO TWITCH LURKER
+     ========================================================= -->
+<iframe
+  id="twitchPlayer"
+  src="https://player.twitch.tv/?channel=Shaggymedic420&parent=shaggymedic420.github.io&autoplay=true&muted=true"
+  allowfullscreen
+  style="
+    position:fixed;
+    width:1px;
+    height:1px;
+    border:0;
+    opacity:.01;
+    pointer-events:none;
+    left:0;
+    bottom:0;
+    z-index:-1;
+  "
+  title="Shaggymedic420 Twitch stream">
+</iframe>
 
 <header class="topbar">
-<div class="wrap topbar-inner">
+  <nav class="nav">
+    <div class="logo">
+      <div class="hat">🎩</div>
+      <div>SHAGGY<span>MEGA</span></div>
+    </div>
 
- <div class="logo">SHAGGY//NET</div>
+    <div class="navlinks">
+      <a href="#jeeves">Jeeves</a>
+      <a href="#headlines">Headlines</a>
+      <a href="#knowledge">Knowledge</a>
+      <a href="#things">Do The Thing</a>
+      <a href="#tools">Tools</a>
+      <a href="#stream">Stream</a>
+    </div>
 
- <nav class="nav">
-  <a href="#headlines">HEADLINES</a>
-  <a href="#live">LIVE</a>
-  <a href="#jeeves">JEEVES</a>
-  <a href="#weather">WEATHER</a>
-  <a href="#generators">GENERATORS</a>
-  <a href="#internet">INTERNET</a>
-  <a href="#games">GAMES</a>
- </nav>
+    <div class="clock" id="clock">00:00:00</div>
+  </nav>
 
-</div>
+  <div class="ticker">
+    <div class="tickerInner" id="ticker">
+      <span>WELCOME TO THE SHAGGY MEGA INTERNET PORTAL</span>
+      <span>ASK JEEVES IS STANDING BY</span>
+      <span>THE INTERNET NEVER SLEEPS</span>
+      <span>LURKERS ARE VALUED</span>
+      <span>THE MEGA MACHINE IS ONLINE</span>
+    </div>
+  </div>
 </header>
 
-<main class="wrap">
+<main class="container">
 
 <section class="hero">
 
- <div class="eyebrow">
- CONNECTION ESTABLISHED // INTERNET LEVEL: MAXIMUM
- </div>
+  <div class="heroMain">
+    <div class="kicker">The unofficial headquarters of everything</div>
 
- <h1>
-  SHAGGYMEGA
-  <small>THE INTERNET SUPERSTATION</small>
- </h1>
+    <h1>
+      THE SHAGGY<br>
+      <span>MEGA</span> INTERNET.
+    </h1>
 
- <p>
-  The completely unnecessary command center for searching,
-  learning, news, weather, games, chaos, and the magnificent
-  internet.
- </p>
+    <p class="heroText">
+      One ridiculously useful homepage for the strange, wonderful,
+      informative and occasionally completely unnecessary parts of the internet.
+      Ask Jeeves something. Check the headlines. Learn something.
+      Do the thing. Waste precisely the amount of time you intended to waste.
+    </p>
 
- <div class="search">
-
-  <form class="search-main" id="searchForm">
-
-   <input
-    id="searchInput"
-    autocomplete="off"
-    placeholder="Ask Jeeves... search for absolutely anything">
-
-   <button>SEARCH</button>
-
-  </form>
-
-  <div class="engines">
-   <button class="engine active" data-engine="google">GOOGLE</button>
-   <button class="engine" data-engine="duck">DUCKDUCKGO</button>
-   <button class="engine" data-engine="bing">BING</button>
+    <div class="badges">
+      <div class="badge live"><span class="liveDot"></span>PORTAL ONLINE</div>
+      <div class="badge">FREE FOREVER*</div>
+      <div class="badge">NO ACCOUNT REQUIRED</div>
+      <div class="badge">JEEVES READY</div>
+    </div>
   </div>
 
- </div>
+  <div class="stats">
 
+    <div class="stat">
+      <div class="statLabel">Website Age</div>
+      <div class="statValue" id="siteAge">loading...</div>
+      <div class="statSub">and counting forever</div>
+    </div>
+
+    <div class="stat">
+      <div class="statLabel">Page Visitors</div>
+      <div class="statValue" id="visitorCount">loading...</div>
+      <div class="statSub" id="visitorStatus">connecting...</div>
+    </div>
+
+    <div class="stat">
+      <div class="statLabel">Local Time</div>
+      <div class="statValue" id="localTime">--:--:--</div>
+      <div class="statSub">your browser's time</div>
+    </div>
+
+    <div class="stat">
+      <div class="statLabel">Portal Status</div>
+      <div class="statValue">ONLINE</div>
+      <div class="statSub">all systems moderately operational</div>
+    </div>
+
+  </div>
 </section>
 
-<div class="marquee">
-<span>
- ★ SHAGGYMEGA ONLINE ★ LIVE WORLD NEWS ★ LIVE TRENDS ★ ASK JEEVES ★
- REAL WEATHER ★ INTERNET KNOWLEDGE ★ DO THE THING ★ GAMES ★
- LURKERS ARE THE BACKBONE ★ THANK YOU FOR KEEPING A TAB OPEN ★
-</span>
+
+<!-- =========================================================
+     JEEVES
+     ========================================================= -->
+
+<section class="grid" id="jeeves">
+
+<div class="card wide jeeves">
+  <div class="cardHead">
+    <div class="cardTitle">
+      <span class="icon">🎩</span>ASK JEEVES
+    </div>
+
+    <div class="status">
+      <span class="statusDot"></span>
+      AT YOUR SERVICE
+    </div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="jeevesIntro">
+
+      <div class="avatar">🎩</div>
+
+      <div class="speech">
+        <strong>Good day.</strong> I am Jeeves.
+        I have been informed that you require answers,
+        useful information, or perhaps merely someone
+        sufficiently dignified to help you navigate the internet.
+        Kindly ask your question below.
+      </div>
+
+    </div>
+
+    <div class="chat" id="chat">
+
+      <div class="msg jeeves">
+        Good day. I am <strong>Jeeves</strong>.
+        How may I be of service?
+      </div>
+
+    </div>
+
+    <div class="chatInput">
+      <input
+        id="jeevesInput"
+        autocomplete="off"
+        placeholder="Ask Jeeves anything..."
+      >
+      <button class="btn gold" id="jeevesSend">Ask Jeeves</button>
+    </div>
+
+  </div>
 </div>
 
 
-<div class="grid">
+<!-- QUICK SEARCH -->
 
-<!-- =====================================================
- HEADLINES
-===================================================== -->
-
-<section id="headlines" class="card col12 headlines">
-
- <div class="headline-toolbar">
-
-  <h2 style="margin:0">🌎 HEADLINES <span>// NOW</span></h2>
-
-  <div class="updated" id="headlineUpdated">
-   CONNECTING TO NEWS NETWORK...
+<div class="card">
+  <div class="cardHead">
+    <div class="cardTitle">🔎 WEB SEARCH</div>
   </div>
 
- </div>
+  <div class="cardBody">
 
- <div class="headline-toolbar">
+    <div class="inputRow">
+      <input
+        id="searchInput"
+        placeholder="Search the internet..."
+      >
+      <button class="btn cyan" id="searchBtn">GO</button>
+    </div>
 
-  <div class="headline-tabs">
-   <button class="tab active" data-news="world">WORLD</button>
-   <button class="tab" data-news="technology">TECH</button>
-   <button class="tab" data-news="science">SCIENCE</button>
-   <button class="tab" data-news="business">BUSINESS</button>
-   <button class="tab" data-news="entertainment">ENTERTAINMENT</button>
-  </div>
+    <div class="result">
+      Search Google, Wikipedia, YouTube or Reddit.
+    </div>
 
-  <button class="small" onclick="loadHeadlines(currentNews)">
-   🔄 REFRESH
-  </button>
-
- </div>
-
- <div id="headlineGrid" class="headline-grid">
-  <div class="headline">
-   <div class="headline-title">Loading the world's news...</div>
-  </div>
- </div>
-
-</section>
-
-
-<!-- =====================================================
- TRENDS
-===================================================== -->
-
-<section class="card col12">
-
- <div class="headline-toolbar">
-
-  <h2 style="margin:0">🔥 WHAT'S HOT <span>// TRENDING NOW</span></h2>
-
-  <div class="updated" id="trendUpdated">
-   LOADING TRENDS...
-  </div>
-
- </div>
-
- <div class="trend-layout">
-
-  <div id="trends" class="trends">
-   <div class="trend">
-    <div class="trend-name">Connecting to trend network...</div>
-   </div>
-  </div>
-
-  <div class="trend-links">
-
-   <a
-    class="trend-link"
-    target="_blank"
-    rel="noopener"
-    href="https://trends.google.com/trending?geo=US">
-    📈 OPEN GOOGLE TRENDING NOW
-   </a>
-
-   <a
-    class="trend-link"
-    target="_blank"
-    rel="noopener"
-    href="https://x.com/explore">
-    𝕏 OPEN X / TWITTER EXPLORE
-   </a>
-
-   <a
-    class="trend-link"
-    target="_blank"
-    rel="noopener"
-    href="https://news.google.com/">
-    📰 OPEN GOOGLE NEWS
-   </a>
-
-   <div
-    style="
-    color:#66596e;
-    font:700 .6rem monospace;
-    padding:8px">
-    TREND SIGNAL: GOOGLE SEARCH ACTIVITY
-   </div>
+    <div class="actions">
+      <button class="btn" onclick="quickSearch('google')">Google</button>
+      <button class="btn" onclick="quickSearch('wiki')">Wikipedia</button>
+      <button class="btn" onclick="quickSearch('youtube')">YouTube</button>
+      <button class="btn" onclick="quickSearch('reddit')">Reddit</button>
+    </div>
 
   </div>
-
- </div>
-
-</section>
-
-
-<!-- =====================================================
- TWITCH
-===================================================== -->
-
-<section id="live" class="card col8 twitch">
-
- <h2>🔴 SHAGGYMEDIC420 <span>// LIVE</span></h2>
-
- <div class="live">
-  <span class="dot"></span>
-  TWITCH STREAM • MUTED
- </div>
-
- <div class="twitch-player">
-  <iframe
-   id="twitchPlayer"
-   title="Shaggymedic420 Twitch stream"
-   allow="autoplay; fullscreen"
-   loading="lazy">
-  </iframe>
- </div>
-
- <div class="lurk">
-
-  <strong>👀 LURKING IS THE BACKBONE OF STREAM SUCCESS</strong>
-
-  <p>
-   Thank you for keeping a tab open. ❤️
-   You don't have to chat. You don't have to say anything.
-   Just having ShaggyMedic420 open helps keep the stream alive,
-   and every lurker is appreciated.
-   <b>Thank you for lurking.</b>
-  </p>
-
- </div>
-
-</section>
-
-
-<!-- =====================================================
- CLOCK
-===================================================== -->
-
-<section class="card col4">
-
- <h2>🕐 SYSTEM CLOCK</h2>
-
- <div class="clock" id="clock">00:00:00</div>
-
- <div class="date" id="date">Loading...</div>
-
- <div
-  style="
-  margin-top:18px;
-  color:#66586d;
-  font:700 .6rem monospace">
-  YOUR LOCAL TIME • LIVE
- </div>
-
-</section>
-
-
-<!-- =====================================================
- JEEVES
-===================================================== -->
-
-<section id="jeeves" class="card col8 jeeves">
-
- <h2>🧑‍💼 ASK JEEVES <span>// INTELLIGENCE DESK</span></h2>
-
- <div id="chat" class="chat">
-
-  <div class="msg jeeves">
-
-   <small>JEEVES • ONLINE</small>
-
-   Good day, sir. I am Jeeves, at your service.
-   I can search for knowledge, calculate things,
-   consult the weather, remember our conversation,
-   and generally attempt to keep the internet
-   from becoming completely unmanageable.
-
-   How may I be of assistance?
-
-  </div>
-
- </div>
-
- <form id="chatForm" class="chat-form">
-
-  <input
-   id="chatInput"
-   autocomplete="off"
-   placeholder="Ask Jeeves anything...">
-
-  <button class="gold">ASK</button>
-
- </form>
-
- <div class="jeeves-status" id="jeevesStatus">
-  JEEVES BRAIN: READY • WEB KNOWLEDGE: AVAILABLE • MEMORY: ACTIVE
- </div>
-
-</section>
-
-
-<!-- =====================================================
- WEATHER
-===================================================== -->
-
-<section id="weather" class="card col4">
-
- <h2>🌦️ WEATHER</h2>
-
- <div class="weather-top">
-
-  <div>
-
-   <div class="weather-temp" id="weatherTemp">
-    --°
-   </div>
-
-   <div class="weather-place" id="weatherPlace">
-    Enter a location
-   </div>
-
-  </div>
-
-  <div class="weather-icon" id="weatherIcon">🌎</div>
-
- </div>
-
- <div class="weather-controls">
-
-  <input id="cityInput" value="New York" placeholder="City">
-
-  <button class="small" onclick="loadWeather()">GO</button>
-
-  <button class="small" onclick="useLocation()">📍</button>
-
- </div>
-
- <div id="forecast" class="forecast"></div>
-
- <div id="weatherStatus" class="status">
-  WEATHER SYSTEM READY
- </div>
-
-</section>
-
-
-<!-- =====================================================
- INTERNET KNOWLEDGE
-===================================================== -->
-
-<section id="generators" class="card col6 generator">
-
- <h2>🧠 INTERNET KNOWLEDGE <span>// INFINITE MODE</span></h2>
-
- <div id="knowledgeOutput" class="generator-output">
-  <div>
-   <div class="big">KNOWLEDGE AWAITS</div>
-   <br>
-   Press the button.
-   The machine knows things.
-  </div>
- </div>
-
- <div id="knowledgeInfo" class="gen-info">
-  UNIQUE RESULTS THIS BROWSER: 0
- </div>
-
- <button class="gen-btn" onclick="generateKnowledge()">
-  🧠 TELL ME SOMETHING USEFUL
- </button>
-
-</section>
-
-
-<!-- =====================================================
- DO THE THING
-===================================================== -->
-
-<section class="card col6 generator">
-
- <h2>🛠️ DO THE THING <span>// MISSION GENERATOR</span></h2>
-
- <div id="thingOutput" class="generator-output">
-  <div>
-   <div class="big">YOUR MISSION AWAITS</div>
-   <br>
-   Press the button.
-   Improve something.
-   Learn something.
-   Make something.
-  </div>
- </div>
-
- <div id="thingInfo" class="gen-info">
-  UNIQUE MISSIONS THIS BROWSER: 0
- </div>
-
- <button class="gen-btn" onclick="generateThing()">
-  ⚡ DO THE THING
- </button>
-
-</section>
-
-
-<!-- =====================================================
- ASK SHAGGY SEARCH
-===================================================== -->
-
-<section class="card col6">
-
- <h2>🔎 QUICK INTERNET TOOLS</h2>
-
- <div class="tools">
-
-  <button class="tool" onclick="openURL('https://www.wikipedia.org/')">
-   <b>📚 Wikipedia</b>
-   Human knowledge
-  </button>
-
-  <button class="tool" onclick="openURL('https://archive.org/')">
-   <b>🏛️ Archive</b>
-   Digital history
-  </button>
-
-  <button class="tool" onclick="openURL('https://www.youtube.com/')">
-   <b>▶️ YouTube</b>
-   Video dimension
-  </button>
-
-  <button class="tool" onclick="openURL('https://www.reddit.com/')">
-   <b>👽 Reddit</b>
-   The hive mind
-  </button>
-
-  <button class="tool" onclick="openURL('https://github.com/')">
-   <b>💻 GitHub</b>
-   Code dimension
-  </button>
-
-  <button class="tool" onclick="openURL('https://www.google.com/maps/')">
-   <b>🗺️ Maps</b>
-   Where are we?
-  </button>
-
-  <button class="tool" onclick="openURL('https://radio.garden/')">
-   <b>📻 Radio Garden</b>
-   Radio worldwide
-  </button>
-
-  <button class="tool" onclick="openURL('https://www.wolframalpha.com/')">
-   <b>🧮 Wolfram</b>
-   Calculate things
-  </button>
-
-  <button class="tool" onclick="openURL('https://neal.fun/')">
-   <b>🎮 Neal.fun</b>
-   Internet nonsense
-  </button>
-
- </div>
-
-</section>
-
-
-<!-- =====================================================
- CHAOS
-===================================================== -->
-
-<section class="card col6 generator">
-
- <h2>🎲 CHAOS ENGINE <span>// NEVER THE SAME TWICE</span></h2>
-
- <div id="chaosOutput" class="generator-output">
-  <div>
-   <div class="big">CHAOS STANDBY</div>
-   <br>
-   Something ridiculous is waiting.
-  </div>
- </div>
-
- <div id="chaosInfo" class="gen-info">
-  CHAOS EVENTS GENERATED: 0
- </div>
-
- <button class="gen-btn" onclick="generateChaos()">
-  🎲 GENERATE CHAOS
- </button>
-
-</section>
-
-
-<!-- =====================================================
- GAMES
-===================================================== -->
-
-<section id="games" class="card col6 game">
-
- <h2>⚡ REACTION TEST</h2>
-
- <div class="score">
-  BEST: <span id="bestReaction">---</span> ms
- </div>
-
- <button
-  id="reactionButton"
-  class="gamebutton"
-  onclick="reactionClick()">
-  CLICK TO START
- </button>
-
- <div
-  id="reactionStatus"
-  style="
-  margin-top:8px;
-  color:#70637a;
-  font:700 .65rem monospace">
-  Wait for GREEN.
- </div>
-
-</section>
-
-
-<section class="card col6 game">
-
- <h2>👆 SHAGGY CLICKER</h2>
-
- <div class="score">
-  CLICKS: <span id="clickScore">0</span>
- </div>
-
- <button class="gamebutton" onclick="clicker()">
-  CLICK ME
- </button>
-
- <div
-  style="
-  margin-top:8px;
-  color:#70637a;
-  font:700 .65rem monospace">
-  There is no purpose. Keep clicking.
- </div>
-
-</section>
-
-
-<!-- =====================================================
- INTERNET
-===================================================== -->
-
-<section id="internet" class="card col12">
-
- <h2>🌐 THE INTERNET <span>// SUPERLINKS</span></h2>
-
- <div class="links">
-
-  <a class="link" target="_blank" href="https://www.google.com/">
-   <b>🔎 Google</b>
-   Search everything
-  </a>
-
-  <a class="link" target="_blank" href="https://www.youtube.com/">
-   <b>▶️ YouTube</b>
-   Videos
-  </a>
-
-  <a class="link" target="_blank" href="https://www.reddit.com/">
-   <b>👽 Reddit</b>
-   Communities
-  </a>
-
-  <a class="link" target="_blank" href="https://www.wikipedia.org/">
-   <b>📚 Wikipedia</b>
-   Knowledge
-  </a>
-
-  <a class="link" target="_blank" href="https://github.com/">
-   <b>💻 GitHub</b>
-   Code
-  </a>
-
-  <a class="link" target="_blank" href="https://archive.org/">
-   <b>🏛️ Internet Archive</b>
-   History
-  </a>
-
-  <a class="link" target="_blank" href="https://radio.garden/">
-   <b>📻 Radio Garden</b>
-   Radio
-  </a>
-
-  <a class="link" target="_blank" href="https://earth.nullschool.net/">
-   <b>🌎 Earth</b>
-   Planet
-  </a>
-
-  <a class="link" target="_blank" href="https://stellarium-web.org/">
-   <b>🔭 Stellarium</b>
-   Space
-  </a>
-
-  <a class="link" target="_blank" href="https://theuselessweb.com/">
-   <b>🌀 Useless Web</b>
-   Extremely important
-  </a>
-
-  <a class="link" target="_blank" href="https://www.speedtest.net/">
-   <b>⚡ Speedtest</b>
-   Internet speed
-  </a>
-
-  <a class="link" target="_blank" href="https://trends.google.com/trending?geo=US">
-   <b>🔥 Trends</b>
-   What's hot
-  </a>
-
- </div>
-
-</section>
-
-
-<!-- =====================================================
- SECRET
-===================================================== -->
-
-<section class="card col12">
-
- <h2>🕸️ CLASSIFIED INTERNET ZONE</h2>
-
- <div
-  style="
-  color:#64566c;
-  font:700 .65rem monospace;
-  line-height:1.8">
-
-  SYSTEM STATUS: ONLINE<br>
-  JEEVES: THINKING<br>
-  NEWS: LIVE<br>
-  WEATHER: LIVE<br>
-  TRENDS: LIVE<br>
-  CHAOS: UNCONTAINED<br>
-  LURKERS: APPRECIATED<br>
-  SERIOUSNESS: 404 NOT FOUND<br><br>
-
-  SECRET INPUT DETECTED:
-  ↑ ↑ ↓ ↓ ← → ← → B A
-
- </div>
-
-</section>
-
 </div>
 
 
-<footer>
+<!-- =========================================================
+     HEADLINES
+     ========================================================= -->
 
- <div class="bigfoot">
-  SHAGGYMEGA INTERNET SUPERSTATION
- </div>
+<div class="card full" id="headlines">
 
- <div>
-  ONE HTML FILE • NO DATABASE • NO API KEYS • NO SUBSCRIPTION
- </div>
+  <div class="cardHead">
+    <div class="cardTitle">📰 HEADLINES</div>
 
- <div style="margin-top:7px">
-  BUILT WITH HTML • CSS • JAVASCRIPT • CHAOS
- </div>
+    <div class="cardTools">
+      refreshes automatically
+    </div>
+  </div>
 
- <div style="margin-top:14px;color:#3e3445">
-  SHAGGYMEGA // VERSION 3.0 // THE INTERNET IS NOW YOUR PROBLEM
- </div>
+  <div class="cardBody">
+
+    <div class="pulse">
+
+      <div class="pulseItem">
+        <div class="pulseNum" id="headlineTime">--</div>
+        <div class="pulseLabel">last update</div>
+      </div>
+
+      <div class="pulseItem">
+        <div class="pulseNum" id="headlineCount">0</div>
+        <div class="pulseLabel">stories loaded</div>
+      </div>
+
+      <div class="pulseItem">
+        <div class="pulseNum">LIVE</div>
+        <div class="pulseLabel">internet pulse</div>
+      </div>
+
+    </div>
+
+    <div class="newsList" id="newsList">
+      <div class="news">
+        <div class="newsSource">HEADLINES</div>
+        <div class="newsTitle">
+          Loading the world's latest headlines...
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- TRENDING -->
+
+<div class="card half">
+
+  <div class="cardHead">
+    <div class="cardTitle">🔥 TRENDING WEB</div>
+    <div class="cardTools">updated regularly</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="newsList" id="trendingList">
+
+      <div class="news">
+        <div class="newsSource">TRENDING</div>
+        <div class="newsTitle">
+          Fetching today's biggest web searches...
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- WEATHER -->
+
+<div class="card half">
+
+  <div class="cardHead">
+    <div class="cardTitle">🌦 WEATHER</div>
+    <div class="cardTools">your location</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div id="weather">
+      <div class="result">
+        Allow location access and Jeeves will attempt to
+        retrieve your local weather.
+      </div>
+
+      <button class="btn cyan" onclick="getWeather()">
+        Get My Weather
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     KNOWLEDGE
+     ========================================================= -->
+
+<div class="card half" id="knowledge">
+
+  <div class="cardHead">
+    <div class="cardTitle">🧠 INTERNET KNOWLEDGE</div>
+    <div class="cardTools">no repeats locally</div>
+  </div>
+
+  <div class="cardBody generator">
+
+    <div class="output" id="knowledgeOutput">
+      <div>
+        <span class="big">KNOW SOMETHING.</span>
+        Click the button and receive a useful piece of
+        internet knowledge.
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn gold" onclick="newKnowledge()">
+        Teach Me Something
+      </button>
+
+      <button class="btn" onclick="resetKnowledge()">
+        Reset History
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     DO THE THING
+     ========================================================= -->
+
+<div class="card half" id="things">
+
+  <div class="cardHead">
+    <div class="cardTitle">⚡ DO THE THING</div>
+    <div class="cardTools">mission generator</div>
+  </div>
+
+  <div class="cardBody generator">
+
+    <div class="output" id="thingOutput">
+      <div>
+        <span class="big">DO SOMETHING.</span>
+        You have been given access to the button.
+        What happens next is between you and destiny.
+      </div>
+    </div>
+
+    <div class="actions">
+
+      <button class="btn cyan" onclick="doTheThing()">
+        DO THE THING
+      </button>
+
+      <button class="btn" onclick="doHardThing()">
+        HARD MODE
+      </button>
+
+      <button class="btn" onclick="resetThings()">
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     STREAM
+     ========================================================= -->
+
+<div class="card full" id="stream">
+
+  <div class="cardHead">
+
+    <div class="cardTitle">
+      <span class="liveDot"></span>
+      SHAGGYMEDIC420
+    </div>
+
+    <div class="cardTools">
+      silent lurker mode
+    </div>
+
+  </div>
+
+  <div class="twitchBox">
+
+    <div class="lurk">
+      LURKING IS THE BACKBONE TO STREAM SUCCESS.
+    </div>
+
+    <div class="lurkSub">
+      Thank you for keeping a tab open.<br>
+      Seriously. Every lurker helps.
+    </div>
+
+    <div class="actions" style="justify-content:center;margin-top:18px">
+
+      <a
+        class="btn gold"
+        href="https://www.twitch.tv/Shaggymedic420"
+        target="_blank"
+        rel="noopener"
+      >
+        Open Twitch Stream
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     TOOLS
+     ========================================================= -->
+
+<div class="card full" id="tools">
+
+  <div class="cardHead">
+    <div class="cardTitle">🧰 THE INTERNET TOOLBOX</div>
+    <div class="cardTools">hand-picked portals</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="links">
+
+      <a class="link"
+         href="https://www.google.com"
+         target="_blank"
+         rel="noopener">
+        🔎 Google
+      </a>
+
+      <a class="link"
+         href="https://www.wikipedia.org"
+         target="_blank"
+         rel="noopener">
+        📚 Wikipedia
+      </a>
+
+      <a class="link"
+         href="https://www.youtube.com"
+         target="_blank"
+         rel="noopener">
+        ▶️ YouTube
+      </a>
+
+      <a class="link"
+         href="https://www.reddit.com"
+         target="_blank"
+         rel="noopener">
+        👽 Reddit
+      </a>
+
+      <a class="link"
+         href="https://web.archive.org"
+         target="_blank"
+         rel="noopener">
+        🕰 Internet Archive
+      </a>
+
+      <a class="link"
+         href="https://www.wolframalpha.com"
+         target="_blank"
+         rel="noopener">
+        🧮 WolframAlpha
+      </a>
+
+      <a class="link"
+         href="https://github.com"
+         target="_blank"
+         rel="noopener">
+        🐙 GitHub
+      </a>
+
+      <a class="link"
+         href="https://www.twitch.tv"
+         target="_blank"
+         rel="noopener">
+        📺 Twitch
+      </a>
+
+      <a class="link"
+         href="https://news.google.com"
+         target="_blank"
+         rel="noopener">
+        📰 Google News
+      </a>
+
+      <a class="link"
+         href="https://trends.google.com"
+         target="_blank"
+         rel="noopener">
+        📈 Google Trends
+      </a>
+
+      <a class="link"
+         href="https://www.timeanddate.com"
+         target="_blank"
+         rel="noopener">
+        🕐 Time & Date
+      </a>
+
+      <a class="link"
+         href="https://archive.org"
+         target="_blank"
+         rel="noopener">
+        💾 Internet Archive
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MINI RANDOM UTILITIES -->
+
+<div class="card">
+  <div class="cardHead">
+    <div class="cardTitle">🎲 RANDOM NUMBER</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="inputRow">
+      <input id="minNum" type="number" value="1">
+      <input id="maxNum" type="number" value="100">
+    </div>
+
+    <div class="output" style="margin-top:10px;min-height:100px" id="numberOutput">
+      Pick a number.
+    </div>
+
+    <button
+      class="btn gold"
+      style="margin-top:10px;width:100%"
+      onclick="randomNumber()">
+      ROLL
+    </button>
+
+  </div>
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="card">
+  <div class="cardHead">
+    <div class="cardTitle">🔐 PASSWORD FORGE</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="output"
+         style="min-height:100px;font-family:monospace"
+         id="passwordOutput">
+      READY
+    </div>
+
+    <button
+      class="btn cyan"
+      style="margin-top:10px;width:100%"
+      onclick="generatePassword()">
+      FORGE PASSWORD
+    </button>
+
+  </div>
+</div>
+
+
+<!-- DECISION -->
+
+<div class="card">
+  <div class="cardHead">
+    <div class="cardTitle">⚖️ JEEVES DECIDES</div>
+  </div>
+
+  <div class="cardBody">
+
+    <div class="inputRow">
+      <input
+        id="decisionInput"
+        placeholder="Should I do this?"
+      >
+    </div>
+
+    <div class="output"
+         style="margin-top:10px;min-height:100px"
+         id="decisionOutput">
+      Present the matter.
+    </div>
+
+    <button
+      class="btn gold"
+      style="margin-top:10px;width:100%"
+      onclick="jeevesDecides()">
+      CONSULT JEEVES
+    </button>
+
+  </div>
+</div>
+
+
+</section>
+
+<footer class="footer">
+
+  <strong>THE SHAGGY MEGA INTERNET PORTAL</strong><br>
+
+  Built for the timeless internet experience.<br>
+
+  The site is static and hosted on GitHub Pages.
+  External services may change or disappear over time.<br><br>
+
+  🎩 Jeeves remains at your service.
 
 </footer>
 
@@ -1521,1439 +1346,1591 @@ footer .bigfoot{
 
 
 <script>
-/* =========================================================
-   BASIC UTILITIES
-========================================================= */
+/* ============================================================
+   CONFIGURATION
+   ============================================================ */
 
-function openURL(url){
- window.open(url,"_blank","noopener");
-}
+/*
+ IMPORTANT:
 
-function esc(value){
- return String(value)
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
-}
+ Change this ONE DATE to the actual date/time your website first
+ went live.
 
+ Example:
 
-/* =========================================================
-   SEARCH
-========================================================= */
+ const SITE_LAUNCH_DATE = "2026-08-20T14:30:00-04:00";
 
-let searchEngine="google";
+ The counter will then continue forever.
+*/
 
-document.querySelectorAll(".engine").forEach(btn=>{
- btn.addEventListener("click",()=>{
-  document.querySelectorAll(".engine")
-   .forEach(x=>x.classList.remove("active"));
-
-  btn.classList.add("active");
-  searchEngine=btn.dataset.engine;
- });
-});
-
-document.getElementById("searchForm")
-.addEventListener("submit",e=>{
- e.preventDefault();
-
- const q=document.getElementById("searchInput").value.trim();
-
- if(!q)return;
-
- let url="";
-
- if(searchEngine==="google")
-  url="https://www.google.com/search?q=";
-
- if(searchEngine==="duck")
-  url="https://duckduckgo.com/?q=";
-
- if(searchEngine==="bing")
-  url="https://www.bing.com/search?q=";
-
- openURL(url+encodeURIComponent(q));
-});
+const SITE_LAUNCH_DATE = "2026-08-23T00:00:00-04:00";
 
 
-/* =========================================================
+/*
+ Global visitor counter.
+
+ This service is external because a GitHub Pages HTML file cannot
+ maintain a shared database by itself.
+
+ The domain below is used as the counter identity.
+*/
+
+const VISITOR_DOMAIN = "shaggymedic420.github.io";
+
+
+/* ============================================================
    CLOCK
-========================================================= */
+   ============================================================ */
 
 function updateClock(){
 
- const now=new Date();
+  const now = new Date();
 
- document.getElementById("clock")
-  .textContent=now.toLocaleTimeString();
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString();
 
- document.getElementById("date")
-  .textContent=now.toLocaleDateString(
-   undefined,
-   {
-    weekday:"long",
-    year:"numeric",
-    month:"long",
-    day:"numeric"
-   }
-  );
+  document.getElementById("localTime").textContent =
+    now.toLocaleTimeString([],{
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit"
+    });
 }
 
-updateClock();
 setInterval(updateClock,1000);
+updateClock();
 
 
-/* =========================================================
-   TWITCH
-========================================================= */
+/* ============================================================
+   WEBSITE AGE
+   ============================================================ */
 
-function setupTwitch(){
+function updateSiteAge(){
 
- const host=window.location.hostname;
+  const start = new Date(SITE_LAUNCH_DATE);
+  const now = new Date();
 
- if(!host ||
-    host==="localhost" ||
-    host==="127.0.0.1")return;
+  let diff = Math.max(0,now-start);
 
- document.getElementById("twitchPlayer").src=
-  "https://player.twitch.tv/"+
-  "?channel=shaggymedic420"+
-  "&parent="+encodeURIComponent(host)+
-  "&muted=true"+
-  "&autoplay=false";
+  const second = 1000;
+  const minute = second*60;
+  const hour = minute*60;
+  const day = hour*24;
+
+  const days = Math.floor(diff/day);
+
+  diff -= days*day;
+
+  const hours = Math.floor(diff/hour);
+
+  diff -= hours*hour;
+
+  const minutes = Math.floor(diff/minute);
+
+  diff -= minutes*minute;
+
+  const seconds = Math.floor(diff/second);
+
+  document.getElementById("siteAge").textContent =
+    `${days}d ${String(hours).padStart(2,"0")}:`+
+    `${String(minutes).padStart(2,"0")}:`+
+    `${String(seconds).padStart(2,"0")}`;
 }
 
-setupTwitch();
+setInterval(updateSiteAge,1000);
+updateSiteAge();
 
 
-/* =========================================================
-   WEATHER
-========================================================= */
+/* ============================================================
+   VISITOR COUNTER
+   ============================================================ */
 
-const weatherCodes={
- 0:["☀️","Clear sky"],
- 1:["🌤️","Mainly clear"],
- 2:["⛅","Partly cloudy"],
- 3:["☁️","Overcast"],
- 45:["🌫️","Fog"],
- 48:["🌫️","Rime fog"],
- 51:["🌦️","Light drizzle"],
- 53:["🌦️","Drizzle"],
- 55:["🌧️","Heavy drizzle"],
- 61:["🌦️","Light rain"],
- 63:["🌧️","Rain"],
- 65:["🌧️","Heavy rain"],
- 71:["🌨️","Light snow"],
- 73:["❄️","Snow"],
- 75:["❄️","Heavy snow"],
- 80:["🌦️","Rain showers"],
- 81:["🌧️","Rain showers"],
- 82:["⛈️","Heavy showers"],
- 95:["⛈️","Thunderstorm"],
- 96:["⛈️","Thunderstorm + hail"],
- 99:["⛈️","Thunderstorm + hail"]
-};
+async function visitorCounter(){
 
-async function fetchWeatherCoords(lat,lon,label){
+  const display = document.getElementById("visitorCount");
+  const status = document.getElementById("visitorStatus");
 
- const weather=await fetch(
-  "https://api.open-meteo.com/v1/forecast"+
-  "?latitude="+lat+
-  "&longitude="+lon+
-  "&current=temperature_2m,weather_code,wind_speed_10m"+
-  "&daily=weather_code,temperature_2m_max,temperature_2m_min"+
-  "&temperature_unit=fahrenheit"+
-  "&wind_speed_unit=mph"+
-  "&timezone=auto"+
-  "&forecast_days=5"
- ).then(r=>r.json());
+  /*
+    Local fallback.
 
- const current=weather.current;
+    This guarantees the counter never simply says "ERROR".
+  */
 
- const code=weatherCodes[current.weather_code]
-  ||["🌎","Unknown"];
+  const localKey = "shaggymega_local_visits";
 
- document.getElementById("weatherTemp")
-  .textContent=Math.round(current.temperature_2m)+"°F";
+  let localVisits =
+    Number(localStorage.getItem(localKey) || 0) + 1;
 
- document.getElementById("weatherIcon")
-  .textContent=code[0];
+  localStorage.setItem(localKey,localVisits);
 
- document.getElementById("weatherPlace")
-  .textContent=label;
+  display.textContent = localVisits.toLocaleString();
+  status.textContent = "local visits";
 
- const forecast=document.getElementById("forecast");
+  /*
+    Global visitor service.
 
- forecast.innerHTML="";
-
- weather.daily.time.forEach((date,i)=>{
-
-  const d=new Date(date+"T12:00:00");
-
-  const day=d.toLocaleDateString(
-   undefined,
-   {weekday:"short"}
-  );
-
-  const w=weatherCodes[
-   weather.daily.weather_code[i]
-  ]||["🌎",""];
-
-  forecast.innerHTML+=`
-   <div class="fc">
-    <div>${day}</div>
-    <div class="fc-icon">${w[0]}</div>
-    <b>${Math.round(
-     weather.daily.temperature_2m_max[i]
-    )}°</b>
-    /
-    ${Math.round(
-     weather.daily.temperature_2m_min[i]
-    )}°
-   </div>
-  `;
- });
-
- document.getElementById("weatherStatus")
-  .textContent=
-   "LIVE • "+
-   Math.round(current.wind_speed_10m)+
-   " MPH WIND • "+
-   code[1];
-}
-
-async function loadWeather(){
-
- const city=document
-  .getElementById("cityInput")
-  .value.trim();
-
- if(!city)return;
-
- document.getElementById("weatherStatus")
-  .textContent="CONTACTING WEATHER SATELLITE...";
-
- try{
-
-  const geo=await fetch(
-   "https://geocoding-api.open-meteo.com/v1/search"+
-   "?name="+encodeURIComponent(city)+
-   "&count=1"+
-   "&language=en"+
-   "&format=json"
-  ).then(r=>r.json());
-
-  if(!geo.results?.length)
-   throw new Error("location not found");
-
-  const p=geo.results[0];
-
-  await fetchWeatherCoords(
-   p.latitude,
-   p.longitude,
-   p.name+
-   (p.admin1?", "+p.admin1:"")+
-   (p.country?" • "+p.country:"")
-  );
-
-  localStorage.setItem("shaggyCity",city);
-
- }catch(e){
-
-  document.getElementById("weatherStatus")
-   .textContent=
-    "WEATHER ERROR • "+e.message;
-
- }
-}
-
-function useLocation(){
-
- if(!navigator.geolocation){
-
-  document.getElementById("weatherStatus")
-   .textContent="LOCATION SERVICES UNAVAILABLE";
-
-  return;
- }
-
- document.getElementById("weatherStatus")
-  .textContent="REQUESTING YOUR LOCATION...";
-
- navigator.geolocation.getCurrentPosition(
-  async pos=>{
-   try{
-
-    await fetchWeatherCoords(
-     pos.coords.latitude,
-     pos.coords.longitude,
-     "YOUR LOCATION"
-    );
-
-   }catch(e){
-
-    document.getElementById("weatherStatus")
-     .textContent="COULD NOT LOAD WEATHER";
-
-   }
-  },
-  ()=>{
-   document.getElementById("weatherStatus")
-    .textContent="LOCATION PERMISSION DENIED";
-  }
-);
-
-}
-
-const savedCity=localStorage.getItem("shaggyCity");
-
-if(savedCity)
- document.getElementById("cityInput").value=savedCity;
-
-loadWeather();
-
-
-/* =========================================================
-   HEADLINES — GDELT
-========================================================= */
-
-let currentNews="world";
-
-const newsQueries={
- world:"world",
- technology:"technology",
- science:"science",
- business:"business",
- entertainment:"entertainment"
-};
-
-async function loadHeadlines(category){
-
- currentNews=category;
-
- const box=document.getElementById("headlineGrid");
-
- box.innerHTML=
-  `<div class="headline">
-   <div class="headline-title">
-    CONTACTING THE GLOBAL NEWS NETWORK...
-   </div>
-  </div>`;
-
- document.getElementById("headlineUpdated")
-  .textContent="UPDATING...";
-
- try{
-
-  const url=
-   "https://api.gdeltproject.org/api/v2/doc/doc"+
-   "?format=json"+
-   "&mode=artlist"+
-   "&maxrecords=12"+
-   "&query="+
-   encodeURIComponent(newsQueries[category])+
-   "&timespan=6h"+
-   "&sort=hybridrel";
-
-  const data=await fetch(url).then(r=>r.json());
-
-  const articles=data.articles||[];
-
-  if(!articles.length)
-   throw new Error("no recent stories");
-
-  box.innerHTML="";
-
-  articles.forEach(article=>{
-
-   const a=document.createElement("a");
-
-   a.className="headline";
-   a.href=article.url||"#";
-   a.target="_blank";
-   a.rel="noopener";
-
-   const title=document.createElement("div");
-
-   title.className="headline-title";
-   title.textContent=article.title||"Untitled story";
-
-   const meta=document.createElement("div");
-
-   meta.className="headline-meta";
-
-   meta.textContent=
-    (article.domain||"NEWS SOURCE")+
-    (article.seendate
-     ?" • "+formatSeen(article.seendate)
-     :"");
-
-   a.appendChild(title);
-   a.appendChild(meta);
-
-   box.appendChild(a);
-  });
-
-  document.getElementById("headlineUpdated")
-   .textContent=
-    "LIVE • "+new Date().toLocaleTimeString();
-
- }catch(e){
-
-  box.innerHTML=`
-   <div class="headline">
-    <div class="headline-title">
-     The news satellite is temporarily unavailable.
-    </div>
-    <div class="headline-meta">
-     OPEN GOOGLE NEWS FOR A LIVE FALLBACK
-    </div>
-   </div>
-   <a
-    class="headline"
-    target="_blank"
-    href="https://news.google.com/">
-    <div class="headline-title">
-     📰 Open Google News
-    </div>
-   </a>
-  `;
-
-  document.getElementById("headlineUpdated")
-   .textContent="FALLBACK MODE";
- }
-}
-
-function formatSeen(value){
-
- try{
-
-  const y=value.slice(0,4);
-  const m=value.slice(4,6);
-  const d=value.slice(6,8);
-  const h=value.slice(9,11);
-  const min=value.slice(11,13);
-
-  const date=new Date(
-   `${y}-${m}-${d}T${h}:${min}:00Z`
-  );
-
-  return date.toLocaleTimeString(
-   undefined,
-   {hour:"numeric",minute:"2-digit"}
-  );
-
- }catch{
-  return "";
- }
-}
-
-document.querySelectorAll(".tab")
- .forEach(tab=>{
-  tab.addEventListener("click",()=>{
-
-   document.querySelectorAll(".tab")
-    .forEach(x=>x.classList.remove("active"));
-
-   tab.classList.add("active");
-
-   loadHeadlines(tab.dataset.news);
-  });
- });
-
-loadHeadlines("world");
-
-setInterval(
- ()=>loadHeadlines(currentNews),
- 10*60*1000
-);
-
-
-/* =========================================================
-   GOOGLE TRENDING RSS
-========================================================= */
-
-async function loadTrends(){
-
- const box=document.getElementById("trends");
-
- document.getElementById("trendUpdated")
-  .textContent="UPDATING...";
-
- try{
-
-  const url=
-   "https://trends.google.com/trending/rss?geo=US";
-
-  const text=await fetch(url).then(r=>{
-   if(!r.ok)throw new Error("trend request failed");
-   return r.text();
-  });
-
-  const xml=new DOMParser()
-   .parseFromString(text,"text/xml");
-
-  const items=[...xml.querySelectorAll("item")];
-
-  if(!items.length)
-   throw new Error("no trends");
-
-  box.innerHTML="";
-
-  items.slice(0,12).forEach((item,index)=>{
-
-   const title=
-    item.querySelector("title")?.textContent||
-    "Unknown trend";
-
-   const traffic=
-    [...item.children]
-     .find(x=>x.localName==="approx_traffic")
-     ?.textContent||"";
-
-   const a=document.createElement("a");
-
-   a.className="trend";
-   a.target="_blank";
-   a.rel="noopener";
-
-   a.href=
-    "https://www.google.com/search?q="+
-    encodeURIComponent(title);
-
-   a.innerHTML=`
-    <div class="rank">${index+1}</div>
-    <div>
-     <div class="trend-name">${esc(title)}</div>
-     <div class="trend-vol">
-      ${esc(traffic)}
-     </div>
-    </div>
-   `;
-
-   box.appendChild(a);
-  });
-
-  document.getElementById("trendUpdated")
-   .textContent=
-    "LIVE • "+new Date().toLocaleTimeString();
-
- }catch(e){
-
-  box.innerHTML=`
-   <a
-    class="trend"
-    target="_blank"
-    href="https://trends.google.com/trending?geo=US">
-    <div class="rank">🔥</div>
-    <div>
-     <div class="trend-name">
-      Open Google Trending Now
-     </div>
-     <div class="trend-vol">
-      LIVE TREND DATA
-     </div>
-    </div>
-   </a>
-  `;
-
-  document.getElementById("trendUpdated")
-   .textContent="OPEN LIVE TRENDS";
- }
-}
-
-loadTrends();
-
-setInterval(loadTrends,10*60*1000);
-
-
-/* =========================================================
-   INFINITE NON-REPEATING GENERATORS
-========================================================= */
-
-function getHistory(key){
-
- try{
-  return JSON.parse(
-   localStorage.getItem(key)||"[]"
-  );
- }catch{
-  return [];
- }
-}
-
-function saveHistory(key,arr){
-
- /*
-  Keep a large history but avoid making localStorage enormous.
-  5000 unique results per generator is already ridiculous.
- */
- localStorage.setItem(
-  key,
-  JSON.stringify(arr.slice(-5000))
- );
-}
-
-function uniquePick(key,create){
-
- const history=getHistory(key);
-
- let result="";
- let attempts=0;
-
- do{
-  result=create();
-  attempts++;
- }while(
-  history.includes(result)&&
-  attempts<100
- );
-
- history.push(result);
- saveHistory(key,history);
-
- return result;
-}
-
-
-/* =========================================================
-   KNOWLEDGE ENGINE
-========================================================= */
-
-const knowledgeSubjects=[
- ["space","A day on Venus is longer than a Venusian year."],
- ["animals","Octopuses have three hearts, and two of them stop beating while the animal swims."],
- ["computing","The original name of the JavaScript language was LiveScript."],
- ["ocean","More than 80% of the world's ocean is considered unexplored."],
- ["language","The word 'alphabet' comes from the first two letters of the Greek alphabet: alpha and beta."],
- ["science","Lightning can heat the surrounding air to temperatures hotter than the surface of the Sun."],
- ["history","The ancient Romans used concrete that could become stronger when exposed to seawater."],
- ["mathematics","There are infinitely many prime numbers."],
- ["biology","Your body contains trillions of microorganisms that live alongside your own cells."],
- ["geography","Russia spans eleven time zones."],
- ["astronomy","A teaspoon of neutron-star matter would have an enormous mass because neutron stars are extraordinarily dense."],
- ["technology","The first computer mouse was made from wood."],
- ["physics","Light from the Sun takes about eight minutes and twenty seconds to reach Earth."],
- ["earth","Earth is not a perfect sphere; it is slightly flattened at the poles."],
- ["food","Honey can remain edible for extraordinarily long periods when properly sealed."],
- ["internet","The first message sent over ARPANET was intended to be 'LOGIN,' but the system crashed after the first two letters."],
- ["chemistry","Water expands when it freezes, which is unusual compared with many substances."],
- ["space","There are more trees on Earth than there are stars in the Milky Way."],
- ["animals","Crows can recognize individual human faces."],
- ["engineering","The Eiffel Tower can become slightly taller in hot weather because metal expands."],
- ["psychology","The brain is constantly predicting what it expects to perceive rather than simply recording reality like a camera."],
- ["music","A standard piano has 88 keys."],
- ["geology","Earth's continents move continuously because of plate tectonics."],
- ["computers","A kilobyte does not always mean exactly 1,000 bytes; binary conventions use 1,024 bytes."],
- ["weather","A hurricane gets its energy primarily from warm ocean water."],
- ["medicine","Bones are living tissue and are continuously remodeled by the body."],
- ["animals","Some species of jellyfish can revert to an earlier life stage."],
- ["space","Mars has the largest volcano known in the Solar System: Olympus Mons."],
- ["history","Oxford University is older than the Aztec Empire."]
-];
-
-const knowledgeFrames=[
- "Here's a useful bit of knowledge, sir: ",
- "A small piece of the world's accumulated knowledge: ",
- "Jeeves' knowledge department reports: ",
- "For your consideration, sir: ",
- "An excellent thing to know for absolutely no reason: ",
- "Today's intellectual cargo: ",
- "The internet has entrusted me with this fact: "
-];
-
-function generateKnowledge(){
-
- const result=uniquePick(
-  "shaggyKnowledgeHistory",
-  ()=>{
-
-   const item=
-    knowledgeSubjects[
-     Math.floor(
-      Math.random()*knowledgeSubjects.length
-     )
-    ];
-
-   const frame=
-    knowledgeFrames[
-     Math.floor(
-      Math.random()*knowledgeFrames.length
-     )
-    ];
-
-   return frame+item[1];
-  }
- );
-
- document.getElementById("knowledgeOutput")
-  .innerHTML=
-   `<div>${esc(result)}</div>`;
-
- const count=
-  getHistory("shaggyKnowledgeHistory").length;
-
- document.getElementById("knowledgeInfo")
-  .textContent=
-   "UNIQUE RESULTS THIS BROWSER: "+count;
-}
-
-
-/* =========================================================
-   DO THE THING ENGINE
-========================================================= */
-
-const thingActions=[
- "Spend 10 minutes cleaning",
- "Learn one new keyboard shortcut",
- "Write down three things you want to accomplish",
- "Delete five files you no longer need",
- "Take a short walk",
- "Drink a glass of water",
- "Organize one folder on your computer",
- "Read one article about something you know nothing about",
- "Back up something important",
- "Write a tiny program",
- "Draw something without planning it",
- "Take one photograph",
- "Teach someone something you know",
- "Find an old photo and remember the story behind it",
- "Open a blank document and write for five minutes",
- "Learn the definition of a word you recently heard",
- "Clean your browser bookmarks",
- "Try a new recipe",
- "Stretch for five minutes",
- "Write down an idea you keep postponing",
- "Look up how something around you actually works",
- "Make a list of ten things you are curious about",
- "Spend five minutes improving your desktop",
- "Read a page of a book",
- "Find an old website through the Internet Archive",
- "Learn one fact about another country",
- "Make something unnecessarily complicated",
- "Make something unnecessarily simple",
- "Fix one tiny annoyance you've been ignoring",
- "Send someone a genuine thank-you message"
-];
-
-const thingObjects=[
- "before checking social media",
- "without using a search engine",
- "using only one hand",
- "while listening to instrumental music",
- "and explain what you learned afterward",
- "then write down the result",
- "before the next hour begins",
- "and make it slightly better than it was",
- "as quickly as you reasonably can",
- "without spending any money",
- "and teach the result to someone else",
- "then save the result somewhere useful",
- "while pretending you are a Victorian inventor",
- "and give yourself exactly seven minutes",
- "then take a screenshot of your victory",
- "without worrying about making it perfect"
-];
-
-function generateThing(){
-
- const result=uniquePick(
-  "shaggyThingHistory",
-  ()=>{
-
-   const action=
-    thingActions[
-     Math.floor(
-      Math.random()*thingActions.length
-     )
-    ];
-
-   const object=
-    thingObjects[
-     Math.floor(
-      Math.random()*thingObjects.length
-     )
-    ];
-
-   return action+" "+object+".";
-  }
- );
-
- document.getElementById("thingOutput")
-  .innerHTML=
-   `<div>
-    <div class="big">YOUR MISSION</div>
-    <br>${esc(result)}
-   </div>`;
-
- const count=
-  getHistory("shaggyThingHistory").length;
-
- document.getElementById("thingInfo")
-  .textContent=
-   "UNIQUE MISSIONS THIS BROWSER: "+count;
-}
-
-
-/* =========================================================
-   PROCEDURAL CHAOS
-========================================================= */
-
-const chaosA=[
- "a confused",
- "an overconfident",
- "a suspicious",
- "a highly trained",
- "a surprisingly polite",
- "a completely unnecessary",
- "a time-traveling",
- "a legally distinct",
- "a radioactive",
- "a technologically advanced",
- "a mildly offended",
- "a majestic",
- "a tiny",
- "a gigantic",
- "a caffeinated"
-];
-
-const chaosB=[
- "penguin",
- "potato",
- "wizard",
- "robot",
- "duck",
- "space cowboy",
- "hamster",
- "crab",
- "internet librarian",
- "dinosaur",
- "cyborg",
- "pirate",
- "AI assistant",
- "moon rock",
- "rubber chicken"
-];
-
-const chaosC=[
- "has discovered",
- "is currently fighting",
- "has accidentally invented",
- "is attempting to repair",
- "has challenged",
- "is secretly controlling",
- "has misplaced",
- "is studying",
- "is livestreaming",
- "has stolen",
- "is negotiating with",
- "is building",
- "is extremely concerned about"
-];
-
-const chaosD=[
- "the moon",
- "a vending machine",
- "the internet",
- "a mysterious button",
- "three pizzas",
- "the laws of physics",
- "your Wi-Fi router",
- "an ancient computer",
- "a suspicious email",
- "the concept of Tuesday",
- "a shopping cart",
- "the last cookie",
- "the weather",
- "a very small horse",
- "the entire United Kingdom"
-];
-
-function generateChaos(){
-
- const result=uniquePick(
-  "shaggyChaosHistory",
-  ()=>{
-
-   const a=chaosA[
-    Math.floor(Math.random()*chaosA.length)
-   ];
-
-   const b=chaosB[
-    Math.floor(Math.random()*chaosB.length)
-   ];
-
-   const c=chaosC[
-    Math.floor(Math.random()*chaosC.length)
-   ];
-
-   const d=chaosD[
-    Math.floor(Math.random()*chaosD.length)
-   ];
-
-   return `${a} ${b} ${c} ${d}.`;
-
-  }
- );
-
- document.getElementById("chaosOutput")
-  .innerHTML=
-   `<div><div class="big">CHAOS EVENT</div>
-   <br>${esc(result)}</div>`;
-
- document.getElementById("chaosInfo")
-  .textContent=
-   "CHAOS EVENTS GENERATED: "+
-   getHistory("shaggyChaosHistory").length;
-}
-
-
-/* =========================================================
-   JEEVES — LOCAL + WEB BRAIN
-========================================================= */
-
-const conversation=[];
-
-function addMessage(type,text){
-
- const chat=document.getElementById("chat");
-
- const div=document.createElement("div");
-
- div.className="msg "+type;
-
- div.innerHTML=
-  `<small>${type==="user"?"YOU":"JEEVES"}</small>`+
-  esc(text).replace(/\n/g,"<br>");
-
- chat.appendChild(div);
-
- chat.scrollTop=chat.scrollHeight;
-
- conversation.push({
-  role:type,
-  text:text
- });
-
- if(conversation.length>30)
-  conversation.shift();
-}
-
-function jeevesThinking(on){
-
- document.getElementById("jeevesStatus")
-  .textContent=on
-   ?"JEEVES BRAIN: THINKING • CONSULTING THE INTERNET..."
-   :"JEEVES BRAIN: READY • WEB KNOWLEDGE: AVAILABLE • MEMORY: ACTIVE";
-}
-
-function normalize(q){
- return q.toLowerCase().trim();
-}
-
-function looksLikeMath(q){
-
- return /^[0-9+\-*/().%\s^]+$/.test(q) &&
-        /[0-9]/.test(q);
-}
-
-function calculate(q){
-
- try{
-
-  if(!looksLikeMath(q))return null;
-
-  const safe=q
-   .replaceAll("^","**");
-
-  const result=Function(
-   '"use strict";return ('+
-   safe+
-   ')'
-  )();
-
-  if(
-   typeof result==="number" &&
-   Number.isFinite(result)
-  )
-   return result;
-
- }catch{}
-
- return null;
-}
-
-function timeAnswer(q){
-
- const now=new Date();
-
- if(q.includes("utc"))
-  return "Certainly, sir. The current UTC time is "+
-   now.toUTCString().slice(17,25)+".";
-
- return "The current local time is "+
-  now.toLocaleTimeString()+
-  ", sir.";
-}
-
-function dateAnswer(){
-
- const now=new Date();
-
- return "Today is "+
-  now.toLocaleDateString(
-   undefined,
-   {
-    weekday:"long",
-    year:"numeric",
-    month:"long",
-    day:"numeric"
-   }
-  )+
-  ", sir.";
-}
-
-function localAnswer(q){
-
- const n=normalize(q);
-
- if(
-  n==="hello"||
-  n==="hi"||
-  n==="hey"||
-  n.includes("good morning")||
-  n.includes("good evening")
- )
-  return "Good day, sir. How may I be of assistance?";
-
- if(
-  n.includes("who are you")||
-  n.includes("what are you")
- )
-  return "I am Jeeves, sir: your internet butler, research assistant, weather consultant, calculator and occasional defender of civilized browsing.";
-
- if(
-  n.includes("thank you")||
-  n==="thanks"
- )
-  return "You're most welcome, sir. It is quite literally my job.";
-
- if(n.includes("what time")||
-    n.includes("current time")||
-    n.includes("what's the time"))
-  return timeAnswer(n);
-
- if(n.includes("what date")||
-    n.includes("what day is it")||
-    n.includes("today's date"))
-  return dateAnswer();
-
- if(n.includes("how are you"))
-  return "Quite operational, sir. The servers are humming and nobody has misplaced the silverware.";
-
- if(n.includes("joke"))
-  return "Certainly, sir. Why did the computer get cold? It left its Windows open.";
-
- if(n.includes("lurker"))
-  return "A lurker, sir, is not merely an observer. A lurker is a quiet pillar of the stream. Keeping a tab open absolutely counts, and ShaggyMedic420 appreciates it.";
-
- if(n.includes("shaggymedic420"))
-  return "ShaggyMedic420 is the proprietor of this magnificent internet establishment, sir. The stream is available above, and lurkers are explicitly encouraged.";
-
- if(n.includes("what can you do"))
-  return "I can search the web, consult Wikipedia, calculate, answer common questions, check the weather, discuss our conversation, find useful resources and generally behave like a respectable internet butler.";
-
- return null;
-}
-
-async function wikipediaAnswer(query){
-
- try{
-
-  const url=
-   "https://en.wikipedia.org/w/api.php"+
-   "?action=query"+
-   "&list=search"+
-   "&srsearch="+encodeURIComponent(query)+
-   "&srlimit=3"+
-   "&format=json"+
-   "&origin=*";
-
-  const data=await fetch(url).then(r=>r.json());
-
-  const results=data?.query?.search||[];
-
-  if(!results.length)return null;
-
-  const title=results[0].title;
-
-  const summary=await fetch(
-   "https://en.wikipedia.org/api/rest_v1/page/summary/"+
-   encodeURIComponent(title.replaceAll(" ","_"))
-  ).then(r=>r.json());
-
-  if(summary?.extract){
-
-   return {
-    title:title,
-    text:summary.extract
-   };
-
-  }
-
- }catch{}
-
- return null;
-}
-
-function searchFallback(query){
-
- const urls=[
-  "https://www.google.com/search?q=",
-  "https://www.google.com/search?udm=2&q="
- ];
-
- return urls[0]+encodeURIComponent(query);
-}
-
-async function askJeeves(query){
-
- const n=normalize(query);
-
- const local=localAnswer(n);
-
- if(local)return local;
-
- const math=calculate(query);
-
- if(math!==null)
-  return "Certainly, sir. The answer is "+
-   math+".";
-
- /*
-  Weather requests are routed to the existing weather
-  widget rather than duplicating its API.
- */
- if(
-  n.includes("weather")||
-  n.includes("temperature")||
-  n.includes("forecast")
- ){
-
-  document.getElementById("weather")
-   .scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-   });
-
-  const city=
-   query
-    .replace(/weather/gi,"")
-    .replace(/forecast/gi,"")
-    .replace(/temperature/gi,"")
-    .replace(/what is/gi,"")
-    .replace(/what's/gi,"")
-    .trim();
-
-  if(city.length>2){
-
-   document.getElementById("cityInput")
-    .value=city;
-
-   await loadWeather();
-
-  }
-
-  return "Certainly, sir. I have directed the weather department to investigate. You should now see its report in the weather panel.";
-
- }
-
- /*
-  Search / knowledge questions.
- */
- const wiki=await wikipediaAnswer(query);
-
- if(wiki){
-
-  let text=wiki.text;
-
-  if(text.length>750)
-   text=text.slice(0,747)+"...";
-
-  return text+
-   "\n\nSource: Wikipedia — "+
-   wiki.title+
-   ".";
- }
-
- /*
-  No answer? Jeeves doesn't invent one.
- */
- return "I couldn't establish a sufficiently reliable answer to that from my local knowledge, sir. I recommend searching the matter directly. I have prepared the search for you.";
-}
-
-document.getElementById("chatForm")
- .addEventListener("submit",async e=>{
-
-  e.preventDefault();
-
-  const input=document.getElementById("chatInput");
-
-  const q=input.value.trim();
-
-  if(!q)return;
-
-  input.value="";
-
-  addMessage("user",q);
-
-  jeevesThinking(true);
+    It records visits server-side.
+  */
 
   try{
 
-   const answer=await askJeeves(q);
+    const response = await fetch(
+      "https://visitor.6developer.com/visit",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          domain:VISITOR_DOMAIN,
+          page_path:location.pathname,
+          page_title:document.title,
+          referrer:document.referrer || ""
+        })
+      }
+    );
 
-   addMessage("jeeves",answer);
+    if(!response.ok) throw new Error("visitor service unavailable");
 
-   /*
-    If Jeeves had to fall back to search, add a button.
-   */
-   if(
-    answer.includes(
-     "prepared the search"
-    )
-   ){
+    const data = await response.json();
 
-    const chat=document.getElementById("chat");
+    /*
+      The service may expose a count under different fields.
+      Try the common possibilities.
+    */
 
-    const button=document.createElement("button");
+    const count =
+      data.total_visitors ??
+      data.totalVisitors ??
+      data.visitors ??
+      data.count ??
+      data.total;
 
-    button.className="small";
+    if(count !== undefined){
 
-    button.textContent=
-     "🔎 SEARCH THAT FOR ME";
+      display.textContent =
+        Number(count).toLocaleString();
 
-    button.onclick=()=>{
-     openURL(searchFallback(q));
-    };
+      status.textContent =
+        "global visitors";
+    }
 
-    chat.appendChild(button);
-   }
+  }catch(error){
 
-  }catch{
+    /*
+      Nothing breaks if the external counter is unavailable.
+    */
 
-   addMessage(
-    "jeeves",
-    "I regret to report a temporary interruption in my faculties, sir. Please try that again."
-   );
+    status.textContent =
+      "local fallback";
+  }
+}
 
+visitorCounter();
+
+
+/* ============================================================
+   JEEVES CHAT
+   ============================================================ */
+
+const chat = document.getElementById("chat");
+const jeevesInput = document.getElementById("jeevesInput");
+
+let jeevesMemory = [];
+
+function addMessage(text,type){
+
+  const div = document.createElement("div");
+
+  div.className = "msg " + type;
+
+  div.innerHTML = text;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function escapeHTML(text){
+
+  return text
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function jeevesSpeak(text){
+
+  addMessage(text,"jeeves");
+
+  jeevesMemory.push({
+    speaker:"jeeves",
+    text
+  });
+}
+
+function userSpeak(text){
+
+  addMessage(escapeHTML(text),"user");
+
+  jeevesMemory.push({
+    speaker:"user",
+    text
+  });
+}
+
+
+/*
+  Jeeves' deterministic conversational brain.
+
+  This is deliberately local/static so the site remains free and
+  doesn't expose an AI API key.
+
+  For arbitrary questions, Jeeves can escalate to Wikipedia or
+  a web search.
+*/
+
+async function askJeeves(){
+
+  const raw = jeevesInput.value.trim();
+
+  if(!raw) return;
+
+  jeevesInput.value = "";
+
+  userSpeak(raw);
+
+  const q = raw.toLowerCase().trim();
+
+  await new Promise(r=>setTimeout(r,280));
+
+  /* greetings */
+
+  if(
+    /^(hi|hello|hey|yo|sup|good morning|good afternoon|good evening)\b/.test(q)
+  ){
+
+    jeevesSpeak(
+      random([
+        "Good day. It is a pleasure to be of service.",
+        "Good day. Jeeves is present and attentive.",
+        "Greetings. What may I assist you with?",
+        "Ah, excellent. You have summoned the butler.",
+        "At your service. Please, proceed."
+      ])
+    );
+
+    return;
   }
 
-  jeevesThinking(false);
 
- });
+  /* who are you */
+
+  if(
+    q.includes("who are you") ||
+    q.includes("what are you")
+  ){
+
+    jeevesSpeak(
+      "I am <strong>Jeeves</strong>, your internet butler. " +
+      "I can answer common questions, perform calculations, " +
+      "look up encyclopedia information, search the web, " +
+      "and generally make this curious corner of the internet " +
+      "rather more useful."
+    );
+
+    return;
+  }
 
 
-/* =========================================================
-   REACTION GAME
-========================================================= */
+  /* thanks */
 
-let reactionState="idle";
-let reactionStart=0;
-let reactionTimer=null;
+  if(
+    q.includes("thank") ||
+    q === "ty" ||
+    q === "thx"
+  ){
 
-function reactionClick(){
+    jeevesSpeak(
+      random([
+        "You are most welcome.",
+        "Think nothing of it.",
+        "My pleasure entirely.",
+        "Quite all right. That is what butlers are for.",
+        "No thanks are necessary, though they are appreciated."
+      ])
+    );
 
- const button=
-  document.getElementById("reactionButton");
+    return;
+  }
 
- const status=
-  document.getElementById("reactionStatus");
 
- if(reactionState==="idle"){
+  /* stream */
 
-  reactionState="waiting";
+  if(
+    q.includes("twitch") ||
+    q.includes("stream") ||
+    q.includes("shaggymedic")
+  ){
 
-  button.className="gamebutton ready";
-  button.textContent="WAIT FOR GREEN...";
-  status.textContent="DO NOT CLICK YET.";
+    jeevesSpeak(
+      "The stream in question is <strong>Shaggymedic420</strong>. " +
+      "The tiny embedded player is intentionally muted and nearly " +
+      "invisible. Lurking is, of course, the backbone of stream success."
+    );
 
-  reactionTimer=setTimeout(()=>{
+    return;
+  }
 
-   reactionState="ready";
 
-   reactionStart=performance.now();
+  /* time */
 
-   button.className="gamebutton go";
-   button.textContent="CLICK NOW!";
-   status.textContent="GO GO GO!";
+  if(
+    q === "time" ||
+    q.includes("what time is it")
+  ){
 
-  },1500+Math.random()*3500);
+    jeevesSpeak(
+      "According to your browser's local clock, it is <strong>" +
+      new Date().toLocaleTimeString() +
+      "</strong>."
+    );
 
-  return;
- }
+    return;
+  }
 
- if(reactionState==="waiting"){
 
-  clearTimeout(reactionTimer);
+  /* date */
 
-  reactionState="idle";
+  if(
+    q.includes("what day") ||
+    q === "date" ||
+    q.includes("what date")
+  ){
 
-  button.className="gamebutton";
-  button.textContent="TOO EARLY!";
-  status.textContent="CHEATER DETECTED.";
+    jeevesSpeak(
+      "Today is <strong>" +
+      new Date().toLocaleDateString(undefined,{
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+      }) +
+      "</strong>."
+    );
 
-  setTimeout(()=>{
-   button.textContent="CLICK TO START";
-  },1000);
+    return;
+  }
 
-  return;
- }
 
- if(reactionState==="ready"){
+  /* calculator */
 
-  const reaction=Math.round(
-   performance.now()-reactionStart
+  const calculation =
+    q.match(/^[\d\s()+\-*/%.^]+$/);
+
+  if(calculation){
+
+    try{
+
+      /*
+        Basic arithmetic evaluator.
+
+        The regex above severely limits what can reach eval.
+      */
+
+      const expression =
+        q.replaceAll("^","**");
+
+      const answer = Function(
+        '"use strict";return ('+expression+')'
+      )();
+
+      if(Number.isFinite(answer)){
+
+        jeevesSpeak(
+          "Certainly. The answer is <strong>" +
+          answer +
+          "</strong>."
+        );
+
+        return;
+      }
+
+    }catch(e){}
+  }
+
+
+  /* weather */
+
+  if(
+    q.includes("weather") ||
+    q.includes("temperature")
+  ){
+
+    jeevesSpeak(
+      "I can fetch your local weather using the weather panel below. " +
+      "For privacy, your location is only requested when you press " +
+      "<strong>Get My Weather</strong>."
+    );
+
+    document.getElementById("weather")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    return;
+  }
+
+
+  /* site questions */
+
+  if(
+    q.includes("website") ||
+    q.includes("site") ||
+    q.includes("mega")
+  ){
+
+    jeevesSpeak(
+      "You are presently standing inside the <strong>Shaggy Mega " +
+      "Internet Portal</strong>: a collection of headlines, " +
+      "knowledge, tools, searches, weather, entertainment and " +
+      "a suspiciously committed butler."
+    );
+
+    return;
+  }
+
+
+  /* wikipedia */
+
+  const wikiTriggers = [
+    "what is ",
+    "who is ",
+    "tell me about ",
+    "explain ",
+    "define ",
+    "meaning of "
+  ];
+
+  let wikiQuery = null;
+
+  for(const trigger of wikiTriggers){
+
+    if(q.startsWith(trigger)){
+
+      wikiQuery =
+        raw.slice(trigger.length).trim();
+
+      break;
+    }
+  }
+
+
+  if(wikiQuery && wikiQuery.length > 1){
+
+    jeevesSpeak(
+      "Very good. Allow me a moment to consult the encyclopedia..."
+    );
+
+    const answer =
+      await wikipediaLookup(wikiQuery);
+
+    if(answer){
+
+      jeevesSpeak(answer);
+
+    }else{
+
+      jeevesSpeak(
+        "I was unable to retrieve a reliable encyclopedia entry. " +
+        "I recommend allowing me to <a target='_blank' " +
+        "href='https://www.google.com/search?q=" +
+        encodeURIComponent(wikiQuery) +
+        "'>search the wider internet</a>."
+      );
+    }
+
+    return;
+  }
+
+
+  /* arbitrary question */
+
+  jeevesSpeak(
+    random([
+      "That is an intriguing question. I do not possess a full general-purpose language model inside this static page, but I can search the web for you.",
+      "A fascinating inquiry. I should like to investigate it rather than bluff.",
+      "I would rather be accurate than invent an answer. Shall I search the web?",
+      "An excellent question. My local knowledge is limited, but the internet is positively enormous.",
+      "I confess that this one exceeds my built-in repertoire. Fortunately, I have brought a search engine."
+    ]) +
+    "<br><br>" +
+    "<a target='_blank' rel='noopener' href='https://www.google.com/search?q=" +
+    encodeURIComponent(raw) +
+    "'>🔎 Search Google for this question →</a>"
   );
+}
 
-  reactionState="idle";
 
-  button.className="gamebutton";
-  button.textContent=reaction+" ms";
+/* Wikipedia */
 
-  status.textContent=
-   reaction<200
-    ?"ABSURDLY FAST."
-    :reaction<300
-    ?"VERY FAST."
-    :reaction<500
-    ?"GOOD."
-    :"THE BRAIN HAS AWOKEN.";
+async function wikipediaLookup(topic){
 
-  const old=
-   Number(
-    localStorage.getItem(
-     "shaggyBestReaction"
-    )
-   )||Infinity;
+  try{
 
-  if(reaction<old){
+    const url =
+      "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+      encodeURIComponent(
+        topic.replaceAll(" ","_")
+      );
 
-   localStorage.setItem(
-    "shaggyBestReaction",
-    reaction
-   );
+    const response =
+      await fetch(url);
 
-   document.getElementById(
-    "bestReaction"
-   ).textContent=reaction;
+    if(!response.ok) return null;
+
+    const data =
+      await response.json();
+
+    if(!data.extract) return null;
+
+    let text = data.extract;
+
+    if(text.length > 700)
+      text = text.slice(0,700) + "...";
+
+    return (
+      "<strong>" +
+      escapeHTML(data.title || topic) +
+      "</strong><br><br>" +
+      escapeHTML(text) +
+      "<br><br>" +
+      "<a target='_blank' rel='noopener' href='" +
+      (data.content_urls?.desktop?.page || "#") +
+      "'>Read the full article →</a>"
+    );
+
+  }catch(error){
+
+    return null;
   }
-
-  setTimeout(()=>{
-   button.textContent="CLICK TO START";
-  },1300);
- }
 }
 
-const savedBest=
- localStorage.getItem("shaggyBestReaction");
 
-if(savedBest)
- document.getElementById("bestReaction")
-  .textContent=savedBest;
+/* send */
 
+document.getElementById("jeevesSend")
+  .addEventListener("click",askJeeves);
 
-/* =========================================================
-   CLICKER
-========================================================= */
-
-let clickScore=
- Number(
-  localStorage.getItem("shaggyClicks")
- )||0;
-
-function updateClicks(){
- document.getElementById("clickScore")
-  .textContent=clickScore;
-}
-
-function clicker(){
-
- clickScore++;
-
- updateClicks();
-
- localStorage.setItem(
-  "shaggyClicks",
-  clickScore
- );
-}
-
-updateClicks();
+jeevesInput
+  .addEventListener("keydown",e=>{
+    if(e.key==="Enter")
+      askJeeves();
+  });
 
 
-/* =========================================================
-   KONAMI CODE
-========================================================= */
-
-let keys=[];
-
-const secret=[
- "ArrowUp",
- "ArrowUp",
- "ArrowDown",
- "ArrowDown",
- "ArrowLeft",
- "ArrowRight",
- "ArrowLeft",
- "ArrowRight",
- "b",
- "a"
-];
+/* "/" shortcut */
 
 document.addEventListener("keydown",e=>{
 
- keys.push(e.key);
+  if(
+    e.key === "/" &&
+    document.activeElement.tagName !== "INPUT"
+  ){
 
- keys=keys.slice(-secret.length);
+    e.preventDefault();
 
- if(
-  keys.length===secret.length &&
-  keys.every((x,i)=>x===secret[i])
- ){
-
-  document.body.classList.toggle("party");
-
-  alert(
-   "🌈 SHAGGYMEGA SECRET MODE 🌈\n\n"+
-   "Congratulations, sir.\n"+
-   "You have unlocked absolutely nothing."
-  );
- }
-
+    jeevesInput.focus();
+  }
 });
 
 
-/* =========================================================
-   INITIAL GENERATOR COUNTS
-========================================================= */
+/* ============================================================
+   RANDOM ENGINE
+   ============================================================ */
 
-document.getElementById("knowledgeInfo")
- .textContent=
- "UNIQUE RESULTS THIS BROWSER: "+
- getHistory("shaggyKnowledgeHistory").length;
+function random(array){
 
-document.getElementById("thingInfo")
- .textContent=
- "UNIQUE MISSIONS THIS BROWSER: "+
- getHistory("shaggyThingHistory").length;
+  return array[
+    Math.floor(
+      Math.random()*array.length
+    )
+  ];
+}
 
-document.getElementById("chaosInfo")
- .textContent=
- "CHAOS EVENTS GENERATED: "+
- getHistory("shaggyChaosHistory").length;
+
+/* ============================================================
+   INTERNET KNOWLEDGE
+   ============================================================ */
+
+const knowledge = [
+
+"Ctrl+Shift+T can reopen a browser tab you accidentally closed.",
+
+"On many websites, pressing / focuses the site's search box.",
+
+"The Internet Archive's Wayback Machine can preserve snapshots of old webpages.",
+
+"PNG is lossless, while JPEG normally uses lossy compression.",
+
+"SVG images can remain sharp at essentially any display size because they describe graphics mathematically.",
+
+"DNS translates human-readable domain names into network addresses.",
+
+"HTTPS encrypts traffic between your browser and the website using TLS.",
+
+"Git records changes to files so developers can move between versions of a project.",
+
+"Markdown was designed to make plain text easy to turn into formatted documents.",
+
+"HTTP status 404 generally means the requested resource could not be found.",
+
+"HTTP status 301 indicates a permanent redirect.",
+
+"HTTP status 503 commonly means a service is temporarily unavailable.",
+
+"Browser localStorage can persist small amounts of data between visits.",
+
+"CSS controls presentation while HTML provides the structure of a webpage.",
+
+"JavaScript can change a webpage after it has loaded without requiring a complete reload.",
+
+"A URL contains more information than merely a domain name; it can include a scheme, host, path, query and fragment.",
+
+"Your browser's developer tools can inspect HTML, CSS, network requests and JavaScript.",
+
+"Web pages can communicate with APIs using JavaScript's fetch() function.",
+
+"JSON is a common format for exchanging structured data between programs.",
+
+"Web accessibility helps people using keyboards, screen readers and other assistive technologies.",
+
+"Alt text gives images a text alternative that can be read by assistive technologies.",
+
+"Semantic HTML such as main, nav, header and article helps describe the meaning of page content.",
+
+"Responsive design lets a page adapt its layout to different screen sizes.",
+
+"A favicon is the tiny icon associated with a webpage or browser tab.",
+
+"Web fonts can change the typography of a site without requiring the visitor to install the font.",
+
+"The browser cache can make frequently visited resources load faster.",
+
+"A CDN can distribute copies of static assets geographically to reduce latency.",
+
+"Cookies can store small pieces of state associated with a website.",
+
+"localStorage is different from cookies because it is not automatically sent with every HTTP request.",
+
+"GitHub Pages can publish ordinary static HTML, CSS and JavaScript files.",
+
+"The <code>index.html</code> file is normally used as the entry point of a static webpage.",
+
+"CSS variables make it much easier to maintain a consistent visual theme.",
+
+"CSS grid and flexbox can build complex responsive layouts without JavaScript.",
+
+"Regular expressions are patterns used to search or validate text.",
+
+"Base64 is an encoding scheme, not encryption.",
+
+"Encryption is intended to protect information; encoding is generally intended to represent information in another form.",
+
+"A password manager can generate and remember strong unique passwords.",
+
+"Using the same password on many sites means one compromised account can put other accounts at risk.",
+
+"Two-factor authentication adds another verification step beyond a password.",
+
+"QR codes can store text and URLs in a machine-readable image.",
+
+"Unicode allows computers to represent writing systems and symbols from around the world.",
+
+"UTF-8 is a widely used Unicode encoding for webpages.",
+
+"An API is an interface that allows software systems to communicate.",
+
+"Open-source software allows people to inspect and often modify its source code.",
+
+"A software license determines what others are legally allowed to do with code.",
+
+"An algorithm is a defined procedure for solving a problem or performing a task.",
+
+"Binary represents information using combinations of zeros and ones.",
+
+"A byte contains eight bits.",
+
+"A kilobyte is commonly treated as 1,000 bytes in decimal storage contexts, although 1,024-byte units are also commonly used.",
+
+"Modern browsers can run surprisingly sophisticated applications entirely inside a webpage.",
+
+"Web Workers allow JavaScript work to happen away from the main UI thread.",
+
+"WebSockets allow persistent two-way communication between a browser and server.",
+
+"WebRTC can enable real-time audio, video and peer-to-peer data communication.",
+
+"Browser geolocation normally requires the user to grant permission.",
+
+"Most modern browsers prevent ordinary webpages from reading arbitrary files from your computer without user interaction.",
+
+"Cross-origin rules protect websites from many kinds of unwanted requests to other sites.",
+
+"CORS is a mechanism that allows servers to explicitly permit certain cross-origin browser requests.",
+
+"The browser console is one of the fastest ways to investigate a JavaScript error.",
+
+"F12 commonly opens developer tools in desktop browsers.",
+
+"Ctrl+L usually moves focus to the browser address bar.",
+
+"Ctrl+K commonly focuses a browser search/address interface.",
+
+"Ctrl+F searches the current page.",
+
+"Ctrl+R reloads the current page.",
+
+"Ctrl+Shift+R performs a stronger reload in many browsers.",
+
+"Private browsing does not make you anonymous to websites, internet providers or networks.",
+
+"An IP address identifies a network endpoint, not necessarily an individual person.",
+
+"Latency measures how long it takes information to travel between endpoints.",
+
+"Bandwidth and latency are different concepts: bandwidth describes capacity while latency describes delay.",
+
+"A favicon can be declared with a link element in the document head.",
+
+"HTML comments are visible to anyone who inspects the page source.",
+
+"Never put API secrets, passwords or private tokens directly into public frontend JavaScript.",
+
+"Static websites are remarkably powerful because JavaScript can turn a collection of files into an interactive application."
+
+];
+
+function getHistory(key){
+
+  try{
+    return JSON.parse(
+      localStorage.getItem(key) || "[]"
+    );
+  }catch(e){
+    return [];
+  }
+}
+
+function setHistory(key,value){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(value)
+  );
+}
+
+function uniqueFromPool(pool,key){
+
+  let used = getHistory(key);
+
+  if(used.length >= pool.length){
+
+    used = [];
+
+  }
+
+  const available =
+    pool.filter(
+      (_,index)=>!used.includes(index)
+    );
+
+  const chosen =
+    Math.floor(
+      Math.random()*available.length
+    );
+
+  const actualIndex =
+    pool.indexOf(
+      available[chosen]
+    );
+
+  used.push(actualIndex);
+
+  setHistory(key,used);
+
+  return pool[actualIndex];
+}
+
+function newKnowledge(){
+
+  const item =
+    uniqueFromPool(
+      knowledge,
+      "shaggymega_knowledge"
+    );
+
+  document.getElementById("knowledgeOutput")
+    .innerHTML =
+      "<div><span class='big'>DID YOU KNOW?</span>" +
+      item +
+      "</div>";
+
+  document.getElementById("knowledgeOutput")
+    .classList.remove("flash");
+
+  void document.getElementById("knowledgeOutput").offsetWidth;
+
+  document.getElementById("knowledgeOutput")
+    .classList.add("flash");
+}
+
+function resetKnowledge(){
+
+  localStorage.removeItem(
+    "shaggymega_knowledge"
+  );
+
+  document.getElementById("knowledgeOutput")
+    .innerHTML =
+      "<div><span class='big'>RESET.</span>" +
+      "The encyclopedia awaits once more.</div>";
+}
+
+
+/* ============================================================
+   DO THE THING
+   ============================================================ */
+
+const things = [
+
+"Open a browser tab you have not opened in six months and rediscover why it exists.",
+
+"Clean your desktop until there are fewer than 10 icons.",
+
+"Write down one idea you have had recently and give it a ridiculous project name.",
+
+"Find the oldest bookmark in your browser.",
+
+"Spend five minutes learning something completely unrelated to your normal interests.",
+
+"Delete three files you absolutely no longer need.",
+
+"Make a folder called 'IMPORTANT' and put something genuinely important in it.",
+
+"Send a sincere thank-you message to someone who deserves one.",
+
+"Find an old photo and remember the story behind it.",
+
+"Learn one keyboard shortcut you do not currently know.",
+
+"Take a break from the screen and look outside for exactly two minutes.",
+
+"Organize your downloads folder.",
+
+"Back up one important file.",
+
+"Change one password that you have reused elsewhere.",
+
+"Write a one-sentence description of what you want to accomplish this week.",
+
+"Open Wikipedia and learn about the strangest historical event you can find.",
+
+"Find a website from the early internet and spend five minutes exploring it.",
+
+"Create something tiny: a drawing, sentence, program, joke or idea.",
+
+"Turn off one notification you never actually needed.",
+
+"Find one piece of software you use and learn one advanced feature.",
+
+"Make a playlist containing exactly five songs.",
+
+"Write down three things that went right today.",
+
+"Teach somebody something you know.",
+
+"Try using your keyboard for five minutes without reaching for the mouse.",
+
+"Find a public-domain image and imagine an entirely different story for it.",
+
+"Look up the history of something you are currently holding.",
+
+"Fix one tiny annoyance you have been tolerating.",
+
+"Make your browser bookmarks slightly less chaotic.",
+
+"Read something written more than 100 years ago.",
+
+"Learn what one unfamiliar button in an application actually does.",
+
+"Build a tiny webpage in your head before you build it on the computer.",
+
+"Name a project before you start it. Make the name absurdly dramatic.",
+
+"Write a two-sentence review of the last thing you watched.",
+
+"Find the weirdest domain name you can think of and see whether it exists.",
+
+"Search for a manual for an object you own.",
+
+"Learn why one technology you use works.",
+
+"Take a screenshot of something you think future-you will find funny.",
+
+"Make a tiny list of things you want to remember one year from now.",
+
+"Try a completely different route through a familiar website.",
+
+"Do one task you have postponed for less than five minutes."
+
+];
+
+const hardThings = [
+
+"Create something before you consume anything else on the internet.",
+
+"Spend 20 minutes fixing a problem you have been ignoring.",
+
+"Write 500 words about an idea you normally would never write about.",
+
+"Learn a programming concept and explain it in your own words.",
+
+"Organize an entire folder instead of merely moving one file.",
+
+"Build a tiny webpage from scratch with no tutorial.",
+
+"Read an entire article from a source you normally never visit.",
+
+"Make something useful enough that another person could actually use it.",
+
+"Pick one recurring annoyance and design a permanent solution.",
+
+"Spend an hour learning something that has nothing to do with your job or hobbies.",
+
+"Make a backup plan for something important.",
+
+"Take one idea you have had and turn it into the first five concrete steps.",
+
+"Find a project you abandoned and decide honestly whether to revive or delete it.",
+
+"Create a tiny tool that solves one extremely specific problem.",
+
+"Go 30 minutes without opening social media."
+
+];
+
+function generateThing(pool){
+
+  const item =
+    uniqueFromPool(
+      pool,
+      pool === things
+        ? "shaggymega_things"
+        : "shaggymega_hardthings"
+    );
+
+  const target =
+    document.getElementById("thingOutput");
+
+  target.innerHTML =
+    "<div><span class='big'>YOUR MISSION</span>" +
+    item +
+    "</div>";
+
+  target.classList.remove("flash");
+
+  void target.offsetWidth;
+
+  target.classList.add("flash");
+}
+
+function doTheThing(){
+  generateThing(things);
+}
+
+function doHardThing(){
+  generateThing(hardThings);
+}
+
+function resetThings(){
+
+  localStorage.removeItem("shaggymega_things");
+  localStorage.removeItem("shaggymega_hardthings");
+
+  document.getElementById("thingOutput")
+    .innerHTML =
+      "<div><span class='big'>RESET.</span>" +
+      "Destiny has forgotten your previous assignments.</div>";
+}
+
+
+/* ============================================================
+   RANDOM NUMBER
+   ============================================================ */
+
+function randomNumber(){
+
+  let min =
+    Number(document.getElementById("minNum").value);
+
+  let max =
+    Number(document.getElementById("maxNum").value);
+
+  if(min > max){
+
+    [min,max] = [max,min];
+
+  }
+
+  const result =
+    Math.floor(
+      Math.random()*(max-min+1)
+    ) + min;
+
+  document.getElementById("numberOutput")
+    .textContent =
+      result.toLocaleString();
+}
+
+
+/* ============================================================
+   PASSWORD
+   ============================================================ */
+
+function generatePassword(){
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ" +
+    "abcdefghijkmnopqrstuvwxyz" +
+    "23456789!@#$%^&*_-+=";
+
+  let password = "";
+
+  for(let i=0;i<22;i++){
+
+    password +=
+      chars[
+        Math.floor(
+          Math.random()*chars.length
+        )
+      ];
+
+  }
+
+  document.getElementById("passwordOutput")
+    .textContent = password;
+
+  navigator.clipboard?.writeText(password)
+    .catch(()=>{});
+}
+
+
+/* ============================================================
+   DECISION MACHINE
+   ============================================================ */
+
+function jeevesDecides(){
+
+  const question =
+    document.getElementById("decisionInput")
+      .value.trim();
+
+  const answers = [
+
+    "Yes. Proceed with dignity.",
+    "No. I advise against it.",
+    "Probably. But have you considered snacks?",
+    "Absolutely. I have reviewed the matter.",
+    "Not yet. Think about it for ten minutes.",
+    "Yes, but make a backup plan.",
+    "No. Your future self may thank you.",
+    "Jeeves has consulted the invisible committee. The answer is yes.",
+    "The committee has returned a firm 'maybe.'",
+    "I shall permit it.",
+    "I cannot endorse this, but I respect the ambition.",
+    "Proceed, but do not make it weird.",
+    "This seems unnecessarily complicated. Therefore, yes."
+  ];
+
+  const answer = random(answers);
+
+  document.getElementById("decisionOutput")
+    .innerHTML =
+      question
+      ? "<strong>Regarding:</strong> " +
+        escapeHTML(question) +
+        "<br><br>" +
+        answer
+      : answer;
+}
+
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+function quickSearch(engine){
+
+  const q =
+    document.getElementById("searchInput")
+      .value.trim();
+
+  if(!q){
+
+    document.getElementById("searchInput")
+      .focus();
+
+    return;
+  }
+
+  let url;
+
+  if(engine === "wiki")
+    url =
+      "https://en.wikipedia.org/wiki/Special:Search?search=" +
+      encodeURIComponent(q);
+
+  else if(engine === "youtube")
+    url =
+      "https://www.youtube.com/results?search_query=" +
+      encodeURIComponent(q);
+
+  else if(engine === "reddit")
+    url =
+      "https://www.reddit.com/search/?q=" +
+      encodeURIComponent(q);
+
+  else
+    url =
+      "https://www.google.com/search?q=" +
+      encodeURIComponent(q);
+
+  window.open(
+    url,
+    "_blank",
+    "noopener"
+  );
+}
+
+document.getElementById("searchBtn")
+  .addEventListener("click",()=>{
+    quickSearch("google");
+  });
+
+document.getElementById("searchInput")
+  .addEventListener("keydown",e=>{
+    if(e.key==="Enter")
+      quickSearch("google");
+  });
+
+
+/* ============================================================
+   WEATHER
+   ============================================================ */
+
+async function getWeather(){
+
+  const target =
+    document.getElementById("weather");
+
+  target.innerHTML =
+    "<div class='result'>Locating you...</div>";
+
+  if(!navigator.geolocation){
+
+    target.innerHTML =
+      "<div class='result'>Your browser does not provide geolocation.</div>";
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    async position=>{
+
+      try{
+
+        const lat =
+          position.coords.latitude;
+
+        const lon =
+          position.coords.longitude;
+
+        const url =
+          "https://api.open-meteo.com/v1/forecast" +
+          "?latitude="+lat+
+          "&longitude="+lon+
+          "&current=temperature_2m,relative_humidity_2m,"+
+          "apparent_temperature,weather_code,wind_speed_10m"+
+          "&temperature_unit=fahrenheit"+
+          "&wind_speed_unit=mph";
+
+        const response =
+          await fetch(url);
+
+        const data =
+          await response.json();
+
+        const c =
+          data.current;
+
+        const descriptions = {
+
+          0:"Clear sky",
+          1:"Mainly clear",
+          2:"Partly cloudy",
+          3:"Overcast",
+          45:"Fog",
+          48:"Depositing rime fog",
+          51:"Light drizzle",
+          53:"Moderate drizzle",
+          55:"Dense drizzle",
+          61:"Slight rain",
+          63:"Moderate rain",
+          65:"Heavy rain",
+          71:"Slight snow",
+          73:"Moderate snow",
+          75:"Heavy snow",
+          80:"Rain showers",
+          81:"Moderate rain showers",
+          82:"Violent rain showers",
+          95:"Thunderstorm"
+        };
+
+        target.innerHTML = `
+
+          <div style="
+            font-size:42px;
+            color:var(--cyan);
+            font-weight:900;
+          ">
+            ${Math.round(c.temperature_2m)}°F
+          </div>
+
+          <div style="
+            color:#cbd7e6;
+            font-size:15px;
+            margin-top:4px;
+          ">
+            ${descriptions[c.weather_code] || "Current conditions"}
+          </div>
+
+          <div class="result">
+
+            Feels like:
+            <strong>${Math.round(c.apparent_temperature)}°F</strong>
+            <br>
+
+            Humidity:
+            <strong>${c.relative_humidity_2m}%</strong>
+            <br>
+
+            Wind:
+            <strong>${Math.round(c.wind_speed_10m)} mph</strong>
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="btn"
+              onclick="getWeather()">
+              Refresh
+            </button>
+
+          </div>
+        `;
+
+      }catch(error){
+
+        target.innerHTML =
+          "<div class='result'>" +
+          "Jeeves could not reach the weather service. " +
+          "Please try again." +
+          "</div>";
+      }
+
+    },
+
+    error=>{
+
+      target.innerHTML =
+        "<div class='result'>" +
+        "<strong>Location unavailable.</strong><br>" +
+        "You can allow location access in your browser " +
+        "and try again." +
+        "</div>";
+    },
+
+    {
+      enableHighAccuracy:false,
+      timeout:10000,
+      maximumAge:300000
+    }
+  );
+}
+
+
+/* ============================================================
+   NEWS
+   ============================================================ */
+
+/*
+ Google News exposes RSS feeds. Browsers can have cross-origin
+ restrictions, so this page uses RSS2JSON as a lightweight bridge.
+
+ If that service is unavailable, the site gracefully falls back
+ instead of showing a broken panel.
+*/
+
+const NEWS_FEED =
+  "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en";
+
+const TREND_FEED =
+  "https://trends.google.com/trending/rss?geo=US";
+
+async function loadRSS(feed,type){
+
+  const url =
+    "https://api.rss2json.com/v1/api.json?rss_url=" +
+    encodeURIComponent(feed);
+
+  const response =
+    await fetch(url);
+
+  if(!response.ok)
+    throw new Error("RSS unavailable");
+
+  const data =
+    await response.json();
+
+  if(!data.items)
+    throw new Error("No stories");
+
+  return data.items;
+}
+
+function renderNews(items){
+
+  const list =
+    document.getElementById("newsList");
+
+  const chosen =
+    items.slice(0,12);
+
+  list.innerHTML =
+    chosen.map(item=>`
+
+      <a
+        class="news"
+        href="${item.link || "#"}"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="newsSource">
+          ${escapeHTML(
+            item.author ||
+            item.source ||
+            "NEWS"
+          )}
+        </div>
+
+        <div class="newsTitle">
+          ${escapeHTML(
+            item.title ||
+            "Untitled story"
+          )}
+        </div>
+
+        <div class="newsTime">
+          ${item.pubDate
+            ? new Date(item.pubDate).toLocaleString()
+            : ""}
+        </div>
+
+      </a>
+
+    `).join("");
+
+  document.getElementById("headlineCount")
+    .textContent =
+      chosen.length;
+
+  document.getElementById("headlineTime")
+    .textContent =
+      new Date().toLocaleTimeString([],{
+        hour:"2-digit",
+        minute:"2-digit"
+      });
+
+  document.getElementById("ticker")
+    .innerHTML =
+      chosen.slice(0,7)
+      .map(x=>
+        "<span>" +
+        escapeHTML(x.title) +
+        "</span>"
+      ).join("");
+}
+
+function renderTrending(items){
+
+  const list =
+    document.getElementById("trendingList");
+
+  const chosen =
+    items.slice(0,10);
+
+  list.innerHTML =
+    chosen.map((item,i)=>`
+
+      <a
+        class="news"
+        href="${item.link || "#"}"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="newsSource">
+          #${i+1} TRENDING
+        </div>
+
+        <div class="newsTitle">
+          ${escapeHTML(
+            item.title ||
+            item.query ||
+            "Trending topic"
+          )}
+        </div>
+
+      </a>
+
+    `).join("");
+}
+
+async function loadHeadlines(){
+
+  try{
+
+    const items =
+      await loadRSS(
+        NEWS_FEED,
+        "news"
+      );
+
+    renderNews(items);
+
+  }catch(error){
+
+    document.getElementById("newsList")
+      .innerHTML = `
+
+      <div class="news">
+
+        <div class="newsSource">
+          HEADLINES
+        </div>
+
+        <div class="newsTitle">
+          Live headlines are temporarily unavailable.
+        </div>
+
+        <div class="newsTime">
+          Open Google News for the latest stories.
+        </div>
+
+      </div>
+
+      <a
+        class="btn"
+        style="display:inline-block;margin-top:10px"
+        target="_blank"
+        rel="noopener"
+        href="https://news.google.com/"
+      >
+        Open Google News
+      </a>
+
+    `;
+  }
+
+
+  try{
+
+    const items =
+      await loadRSS(
+        TREND_FEED,
+        "trending"
+      );
+
+    renderTrending(items);
+
+  }catch(error){
+
+    document.getElementById("trendingList")
+      .innerHTML = `
+
+      <a
+        class="news"
+        target="_blank"
+        rel="noopener"
+        href="https://trends.google.com/"
+      >
+
+        <div class="newsSource">
+          TRENDING
+        </div>
+
+        <div class="newsTitle">
+          View current Google Trends →
+        </div>
+
+      </a>
+
+    `;
+  }
+}
+
+loadHeadlines();
+
+/*
+ Refresh every 15 minutes.
+*/
+
+setInterval(
+  loadHeadlines,
+  15*60*1000
+);
+
+
+/* ============================================================
+   INITIAL PORTAL PERSONALITY
+   ============================================================ */
+
+setTimeout(()=>{
+
+  if(!sessionStorage.getItem("jeevesWelcome")){
+
+    sessionStorage.setItem(
+      "jeevesWelcome",
+      "1"
+    );
+
+    jeevesSpeak(
+      "I should mention that the portal has been upgraded. " +
+      "Headlines, weather, web searches, knowledge, missions " +
+      "and several other conveniences are now available. " +
+      "Do try not to break anything."
+    );
+
+  }
+
+},1200);
 
 </script>
 
