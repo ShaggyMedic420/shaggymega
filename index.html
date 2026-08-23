@@ -1,1255 +1,2102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shaggymedic420's Mega Internet Portal — the internet, but all in one place." />
-  <meta name="theme-color" content="#07000f" />
-  <title>SHAGGYMEGA // THE INTERNET PORTAL</title>
-
-  <style>
-    :root {
-      --bg: #05000b;
-      --panel: rgba(15, 5, 30, .88);
-      --panel2: rgba(25, 7, 48, .9);
-      --cyan: #00f6ff;
-      --pink: #ff00d4;
-      --purple: #9d4edd;
-      --green: #39ff14;
-      --yellow: #ffe600;
-      --red: #ff304f;
-      --text: #f5eaff;
-      --muted: #a99bb8;
-      --border: rgba(0,246,255,.35);
-      --shadow: 0 0 25px rgba(0,246,255,.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family:
-        "Trebuchet MS",
-        "Segoe UI",
-        system-ui,
-        sans-serif;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(157,78,221,.18), transparent 25%),
-        radial-gradient(circle at 80% 20%, rgba(255,0,212,.12), transparent 25%),
-        radial-gradient(circle at 50% 90%, rgba(0,246,255,.08), transparent 30%),
-        var(--bg);
-      overflow-x: hidden;
-    }
-
-    /* CRT / scanline effect */
-    body::before {
-      content: "";
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      opacity: .055;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          transparent 0,
-          transparent 2px,
-          #fff 3px,
-          transparent 4px
-        );
-      mix-blend-mode: overlay;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    .wrap {
-      width: min(1400px, calc(100% - 28px));
-      margin: auto;
-    }
-
-    /* =========================
-       TOP BAR
-       ========================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(15px);
-      background: rgba(5,0,11,.82);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-inner {
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .logo-mini {
-      color: var(--cyan);
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-shadow: 0 0 12px var(--cyan);
-      white-space: nowrap;
-    }
-
-    .nav {
-      display: flex;
-      gap: 7px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav a {
-      padding: 7px 10px;
-      border: 1px solid transparent;
-      color: #cdbfd9;
-      font-size: .82rem;
-      white-space: nowrap;
-    }
-
-    .nav a:hover {
-      color: var(--cyan);
-      border-color: var(--cyan);
-      box-shadow: 0 0 12px rgba(0,246,255,.18);
-    }
-
-    /* =========================
-       HERO
-       ========================= */
-
-    header {
-      padding: 60px 0 35px;
-      text-align: center;
-    }
-
-    .eyebrow {
-      color: var(--green);
-      font-family: monospace;
-      letter-spacing: 4px;
-      font-size: .78rem;
-      text-shadow: 0 0 10px var(--green);
-      margin-bottom: 15px;
-    }
-
-    .hero-title {
-      position: relative;
-      display: inline-block;
-      margin: 0;
-      font-size: clamp(2.6rem, 8vw, 7.8rem);
-      line-height: .88;
-      font-weight: 1000;
-      letter-spacing: -5px;
-      text-transform: uppercase;
-      color: white;
-      text-shadow:
-        3px 3px 0 var(--pink),
-        -3px -3px 0 var(--cyan),
-        0 0 35px rgba(255,0,212,.35);
-    }
-
-    .hero-title::after {
-      content: "THE INTERNET PORTAL";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -30px;
-      font-size: .28em;
-      letter-spacing: 7px;
-      color: var(--yellow);
-      text-shadow: 0 0 10px var(--yellow);
-    }
-
-    .hero-sub {
-      max-width: 750px;
-      margin: 52px auto 25px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    /* =========================
-       SEARCH
-       ========================= */
-
-    .searchbox {
-      max-width: 850px;
-      margin: 25px auto 35px;
-    }
-
-    .search-inner {
-      display: flex;
-      background: #08030f;
-      border: 2px solid var(--cyan);
-      box-shadow:
-        0 0 15px rgba(0,246,255,.2),
-        inset 0 0 25px rgba(0,246,255,.04);
-    }
-
-    .search-inner input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: white;
-      padding: 17px;
-      font-size: 1.05rem;
-    }
-
-    .search-inner input::placeholder {
-      color: #75667f;
-    }
-
-    .search-inner button {
-      border: 0;
-      padding: 0 22px;
-      background: var(--cyan);
-      color: #001014;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .search-inner button:hover {
-      background: white;
-      box-shadow: 0 0 20px var(--cyan);
-    }
-
-    .search-note {
-      color: #74687d;
-      font-family: monospace;
-      font-size: .72rem;
-      margin-top: 8px;
-    }
-
-    /* =========================
-       CARDS
-       ========================= */
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 15px;
-    }
-
-    .card {
-      position: relative;
-      overflow: hidden;
-      padding: 18px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.025), transparent),
-        var(--panel);
-      border: 1px solid rgba(157,78,221,.4);
-      box-shadow: var(--shadow);
-      transition: .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--cyan);
-      box-shadow:
-        0 0 25px rgba(0,246,255,.12),
-        inset 0 0 30px rgba(0,246,255,.025);
-    }
-
-    .card h2 {
-      margin: 0 0 13px;
-      font-size: 1rem;
-      color: var(--cyan);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .card h2 span {
-      color: var(--pink);
-    }
-
-    .wide { grid-column: span 8; }
-    .side { grid-column: span 4; }
-    .third { grid-column: span 4; }
-    .half { grid-column: span 6; }
-
-    .links {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 8px;
-    }
-
-    .link {
-      padding: 11px;
-      background: rgba(255,255,255,.025);
-      border: 1px solid rgba(255,255,255,.08);
-      color: #ddd2e6;
-      transition: .15s;
-    }
-
-    .link:hover {
-      color: var(--yellow);
-      border-color: var(--yellow);
-      background: rgba(255,230,0,.05);
-      transform: translateX(2px);
-    }
-
-    .emoji {
-      margin-right: 7px;
-    }
-
-    /* =========================
-       LIVE PANEL
-       ========================= */
-
-    .live {
-      border-color: rgba(255,48,79,.5);
-    }
-
-    .live h2 {
-      color: var(--red);
-    }
-
-    .live-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 13px;
-      font-family: monospace;
-      color: #ff8293;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      background: var(--red);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--red);
-      animation: pulse 1.1s infinite;
-    }
-
-    @keyframes pulse {
-      50% { opacity: .25; transform: scale(.7); }
-    }
-
-    .twitch-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .twitch-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .twitch-placeholder {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle, rgba(145,70,255,.18), transparent 55%),
-        #08020e;
-      color: #8d7c99;
-      text-align: center;
-      padding: 20px;
-      pointer-events: none;
-    }
-
-    .twitch-placeholder strong {
-      display: block;
-      color: #bf91ff;
-      margin-bottom: 5px;
-    }
-
-    /* =========================
-       CLOCK / INFO
-       ========================= */
-
-    .clock {
-      font-family: monospace;
-      font-size: 2rem;
-      color: var(--green);
-      text-shadow: 0 0 12px var(--green);
-    }
-
-    .date {
-      color: var(--muted);
-      font-size: .82rem;
-    }
-
-    .quote {
-      color: #f0dfff;
-      font-size: 1.1rem;
-      line-height: 1.5;
-    }
-
-    .quote small {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-    }
-
-    /* =========================
-       ASK JEEVES
-       ========================= */
-
-    .jeeves {
-      border-color: rgba(255,230,0,.35);
-    }
-
-    .jeeves h2 {
-      color: var(--yellow);
-    }
-
-    .jeeves-result {
-      min-height: 50px;
-      color: #ddd2e6;
-      line-height: 1.5;
-    }
-
-    .jeeves-result strong {
-      color: var(--yellow);
-    }
-
-    .jeeves-form {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 13px;
-    }
-
-    .jeeves-form input {
-      min-width: 0;
-      flex: 1;
-      padding: 10px;
-      background: #050208;
-      border: 1px solid #6e5d78;
-      color: white;
-      outline: none;
-    }
-
-    .jeeves-form button {
-      border: 0;
-      padding: 0 14px;
-      background: var(--yellow);
-      color: #151000;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    /* =========================
-       BUTTONS / TOOLS
-       ========================= */
-
-    .tools {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
-      gap: 8px;
-    }
-
-    .tool {
-      cursor: pointer;
-      padding: 13px;
-      background: rgba(0,0,0,.25);
-      border: 1px solid rgba(0,246,255,.16);
-      color: #ddd;
-      text-align: left;
-    }
-
-    .tool:hover {
-      border-color: var(--pink);
-      color: white;
-      box-shadow: 0 0 15px rgba(255,0,212,.12);
-    }
-
-    .tool b {
-      display: block;
-      color: var(--cyan);
-      margin-bottom: 4px;
-    }
-
-    .marquee {
-      margin: 15px 0;
-      overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,.08);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      padding: 9px 0;
-      color: var(--green);
-      font-family: monospace;
-      white-space: nowrap;
-    }
-
-    .marquee span {
-      display: inline-block;
-      animation: scroll 22s linear infinite;
-    }
-
-    @keyframes scroll {
-      from { transform: translateX(100%); }
-      to { transform: translateX(-100%); }
-    }
-
-    footer {
-      padding: 45px 0 60px;
-      text-align: center;
-      color: #685b72;
-      font-family: monospace;
-      font-size: .75rem;
-    }
-
-    .rainbow {
-      height: 3px;
-      background: linear-gradient(
-        90deg,
-        #ff0000,
-        #ff8c00,
-        #fff000,
-        #22ff00,
-        #00eaff,
-        #4d4dff,
-        #c800ff,
-        #ff0088
-      );
-      box-shadow: 0 0 15px rgba(255,255,255,.25);
-    }
-
-    /* =========================
-       RESPONSIVE
-       ========================= */
-
-    @media (max-width: 850px) {
-      .wide,
-      .side,
-      .third,
-      .half {
-        grid-column: span 12;
-      }
-
-      .hero-title {
-        letter-spacing: -3px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .wrap {
-        width: min(100% - 16px, 1400px);
-      }
-
-      header {
-        padding-top: 40px;
-      }
-
-      .hero-title {
-        font-size: 2.9rem;
-      }
-
-      .search-inner button {
-        padding: 0 13px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SHAGGYMEGA — the internet, all in one place.">
+<meta name="theme-color" content="#05000d">
+<title>SHAGGYMEGA // INTERNET SUPERSTATION</title>
+
+<style>
+:root{
+  --bg:#04020a;
+  --panel:#0b0615;
+  --panel2:#120821;
+  --cyan:#00f6ff;
+  --pink:#ff00d4;
+  --purple:#9747ff;
+  --green:#39ff14;
+  --yellow:#ffe600;
+  --red:#ff3155;
+  --blue:#418cff;
+  --text:#f5edff;
+  --muted:#9c8bab;
+  --border:rgba(0,246,255,.28);
+  --glow:0 0 25px rgba(0,246,255,.12);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:
+    "Trebuchet MS",
+    "Segoe UI",
+    system-ui,
+    sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(151,71,255,.20),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(255,0,212,.15),transparent 25%),
+    radial-gradient(circle at 50% 100%,rgba(0,246,255,.08),transparent 35%),
+    var(--bg);
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  pointer-events:none;
+  opacity:.045;
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    white 3px,
+    transparent 4px
+  );
+}
+
+body.party{
+  animation:hue 4s linear infinite;
+}
+
+@keyframes hue{
+  to{filter:hue-rotate(360deg)}
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{cursor:pointer}
+
+.wrap{
+  width:min(1450px,calc(100% - 24px));
+  margin:auto;
+}
+
+/* TOP */
+
+.rainbow{
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    red,orange,yellow,lime,cyan,blue,violet,magenta,red
+  );
+  background-size:200% 100%;
+  animation:rainbow 6s linear infinite;
+}
+
+@keyframes rainbow{
+  to{background-position:200% 0}
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(15px);
+  background:rgba(4,2,10,.86);
+  border-bottom:1px solid var(--border);
+}
+
+.topbar-inner{
+  min-height:48px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  color:var(--cyan);
+  font-weight:1000;
+  letter-spacing:2px;
+  text-shadow:0 0 12px var(--cyan);
+  white-space:nowrap;
+}
+
+.nav{
+  display:flex;
+  gap:5px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{display:none}
+
+.nav a{
+  padding:7px 10px;
+  color:#bcaec8;
+  font-size:.78rem;
+  white-space:nowrap;
+  border:1px solid transparent;
+}
+
+.nav a:hover{
+  color:var(--cyan);
+  border-color:var(--cyan);
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:65px 0 35px;
+}
+
+.eyebrow{
+  color:var(--green);
+  font-family:monospace;
+  font-size:.75rem;
+  letter-spacing:4px;
+  text-shadow:0 0 10px var(--green);
+}
+
+.hero h1{
+  margin:16px 0 0;
+  font-size:clamp(3rem,9vw,8rem);
+  line-height:.82;
+  letter-spacing:-6px;
+  font-weight:1000;
+  color:white;
+  text-shadow:
+    4px 4px 0 var(--pink),
+    -4px -4px 0 var(--cyan),
+    0 0 40px rgba(255,0,212,.35);
+}
+
+.hero h1 small{
+  display:block;
+  margin-top:28px;
+  font-size:.2em;
+  letter-spacing:8px;
+  color:var(--yellow);
+  text-shadow:0 0 10px var(--yellow);
+}
+
+.hero p{
+  max-width:800px;
+  margin:50px auto 25px;
+  color:var(--muted);
+}
+
+/* SEARCH */
+
+.search{
+  max-width:900px;
+  margin:auto;
+}
+
+.search-main{
+  display:flex;
+  border:2px solid var(--cyan);
+  background:#050209;
+  box-shadow:0 0 25px rgba(0,246,255,.15);
+}
+
+.search-main input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:17px;
+  font-size:1.05rem;
+}
+
+.search-main button{
+  border:0;
+  padding:0 22px;
+  background:var(--cyan);
+  color:#001014;
+  font-weight:1000;
+}
+
+.search-main button:hover{
+  background:white;
+  box-shadow:0 0 20px var(--cyan);
+}
+
+.search-engines{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  margin-top:8px;
+}
+
+.engine{
+  border:1px solid #382b43;
+  background:#09050e;
+  color:#9b8aa7;
+  padding:5px 9px;
+  font-size:.7rem;
+}
+
+.engine.active,
+.engine:hover{
+  color:var(--cyan);
+  border-color:var(--cyan);
+}
+
+/* MARQUEE */
+
+.marquee{
+  overflow:hidden;
+  white-space:nowrap;
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:10px 0;
+  color:var(--green);
+  font-family:monospace;
+  margin-bottom:18px;
+}
+
+.marquee span{
+  display:inline-block;
+  animation:marquee 25s linear infinite;
+}
+
+@keyframes marquee{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-100%)}
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:15px;
+}
+
+.card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.025),transparent),
+    var(--panel);
+  border:1px solid rgba(151,71,255,.32);
+  box-shadow:var(--glow);
+  padding:18px;
+  transition:.18s;
+  min-width:0;
+}
+
+.card:hover{
+  border-color:var(--cyan);
+  box-shadow:
+    0 0 28px rgba(0,246,255,.12),
+    inset 0 0 30px rgba(0,246,255,.025);
+}
+
+.card h2{
+  margin:0 0 14px;
+  font-size:.95rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--cyan);
+}
+
+.card h2 span{color:var(--pink)}
+
+.col12{grid-column:span 12}
+.col8{grid-column:span 8}
+.col6{grid-column:span 6}
+.col4{grid-column:span 4}
+
+@media(max-width:900px){
+  .col8,.col6,.col4{grid-column:span 12}
+}
+
+/* TWITCH */
+
+.twitch{
+  border-color:rgba(255,49,85,.4);
+}
+
+.twitch h2{color:var(--red)}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-family:monospace;
+  color:#ff8497;
+  margin-bottom:12px;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 12px var(--red);
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  50%{opacity:.25;transform:scale(.7)}
+}
+
+.twitch-player{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#000;
+}
+
+.twitch-player iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* WEATHER */
+
+.weather-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.weather-temp{
+  font-size:3rem;
+  font-weight:1000;
+  color:var(--yellow);
+  text-shadow:0 0 15px rgba(255,230,0,.35);
+}
+
+.weather-icon{
+  font-size:3rem;
+}
+
+.weather-place{
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.weather-controls{
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+}
+
+.weather-controls input{
+  flex:1;
+  min-width:0;
+  background:#050208;
+  border:1px solid #44364e;
+  color:white;
+  padding:9px;
+  outline:0;
+}
+
+.small-btn{
+  border:1px solid var(--cyan);
+  background:rgba(0,246,255,.06);
+  color:var(--cyan);
+  padding:8px 10px;
+}
+
+.small-btn:hover{
+  background:var(--cyan);
+  color:#001014;
+}
+
+.forecast{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  margin-top:14px;
+}
+
+.forecast-day{
+  padding:8px 4px;
+  text-align:center;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+  font-size:.72rem;
+}
+
+.forecast-day .fi{
+  font-size:1.4rem;
+  margin:5px 0;
+}
+
+.forecast-day b{
+  color:var(--yellow);
+}
+
+/* NEWS */
+
+.news-list{
+  display:grid;
+  gap:7px;
+}
+
+.news-item{
+  display:block;
+  padding:10px;
+  background:rgba(255,255,255,.025);
+  border-left:2px solid var(--purple);
+}
+
+.news-item:hover{
+  border-left-color:var(--cyan);
+  background:rgba(0,246,255,.04);
+}
+
+.news-title{
+  color:#eee3f7;
+  font-size:.87rem;
+}
+
+.news-meta{
+  color:#756780;
+  font-family:monospace;
+  font-size:.68rem;
+  margin-top:4px;
+}
+
+/* CLOCK */
+
+.clock{
+  font-family:monospace;
+  font-size:2.4rem;
+  color:var(--green);
+  text-shadow:0 0 12px var(--green);
+}
+
+.date{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+/* LINKS */
+
+.links{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:8px;
+}
+
+.link{
+  padding:12px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  color:#ddd1e8;
+}
+
+.link:hover{
+  color:var(--yellow);
+  border-color:var(--yellow);
+  transform:translateX(2px);
+}
+
+.link b{
+  display:block;
+  color:var(--cyan);
+  margin-bottom:3px;
+}
+
+/* TOOLS */
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(135px,1fr));
+  gap:8px;
+}
+
+.tool{
+  padding:12px;
+  text-align:left;
+  border:1px solid rgba(0,246,255,.14);
+  background:rgba(0,0,0,.22);
+  color:#d7cce0;
+}
+
+.tool:hover{
+  border-color:var(--pink);
+  color:white;
+}
+
+.tool b{
+  display:block;
+  color:var(--cyan);
+  margin-bottom:4px;
+}
+
+/* GAMES */
+
+.game{
+  text-align:center;
+}
+
+.game-score{
+  color:var(--yellow);
+  font-family:monospace;
+  margin-bottom:10px;
+}
+
+.game-button{
+  width:100%;
+  min-height:100px;
+  border:2px solid var(--purple);
+  background:
+    radial-gradient(circle,rgba(151,71,255,.18),transparent 60%),
+    #08040e;
+  color:white;
+  font-size:1.2rem;
+}
+
+.game-button:hover{
+  border-color:var(--pink);
+}
+
+.game-button.ready{
+  background:var(--red);
+}
+
+.game-button.go{
+  background:var(--green);
+  color:#001500;
+  border-color:var(--green);
+}
+
+/* SETTINGS */
+
+.setting{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.setting:last-child{border:0}
+
+.switch{
+  position:relative;
+  width:42px;
+  height:23px;
+  background:#24182d;
+  border:1px solid #594966;
+  border-radius:30px;
+}
+
+.switch input{
+  display:none;
+}
+
+.switch span{
+  position:absolute;
+  width:17px;
+  height:17px;
+  top:2px;
+  left:3px;
+  background:#88758f;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch input:checked+span{
+  left:20px;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+}
+
+/* SECRET */
+
+.secret{
+  font-family:monospace;
+  color:#786a83;
+  font-size:.75rem;
+  line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+  padding:50px 0 70px;
+  text-align:center;
+  color:#675971;
+  font-family:monospace;
+  font-size:.72rem;
+}
+
+/* HIDDEN */
+
+.hidden{display:none!important}
+
+/* MOBILE */
+
+@media(max-width:600px){
+  .wrap{width:calc(100% - 12px)}
+  .hero{padding-top:42px}
+  .hero h1{letter-spacing:-3px}
+  .forecast{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .forecast-day{font-size:.62rem}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="rainbow"></div>
+<div class="rainbow"></div>
 
-  <div class="topbar">
-    <div class="wrap topbar-inner">
-      <div class="logo-mini">SHAGGY//NET</div>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="logo">SHAGGY//NET</div>
 
-      <nav class="nav">
-        <a href="#search">SEARCH</a>
-        <a href="#live">LIVE</a>
-        <a href="#internet">INTERNET</a>
-        <a href="#tools">TOOLS</a>
-        <a href="#fun">FUN</a>
-      </nav>
-    </div>
+    <nav class="nav">
+      <a href="#live">LIVE</a>
+      <a href="#weather">WEATHER</a>
+      <a href="#news">NEWS</a>
+      <a href="#internet">INTERNET</a>
+      <a href="#games">GAMES</a>
+      <a href="#settings">SETTINGS</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section class="hero">
+
+  <div class="eyebrow">
+    CONNECTION ESTABLISHED // INTERNET LEVEL: MAXIMUM
   </div>
 
-  <main class="wrap">
+  <h1>
+    SHAGGYMEGA
+    <small>THE INTERNET SUPERSTATION</small>
+  </h1>
 
-    <header>
-      <div class="eyebrow">WELCOME, HUMAN // CONNECTION ESTABLISHED</div>
+  <p>
+    Welcome to the completely unnecessary, excessively powerful,
+    mildly questionable headquarters of the internet.
+  </p>
 
-      <h1 class="hero-title">
-        SHAGGYMEGA
-      </h1>
+  <div class="search">
 
-      <p class="hero-sub">
-        One ridiculous little portal containing as much of the useful,
-        weird, wonderful internet as we can fit into one page.
-      </p>
+    <form class="search-main" id="searchForm">
 
-      <section id="search" class="searchbox">
-        <form class="search-inner" id="searchForm">
-          <input
-            id="searchInput"
-            autocomplete="off"
-            placeholder="Ask Jeeves... or just search the internet"
-            aria-label="Internet search"
-          />
-          <button type="submit">SEARCH</button>
-        </form>
+      <input
+        id="searchInput"
+        autocomplete="off"
+        placeholder="Ask Jeeves... search for literally anything"
+      >
 
-        <div class="search-note">
-          POWERED BY PURE HTML, CSS & JAVASCRIPT • NO ACCOUNT REQUIRED
-        </div>
-      </section>
-    </header>
+      <button>SEARCH</button>
 
-    <div class="marquee">
-      <span>
-        ★ WELCOME TO THE MEGA PORTAL ★ YOU ARE BROWSING THE FUTURE ★
-        SHAGGYMEGA420 INTERNET SUPERSTATION ★ PLEASE ENJOY THE WEBSITE ★
-      </span>
+    </form>
+
+    <div class="search-engines">
+
+      <button class="engine active" data-engine="google">
+        GOOGLE
+      </button>
+
+      <button class="engine" data-engine="duck">
+        DUCKDUCKGO
+      </button>
+
+      <button class="engine" data-engine="bing">
+        BING
+      </button>
+
     </div>
 
-    <section class="grid">
+  </div>
 
-      <!-- Twitch -->
-      <article id="live" class="card wide live">
-        <h2><span>●</span> Shaggymedic420 LIVE</h2>
+</section>
 
-        <div class="live-status">
-          <span class="dot"></span>
-          TWITCH STREAM • MUTED
+<div class="marquee">
+  <span>
+    ★ WELCOME TO SHAGGYMEGA ★ LIVE INTERNET DATA ★ REAL WEATHER ★ REAL NEWS ★
+    GAMES ★ SEARCH ★ MEMES ★ TOOLS ★ ABSOLUTELY NO REASON FOR THIS WEBSITE TO EXIST ★
+  </span>
+</div>
+
+<section class="grid">
+
+<!-- TWITCH -->
+
+<article id="live" class="card col8 twitch">
+
+  <h2>🔴 SHAGGYMEDIC420 // LIVE</h2>
+
+  <div class="live">
+    <span class="dot"></span>
+    TWITCH STREAM • MUTED
+  </div>
+
+  <div class="twitch-player">
+
+    <iframe
+      id="twitchPlayer"
+      title="Shaggymedic420 Twitch stream"
+      allow="autoplay; fullscreen"
+      loading="lazy">
+    </iframe>
+
+  </div>
+
+</article>
+
+
+<!-- CLOCK -->
+
+<article class="card col4">
+
+  <h2>🕐 SYSTEM CLOCK</h2>
+
+  <div class="clock" id="clock">
+    00:00:00
+  </div>
+
+  <div class="date" id="date">
+    Loading...
+  </div>
+
+  <div style="margin-top:18px;color:#71627b;font-family:monospace;font-size:.7rem">
+    YOUR LOCAL TIME
+  </div>
+
+</article>
+
+
+<!-- WEATHER -->
+
+<article id="weather" class="card col6">
+
+  <h2>🌦️ LIVE WEATHER</h2>
+
+  <div class="weather-top">
+
+    <div>
+      <div class="weather-temp" id="weatherTemp">
+        --°
+      </div>
+
+      <div class="weather-place" id="weatherPlace">
+        Enter your city
+      </div>
+    </div>
+
+    <div class="weather-icon" id="weatherIcon">
+      🌎
+    </div>
+
+  </div>
+
+  <div class="weather-controls">
+
+    <input
+      id="cityInput"
+      placeholder="City, State or Country"
+      value="New York"
+    >
+
+    <button
+      class="small-btn"
+      onclick="loadWeather()">
+      GO
+    </button>
+
+    <button
+      class="small-btn"
+      onclick="useMyLocation()"
+      title="Use your device location">
+      📍
+    </button>
+
+  </div>
+
+  <div class="forecast" id="forecast"></div>
+
+  <div
+    id="weatherStatus"
+    style="margin-top:9px;color:#665a70;font-family:monospace;font-size:.65rem">
+    WEATHER SYSTEM READY
+  </div>
+
+</article>
+
+
+<!-- NEWS -->
+
+<article id="news" class="card col6">
+
+  <h2>📰 LIVE INTERNET NEWS</h2>
+
+  <div id="newsList" class="news-list">
+    Loading the internet's gossip...
+  </div>
+
+  <button
+    class="small-btn"
+    style="margin-top:12px;width:100%"
+    onclick="loadNews()">
+    🔄 REFRESH NEWS
+  </button>
+
+</article>
+
+
+<!-- INTERNET -->
+
+<article id="internet" class="card col12">
+
+  <h2>🌐 THE INTERNET <span>SUPERLINKS</span></h2>
+
+  <div class="links">
+
+    <a class="link" target="_blank" href="https://www.youtube.com/">
+      <b>▶️ YouTube</b>
+      Video dimension
+    </a>
+
+    <a class="link" target="_blank" href="https://www.reddit.com/">
+      <b>👽 Reddit</b>
+      The hive mind
+    </a>
+
+    <a class="link" target="_blank" href="https://www.wikipedia.org/">
+      <b>📚 Wikipedia</b>
+      Human knowledge
+    </a>
+
+    <a class="link" target="_blank" href="https://github.com/">
+      <b>💻 GitHub</b>
+      Code dimension
+    </a>
+
+    <a class="link" target="_blank" href="https://www.google.com/maps/">
+      <b>🗺️ Maps</b>
+      Where are we?
+    </a>
+
+    <a class="link" target="_blank" href="https://archive.org/">
+      <b>🏛️ Internet Archive</b>
+      Digital history
+    </a>
+
+    <a class="link" target="_blank" href="https://radio.garden/">
+      <b>📻 Radio Garden</b>
+      Radio worldwide
+    </a>
+
+    <a class="link" target="_blank" href="https://neal.fun/">
+      <b>🎮 Neal.fun</b>
+      Internet nonsense
+    </a>
+
+    <a class="link" target="_blank" href="https://theuselessweb.com/">
+      <b>🌀 Useless Web</b>
+      Extremely important
+    </a>
+
+    <a class="link" target="_blank" href="https://earth.nullschool.net/">
+      <b>🌎 Earth</b>
+      Beautiful planet
+    </a>
+
+    <a class="link" target="_blank" href="https://stellarium-web.org/">
+      <b>🔭 Stellarium</b>
+      Look at space
+    </a>
+
+    <a class="link" target="_blank" href="https://www.wolframalpha.com/">
+      <b>🧮 Wolfram</b>
+      Calculate things
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- TOOLS -->
+
+<article class="card col6">
+
+  <h2>🛠️ INTERNET TOOLBOX</h2>
+
+  <div class="tools">
+
+    <button class="tool"
+      onclick="openURL('https://www.speedtest.net/')">
+      <b>⚡ Speedtest</b>
+      Test your internet
+    </button>
+
+    <button class="tool"
+      onclick="openURL('https://time.is/')">
+      <b>🕐 Time.is</b>
+      Exact world time
+    </button>
+
+    <button class="tool"
+      onclick="openURL('https://haveibeenpwned.com/')">
+      <b>🔐 HIBP</b>
+      Check data breaches
+    </button>
+
+    <button class="tool"
+      onclick="openURL('https://www.remove.bg/')">
+      <b>✂️ Remove BG</b>
+      Image magic
+    </button>
+
+    <button class="tool"
+      onclick="openURL('https://translate.google.com/')">
+      <b>🌎 Translate</b>
+      Talk to humanity
+    </button>
+
+    <button class="tool"
+      onclick="openURL('https://www.flightradar24.com/')">
+      <b>✈️ Flights</b>
+      Watch airplanes
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- RANDOMIZER -->
+
+<article class="card col6">
+
+  <h2>🎲 CHAOS GENERATOR</h2>
+
+  <div
+    id="randomResult"
+    style="
+      min-height:90px;
+      display:grid;
+      place-items:center;
+      font-size:2rem;
+      color:var(--pink);
+      text-shadow:0 0 15px var(--pink);
+      text-align:center">
+    PRESS THE BUTTON
+  </div>
+
+  <button
+    class="small-btn"
+    style="width:100%;padding:13px"
+    onclick="chaos()">
+    🎲 GENERATE CHAOS
+  </button>
+
+</article>
+
+
+<!-- GAMES -->
+
+<article id="games" class="card col6 game">
+
+  <h2>⚡ REACTION TEST</h2>
+
+  <div class="game-score">
+    BEST: <span id="bestReaction">---</span> ms
+  </div>
+
+  <button
+    id="reactionButton"
+    class="game-button"
+    onclick="reactionClick()">
+    CLICK TO START
+  </button>
+
+  <div
+    id="reactionStatus"
+    style="
+      margin-top:10px;
+      color:var(--muted);
+      font-family:monospace;
+      font-size:.72rem">
+    Wait for GREEN.
+  </div>
+
+</article>
+
+
+<!-- CLICKER -->
+
+<article class="card col6 game">
+
+  <h2>👆 SHAGGY CLICKER</h2>
+
+  <div class="game-score">
+    CLICKS: <span id="clickScore">0</span>
+  </div>
+
+  <button
+    class="game-button"
+    onclick="clicker()">
+    CLICK ME
+  </button>
+
+  <div
+    style="
+      margin-top:10px;
+      color:var(--muted);
+      font-family:monospace;
+      font-size:.72rem">
+    There is no purpose. Keep clicking.
+  </div>
+
+</article>
+
+
+<!-- SETTINGS -->
+
+<article id="settings" class="card col6">
+
+  <h2>⚙️ DASHBOARD SETTINGS</h2>
+
+  <div class="setting">
+
+    <span>Party Mode</span>
+
+    <label class="switch">
+      <input id="partyToggle" type="checkbox" onchange="toggleParty()">
+      <span></span>
+    </label>
+
+  </div>
+
+  <div class="setting">
+
+    <span>Animated Marquee</span>
+
+    <label class="switch">
+      <input
+        id="marqueeToggle"
+        type="checkbox"
+        checked
+        onchange="toggleMarquee()">
+      <span></span>
+    </label>
+
+  </div>
+
+  <div class="setting">
+
+    <span>Save Preferences</span>
+
+    <button
+      class="small-btn"
+      onclick="saveSettings()">
+      SAVE
+    </button>
+
+  </div>
+
+  <div class="setting">
+
+    <span>Reset Portal</span>
+
+    <button
+      class="small-btn"
+      onclick="resetPortal()">
+      RESET
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- ASK JEEVES -->
+
+<article class="card col6">
+
+  <h2>🧑‍💼 ASK SHAGGY</h2>
+
+  <form
+    id="askForm"
+    style="display:flex;gap:6px">
+
+    <input
+      id="askInput"
+      placeholder="What do you seek?"
+      style="
+        flex:1;
+        min-width:0;
+        background:#050208;
+        border:1px solid #44364e;
+        color:white;
+        padding:10px;
+        outline:0">
+
+    <button class="small-btn">
+      ASK
+    </button>
+
+  </form>
+
+  <div
+    id="askResult"
+    style="
+      margin-top:14px;
+      color:#d9cce3;
+      line-height:1.5">
+    <b style="color:var(--yellow)">Jeeves:</b>
+    I am standing by.
+  </div>
+
+</article>
+
+
+<!-- SECRET -->
+
+<article class="card col12">
+
+  <h2>🕸️ CLASSIFIED INTERNET ZONE</h2>
+
+  <div class="secret">
+
+    STATUS: ONLINE<br>
+    SERVERS: PROBABLY<br>
+    VIBES: EXCELLENT<br>
+    SERIOUSNESS: 404 NOT FOUND<br>
+    INTERNET: YES<br>
+    POTATO LEVEL: CRITICAL<br><br>
+
+    Try the Konami Code:
+    ↑ ↑ ↓ ↓ ← → ← → B A
+
+  </div>
+
+</article>
+
+</section>
+
+<footer>
+
+  <div style="color:#a98fb8;margin-bottom:10px">
+    SHAGGYMEGA INTERNET SUPERSTATION
+  </div>
+
+  <div>
+    BUILT WITH HTML • CSS • JAVASCRIPT • CHAOS
+  </div>
+
+  <div style="margin-top:8px">
+    NO DATABASE • NO BACKEND • NO SUBSCRIPTION
+  </div>
+
+  <div style="margin-top:15px;color:#463a4e">
+    VERSION 2.0 // INTERNET OVERLOAD
+  </div>
+
+</footer>
+
+</main>
+
+<script>
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+let searchEngine="google";
+
+document.querySelectorAll(".engine").forEach(button=>{
+  button.addEventListener("click",()=>{
+
+    document.querySelectorAll(".engine")
+      .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    searchEngine=button.dataset.engine;
+
+  });
+});
+
+document.getElementById("searchForm")
+.addEventListener("submit",e=>{
+
+  e.preventDefault();
+
+  const q=document.getElementById("searchInput")
+    .value.trim();
+
+  if(!q)return;
+
+  let base="";
+
+  if(searchEngine==="google")
+    base="https://www.google.com/search?q=";
+
+  if(searchEngine==="duck")
+    base="https://duckduckgo.com/?q=";
+
+  if(searchEngine==="bing")
+    base="https://www.bing.com/search?q=";
+
+  window.open(
+    base+encodeURIComponent(q),
+    "_blank"
+  );
+
+});
+
+
+/* =========================================================
+   CLOCK
+========================================================= */
+
+function updateClock(){
+
+  const now=new Date();
+
+  document.getElementById("clock")
+    .textContent=now.toLocaleTimeString();
+
+  document.getElementById("date")
+    .textContent=now.toLocaleDateString(
+      undefined,
+      {
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+      }
+    );
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* =========================================================
+   TWITCH
+========================================================= */
+
+function setupTwitch(){
+
+  const host=window.location.hostname;
+
+  if(!host ||
+     host==="localhost" ||
+     host==="127.0.0.1")return;
+
+  document.getElementById("twitchPlayer").src=
+    "https://player.twitch.tv/" +
+    "?channel=shaggymedic420" +
+    "&parent="+encodeURIComponent(host)+
+    "&muted=true"+
+    "&autoplay=false";
+}
+
+setupTwitch();
+
+
+/* =========================================================
+   WEATHER
+========================================================= */
+
+const weatherCodes={
+  0:["☀️","Clear sky"],
+  1:["🌤️","Mainly clear"],
+  2:["⛅","Partly cloudy"],
+  3:["☁️","Overcast"],
+  45:["🌫️","Fog"],
+  48:["🌫️","Rime fog"],
+  51:["🌦️","Light drizzle"],
+  53:["🌦️","Drizzle"],
+  55:["🌧️","Heavy drizzle"],
+  61:["🌦️","Light rain"],
+  63:["🌧️","Rain"],
+  65:["🌧️","Heavy rain"],
+  71:["🌨️","Light snow"],
+  73:["❄️","Snow"],
+  75:["❄️","Heavy snow"],
+  80:["🌦️","Rain showers"],
+  81:["🌧️","Rain showers"],
+  82:["⛈️","Heavy showers"],
+  95:["⛈️","Thunderstorm"],
+  96:["⛈️","Thunderstorm + hail"],
+  99:["⛈️","Thunderstorm + hail"]
+};
+
+async function loadWeather(){
+
+  const city=document
+    .getElementById("cityInput")
+    .value.trim();
+
+  if(!city)return;
+
+  const status=document
+    .getElementById("weatherStatus");
+
+  status.textContent="CONTACTING WEATHER SATELLITE...";
+
+  try{
+
+    const geo=await fetch(
+      "https://geocoding-api.open-meteo.com/v1/search"+
+      "?name="+encodeURIComponent(city)+
+      "&count=1"+
+      "&language=en"+
+      "&format=json"
+    ).then(r=>r.json());
+
+    if(!geo.results || !geo.results.length)
+      throw new Error("Location not found");
+
+    const place=geo.results[0];
+
+    const weather=await fetch(
+      "https://api.open-meteo.com/v1/forecast"+
+      "?latitude="+place.latitude+
+      "&longitude="+place.longitude+
+      "&current=temperature_2m,weather_code,wind_speed_10m"+
+      "&daily=weather_code,temperature_2m_max,temperature_2m_min"+
+      "&temperature_unit=fahrenheit"+
+      "&wind_speed_unit=mph"+
+      "&timezone=auto"+
+      "&forecast_days=5"
+    ).then(r=>r.json());
+
+    const current=weather.current;
+
+    const code=weatherCodes[current.weather_code] ||
+      ["🌎","Unknown"];
+
+    document.getElementById("weatherTemp")
+      .textContent=Math.round(current.temperature_2m)+"°F";
+
+    document.getElementById("weatherIcon")
+      .textContent=code[0];
+
+    document.getElementById("weatherPlace")
+      .textContent=
+        place.name+
+        (place.admin1 ? ", "+place.admin1 : "")+
+        (place.country ? " • "+place.country : "");
+
+    const forecast=document.getElementById("forecast");
+
+    forecast.innerHTML="";
+
+    weather.daily.time.forEach((date,i)=>{
+
+      const d=new Date(date+"T12:00:00");
+
+      const day=d.toLocaleDateString(
+        undefined,
+        {weekday:"short"}
+      );
+
+      const w=weatherCodes[
+        weather.daily.weather_code[i]
+      ] || ["🌎",""];
+
+      forecast.innerHTML+=`
+        <div class="forecast-day">
+          <div>${day}</div>
+          <div class="fi">${w[0]}</div>
+          <b>${Math.round(
+            weather.daily.temperature_2m_max[i]
+          )}°</b>
+          /
+          ${Math.round(
+            weather.daily.temperature_2m_min[i]
+          )}°
         </div>
+      `;
 
-        <div class="twitch-wrap">
-          <iframe
-            id="twitchPlayer"
-            title="Shaggymedic420 Twitch stream"
-            allow="autoplay; fullscreen"
-            src=""
-            loading="lazy">
-          </iframe>
+    });
 
-          <div class="twitch-placeholder" id="twitchPlaceholder">
-            <div>
-              <strong>SHAGGYMEDIC420</strong>
-              Twitch player initializes after the site knows its GitHub Pages domain.
+    status.textContent=
+      "LIVE DATA • "+
+      Math.round(current.wind_speed_10m)+
+      " MPH WIND • "+
+      code[1];
+
+    localStorage.setItem(
+      "shaggyCity",
+      city
+    );
+
+  }catch(error){
+
+    status.textContent=
+      "WEATHER ERROR: "+error.message;
+
+  }
+
+}
+
+
+function useMyLocation(){
+
+  const status=document
+    .getElementById("weatherStatus");
+
+  if(!navigator.geolocation){
+
+    status.textContent=
+      "LOCATION SERVICES NOT AVAILABLE";
+
+    return;
+  }
+
+  status.textContent=
+    "REQUESTING YOUR LOCATION...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    async position=>{
+
+      const lat=position.coords.latitude;
+      const lon=position.coords.longitude;
+
+      try{
+
+        const weather=await fetch(
+          "https://api.open-meteo.com/v1/forecast"+
+          "?latitude="+lat+
+          "&longitude="+lon+
+          "&current=temperature_2m,weather_code,wind_speed_10m"+
+          "&daily=weather_code,temperature_2m_max,temperature_2m_min"+
+          "&temperature_unit=fahrenheit"+
+          "&wind_speed_unit=mph"+
+          "&timezone=auto"+
+          "&forecast_days=5"
+        ).then(r=>r.json());
+
+        const current=weather.current;
+
+        const code=weatherCodes[
+          current.weather_code
+        ] || ["🌎","Unknown"];
+
+        document.getElementById("weatherTemp")
+          .textContent=Math.round(
+            current.temperature_2m
+          )+"°F";
+
+        document.getElementById("weatherIcon")
+          .textContent=code[0];
+
+        document.getElementById("weatherPlace")
+          .textContent=
+            "YOUR LOCATION";
+
+        const forecast=
+          document.getElementById("forecast");
+
+        forecast.innerHTML="";
+
+        weather.daily.time.forEach((date,i)=>{
+
+          const d=new Date(date+"T12:00:00");
+
+          const day=d.toLocaleDateString(
+            undefined,
+            {weekday:"short"}
+          );
+
+          const w=weatherCodes[
+            weather.daily.weather_code[i]
+          ] || ["🌎",""];
+
+          forecast.innerHTML+=`
+            <div class="forecast-day">
+              <div>${day}</div>
+              <div class="fi">${w[0]}</div>
+              <b>${Math.round(
+                weather.daily.temperature_2m_max[i]
+              )}°</b>
+              /
+              ${Math.round(
+                weather.daily.temperature_2m_min[i]
+              )}°
             </div>
-          </div>
-        </div>
-      </article>
+          `;
 
-      <!-- Ask Jeeves -->
-      <article class="card side jeeves">
-        <h2>🧑‍💼 Ask Shaggy</h2>
+        });
 
-        <form class="jeeves-form" id="jeevesForm">
-          <input
-            id="jeevesInput"
-            placeholder="What do you seek?"
-            autocomplete="off"
-          />
-          <button>ASK</button>
-        </form>
+        status.textContent=
+          "LOCATION WEATHER ONLINE";
 
-        <div class="jeeves-result" id="jeevesResult">
-          <strong>Jeeves says:</strong>
-          "Very good question. Allow me to consult the internet."
-        </div>
-      </article>
+      }catch(e){
 
-      <!-- Clock -->
-      <article class="card third">
-        <h2>🕐 Mega Clock</h2>
-        <div class="clock" id="clock">00:00:00</div>
-        <div class="date" id="date">Loading...</div>
-      </article>
+        status.textContent=
+          "COULD NOT LOAD WEATHER";
 
-      <!-- Quick Links -->
-      <article id="internet" class="card wide">
-        <h2>🌐 The Internet <span>Superlinks</span></h2>
-
-        <div class="links">
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.google.com/">
-            <span class="emoji">🔎</span>Google
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.youtube.com/">
-            <span class="emoji">▶️</span>YouTube
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.reddit.com/">
-            <span class="emoji">👽</span>Reddit
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.wikipedia.org/">
-            <span class="emoji">📚</span>Wikipedia
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://github.com/">
-            <span class="emoji">💻</span>GitHub
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.twitch.tv/">
-            <span class="emoji">🎮</span>Twitch
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/">
-            <span class="emoji">🗺️</span>Maps
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://archive.org/">
-            <span class="emoji">🏛️</span>Internet Archive
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://news.ycombinator.com/">
-            <span class="emoji">🧠</span>Hacker News
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.producthunt.com/">
-            <span class="emoji">🚀</span>Product Hunt
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.duckduckgo.com/">
-            <span class="emoji">🦆</span>DuckDuckGo
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.nasa.gov/">
-            <span class="emoji">🚀</span>NASA
-          </a>
-
-        </div>
-      </article>
-
-      <!-- Quote -->
-      <article id="fun" class="card third">
-        <h2>💬 Internet Wisdom</h2>
-
-        <div class="quote">
-          <span id="quoteText">
-            Loading extremely important wisdom...
-          </span>
-
-          <small id="quoteAuthor"></small>
-        </div>
-
-        <button
-          class="tool"
-          style="margin-top:15px;width:100%;"
-          onclick="newQuote()">
-          ✨ GIVE ME ANOTHER
-        </button>
-      </article>
-
-      <!-- Tools -->
-      <article id="tools" class="card half">
-        <h2>🛠️ Internet Toolbox</h2>
-
-        <div class="tools">
-
-          <button class="tool" onclick="openTool('https://www.speedtest.net/')">
-            <b>⚡ Speed Test</b>
-            Test your connection
-          </button>
-
-          <button class="tool" onclick="openTool('https://time.is/')">
-            <b>🕐 Exact Time</b>
-            Atomic-ish time
-          </button>
-
-          <button class="tool" onclick="openTool('https://haveibeenpwned.com/')">
-            <b>🔐 Security</b>
-            Check breached accounts
-          </button>
-
-          <button class="tool" onclick="openTool('https://www.remove.bg/')">
-            <b>✂️ Remove BG</b>
-            Magic image tool
-          </button>
-
-          <button class="tool" onclick="openTool('https://www.wolframalpha.com/')">
-            <b>🧮 Wolfram</b>
-            Compute basically anything
-          </button>
-
-          <button class="tool" onclick="openTool('https://translate.google.com/')">
-            <b>🌎 Translate</b>
-            Talk to humanity
-          </button>
-
-        </div>
-      </article>
-
-      <!-- Randomizer -->
-      <article class="card half">
-        <h2>🎲 Completely Necessary Machine</h2>
-
-        <div
-          id="randomResult"
-          style="
-            font-size:2rem;
-            min-height:80px;
-            display:grid;
-            place-items:center;
-            color:var(--pink);
-            text-shadow:0 0 12px var(--pink);
-          ">
-          PRESS THE BUTTON
-        </div>
-
-        <button
-          class="tool"
-          style="width:100%;text-align:center;"
-          onclick="randomize()">
-          🎲 DO THE THING
-        </button>
-      </article>
-
-      <!-- More Internet -->
-      <article class="card wide">
-        <h2>🕸️ Deep Internet Portal</h2>
-
-        <div class="links">
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://neal.fun/">
-            🎮 Neal.fun
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://theuselessweb.com/">
-            🌀 Useless Web
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://radio.garden/">
-            📻 Radio Garden
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://pointerpointer.com/">
-            👉 Pointer Pointer
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.flightaware.com/">
-            ✈️ Flight Tracker
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://earth.nullschool.net/">
-            🌎 Earth
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://www.flightradar24.com/">
-            🛩️ Flight Radar
-          </a>
-
-          <a class="link" target="_blank" rel="noopener"
-             href="https://stellarium-web.org/">
-            🔭 Stars
-          </a>
-
-        </div>
-      </article>
-
-      <!-- Local mini utility -->
-      <article class="card side">
-        <h2>📋 Tiny Utilities</h2>
-
-        <div class="tools">
-
-          <button class="tool" onclick="copySiteURL()">
-            <b>🔗 Copy URL</b>
-            Share this portal
-          </button>
-
-          <button class="tool" onclick="toggleTheme()">
-            <b>🌈 Theme Warp</b>
-            Change colors
-          </button>
-
-          <button class="tool" onclick="alert('You have unlocked absolutely nothing. Congratulations.')">
-            <b>🏆 Secret</b>
-            Definitely important
-          </button>
-
-        </div>
-      </article>
-
-    </section>
-
-    <footer>
-      <div style="color:#a990b7;margin-bottom:10px;">
-        SHAGGYMEGA INTERNET PORTAL
-      </div>
-
-      <div>
-        BUILT WITH HTML • CSS • JAVASCRIPT • QUESTIONABLE AMOUNTS OF ENTHUSIASM
-      </div>
-
-      <div style="margin-top:8px;">
-        NO COOKIES REQUIRED • NO LOGIN REQUIRED • NO BACKEND REQUIRED
-      </div>
-    </footer>
-
-  </main>
-
-  <script>
-    /* =========================================
-       SEARCH
-       ========================================= */
-
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
-
-    searchForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const query = searchInput.value.trim();
-
-      if (!query) {
-        searchInput.focus();
-        return;
       }
 
-      window.open(
-        "https://www.google.com/search?q=" +
-        encodeURIComponent(query),
-        "_blank",
-        "noopener"
-      );
+    },
+
+    ()=>{
+      status.textContent=
+        "LOCATION PERMISSION DENIED";
+    }
+
+  );
+}
+
+
+/* =========================================================
+   NEWS — HACKER NEWS
+========================================================= */
+
+async function loadNews(){
+
+  const box=document.getElementById("newsList");
+
+  box.innerHTML=
+    "CONTACTING THE NEWS NETWORK...";
+
+  try{
+
+    const ids=await fetch(
+      "https://hacker-news.firebaseio.com/v0/topstories.json"
+    ).then(r=>r.json());
+
+    const selected=ids.slice(0,8);
+
+    const stories=await Promise.all(
+      selected.map(id=>
+        fetch(
+          "https://hacker-news.firebaseio.com/v0/item/"+
+          id+".json"
+        ).then(r=>r.json())
+      )
+    );
+
+    box.innerHTML="";
+
+    stories.forEach(story=>{
+
+      if(!story || !story.title)return;
+
+      const a=document.createElement("a");
+
+      a.className="news-item";
+
+      a.target="_blank";
+
+      a.rel="noopener";
+
+      a.href=
+        story.url ||
+        "https://news.ycombinator.com/item?id="+story.id;
+
+      const title=document.createElement("div");
+
+      title.className="news-title";
+
+      title.textContent=story.title;
+
+      const meta=document.createElement("div");
+
+      meta.className="news-meta";
+
+      meta.textContent=
+        (story.score||0)+" points • "+
+        (story.descendants||0)+" comments";
+
+      a.appendChild(title);
+      a.appendChild(meta);
+
+      box.appendChild(a);
+
     });
 
+  }catch(error){
 
-    /* =========================================
-       ASK SHAGGY
-       ========================================= */
+    box.innerHTML=
+      "NEWS SATELLITE OFFLINE.<br>"+
+      "Try refreshing in a moment.";
 
-    const jeevesForm = document.getElementById("jeevesForm");
-    const jeevesInput = document.getElementById("jeevesInput");
-    const jeevesResult = document.getElementById("jeevesResult");
+  }
 
-    const answers = [
-      "A fascinating question. I recommend searching the internet.",
-      "My extensive research indicates that you should probably Google it.",
-      "I have consulted the ancient algorithms. The answer is: maybe.",
-      "Excellent question. Unfortunately, I am merely a website.",
-      "After careful consideration: absolutely.",
-      "After even more careful consideration: absolutely not.",
-      "Jeeves has reviewed your query and requests snacks.",
-      "The internet knows. The internet always knows.",
-      "Interesting. Very interesting. Let us investigate further.",
-      "I believe Wikipedia may have something to say about this."
+}
+
+loadNews();
+
+setInterval(loadNews,300000);
+
+
+/* =========================================================
+   CHAOS
+========================================================= */
+
+const chaosItems=[
+  "🐸 FROG",
+  "🍕 PIZZA",
+  "🚀 SPACE",
+  "🦆 DUCK",
+  "👽 ALIEN",
+  "🧙 WIZARD",
+  "🐈 CAT",
+  "🦖 DINOSAUR",
+  "🥔 POTATO",
+  "🔥 CHAOS",
+  "💎 DIAMOND",
+  "🛸 UFO",
+  "🎸 ROCK",
+  "🌈 RAINBOW",
+  "🧠 BRAIN",
+  "💻 COMPUTER",
+  "🌮 TACO",
+  "🦀 CRAB",
+  "🎰 JACKPOT"
+];
+
+function chaos(){
+
+  const result=
+    document.getElementById("randomResult");
+
+  result.textContent=
+    chaosItems[
+      Math.floor(
+        Math.random()*chaosItems.length
+      )
     ];
 
-    jeevesForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+}
 
-      const q = jeevesInput.value.trim();
 
-      if (!q) return;
+/* =========================================================
+   REACTION GAME
+========================================================= */
 
-      const answer =
-        answers[Math.floor(Math.random() * answers.length)];
+let reactionState="idle";
+let reactionStart=0;
+let reactionTimer=null;
 
-      jeevesResult.innerHTML =
-        "<strong>Jeeves says:</strong> " +
-        escapeHTML(answer) +
-        "<br><br>" +
-        "<button class='tool' onclick=\"searchJeeves()\">🔎 SEARCH THAT</button>";
-    });
+function reactionClick(){
 
-    function searchJeeves() {
-      const q = jeevesInput.value.trim();
+  const button=
+    document.getElementById("reactionButton");
 
-      if (!q) return;
+  const status=
+    document.getElementById("reactionStatus");
 
-      window.open(
-        "https://www.google.com/search?q=" +
-        encodeURIComponent(q),
-        "_blank",
-        "noopener"
+  if(reactionState==="idle"){
+
+    reactionState="waiting";
+
+    button.className="game-button ready";
+
+    button.textContent=
+      "WAIT FOR GREEN...";
+
+    status.textContent=
+      "DO NOT CLICK YET.";
+
+    const delay=
+      1500+
+      Math.random()*3500;
+
+    reactionTimer=setTimeout(()=>{
+
+      reactionState="ready";
+
+      reactionStart=performance.now();
+
+      button.className=
+        "game-button go";
+
+      button.textContent=
+        "CLICK NOW!";
+
+      status.textContent=
+        "GO GO GO!";
+
+    },delay);
+
+    return;
+  }
+
+  if(reactionState==="waiting"){
+
+    clearTimeout(reactionTimer);
+
+    reactionState="idle";
+
+    button.className="game-button";
+
+    button.textContent=
+      "TOO EARLY!";
+
+    status.textContent=
+      "CHEATER DETECTED.";
+
+    setTimeout(()=>{
+      button.textContent="CLICK TO START";
+    },1000);
+
+    return;
+  }
+
+  if(reactionState==="ready"){
+
+    const reaction=
+      Math.round(
+        performance.now()-reactionStart
       );
-    }
 
+    reactionState="idle";
 
-    /* =========================================
-       CLOCK
-       ========================================= */
+    button.className="game-button";
 
-    function updateClock() {
-      const now = new Date();
+    button.textContent=
+      reaction+" ms";
 
-      document.getElementById("clock").textContent =
-        now.toLocaleTimeString();
+    status.textContent=
+      reaction<200
+        ? "INSANE."
+        : reaction<300
+        ? "VERY FAST."
+        : reaction<500
+        ? "GOOD."
+        : "YOU SURVIVED.";
 
-      document.getElementById("date").textContent =
-        now.toLocaleDateString(undefined, {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-    }
+    const best=
+      Number(
+        localStorage.getItem(
+          "shaggyBestReaction"
+        )
+      ) || Infinity;
 
-    updateClock();
-    setInterval(updateClock, 1000);
+    if(reaction<best){
 
-
-    /* =========================================
-       QUOTES
-       ========================================= */
-
-    const quotes = [
-      ["The internet is a series of tubes.", "The Internet"],
-      ["Have you tried turning it off and on again?", "Ancient IT Wisdom"],
-      ["Welcome to the internet. Have a look around.", "Bo Burnham"],
-      ["Information wants to be free.", "Internet Philosophy"],
-      ["There is no place like 127.0.0.1.", "Every Web Developer"],
-      ["The best thing about the internet is that nobody knows you're a potato.", "Probably Someone"],
-      ["You are now browsing the website.", "This Website"],
-      ["Somewhere, someone is still running Windows XP.", "History"],
-      ["If it works, don't touch it.", "Engineering"],
-      ["404: Seriousness Not Found.", "ShaggyMega"]
-    ];
-
-    function newQuote() {
-      const q = quotes[Math.floor(Math.random() * quotes.length)];
-
-      document.getElementById("quoteText").textContent = '"' + q[0] + '"';
-      document.getElementById("quoteAuthor").textContent = "— " + q[1];
-    }
-
-    newQuote();
-
-
-    /* =========================================
-       RANDOMIZER
-       ========================================= */
-
-    const randomThings = [
-      "🐸 FROG",
-      "🍕 PIZZA",
-      "🚀 SPACE",
-      "🦆 DUCK",
-      "💎 DIAMOND",
-      "🛸 UFO",
-      "🧙 WIZARD",
-      "🐈 CAT",
-      "🌎 EARTH",
-      "🔥 CHAOS",
-      "🦖 DINOSAUR",
-      "👽 ALIEN",
-      "🎸 ROCK",
-      "🌈 RAINBOW",
-      "💻 COMPUTER",
-      "🧠 BRAIN",
-      "🥔 POTATO",
-      "🎮 GAMING"
-    ];
-
-    function randomize() {
-      const result = document.getElementById("randomResult");
-
-      result.textContent =
-        randomThings[
-          Math.floor(Math.random() * randomThings.length)
-        ];
-    }
-
-
-    /* =========================================
-       UTILITIES
-       ========================================= */
-
-    function openTool(url) {
-      window.open(url, "_blank", "noopener");
-    }
-
-    function copySiteURL() {
-      navigator.clipboard
-        .writeText(window.location.href)
-        .then(() => {
-          alert("Portal URL copied!");
-        })
-        .catch(() => {
-          alert(window.location.href);
-        });
-    }
-
-    function escapeHTML(str) {
-      return str.replace(/[&<>"']/g, function(char) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        }[char];
-      });
-    }
-
-
-    /* =========================================
-       THEME WARP
-       ========================================= */
-
-    let warped = false;
-
-    function toggleTheme() {
-      warped = !warped;
-
-      if (warped) {
-        document.documentElement.style.setProperty(
-          "--cyan", "#ffea00"
-        );
-
-        document.documentElement.style.setProperty(
-          "--pink", "#00ff95"
-        );
-
-        document.documentElement.style.setProperty(
-          "--purple", "#00aaff"
-        );
-      } else {
-        document.documentElement.style.setProperty(
-          "--cyan", "#00f6ff"
-        );
-
-        document.documentElement.style.setProperty(
-          "--pink", "#ff00d4"
-        );
-
-        document.documentElement.style.setProperty(
-          "--purple", "#9d4edd"
-        );
-      }
-    }
-
-
-    /* =========================================
-       TWITCH
-       
-       IMPORTANT:
-       Twitch requires the actual hostname of
-       the website to appear in "parent".
-
-       Because your final GitHub username is not
-       known yet, this is configured dynamically.
-       ========================================= */
-
-    function setupTwitch() {
-      const host = window.location.hostname;
-
-      if (
-        !host ||
-        host === "localhost" ||
-        host === "127.0.0.1" ||
-        host === ""
-      ) {
-        document.getElementById("twitchPlaceholder").innerHTML =
-          "<div><strong>TWITCH PREVIEW</strong>" +
-          "Upload this site to GitHub Pages first.<br>" +
-          "Then the Twitch player will automatically use your GitHub Pages domain.</div>";
-
-        return;
-      }
-
-      const iframe =
-        document.getElementById("twitchPlayer");
-
-      iframe.src =
-        "https://player.twitch.tv/" +
-        "?channel=shaggymedic420" +
-        "&parent=" + encodeURIComponent(host) +
-        "&muted=true" +
-        "&autoplay=false";
+      localStorage.setItem(
+        "shaggyBestReaction",
+        reaction
+      );
 
       document.getElementById(
-        "twitchPlaceholder"
-      ).style.display = "none";
+        "bestReaction"
+      ).textContent=reaction;
+
     }
 
-    setupTwitch();
+    setTimeout(()=>{
+      button.textContent=
+        "CLICK TO START";
+    },1300);
+
+  }
+
+}
+
+const savedBest=
+  localStorage.getItem(
+    "shaggyBestReaction"
+  );
+
+if(savedBest){
+
+  document.getElementById(
+    "bestReaction"
+  ).textContent=savedBest;
+
+}
 
 
-    /* =========================================
-       EASTER EGG
-       ========================================= */
+/* =========================================================
+   CLICKER
+========================================================= */
 
-    let konami = [];
-    const secret = [
-      "ArrowUp",
-      "ArrowUp",
-      "ArrowDown",
-      "ArrowDown",
-      "ArrowLeft",
-      "ArrowRight",
-      "ArrowLeft",
-      "ArrowRight",
-      "b",
-      "a"
+let clickScore=
+  Number(
+    localStorage.getItem(
+      "shaggyClicks"
+    )
+  ) || 0;
+
+function updateClicks(){
+
+  document.getElementById(
+    "clickScore"
+  ).textContent=clickScore;
+
+}
+
+function clicker(){
+
+  clickScore++;
+
+  updateClicks();
+
+  localStorage.setItem(
+    "shaggyClicks",
+    clickScore
+  );
+
+}
+
+updateClicks();
+
+
+/* =========================================================
+   ASK SHAGGY
+========================================================= */
+
+const answers=[
+  "I have consulted the internet. It says: probably.",
+  "Excellent question. Unfortunately, I am a website.",
+  "Jeeves recommends searching for that.",
+  "After extensive research: absolutely.",
+  "After further research: absolutely not.",
+  "The ancient algorithms have spoken.",
+  "Interesting. Very interesting.",
+  "The internet knows. The internet always knows.",
+  "I believe Wikipedia may have an opinion.",
+  "Jeeves requests snacks."
+];
+
+document.getElementById("askForm")
+.addEventListener("submit",e=>{
+
+  e.preventDefault();
+
+  const q=document
+    .getElementById("askInput")
+    .value.trim();
+
+  if(!q)return;
+
+  const answer=
+    answers[
+      Math.floor(
+        Math.random()*answers.length
+      )
     ];
 
-    document.addEventListener("keydown", function(event) {
-      konami.push(event.key);
-      konami = konami.slice(-secret.length);
+  document.getElementById(
+    "askResult"
+  ).innerHTML=
+    "<b style='color:var(--yellow)'>Jeeves:</b> "+
+    answer+
+    "<br><br>"+
+    "<button class='small-btn' onclick='askSearch()'>🔎 SEARCH IT</button>";
 
-      if (
-        konami.length === secret.length &&
-        konami.every((key, i) => key === secret[i])
-      ) {
-        document.body.animate(
-          [
-            { filter: "hue-rotate(0deg)" },
-            { filter: "hue-rotate(360deg)" }
-          ],
-          {
-            duration: 1500,
-            iterations: 3
-          }
-        );
+});
 
-        alert(
-          "🌈 SECRET INTERNET MODE UNLOCKED 🌈\n\n" +
-          "You have discovered absolutely nothing."
-        );
-      }
-    });
-  </script>
+function askSearch(){
+
+  const q=document
+    .getElementById("askInput")
+    .value.trim();
+
+  if(q){
+
+    window.open(
+      "https://www.google.com/search?q="+
+      encodeURIComponent(q),
+      "_blank"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function toggleParty(){
+
+  const on=
+    document.getElementById(
+      "partyToggle"
+    ).checked;
+
+  document.body.classList.toggle(
+    "party",
+    on
+  );
+
+}
+
+function toggleMarquee(){
+
+  const on=
+    document.getElementById(
+      "marqueeToggle"
+    ).checked;
+
+  document.querySelector(
+    ".marquee span"
+  ).style.animationPlayState=
+    on ? "running" : "paused";
+
+}
+
+function saveSettings(){
+
+  localStorage.setItem(
+    "shaggyParty",
+    document.getElementById(
+      "partyToggle"
+    ).checked
+  );
+
+  localStorage.setItem(
+    "shaggyMarquee",
+    document.getElementById(
+      "marqueeToggle"
+    ).checked
+  );
+
+  alert(
+    "SETTINGS SAVED TO YOUR BROWSER."
+  );
+
+}
+
+function loadSettings(){
+
+  const party=
+    localStorage.getItem(
+      "shaggyParty"
+    )==="true";
+
+  const marquee=
+    localStorage.getItem(
+      "shaggyMarquee"
+    );
+
+  document.getElementById(
+    "partyToggle"
+  ).checked=party;
+
+  if(marquee!==null){
+
+    document.getElementById(
+      "marqueeToggle"
+    ).checked=
+      marquee==="true";
+
+  }
+
+  toggleParty();
+  toggleMarquee();
+
+  const city=
+    localStorage.getItem(
+      "shaggyCity"
+    );
+
+  if(city){
+
+    document.getElementById(
+      "cityInput"
+    ).value=city;
+
+  }
+
+}
+
+loadSettings();
+
+
+function resetPortal(){
+
+  if(!confirm(
+    "Reset your ShaggyMega browser settings?"
+  ))return;
+
+  localStorage.clear();
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   KONAMI CODE
+========================================================= */
+
+let keys=[];
+
+const secret=[
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "b",
+  "a"
+];
+
+document.addEventListener("keydown",e=>{
+
+  keys.push(e.key);
+
+  keys=keys.slice(-secret.length);
+
+  if(
+    keys.length===secret.length &&
+    keys.every(
+      (x,i)=>x===secret[i]
+    )
+  ){
+
+    document.body.classList.toggle(
+      "party"
+    );
+
+    alert(
+      "🌈 SECRET SHAGGYMEGA MODE 🌈\n\n"+
+      "You have unlocked absolutely nothing."
+    );
+
+  }
+
+});
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function openURL(url){
+
+  window.open(
+    url,
+    "_blank",
+    "noopener"
+  );
+
+}
+
+</script>
 
 </body>
 </html>
